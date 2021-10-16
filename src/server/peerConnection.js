@@ -1,5 +1,5 @@
-import firepadRef from "./firebase";
-import { store } from "../pages/VideoRoom";
+import firepadRef from "./firebase-videoRooms/getFirebaseRef";
+import { store } from "../store/createStore";
 
 const participantRef = firepadRef.child("participants");
 

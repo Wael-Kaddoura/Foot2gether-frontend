@@ -1,14 +1,14 @@
-import Room from "../components/VideoRooms/Room";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import { userReducer } from "../store/reducer";
-
-export const store = createStore(userReducer);
+import Room from "../components/VideoRooms/Room";
+import store from "../store/createStore";
+import firepadRef from "../server/firebase-videoRooms/getFirebaseRef";
 
 function VideoRoom() {
+  const userName = prompt("What's your name?");
+
   return (
     <Provider store={store}>
-      <Room />
+      <Room firepadRef={firepadRef} userName={userName} />
     </Provider>
   );
 }

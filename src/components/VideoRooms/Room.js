@@ -1,5 +1,5 @@
 import MainScreen from "./MainScreen/MainScreen.component";
-import firepadRef, { db, Kosa } from "../../server/firebase";
+import { db } from "../../server/firebase-videoRooms/firebase";
 import "../../App.css";
 import { useEffect } from "react";
 import {
@@ -12,7 +12,7 @@ import {
 import { connect } from "react-redux";
 
 function Room(props) {
-  let userName = Kosa();
+  let { firepadRef, userName } = props;
 
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
