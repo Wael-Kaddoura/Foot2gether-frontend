@@ -1,5 +1,5 @@
-import {useEffect} from "react";
-import firebase from "../../server/firebase";
+import { useEffect } from "react";
+import firebase from "../../server/firebase-notifications/firebase";
 
 function Notification() {
   useEffect(() => {
