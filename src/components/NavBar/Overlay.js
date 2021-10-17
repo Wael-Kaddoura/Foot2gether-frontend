@@ -6,20 +6,17 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import DesktopMobile from "./DesktopMobile";
-import DesktopHeader from "./DesktopHeader";
-import Overlay from "./Overlay";
+import backgroundImage from "../../Images/bg_3.jpg";
 
-function MainNavBar({ NavBarContent }) {
+function Overlay({ NavBarContent }) {
   return (
-    <div>
-      <DesktopMobile />
-
-      <DesktopHeader />
-
-      <Overlay NavBarContent={NavBarContent} />
+    <div
+      className="hero overlay"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <div className="container">{NavBarContent}</div>
     </div>
   );
 }
 
-export default MainNavBar;
+export default Overlay;
