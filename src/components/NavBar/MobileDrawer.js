@@ -10,7 +10,7 @@ import { List } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import NavBarItem from "./NavBarItem";
 
-function MobileDrawer() {
+function MobileDrawer({ currentPageName }) {
   return (
     <div className="site-mobile-menu site-navbar-target">
       <div className="site-mobile-menu-header">
@@ -26,10 +26,30 @@ function MobileDrawer() {
           role="navigation"
         >
           <List>
-            <NavBarItem name="HOME" color="black" />
-            <NavBarItem name="MATCHES" color="black" />
-            <NavBarItem name="BLOG" color="black" />
-            <NavBarItem name="STANDINGS" color="black" />
+            <NavBarItem
+              name="HOME"
+              color="black"
+              isActiveDrawer={currentPageName === "Home" ? "drawer-active" : ""}
+            />
+            <NavBarItem
+              name="MATCHES"
+              color="black"
+              isActiveDrawer={
+                currentPageName === "Matches" ? "drawer-active" : ""
+              }
+            />
+            <NavBarItem
+              name="BLOG"
+              color="black"
+              isActiveDrawer={currentPageName === "Blog" ? "drawer-active" : ""}
+            />
+            <NavBarItem
+              name="STANDINGS"
+              color="black"
+              isActiveDrawer={
+                currentPageName === "Standings" ? "drawer-active" : ""
+              }
+            />
           </List>
         </nav>
       </div>

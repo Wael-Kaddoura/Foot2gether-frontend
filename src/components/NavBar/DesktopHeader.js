@@ -10,7 +10,7 @@ import { List } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavBarItem from "./NavBarItem";
 
-function DesktopHeader({ pageName }) {
+function DesktopHeader({ currentPageName }) {
   return (
     <header className="site-navbar py-4" role="banner">
       <div className="container">
@@ -30,22 +30,22 @@ function DesktopHeader({ pageName }) {
                 <NavBarItem
                   name="HOME"
                   color="white"
-                  isActive={pageName === "Home" ? "active" : ""}
+                  isActive={currentPageName === "Home" ? "active" : ""}
                 />
                 <NavBarItem
                   name="MATCHES"
                   color="white"
-                  isActive={pageName === "Matches" ? "active" : ""}
+                  isActive={currentPageName === "Matches" ? "active" : ""}
                 />
                 <NavBarItem
                   name="BLOG"
                   color="white"
-                  isActive={pageName === "Blog" ? "active" : ""}
+                  isActive={currentPageName === "Blog" ? "active" : ""}
                 />
                 <NavBarItem
                   name="STANDINGS"
                   color="white"
-                  isActive={pageName === "Standings" ? "active" : ""}
+                  isActive={currentPageName === "Standings" ? "active" : ""}
                 />
               </List>
             </nav>
