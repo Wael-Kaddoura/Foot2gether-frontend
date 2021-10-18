@@ -1,10 +1,14 @@
 import { Card, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import team1 from "../../../Images/real_madrid.png";
-import team2 from "../../../Images/manchester_united.png";
+import team2 from "../../../Images/liverpool.png";
 
 const useStyles = makeStyles({
-  card: { backgroundColor: "rgba(255, 255, 255, 0.05)" },
+  card: {
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
   teamSide: { textAlign: "center" },
   teamImage: { minHeight: 110, maxHeight: 110, maxWidth: 95 },
   teamName: { color: "#fff", fontSize: 18, fontWeight: 700 },
@@ -61,9 +65,7 @@ function MatchCard({ children }) {
 
         <Grid item xs={4} className={classes.teamSide}>
           <img className={classes.teamImage} src={team2} alt="team2" />
-          <Typography className={classes.teamName}>
-            Manchester United
-          </Typography>
+          <Typography className={classes.teamName}>Liverpool</Typography>
         </Grid>
       </Grid>
     </Card>
