@@ -10,17 +10,17 @@ import { List } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import NavBarItem from "./NavBarItem";
 
-function DesktopMobile() {
+function MobileDrawer() {
   return (
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close">
-          <span class="icon-close2 js-menu-toggle">
+    <div className="site-mobile-menu site-navbar-target">
+      <div className="site-mobile-menu-header">
+        <div className="site-mobile-menu-close">
+          <span className="icon-close2 js-menu-toggle">
             <CloseIcon />
           </span>
         </div>
       </div>
-      <div class="">
+      <div className="">
         <nav
           className="site-navigation position-relative text-right"
           role="navigation"
@@ -37,4 +37,4 @@ function DesktopMobile() {
   );
 }
 
-export default DesktopMobile;
+export default MobileDrawer;
