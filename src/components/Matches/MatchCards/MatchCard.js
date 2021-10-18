@@ -6,7 +6,7 @@ import team2 from "../../../Images/manchester_united.png";
 const useStyles = makeStyles({
   card: { backgroundColor: "rgba(255, 255, 255, 0.05)" },
   teamSide: { textAlign: "center" },
-  teamImage: { minHeight: 120, maxWidth: 100 },
+  teamImage: { minHeight: 110, maxHeight: 110, maxWidth: 95 },
   teamName: { color: "#fff", fontSize: 18, fontWeight: 700 },
   matchDetails: { textAlign: "center" },
   matchLeague: { color: "#EE1E46", fontSize: 16, fontWeight: 700 },
