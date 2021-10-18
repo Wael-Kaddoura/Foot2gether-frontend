@@ -17,7 +17,7 @@ function Home() {
     </div>
   );
 
-  return <MainNavBar NavBarContent={NavBarContent} />;
+  return <MainNavBar pageName="Home" NavBarContent={NavBarContent} />;
 }
 
 export default Home;
