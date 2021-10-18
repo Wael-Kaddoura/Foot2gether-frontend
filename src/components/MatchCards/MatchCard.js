@@ -24,9 +24,14 @@ const useStyles = makeStyles({
     borderColor: "#ee1e46",
     textTransform: "lowercase",
   },
+  finishedScore: {
+    color: "#fff",
+    fontSize: 40,
+    fontWeight: 500,
+  },
 });
 
-function MatchCard({ live, upcoming }) {
+function MatchCard({ live, upcoming, finished }) {
   const classes = useStyles();
 
   const Ref = useRef(null);
@@ -143,6 +148,10 @@ function MatchCard({ live, upcoming }) {
                 >
                   {timer}
                 </Button>
+              )}
+
+              {finished && (
+                <Typography className={classes.finishedScore}>3 - 1</Typography>
               )}
             </Grid>
           </Grid>
