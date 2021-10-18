@@ -1,5 +1,7 @@
+import MainNavBar from "../components/NavBar/MainNavBar";
+
 function Standings() {
-  return <div>Standings</div>;
+  return <MainNavBar currentPageName="Standings" />;
 }
 
 export default Standings;

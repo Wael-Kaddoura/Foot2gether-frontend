@@ -1,5 +1,7 @@
+import MainNavBar from "../components/NavBar/MainNavBar";
+
 function Matches() {
-  return <div>Matches</div>;
+  return <MainNavBar currentPageName="Matches" />;
 }
 
 export default Matches;

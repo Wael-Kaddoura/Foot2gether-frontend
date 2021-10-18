@@ -1,5 +1,7 @@
+import MainNavBar from "../components/NavBar/MainNavBar";
+
 function Blog() {
-  return <div>Blog</div>;
+  return <MainNavBar currentPageName="Blog" />;
 }
 
 export default Blog;
