@@ -6,14 +6,14 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import DesktopMobile from "./DesktopMobile";
+import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import Overlay from "./Overlay";
 
 function MainNavBar({ NavBarContent }) {
   return (
     <div>
-      <DesktopMobile />
+      <MobileDrawer />
 
       <DesktopHeader />
 
