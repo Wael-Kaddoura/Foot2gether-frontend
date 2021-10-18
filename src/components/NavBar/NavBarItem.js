@@ -9,14 +9,14 @@ import "../../css/style.css";
 import { ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function MainNavBar({ name, color }) {
+function MainNavBar({ name, color, isActive, active }) {
   return (
     <Link
       to={"/" + name}
       className="nav-link"
       style={{ textDecoration: "none", color: color }}
     >
-      <ListItem button>
+      <ListItem button className={isActive}>
         <ListItemText primary={name} />
       </ListItem>
     </Link>

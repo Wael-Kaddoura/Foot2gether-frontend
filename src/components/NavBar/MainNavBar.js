@@ -10,12 +10,12 @@ import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import Overlay from "./Overlay";
 
-function MainNavBar({ NavBarContent }) {
+function MainNavBar({ pageName, NavBarContent }) {
   return (
     <div>
       <MobileDrawer />
 
-      <DesktopHeader />
+      <DesktopHeader pageName={pageName} />
 
       <Overlay NavBarContent={NavBarContent} />
     </div>

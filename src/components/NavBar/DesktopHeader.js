@@ -10,7 +10,7 @@ import { List } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavBarItem from "./NavBarItem";
 
-function Header() {
+function DesktopHeader({ pageName }) {
   return (
     <header className="site-navbar py-4" role="banner">
       <div className="container">
@@ -27,10 +27,26 @@ function Header() {
               role="navigation"
             >
               <List className="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <NavBarItem name="HOME" color="white" />
-                <NavBarItem name="MATCHES" color="white" />
-                <NavBarItem name="BLOG" color="white" />
-                <NavBarItem name="STANDINGS" color="white" />
+                <NavBarItem
+                  name="HOME"
+                  color="white"
+                  isActive={pageName === "Home" ? "active" : ""}
+                />
+                <NavBarItem
+                  name="MATCHES"
+                  color="white"
+                  isActive={pageName === "Matches" ? "active" : ""}
+                />
+                <NavBarItem
+                  name="BLOG"
+                  color="white"
+                  isActive={pageName === "Blog" ? "active" : ""}
+                />
+                <NavBarItem
+                  name="STANDINGS"
+                  color="white"
+                  isActive={pageName === "Standings" ? "active" : ""}
+                />
               </List>
             </nav>
 
@@ -49,4 +65,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default DesktopHeader;
