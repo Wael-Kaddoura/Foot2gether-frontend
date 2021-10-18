@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-function MatchCard() {
+function MatchCard({ live }) {
   const classes = useStyles();
 
   return (
@@ -68,13 +68,15 @@ function MatchCard() {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <Button
-                className={classes.showRoomBtn}
-                variant="outlined"
-                color="error"
-              >
-                Show Rooms
-              </Button>
+              {live && (
+                <Button
+                  className={classes.showRoomBtn}
+                  variant="outlined"
+                  color="error"
+                >
+                  Show Rooms
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Grid>
