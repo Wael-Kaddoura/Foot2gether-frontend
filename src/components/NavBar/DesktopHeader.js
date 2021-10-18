@@ -6,7 +6,9 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
+import { List } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import NavBarItem from "./NavBarItem";
 
 function Header() {
   return (
@@ -18,33 +20,18 @@ function Header() {
               <span className="h1 main-logo">Foot2gether</span>
             </a>
           </div>
+
           <div className="ml-auto">
             <nav
               className="site-navigation position-relative text-right"
               role="navigation"
             >
-              <ul className="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li className="active">
-                  <a href="index.html" className="nav-link">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="matches.html" className="nav-link">
-                    Matches
-                  </a>
-                </li>
-                <li>
-                  <a href="blog.html" className="nav-link">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="contact.html" className="nav-link">
-                    Standings
-                  </a>
-                </li>
-              </ul>
+              <List className="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <NavBarItem name="HOME" color="white" />
+                <NavBarItem name="MATCHES" color="white" />
+                <NavBarItem name="BLOG" color="white" />
+                <NavBarItem name="STANDINGS" color="white" />
+              </List>
             </nav>
 
             <a
