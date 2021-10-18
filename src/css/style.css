@@ -17,6 +17,16 @@ body {
   color: #fff;
 }
 
+.nav-link {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
+
 a {
   -webkit-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
@@ -497,6 +507,7 @@ h5,
 .site-navbar .site-navigation .site-menu .has-children .dropdown .active > a {
   color: #ee1e46 !important;
 }
+
 .site-navbar .site-navigation .site-menu .has-children .dropdown > li {
   list-style: none;
   padding: 0;
@@ -1611,4 +1622,14 @@ h5,
 .main-logo {
   font-size: 24px;
   font-weight: 900;
+}
+
+.active:after {
+  height: 2px;
+  background: #fff;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
 }
