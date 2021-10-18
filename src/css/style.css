@@ -1624,6 +1624,10 @@ h5,
   font-weight: 900;
 }
 
+.drawer-active {
+  color: #ee1e46 !important;
+}
+
 .active:after {
   height: 2px;
   background: #fff;
