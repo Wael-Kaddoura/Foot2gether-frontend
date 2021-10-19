@@ -113,6 +113,7 @@ function MatchTabs(props) {
                 <Badge
                   badgeContent={liveMatchesCount}
                   color="error"
+                  showZero
                   anchorOrigin={{
                     vertical: "top",
                     horizontal: "right",
@@ -136,6 +137,7 @@ function MatchTabs(props) {
                 <Badge
                   badgeContent={upcomingMatchesCount}
                   color="error"
+                  showZero
                   anchorOrigin={{
                     vertical: "top",
                     horizontal: "right",
@@ -159,6 +161,7 @@ function MatchTabs(props) {
                 <Badge
                   badgeContent={finishedMatchesCount}
                   color="error"
+                  showZero
                   anchorOrigin={{
                     vertical: "top",
                     horizontal: "right",
