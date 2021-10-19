@@ -63,6 +63,7 @@ function MatchTabs(props) {
     upcomingMatches,
     upcomingMatchesCount,
     finishedMatches,
+    finishedMatchesCount,
   } = props;
 
   const theme = useTheme();
@@ -156,7 +157,7 @@ function MatchTabs(props) {
               <div>
                 {"Finished    ."}
                 <Badge
-                  badgeContent={2}
+                  badgeContent={finishedMatchesCount}
                   color="error"
                   anchorOrigin={{
                     vertical: "top",
