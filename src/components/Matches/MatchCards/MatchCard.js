@@ -13,9 +13,9 @@ const useStyles = makeStyles({
   teamImage: { minHeight: 110, maxHeight: 110, maxWidth: 95 },
   teamName: { color: "#fff", fontSize: 18, fontWeight: 700 },
   matchDetails: { textAlign: "center" },
-  matchLeague: { color: "#EE1E46", fontSize: 16, fontWeight: 700 },
-  matchTime: { color: "#808080", fontSize: 16, fontWeight: 300 },
-  matchStadium: { color: "#808080", fontSize: 16, fontWeight: 300 },
+  matchLeague: { color: "#fff", fontSize: 20, fontWeight: 700 },
+  matchTime: { color: "#808080", fontSize: 17, fontWeight: 300 },
+  matchStadium: { color: "#808080", fontSize: 17, fontWeight: 300 },
 });
 
 function MatchCard({ children }) {
@@ -43,12 +43,12 @@ function MatchCard({ children }) {
             sx={{ minHeight: 278 }}
             container
             direction="column"
-            justifyContent="space-around"
+            justifyContent="space-evenly"
             alignItems="center"
           >
             <Grid item xs={4}>
               <Typography className={classes.matchLeague} sx={{ mb: 1 }}>
-                Premiere League
+                Premier League
               </Typography>
               <Typography className={classes.matchTime} sx={{ mb: 1 }}>
                 04:00 PM
