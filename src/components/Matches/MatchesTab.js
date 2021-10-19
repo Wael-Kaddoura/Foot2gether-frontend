@@ -56,7 +56,7 @@ function a11yProps(index) {
   };
 }
 
-function MatchTabs() {
+function MatchTabs({ liveMatches, upcomingMatches, finishedMatches }) {
   const theme = useTheme();
   const classes = useStyles(theme);
 
@@ -95,7 +95,6 @@ function MatchTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
           centered
-          textColor="white"
           TabIndicatorProps={{ style: { backgroundColor: "#fff" } }}
         >
           <Tab
@@ -170,17 +169,19 @@ function MatchTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <LiveMatchCard />
-        <LiveMatchCard />
+        {liveMatches.map((match) => (
+          <LiveMatchCard
+            team1Name={match.team1.name}
+            team1Logo={match.team1.logo}
+            team2Name={match.team2.name}
+            team2Logo={match.team2.logo}
+            league={match.competition.name}
+            kick_off={match.kick_off}
+          />
+        ))}
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <UpcomingMatchCard />
-        <UpcomingMatchCard />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <FinishedMatchCard />
-        <FinishedMatchCard />
-      </TabPanel>
+      <TabPanel value={value} index={1}></TabPanel>
+      <TabPanel value={value} index={2}></TabPanel>
     </Box>
   );
 }

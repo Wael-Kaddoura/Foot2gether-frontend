@@ -10,11 +10,21 @@ const useStyles = makeStyles({
   },
 });
 
-function LiveMatchCard() {
+function LiveMatchCard(props) {
   const classes = useStyles();
 
+  const { team1Name, team1Logo, team2Name, team2Logo, league, kick_off } =
+    props;
+
   return (
-    <MatchCard>
+    <MatchCard
+      team1Name={team1Name}
+      team1Logo={team1Logo}
+      team2Name={team2Name}
+      team2Logo={team2Logo}
+      league={league}
+      kick_off={kick_off}
+    >
       <Button className={classes.showRoomBtn} variant="outlined" color="error">
         Show Rooms
       </Button>

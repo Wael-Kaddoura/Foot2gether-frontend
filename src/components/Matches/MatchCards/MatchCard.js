@@ -1,7 +1,5 @@
 import { Card, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import team1 from "../../../Images/real_madrid.png";
-import team2 from "../../../Images/liverpool.png";
 
 const useStyles = makeStyles({
   card: {
@@ -18,7 +16,16 @@ const useStyles = makeStyles({
   matchStadium: { color: "#808080", fontSize: 17, fontWeight: 300 },
 });
 
-function MatchCard({ children }) {
+function MatchCard(props) {
+  const {
+    children,
+    team1Name,
+    team1Logo,
+    team2Name,
+    team2Logo,
+    league,
+    kick_off,
+  } = props;
   const classes = useStyles();
 
   return (
@@ -34,8 +41,8 @@ function MatchCard({ children }) {
         alignItems="center"
       >
         <Grid item xs={4} className={classes.teamSide}>
-          <img className={classes.teamImage} src={team1} alt="team1" />
-          <Typography className={classes.teamName}>Real Madrid</Typography>
+          <img className={classes.teamImage} src={team1Logo} alt="team1" />
+          <Typography className={classes.teamName}>{team1Name}</Typography>
         </Grid>
 
         <Grid item xs={4} className={classes.matchDetails}>
@@ -48,10 +55,10 @@ function MatchCard({ children }) {
           >
             <Grid item xs={4}>
               <Typography className={classes.matchLeague} sx={{ mb: 1 }}>
-                Premier League
+                {league}
               </Typography>
               <Typography className={classes.matchTime} sx={{ mb: 1 }}>
-                04:00 PM
+                {kick_off}
               </Typography>
               <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
                 Emirates Stadium
@@ -64,8 +71,8 @@ function MatchCard({ children }) {
         </Grid>
 
         <Grid item xs={4} className={classes.teamSide}>
-          <img className={classes.teamImage} src={team2} alt="team2" />
-          <Typography className={classes.teamName}>Liverpool</Typography>
+          <img className={classes.teamImage} src={team2Logo} alt="team2" />
+          <Typography className={classes.teamName}>{team2Name}</Typography>
         </Grid>
       </Grid>
     </Card>
