@@ -1,9 +1,27 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Tabs, Tab, Typography, Box } from "@mui/material";
+import { Tabs, Tab, Typography, Box, Badge, useTheme } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
 import UpcomingMatchCard from "./MatchCards/UpcomingMatchCard";
 import FinishedMatchCard from "./MatchCards/FinishedMatchCard";
 import LiveMatchCard from "./MatchCards/LiveMatchCard";
+
+const useStyles = makeStyles((theme) => ({
+  tab: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      minWidth: 135,
+      width: 135,
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      minWidth: 204,
+      width: 204,
+    },
+    [theme.breakpoints.up("md")]: {
+      minWidth: 380,
+      width: 380,
+    },
+  },
+}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,6 +57,9 @@ function a11yProps(index) {
 }
 
 function MatchTabs() {
+  const theme = useTheme();
+  const classes = useStyles(theme);
+
   const [value, setValue] = useState(0);
   const [isLive, setIsLive] = useState(true);
   const [isUpcoming, setIsUpcoming] = useState(false);
@@ -78,7 +99,19 @@ function MatchTabs() {
           TabIndicatorProps={{ style: { backgroundColor: "#fff" } }}
         >
           <Tab
-            label="Live"
+            label={
+              <div>
+                {"Live    ."}
+                <Badge
+                  badgeContent={4}
+                  color="error"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                ></Badge>
+              </div>
+            }
             {...a11yProps(0)}
             style={
               isLive
@@ -86,9 +119,22 @@ function MatchTabs() {
                 : { color: "#808080" }
             }
             onClick={ActivateLive}
+            classes={{ root: classes.tab }}
           />
           <Tab
-            label="Upcoming"
+            label={
+              <div>
+                {"Upcoming    ."}
+                <Badge
+                  badgeContent={6}
+                  color="error"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                ></Badge>
+              </div>
+            }
             {...a11yProps(1)}
             style={
               isUpcoming
@@ -96,9 +142,22 @@ function MatchTabs() {
                 : { color: "#808080" }
             }
             onClick={ActivateUpcoming}
+            classes={{ root: classes.tab }}
           />
           <Tab
-            label="Finished"
+            label={
+              <div>
+                {"Finished    ."}
+                <Badge
+                  badgeContent={2}
+                  color="error"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                ></Badge>
+              </div>
+            }
             {...a11yProps(2)}
             style={
               isFinished
@@ -106,6 +165,7 @@ function MatchTabs() {
                 : { color: "#808080" }
             }
             onClick={ActivateFinished}
+            classes={{ root: classes.tab }}
           />
         </Tabs>
       </Box>
