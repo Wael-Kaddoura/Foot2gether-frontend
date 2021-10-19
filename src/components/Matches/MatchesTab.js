@@ -57,8 +57,13 @@ function a11yProps(index) {
 }
 
 function MatchTabs(props) {
-  const { liveMatches, liveMatchesCount, upcomingMatches, finishedMatches } =
-    props;
+  const {
+    liveMatches,
+    liveMatchesCount,
+    upcomingMatches,
+    upcomingMatchesCount,
+    finishedMatches,
+  } = props;
 
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -128,7 +133,7 @@ function MatchTabs(props) {
               <div>
                 {"Upcoming    ."}
                 <Badge
-                  badgeContent={6}
+                  badgeContent={upcomingMatchesCount}
                   color="error"
                   anchorOrigin={{
                     vertical: "top",

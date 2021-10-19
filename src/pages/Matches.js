@@ -19,7 +19,7 @@ function Matches() {
   const [liveMatches, setLiveMatches] = useState(null);
   const [liveMatchesCount, setLiveMatchesCount] = useState(null);
   const [upcomingMatches, setUpcomingMatches] = useState(null);
-  const [upcomingMatchesCount, Count] = useState(null);
+  const [upcomingMatchesCount, setUpcomingMatchesCount] = useState(null);
   const [finishedMatches, setFinishedMatches] = useState(null);
   const [finishedMatchesCount, setFinishedMatchesCount] = useState(null);
 
@@ -48,7 +48,18 @@ function Matches() {
       let response = await axios.get("http://localhost:8000/match/upcoming");
       let upcoming_matches_data = response.data;
       setUpcomingMatches(upcoming_matches_data);
-      console.log(upcoming_matches_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getUpcomingMatchesCount() {
+    try {
+      let response = await axios.get(
+        "http://localhost:8000/match/upcoming_count"
+      );
+      let upcoming_matches_count = response.data.upcoming_count;
+      setUpcomingMatchesCount(upcoming_matches_count);
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +69,7 @@ function Matches() {
     await getLiveMatches();
     await getLiveMatchesCount();
     await getUpcomingMatches();
+    await getUpcomingMatchesCount();
     setIsLoaded(true);
   }
 
@@ -84,6 +96,7 @@ function Matches() {
           liveMatches={liveMatches}
           liveMatchesCount={liveMatchesCount}
           upcomingMatches={upcomingMatches}
+          upcomingMatchesCount={upcomingMatchesCount}
         />
       )}
     </div>
