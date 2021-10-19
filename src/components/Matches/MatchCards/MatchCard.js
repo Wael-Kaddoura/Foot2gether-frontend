@@ -24,7 +24,7 @@ function MatchCard(props) {
     team2Name,
     team2Logo,
     league,
-    kick_off,
+    kickOff,
   } = props;
   const classes = useStyles();
 
@@ -58,7 +58,7 @@ function MatchCard(props) {
                 {league}
               </Typography>
               <Typography className={classes.matchTime} sx={{ mb: 1 }}>
-                {kick_off}
+                {kickOff}
               </Typography>
               <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
                 Emirates Stadium
