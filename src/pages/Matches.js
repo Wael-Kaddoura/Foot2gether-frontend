@@ -17,15 +17,28 @@ function Matches() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [liveMatches, setLiveMatches] = useState(null);
+  const [liveMatchesCount, setLiveMatchesCount] = useState(null);
   const [upcomingMatches, setUpcomingMatches] = useState(null);
+  const [upcomingMatchesCount, Count] = useState(null);
   const [finishedMatches, setFinishedMatches] = useState(null);
+  const [finishedMatchesCount, setFinishedMatchesCount] = useState(null);
 
   async function getLiveMatches() {
     try {
       let response = await axios.get("http://localhost:8000/match/live");
       let live_matches_data = response.data;
       setLiveMatches(live_matches_data);
-      console.log(live_matches_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getLiveMatchesCount() {
+    try {
+      let response = await axios.get("http://localhost:8000/match/live_count");
+      let live_matches_count = response.data.live_count;
+      setLiveMatchesCount(live_matches_count);
+      console.log(live_matches_count);
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +46,7 @@ function Matches() {
 
   async function fetchData() {
     await getLiveMatches();
+    await getLiveMatchesCount();
     setIsLoaded(true);
   }
 
@@ -54,7 +68,12 @@ function Matches() {
   return (
     <div>
       <MainNavBar currentPageName="Matches" NavBarContent={NavBarContent} />
-      {isLoaded && <MatchesTab liveMatches={liveMatches} />}
+      {isLoaded && (
+        <MatchesTab
+          liveMatches={liveMatches}
+          liveMatchesCount={liveMatchesCount}
+        />
+      )}
     </div>
   );
 }
