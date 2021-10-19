@@ -10,12 +10,31 @@ const useStyles = makeStyles({
   },
 });
 
-function FinishedMatchCard() {
+function FinishedMatchCard(props) {
   const classes = useStyles();
 
+  const {
+    team1Name,
+    team1Logo,
+    team1Score,
+    team2Name,
+    team2Logo,
+    team2Score,
+    league,
+  } = props;
+
   return (
-    <MatchCard>
-      <Typography className={classes.finishedScore}>3 - 1</Typography>;
+    <MatchCard
+      team1Name={team1Name}
+      team1Logo={team1Logo}
+      team2Name={team2Name}
+      team2Logo={team2Logo}
+      league={league}
+    >
+      <Typography className={classes.finishedScore}>
+        {team1Score} - {team2Score}
+      </Typography>
+      ;
     </MatchCard>
   );
 }

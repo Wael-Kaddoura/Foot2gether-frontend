@@ -65,11 +65,22 @@ function Matches() {
     }
   }
 
+  async function getFinishedMatches() {
+    try {
+      let response = await axios.get("http://localhost:8000/match/finished");
+      let finished_matches_data = response.data;
+      setFinishedMatches(finished_matches_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchData() {
     await getLiveMatches();
     await getLiveMatchesCount();
     await getUpcomingMatches();
     await getUpcomingMatchesCount();
+    await getFinishedMatches();
     setIsLoaded(true);
   }
 
@@ -97,6 +108,7 @@ function Matches() {
           liveMatchesCount={liveMatchesCount}
           upcomingMatches={upcomingMatches}
           upcomingMatchesCount={upcomingMatchesCount}
+          finishedMatches={finishedMatches}
         />
       )}
     </div>

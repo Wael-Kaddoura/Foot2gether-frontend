@@ -201,7 +201,19 @@ function MatchTabs(props) {
           />
         ))}
       </TabPanel>
-      <TabPanel value={value} index={2}></TabPanel>
+      <TabPanel value={value} index={2}>
+        {finishedMatches.map((match) => (
+          <FinishedMatchCard
+            team1Name={match.team1.name}
+            team1Logo={match.team1.logo}
+            team1Score={match.team1_score}
+            team2Name={match.team2.name}
+            team2Logo={match.team2.logo}
+            team2Score={match.team2_score}
+            league={match.competition.name}
+          />
+        ))}
+      </TabPanel>
     </Box>
   );
 }
