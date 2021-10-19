@@ -179,11 +179,23 @@ function MatchTabs(props) {
             team2Name={match.team2.name}
             team2Logo={match.team2.logo}
             league={match.competition.name}
-            kick_off={match.kick_off}
+            kickOff={match.kick_off}
           />
         ))}
       </TabPanel>
-      <TabPanel value={value} index={1}></TabPanel>
+      <TabPanel value={value} index={1}>
+        {upcomingMatches.map((match) => (
+          <UpcomingMatchCard
+            team1Name={match.team1.name}
+            team1Logo={match.team1.logo}
+            team2Name={match.team2.name}
+            team2Logo={match.team2.logo}
+            league={match.competition.name}
+            matchDay={match.match_day}
+            kickOff={match.kick_off}
+          />
+        ))}
+      </TabPanel>
       <TabPanel value={value} index={2}></TabPanel>
     </Box>
   );

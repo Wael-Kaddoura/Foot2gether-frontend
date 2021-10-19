@@ -38,7 +38,17 @@ function Matches() {
       let response = await axios.get("http://localhost:8000/match/live_count");
       let live_matches_count = response.data.live_count;
       setLiveMatchesCount(live_matches_count);
-      console.log(live_matches_count);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getUpcomingMatches() {
+    try {
+      let response = await axios.get("http://localhost:8000/match/upcoming");
+      let upcoming_matches_data = response.data;
+      setUpcomingMatches(upcoming_matches_data);
+      console.log(upcoming_matches_data);
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +57,7 @@ function Matches() {
   async function fetchData() {
     await getLiveMatches();
     await getLiveMatchesCount();
+    await getUpcomingMatches();
     setIsLoaded(true);
   }
 
@@ -72,6 +83,7 @@ function Matches() {
         <MatchesTab
           liveMatches={liveMatches}
           liveMatchesCount={liveMatchesCount}
+          upcomingMatches={upcomingMatches}
         />
       )}
     </div>

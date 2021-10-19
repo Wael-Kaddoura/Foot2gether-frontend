@@ -12,14 +12,24 @@ const useStyles = makeStyles({
   },
 });
 
-function UpcomingMatchCard() {
+function UpcomingMatchCard(props) {
+  const {
+    team1Name,
+    team1Logo,
+    team2Name,
+    team2Logo,
+    league,
+    matchDay,
+    kickOff,
+  } = props;
+
   const classes = useStyles();
 
   const Ref = useRef(null);
 
-  const [timer, setTimer] = useState("00:00:00");
+  const [timer, setTimer] = useState("");
 
-  //Getting hours, minutes & seconds from our initial time
+  //Getting hours, minutes & seconds from our time
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
@@ -50,9 +60,6 @@ function UpcomingMatchCard() {
   };
 
   const clearTimer = (e) => {
-    //Initial View
-    setTimer("01:45:30");
-
     //Updating Timer variable every 1 second
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
@@ -61,20 +68,25 @@ function UpcomingMatchCard() {
     Ref.current = id;
   };
 
-  const getDeadTime = () => {
-    let deadline = new Date();
-
-    //Specify Countdown in seconds
-    deadline.setSeconds(deadline.getSeconds() + 6330);
+  const getDeadTime = (kickOff) => {
+    //Specify Countdown Deadline
+    let deadline = new Date(matchDay + " " + kickOff);
     return deadline;
   };
 
   useEffect(() => {
-    clearTimer(getDeadTime());
+    clearTimer(getDeadTime(kickOff));
   }, []);
 
   return (
-    <MatchCard>
+    <MatchCard
+      team1Name={team1Name}
+      team1Logo={team1Logo}
+      team2Name={team2Name}
+      team2Logo={team2Logo}
+      league={league}
+      kickOff={kickOff}
+    >
       <Button
         className={classes.upcomingBtn}
         variant="outlined"
