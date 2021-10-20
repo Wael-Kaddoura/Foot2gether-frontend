@@ -1,20 +1,29 @@
 import { Card, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.05)",
     marginLeft: "auto",
     marginRight: "auto",
   },
   teamSide: { textAlign: "center" },
-  teamImage: { minHeight: 110, maxHeight: 110, maxWidth: 95 },
   teamName: { color: "#fff", fontSize: 18, fontWeight: 700 },
   matchDetails: { textAlign: "center" },
   matchLeague: { color: "#fff", fontSize: 20, fontWeight: 700 },
   matchTime: { color: "#808080", fontSize: 17, fontWeight: 300 },
   matchStadium: { color: "#808080", fontSize: 17, fontWeight: 300 },
-});
+  teamLogo: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      maxHeight: 90,
+      maxWidth: 90,
+    },
+    [theme.breakpoints.between("sm", "xl")]: {
+      Height: 120,
+      maxWidth: 120,
+    },
+  },
+}));
 
 function MatchCard(props) {
   const {
@@ -41,7 +50,7 @@ function MatchCard(props) {
         alignItems="center"
       >
         <Grid item xs={4} className={classes.teamSide}>
-          <img className={classes.teamImage} src={team1Logo} alt="team1" />
+          <img className={classes.teamLogo} src={team1Logo} alt="team1" />
           <Typography className={classes.teamName}>{team1Name}</Typography>
         </Grid>
 
@@ -71,7 +80,7 @@ function MatchCard(props) {
         </Grid>
 
         <Grid item xs={4} className={classes.teamSide}>
-          <img className={classes.teamImage} src={team2Logo} alt="team2" />
+          <img className={classes.teamLogo} src={team2Logo} alt="team2" />
           <Typography className={classes.teamName}>{team2Name}</Typography>
         </Grid>
       </Grid>
