@@ -1,5 +1,6 @@
 import { Button, LinearProgress, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({
@@ -35,9 +36,15 @@ function LiveMatchCard(props) {
           <LinearProgress color="error" />
         </Grid>
       </Grid>
-      <Button className={classes.showRoomBtn} variant="outlined" color="error">
-        Show Rooms
-      </Button>
+      <Link to="/match/rooms">
+        <Button
+          className={classes.showRoomBtn}
+          variant="outlined"
+          color="error"
+        >
+          Show Rooms
+        </Button>
+      </Link>{" "}
     </MatchCard>
   );
 }
