@@ -27,16 +27,16 @@ function UserInfo() {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             <Typography className={classes.userBio}>
               "United is Life, the rest are more details" - ERIC CANTONA
             </Typography>
           </Grid>
-          <Grid item xs={2} sx={{ mt: 1 }}>
+          <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Followers</Typography>
             <Typography className={classes.followInfo}>75</Typography>
           </Grid>
-          <Grid item xs={2} sx={{ mt: 1 }}>
+          <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Following</Typography>
             <Typography className={classes.followInfo}>28</Typography>
           </Grid>
