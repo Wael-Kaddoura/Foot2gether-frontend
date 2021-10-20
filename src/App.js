@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Blog from "./pages/Blog";
 import Standings from "./pages/Standings";
+import MatchRooms from "./pages/MatchRooms";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route exact path="/standings">
           <Standings />
+        </Route>
+        <Route exact path="/match/rooms">
+          <MatchRooms />
         </Route>
       </Switch>
     </Router>
