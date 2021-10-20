@@ -9,7 +9,6 @@ import "../../css/style.css";
 import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import UserOverlay from "./UserOverlay";
-import UserInfo from "./UserInfo";
 
 function UserNavBar({ currentPageName, NavBarContent }) {
   return (
@@ -17,7 +16,6 @@ function UserNavBar({ currentPageName, NavBarContent }) {
       <MobileDrawer currentPageName={currentPageName} />
       <DesktopHeader currentPageName={currentPageName} />
       <UserOverlay NavBarContent={NavBarContent} />
-      <UserInfo />
     </div>
   );
 }
