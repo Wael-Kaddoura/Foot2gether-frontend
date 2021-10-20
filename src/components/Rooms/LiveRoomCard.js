@@ -1,29 +1,11 @@
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-import { fontWeight } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.05)",
     marginLeft: "auto",
     marginRight: "auto",
-  },
-  teamSide: { textAlign: "center" },
-  teamName: { color: "#fff", fontSize: 18, fontWeight: 700 },
-  matchDetails: { textAlign: "center" },
-  matchLeague: { color: "#fff", fontSize: 20, fontWeight: 700 },
-  matchTime: { color: "#808080", fontSize: 17, fontWeight: 300 },
-  matchStadium: { color: "#808080", fontSize: 17, fontWeight: 300 },
-  teamLogo: {
-    [theme.breakpoints.between("xs", "sm")]: {
-      maxHeight: 90,
-      maxWidth: 90,
-    },
-    [theme.breakpoints.between("sm", "xl")]: {
-      minHeight: 120,
-      maxHeight: 120,
-      maxWidth: 120,
-    },
   },
   roomName: {
     color: "#fff",
@@ -69,11 +51,11 @@ function LiveRoomCard(props) {
       >
         <Grid item xs={12}>
           <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item xs={2} md={2}>
+            <Grid item xs={4} md={2}>
               <Typography className={classes.roomName}>Room01</Typography>
             </Grid>
 
-            <Grid item xs={1} md={1}>
+            <Grid item xs={3} md={1}>
               <Button
                 className={classes.joinBtn}
                 variant="outlined"
