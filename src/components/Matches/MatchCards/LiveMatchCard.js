@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, LinearProgress, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import MatchCard from "./MatchCard";
 
@@ -24,6 +24,17 @@ function LiveMatchCard(props) {
       league={league}
       kickOff={kickOff}
     >
+      <Grid
+        sx={{ mb: 4 }}
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={5}>
+          <LinearProgress color="error" />
+        </Grid>
+      </Grid>
       <Button className={classes.showRoomBtn} variant="outlined" color="error">
         Show Rooms
       </Button>
