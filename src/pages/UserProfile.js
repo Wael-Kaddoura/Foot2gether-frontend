@@ -1,7 +1,8 @@
 import UserNavBar from "../components/NavBar/UserNavBar";
 import userProfilePicture from "../Images/john doe.png";
-import { Grid, Button, Badge } from "@mui/material";
+import { Grid, Button, Badge, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { fontWeight } from "@mui/system";
 
 const useStyles = makeStyles({
   followBtn: {
@@ -11,6 +12,11 @@ const useStyles = makeStyles({
   },
   userCover: {
     height: "60vh",
+  },
+  userName: {
+    fontSize: 30,
+    fontWeight: 800,
+    color: "#fff",
   },
   userImage: {
     height: 200,
@@ -40,27 +46,41 @@ function UserProfile() {
       justifyContent="space-between"
       alignItems="flex-end"
     >
-      <Grid item xs={6} sx={{ mb: 5 }}>
-        <Badge
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-          badgeContent={
-            <img
-              src={"http://localhost:8000/logos/Manchester_United.png"}
-              className={classes.favTeam}
-              alt="userProfile"
-            />
-          }
+      <Grid item xs={8} lg={6} sx={{ mb: 5 }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="flex-end"
         >
-          <img
-            src={userProfilePicture}
-            className={classes.userImage}
-            alt="userProfile"
-          />
-        </Badge>
+          <Grid item xs={12} md={5}>
+            <Badge
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              badgeContent={
+                <img
+                  src={"http://localhost:8000/logos/Manchester_United.png"}
+                  className={classes.favTeam}
+                  alt="userProfile"
+                />
+              }
+            >
+              <img
+                src={userProfilePicture}
+                className={classes.userImage}
+                alt="userProfile"
+              />
+            </Badge>
+          </Grid>
+
+          <Grid item xs={12} md={5} sx={{ ml: 2, mt: 3 }}>
+            <Typography className={classes.userName}>Bilal Azzam</Typography>
+          </Grid>
+        </Grid>
       </Grid>
+
       <Grid item xs={4} sm={1} sx={{ mb: 8 }}>
         <Button className={classes.followBtn} variant="outlined" color="error">
           Follow
