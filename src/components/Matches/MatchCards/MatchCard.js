@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 90,
     },
     [theme.breakpoints.between("sm", "xl")]: {
-      Height: 120,
+      minHeight: 120,
+      maxHeight: 120,
       maxWidth: 120,
     },
   },
