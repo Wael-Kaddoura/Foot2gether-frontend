@@ -183,6 +183,7 @@ function MatchTabs(props) {
       <TabPanel value={value} index={0}>
         {liveMatches.map((match) => (
           <LiveMatchCard
+            matchID={match.id}
             team1Name={match.team1.name}
             team1Logo={match.team1.logo}
             team2Name={match.team2.name}
