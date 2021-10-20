@@ -34,15 +34,36 @@ function MatchRooms() {
       let response = await axios.get("http://localhost:8000/match/" + match_id);
       let match_data = response.data;
       setMatchData(match_data);
-      console.log(match_data);
-      setIsLoaded(true);
     } catch (error) {
       console.log(error);
     }
   }
 
+  async function getMatchRooms() {
+    try {
+      let config = {
+        data: { match_id: 2 },
+      };
+      let response = await axios.get(
+        "http://localhost:8000/room/match",
+        config
+      );
+      let match_rooms_data = response.data;
+      setMatchData(match_rooms_data);
+      console.log(match_rooms_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    await getMatchData();
+    // await getMatchRooms();
+    setIsLoaded(true);
+  }
+
   useEffect(() => {
-    getMatchData();
+    fetchData();
   }, []);
 
   return (
