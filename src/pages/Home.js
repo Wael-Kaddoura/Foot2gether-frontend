@@ -1,6 +1,21 @@
+import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import { Button } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
 
+const useStyles = makeStyles({
+  viewMatchesBtn: {
+    color: "#fff",
+    backgroundColor: "#ee1e46",
+    borderColor: "#ee1e46",
+    width: 150,
+    height: 55,
+  },
+});
+
 function Home() {
+  const classes = useStyles();
+
   const NavBarContent = (
     <div className="row align-items-center">
       <div className="col-lg-5 ml-auto">
@@ -9,9 +24,15 @@ function Home() {
           Enjoy watching Football Matches with Fans from around the Globe!
         </p>
         <p className="text-center">
-          <a href="matches.html" className="btn btn-primary py-3 px-4 mr-3">
-            View Matches
-          </a>
+          <Link to="/MATCHES">
+            <Button
+              className={classes.viewMatchesBtn}
+              variant="outlined"
+              color="error"
+            >
+              View Matches
+            </Button>
+          </Link>
         </p>
       </div>
     </div>
