@@ -44,7 +44,7 @@ function LiveMatchCard(props) {
         >
           Show Rooms
         </Button>
-      </Link>{" "}
+      </Link>
     </MatchCard>
   );
 }
