@@ -1,4 +1,5 @@
 import MainNavBar from "../components/NavBar/MainNavBar";
+import BlogBody from "../components/Blogs/BlogBody";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
@@ -42,6 +43,7 @@ function BlogView() {
   return (
     <div>
       <MainNavBar NavBarContent={NavBarContent} />
+      <BlogBody />
     </div>
   );
 }
