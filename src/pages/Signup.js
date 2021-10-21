@@ -14,8 +14,10 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import team1Img from "../Images/manchester_city.png";
+import team2Img from "../Images/manchester_united.png";
 
 const style = {
   position: "absolute",
@@ -29,7 +31,7 @@ const style = {
   p: 4,
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   mainContainer: {
     width: "100%",
     height: "100%",
@@ -42,7 +44,17 @@ const useStyles = makeStyles({
   formField: {
     width: "100%",
   },
-});
+  teamLogo: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      width: 35,
+      height: 35,
+    },
+    [theme.breakpoints.between("sm", "xl")]: {
+      width: 40,
+      height: 40,
+    },
+  },
+}));
 
 function Signup() {
   const classes = useStyles();
@@ -69,6 +81,7 @@ function Signup() {
         >
           Create a New Account
         </Typography>
+
         <Box component="form" sx={{ mb: 5 }}>
           <TextField
             className={classes.formField}
@@ -118,9 +131,14 @@ function Signup() {
             onChange={handleChange}
             sx={{ mb: 3 }}
           >
-            <MenuItem value={10}>Manchester United</MenuItem>
-            <MenuItem value={20}>Real Madrid</MenuItem>
-            <MenuItem value={30}>Manchester City</MenuItem>
+            <MenuItem value={10}>
+              <img src={team2Img} className={classes.teamLogo} alt="t2" />
+              <Typography sx={{ ml: 3 }}>Manchester United</Typography>
+            </MenuItem>
+            <MenuItem value={30}>
+              <img src={team1Img} className={classes.teamLogo} alt="t2" />
+              <Typography sx={{ ml: 3 }}>Manchester City</Typography>
+            </MenuItem>
           </Select>
 
           <FormLabel component="legend">Gender</FormLabel>
