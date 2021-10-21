@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { Button } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
-import HomeMatchCard from "../components/Matches/MatchCards/HomeMatchCard";
+import HomeMatchCard from "../components/Home/HomeMatchCard";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
