@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LiveRoomCard(props) {
+function LiveMatchRoomCard(props) {
   const {} = props;
   const classes = useStyles();
 
@@ -96,4 +96,4 @@ function LiveRoomCard(props) {
   );
 }
 
-export default LiveRoomCard;
+export default LiveMatchRoomCard;
