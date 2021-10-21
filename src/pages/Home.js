@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import HomeMatchCard from "../components/Home/HomeMatchCard";
+import HomeBlogs from "../components/Home/HomeBlogs";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
@@ -11,6 +12,9 @@ const useStyles = makeStyles({
     borderColor: "#ee1e46",
     width: 150,
     height: 55,
+  },
+  homeContent: {
+    minWidth: "100%",
   },
 });
 
@@ -43,6 +47,15 @@ function Home() {
     <div>
       <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />
       <HomeMatchCard />
+      <Grid
+        container
+        className={classes.homeContent}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <HomeBlogs />
+      </Grid>
     </div>
   );
 }
