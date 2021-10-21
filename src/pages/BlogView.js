@@ -1,5 +1,6 @@
 import MainNavBar from "../components/NavBar/MainNavBar";
 import BlogBody from "../components/Blogs/BlogBody";
+import BlogCommentsSection from "../components/Blogs/BlogCommentsSection";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
@@ -44,6 +45,7 @@ function BlogView() {
     <div>
       <MainNavBar NavBarContent={NavBarContent} />
       <BlogBody />
+      <BlogCommentsSection />
     </div>
   );
 }
