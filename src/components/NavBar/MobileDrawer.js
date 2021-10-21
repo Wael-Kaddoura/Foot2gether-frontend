@@ -39,16 +39,16 @@ function MobileDrawer({ currentPageName }) {
               }
             />
             <NavBarItem
+              name="ROOMS"
+              color="black"
+              isActiveDrawer={
+                currentPageName === "Rooms" ? "drawer-active" : ""
+              }
+            />
+            <NavBarItem
               name="BLOG"
               color="black"
               isActiveDrawer={currentPageName === "Blog" ? "drawer-active" : ""}
-            />
-            <NavBarItem
-              name="STANDINGS"
-              color="black"
-              isActiveDrawer={
-                currentPageName === "Standings" ? "drawer-active" : ""
-              }
             />
           </List>
         </nav>

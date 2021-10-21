@@ -38,14 +38,14 @@ function DesktopHeader({ currentPageName }) {
                   isActive={currentPageName === "Matches" ? "active" : ""}
                 />
                 <NavBarItem
+                  name="ROOMS"
+                  color="white"
+                  isActive={currentPageName === "Rooms" ? "active" : ""}
+                />
+                <NavBarItem
                   name="BLOG"
                   color="white"
                   isActive={currentPageName === "Blog" ? "active" : ""}
-                />
-                <NavBarItem
-                  name="STANDINGS"
-                  color="white"
-                  isActive={currentPageName === "Standings" ? "active" : ""}
                 />
               </List>
             </nav>
