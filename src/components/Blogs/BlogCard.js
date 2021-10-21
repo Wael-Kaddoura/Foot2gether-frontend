@@ -1,19 +1,12 @@
 import { Grid, Box, Typography } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
 import BlogImg from "../../Images/img_1.jpg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   blogImg: {
+    height: "auto",
+    width: "100%",
     borderRadius: "4%",
-
-    [theme.breakpoints.between("xs", "sm")]: {
-      height: "auto",
-      width: "100%",
-    },
-    [theme.breakpoints.between("md", "lg")]: {
-      height: "auto",
-      width: "100%",
-    },
   },
   blogInfo: {
     width: "100%",
@@ -38,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "16px !important",
     fontWeight: "600 !important",
   },
-}));
+});
 
 function BlogCard() {
   const classes = useStyles();
