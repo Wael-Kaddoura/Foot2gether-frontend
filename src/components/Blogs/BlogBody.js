@@ -35,7 +35,7 @@ function BlogBody() {
       justifyContent="center"
       alignItems="center"
     >
-      <Grid item xs={5}>
+      <Grid item xs={12} sm={9} md={7} lg={5}>
         <Typography className={classes.blogTitle} sx={{ mb: 5 }}>
           Romulu to stay at Real Madrid?
         </Typography>
