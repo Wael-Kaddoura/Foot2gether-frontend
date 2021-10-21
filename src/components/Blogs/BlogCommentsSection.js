@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import BlogComment from "./BlogComment";
+import BlogNewComment from "./BlogNewComment";
 
 const useStyles = makeStyles({
   blogTitle: {
@@ -52,6 +53,8 @@ function BlogComments() {
           <BlogComment />
           <BlogComment />
         </Grid>
+
+        <BlogNewComment />
       </Grid>
     </Grid>
   );
