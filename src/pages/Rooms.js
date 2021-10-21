@@ -1,8 +1,9 @@
 import { makeStyles } from "@mui/styles";
-import { Grid, Button } from "@mui/material";
+import { Grid } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import SearchBar from "../components/SearchBar";
 import LiveRoomCard from "../components/Rooms/LiveRoomCard";
+import CreateNewRoom from "../components/Rooms/CreateNewRoom";
 import CircleIcon from "@mui/icons-material/Circle";
 
 const useStyles = makeStyles({
@@ -47,7 +48,6 @@ function Rooms() {
         className={classes.roomContent}
         direction="row"
         justifyContent="center"
-        alignItems="center"
       >
         <Grid item xs={12} className={classes.roomsContainer} sx={{ mx: 2 }}>
           <Grid
@@ -58,14 +58,22 @@ function Rooms() {
             sx={{ mt: 5 }}
           >
             <Grid item xs={12} sx={{ mb: 5 }}>
-              <Grid
-                container
-                direction="row"
-                alignItems="center"
-                className={classes.bodyTitle}
-              >
-                <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
-                Live Rooms
+              <Grid container>
+                <Grid item xs={7}>
+                  <Grid
+                    container
+                    direction="row"
+                    alignItems="center"
+                    className={classes.bodyTitle}
+                  >
+                    <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
+                    Live Rooms
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={5} style={{ textAlign: "right" }}>
+                  <CreateNewRoom />
+                </Grid>
               </Grid>
             </Grid>
 
