@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import MatchesTab from "../components/Matches/MatchesTab";
-import SearchBar from "../components/SearchBar";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
@@ -109,7 +108,6 @@ function Matches() {
         <p className={classes.pageSubTitle}>
           Choose any Match to enjoy watching the game with other fans!
         </p>
-        <SearchBar />
       </div>
     </div>
   );
