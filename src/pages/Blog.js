@@ -8,6 +8,12 @@ const useStyles = makeStyles({
     fontSize: "50px !important",
     fontWeight: 700,
   },
+  pageSubtitle: {
+    color: "rgba(255, 255, 255, 0.7)",
+    fontSize: 16,
+    fontWeight: 300,
+  },
+
   blogsContainer: {
     paddingRight: "5em",
     paddingLeft: "5em",
