@@ -1,7 +1,7 @@
 import UserNavBar from "../components/NavBar/UserNavBar";
 import userProfilePicture from "../Images/john doe.png";
 import UserInfo from "../components/NavBar/UserInfo";
-import LiveRoomCard from "../components/Rooms/LiveRoomCard";
+import LiveRoomCard from "../components/Rooms/LiveMatchRoomCard";
 import { Grid, Button, Badge, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
