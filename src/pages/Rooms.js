@@ -49,7 +49,7 @@ function Rooms() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} className={classes.roomsContainer}>
+        <Grid item xs={12} className={classes.roomsContainer} sx={{ mx: 2 }}>
           <Grid
             container
             direction="row"
