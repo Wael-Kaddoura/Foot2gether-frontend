@@ -1,5 +1,6 @@
 import { Grid, Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 import BlogImg from "../../Images/img_1.jpg";
 
 const useStyles = makeStyles({
@@ -38,20 +39,22 @@ function BlogCard() {
 
   return (
     <Grid item xs={12} md={4} lg={3} sx={{ mb: 5, mr: 1 }}>
-      <img className={classes.blogImg} src={BlogImg} alt="blogImage" />
-      <Box className={classes.blogInfo} sx={{ mt: 3 }}>
-        <Typography className={classes.blogDate}>May 20, 2020</Typography>
-        <Typography className={classes.blogTitle} sx={{ mb: 2 }}>
-          Romulu to stay at Real Madrid?
-        </Typography>
-        <Typography className={classes.blogBody}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus
-          deserunt saepe tempora dolorem.
-        </Typography>
-        <Typography className={classes.blogReadMore} sx={{ mt: 2 }}>
-          Read More
-        </Typography>
-      </Box>
+      <Link to={"/blogview"}>
+        <img className={classes.blogImg} src={BlogImg} alt="blogImage" />
+        <Box className={classes.blogInfo} sx={{ mt: 3 }}>
+          <Typography className={classes.blogDate}>May 20, 2020</Typography>
+          <Typography className={classes.blogTitle} sx={{ mb: 2 }}>
+            Romulu to stay at Real Madrid?
+          </Typography>
+          <Typography className={classes.blogBody}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus
+            deserunt saepe tempora dolorem.
+          </Typography>
+          <Typography className={classes.blogReadMore} sx={{ mt: 2 }}>
+            Read More
+          </Typography>
+        </Box>
+      </Link>
     </Grid>
   );
 }
