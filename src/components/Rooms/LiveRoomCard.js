@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
-      width: 35,
-      height: 35,
+      width: 38,
+      height: 38,
     },
     [theme.breakpoints.between("sm", "xl")]: {
       width: 50,
