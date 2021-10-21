@@ -4,6 +4,7 @@ import { Grid, Button } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import HomeMatchCard from "../components/Home/HomeMatchCard";
 import HomeBlogs from "../components/Home/HomeBlogs";
+import HomeNextMatchCard from "../components/Home/HomeNextMatchCard";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
@@ -54,6 +55,8 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
+        <HomeNextMatchCard />
+
         <HomeBlogs />
       </Grid>
     </div>
