@@ -2,6 +2,7 @@ import MainNavBar from "../components/NavBar/MainNavBar";
 import BlogCard from "../components/Blogs/BlogCard";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import CreateNewBlog from "../components/Blogs/CreateNewBlog";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -31,6 +32,7 @@ function Blog() {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta,
           molestias repudiandae pariatur.
         </p>
+        <CreateNewBlog />
       </div>
     </div>
   );
