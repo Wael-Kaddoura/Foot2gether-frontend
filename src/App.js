@@ -6,6 +6,7 @@ import Blog from "./pages/Blog";
 import Standings from "./pages/Standings";
 import MatchRooms from "./pages/MatchRooms";
 import UserProfile from "./pages/UserProfile";
+import BlogView from "./pages/BlogView";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route exact path="/userprofile">
           <UserProfile />
+        </Route>
+        <Route exact path="/blogview">
+          <BlogView />
         </Route>
       </Switch>
     </Router>
