@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { Button } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
+import HomeMatchCard from "../components/Matches/MatchCards/HomeMatchCard";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
@@ -38,7 +39,12 @@ function Home() {
     </div>
   );
 
-  return <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />;
+  return (
+    <div>
+      <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />
+      <HomeMatchCard />
+    </div>
+  );
 }
 
 export default Home;
