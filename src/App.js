@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Blog from "./pages/Blogs";
@@ -13,6 +14,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
         <Route exact path="/home">
           <Home />
         </Route>
