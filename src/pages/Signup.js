@@ -139,7 +139,7 @@ function Signup() {
           <Link to={"/signup"} style={{ color: "blue" }}></Link>
 
           <Button variant="contained" color="success">
-            Login
+            Sign Up
           </Button>
         </Grid>
       </Box>
