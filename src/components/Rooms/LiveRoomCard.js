@@ -1,5 +1,7 @@
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+import team1Img from "../../Images/manchester_city.png";
+import team2Img from "../../Images/manchester_united.png";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -32,6 +34,16 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     textAlign: "center",
   },
+  teamLogo: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      width: 35,
+      height: 35,
+    },
+    [theme.breakpoints.between("sm", "xl")]: {
+      width: 50,
+      height: 50,
+    },
+  },
 }));
 
 function LiveRoomCard(props) {
@@ -54,6 +66,12 @@ function LiveRoomCard(props) {
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item xs={4} md={2}>
                 <Typography className={classes.roomName}>Room01</Typography>
+              </Grid>
+
+              <Grid item xs={3} sm={2} className={classes.vs}>
+                <img className={classes.teamLogo} src={team1Img} alt="team1" />
+
+                <img className={classes.teamLogo} src={team2Img} alt="team2" />
               </Grid>
 
               <Grid item xs={3} md={1}>
