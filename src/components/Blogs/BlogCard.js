@@ -43,7 +43,9 @@ function BlogCard(props) {
       <Link to={"/blogview?id=" + blogID}>
         <img className={classes.blogImg} src={blogImg} alt="blogImage" />
         <Box className={classes.blogInfo} sx={{ mt: 3 }}>
-          <Typography className={classes.blogDate}>{blogDate}</Typography>
+          <Typography className={classes.blogDate}>
+            {`${new Date(blogDate)}`.substring(0, 16)}
+          </Typography>
           <Typography className={classes.blogTitle} sx={{ mb: 2 }}>
             {blogTitle}
           </Typography>
