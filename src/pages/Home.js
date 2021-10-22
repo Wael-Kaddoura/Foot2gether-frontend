@@ -27,12 +27,23 @@ function Home() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [latestBlogsData, setLatestBlogsData] = useState(null);
+  const [nextMatchData, setNextMatchData] = useState(null);
+
+  async function getNextMatchData() {
+    try {
+      let response = await axios.get("http://localhost:8000/match/next");
+      let next_match_data = response.data;
+      console.log(next_match_data);
+      setNextMatchData(next_match_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function getLatestBlogs() {
     try {
       let response = await axios.get("http://localhost:8000/blog/latest");
       let latest_blogs_data = response.data;
-      console.log(latest_blogs_data);
       setLatestBlogsData(latest_blogs_data);
     } catch (error) {
       console.log(error);
@@ -41,7 +52,7 @@ function Home() {
 
   async function fetchData() {
     await getLatestBlogs();
-
+    await getNextMatchData();
     setIsLoaded(true);
   }
 
@@ -82,7 +93,7 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        <HomeNextMatchCard />
+        {isLoaded && <HomeNextMatchCard nextMatch={nextMatchData} />}
         {isLoaded && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
     </div>

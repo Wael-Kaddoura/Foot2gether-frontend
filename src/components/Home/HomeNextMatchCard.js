@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import team1Img from "../../Images/manchester_city.png";
 import team2Img from "../../Images/manchester_united.png";
 
-function HomeNextMatchCard() {
+function HomeNextMatchCard({ nextMatch }) {
   return (
     <Grid item xs={12}>
       <div className="site-section bg-dark">
@@ -18,8 +18,8 @@ function HomeNextMatchCard() {
                   <div className="widget-vs">
                     <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
                       <div className="team-1 text-center">
-                        <img src={team1Img} alt="team1" />
-                        <h3>Tottenham</h3>
+                        <img src={nextMatch[0].team1.logo} alt="team1" />
+                        <h3>{nextMatch[0].team1.name}</h3>
                       </div>
                       <div>
                         <span className="vs">
@@ -27,17 +27,17 @@ function HomeNextMatchCard() {
                         </span>
                       </div>
                       <div className="team-2 text-center">
-                        <img src={team2Img} alt="team2" />
-                        <h3>Chelsea</h3>
+                        <img src={nextMatch[0].team2.logo} alt="team2" />
+                        <h3>{nextMatch[0].team2.name}</h3>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="text-center widget-vs-contents mb-4">
-                  <h4>Premiere League</h4>
+                  <h4>{nextMatch[0].competition.name}</h4>
                   <p className="mb-5">
-                    <span className="d-block">6:00 PM</span>
+                    <span className="d-block">{nextMatch[0].kick_off}</span>
                     <strong className="text-primary">
                       Tottenham Hotspur Staduim
                     </strong>
