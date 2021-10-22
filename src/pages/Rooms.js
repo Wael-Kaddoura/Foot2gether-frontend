@@ -121,6 +121,8 @@ function Rooms() {
                   roomID={room.id}
                   roomCreator={room.creator.username}
                   roomCurrentCapacity={room.current_participants_number}
+                  team1ID={room.matchroom.team1_id}
+                  team2ID={room.matchroom.team2_id}
                 />
               ))}
             </Grid>

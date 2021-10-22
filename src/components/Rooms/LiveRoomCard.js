@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import team1Img from "../../Images/manchester_city.png";
 import team2Img from "../../Images/manchester_united.png";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -36,19 +38,63 @@ const useStyles = makeStyles((theme) => ({
   },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
-      width: 38,
-      height: 38,
+      maxWidth: 38,
+      maxHeight: 38,
     },
     [theme.breakpoints.between("sm", "xl")]: {
-      width: 50,
-      height: 50,
+      maxWidth: 50,
+      maxHeight: 50,
     },
   },
 }));
 
 function LiveRoomCard(props) {
-  const { roomName, roomID, roomCreator, roomCurrentCapacity } = props;
+  const {
+    roomName,
+    roomID,
+    roomCreator,
+    roomCurrentCapacity,
+    team1ID,
+    team2ID,
+  } = props;
+
   const classes = useStyles();
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [team1Logo, setTeam1Logo] = useState(null);
+  const [team2Logo, setTeam2Logo] = useState(null);
+
+  async function getTeam1Logo() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/team/logo/` + team1ID
+      );
+      let team1_logo = response.data.logo;
+      setTeam1Logo(team1_logo);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getTeam2Logo() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/team/logo/` + team2ID
+      );
+      let team2_logo = response.data.logo;
+      setTeam2Logo(team2_logo);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function fetchData() {
+    await getTeam1Logo();
+    await getTeam2Logo();
+    setIsLoaded(true);
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Grid item xs={12} sx={{ mb: 5 }}>
@@ -73,12 +119,13 @@ function LiveRoomCard(props) {
               <Typography className={classes.roomName}>{roomName}</Typography>
             </Grid>
 
-            <Grid item xs={3} sm={2} className={classes.vs}>
-              <img className={classes.teamLogo} src={team1Img} alt="team1" />
+            {isLoaded && (
+              <Grid item xs={3} sm={2} className={classes.vs}>
+                <img className={classes.teamLogo} src={team1Logo} alt="team1" />
 
-              <img className={classes.teamLogo} src={team2Img} alt="team2" />
-            </Grid>
-
+                <img className={classes.teamLogo} src={team2Logo} alt="team2" />
+              </Grid>
+            )}
             <Grid item xs={3} md={1}>
               <Button
                 className={classes.joinBtn}
