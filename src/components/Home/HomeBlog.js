@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import BlogImg from "../../Images/img_1.jpg";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   blogImg: {
@@ -25,28 +25,33 @@ const useStyles = makeStyles({
   },
 });
 
-function HomeBlog() {
+function HomeBlog(props) {
+  const { blogID, blogImg, blogTitle, blogBody, blogDate } = props;
+
   const classes = useStyles();
 
   return (
     <Grid item xs={12} md={6} sx={{ mb: 5 }}>
-      <Grid container>
-        <Grid item xs={4} sx={{ mr: 2 }}>
-          <img className={classes.blogImg} src={BlogImg} alt="blogImage" />
-        </Grid>
-        <Grid item xs={7}>
-          <Typography className={classes.blogDate}>May 20, 2020</Typography>
+      <Link to={"/blogview?id=" + blogID}>
+        <Grid container>
+          <Grid item xs={4} sx={{ mr: 2 }}>
+            <img className={classes.blogImg} src={blogImg} alt="blogImage" />
+          </Grid>
+          <Grid item xs={7}>
+            <Typography className={classes.blogDate}>
+              {`${new Date(blogDate)}`.substring(0, 16)}
+            </Typography>
 
-          <Typography className={classes.blogTitle} sx={{ mb: 3 }}>
-            Romulu to stay at Real Madrid?
-          </Typography>
+            <Typography className={classes.blogTitle} sx={{ mb: 3 }}>
+              {blogTitle}
+            </Typography>
 
-          <Typography className={classes.blogBody}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus
-            deserunt saepe tempora dolorem.
-          </Typography>
+            <Typography className={classes.blogBody}>
+              {blogBody.substring(0, 97) + "..."}
+            </Typography>
+          </Grid>
         </Grid>
-      </Grid>
+      </Link>{" "}
     </Grid>
   );
 }

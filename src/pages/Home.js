@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { Grid, Button } from "@mui/material";
+import axios from "axios";
+
 import MainNavBar from "../components/NavBar/MainNavBar";
 import HomeMatchCard from "../components/Home/HomeMatchCard";
 import HomeBlogs from "../components/Home/HomeBlogs";
@@ -21,6 +24,30 @@ const useStyles = makeStyles({
 
 function Home() {
   const classes = useStyles();
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [latestBlogsData, setLatestBlogsData] = useState(null);
+
+  async function getLatestBlogs() {
+    try {
+      let response = await axios.get("http://localhost:8000/blog/latest");
+      let latest_blogs_data = response.data;
+      console.log(latest_blogs_data);
+      setLatestBlogsData(latest_blogs_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    await getLatestBlogs();
+
+    setIsLoaded(true);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const NavBarContent = (
     <div className="row align-items-center">
@@ -56,8 +83,7 @@ function Home() {
         alignItems="center"
       >
         <HomeNextMatchCard />
-
-        <HomeBlogs />
+        {isLoaded && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
     </div>
   );

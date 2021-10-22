@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CircleIcon from "@mui/icons-material/Circle";
 import HomeBlog from "./HomeBlog";
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function HomeBlogs() {
+function HomeBlogs({ latestBlogs }) {
   const classes = useStyles();
 
   return (
@@ -39,8 +39,15 @@ function HomeBlogs() {
           </Grid>
         </Grid>
 
-        <HomeBlog />
-        <HomeBlog />
+        {latestBlogs.map((blog) => (
+          <HomeBlog
+            blogID={blog.id}
+            blogImg={blog.image}
+            blogTitle={blog.title}
+            blogBody={blog.body}
+            blogDate={blog.updatedAt}
+          />
+        ))}
       </Grid>
     </Grid>
   );
