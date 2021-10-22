@@ -37,7 +37,6 @@ function Rooms() {
     try {
       let response = await axios.get(`http://localhost:8000/room`);
       let live_rooms_data = response.data;
-      console.log("rooms", live_rooms_data);
       setLiveRooms(live_rooms_data);
     } catch (error) {
       console.log(error);
