@@ -7,7 +7,6 @@ import RoomMatchCard from "../components/Matches/MatchCards/RoomMatchCard";
 import LiveMatchRoomCard from "../components/Rooms/LiveMatchRoomCard";
 import CircleIcon from "@mui/icons-material/Circle";
 import axios from "axios";
-import { useToastContainer } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   pageTitle: {
@@ -48,8 +47,6 @@ function MatchRooms() {
     try {
       let response = await axios.get("http://localhost:8000/match/" + match_id);
       let match_data = response.data;
-      console.log("match", match_data);
-
       setMatchData(match_data);
     } catch (error) {
       console.log(error);
@@ -62,7 +59,6 @@ function MatchRooms() {
         `http://localhost:8000/room/match/${match_id}`
       );
       let match_rooms_data = response.data;
-      console.log("rooms", match_rooms_data);
       setLiveRooms(match_rooms_data);
     } catch (error) {
       console.log(error);
