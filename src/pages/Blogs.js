@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import BlogCard from "../components/Blogs/BlogCard";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CreateNewBlog from "../components/Blogs/CreateNewBlog";
+import axios from "axios";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -24,6 +26,24 @@ const useStyles = makeStyles({
 function Blog() {
   const classes = useStyles();
 
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [blogsData, setBlogsData] = useState(null);
+
+  async function getBlogsData() {
+    try {
+      let response = await axios.get(`http://localhost:8000/blog`);
+      let blogs_data = response.data;
+      setBlogsData(blogs_data);
+      setIsLoaded(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getBlogsData();
+  }, []);
+
   const NavBarContent = (
     <div className="row align-items-center">
       <div className="col-lg-5 mx-auto text-center">
@@ -41,21 +61,27 @@ function Blog() {
     <div>
       <MainNavBar currentPageName="Blog" NavBarContent={NavBarContent} />
 
-      <Grid
-        className={classes.blogsContainer}
-        container
-        direction="row"
-        justifyContent="space-around"
-        alignItems="center"
-        sx={{ mt: 10 }}
-      >
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </Grid>
+      {isLoaded && (
+        <Grid
+          className={classes.blogsContainer}
+          container
+          direction="row"
+          justifyContent="space-around"
+          alignItems="center"
+          sx={{ mt: 10 }}
+        >
+          {blogsData.map((blog) => (
+            <BlogCard
+              blogID={blog.id}
+              blogImg={blog.image}
+              blogTitle={blog.title}
+              blogBody={blog.body}
+              blogDate={blog.updatedAt}
+              blogAuthor={blog.author.username}
+            />
+          ))}
+        </Grid>
+      )}
     </div>
   );
 }
