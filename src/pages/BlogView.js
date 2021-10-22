@@ -1,8 +1,11 @@
+import { useState, useEffect } from "react";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import BlogBody from "../components/Blogs/BlogBody";
 import BlogCommentsSection from "../components/Blogs/BlogCommentsSection";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -23,20 +26,45 @@ const useStyles = makeStyles({
 function BlogView() {
   const classes = useStyles();
 
+  const blog_id = new URLSearchParams(useLocation().search).get("id");
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [blogData, setBlogData] = useState(null);
+
+  async function getBlogData() {
+    try {
+      let response = await axios.get("http://localhost:8000/blog/" + blog_id);
+      let blog_data = response.data;
+      setBlogData(blog_data);
+      setIsLoaded(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getBlogData();
+  }, []);
+
   const NavBarContent = (
     <div className="row align-items-center">
       <div className="col-lg-5 mx-auto text-center">
-        <h1 className={classes.pageTitle}>Romulu to stay at Real Madrid?</h1>
-        {/* <p className={classes.pageSubTitle}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta,
-          molestias repudiandae pariatur.
-        </p> */}
-        <Box component="span" className={classes.pageSubtitle}>
-          May 20, 2020
-        </Box>
-        <Box component="span" className={classes.pageSubtitle} sx={{ mx: 3 }}>
-          by Admin
-        </Box>
+        {isLoaded && (
+          <div>
+            <h1 className={classes.pageTitle}>{blogData.title} </h1>
+
+            <Box component="span" className={classes.pageSubtitle}>
+              {`${new Date(blogData.updatedAt)}`.substring(0, 16)}
+            </Box>
+            <Box
+              component="span"
+              className={classes.pageSubtitle}
+              sx={{ mx: 3 }}
+            >
+              by {blogData.author.username}
+            </Box>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -44,8 +72,16 @@ function BlogView() {
   return (
     <div>
       <MainNavBar NavBarContent={NavBarContent} />
-      <BlogBody />
-      <BlogCommentsSection />
+      {isLoaded && (
+        <div>
+          <BlogBody
+            blogTitle={blogData.title}
+            blogBody={blogData.body}
+            blogImg={blogData.image}
+          />
+          <BlogCommentsSection />
+        </div>
+      )}
     </div>
   );
 }
