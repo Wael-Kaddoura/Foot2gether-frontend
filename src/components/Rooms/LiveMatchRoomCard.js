@@ -39,18 +39,24 @@ function LiveMatchRoomCard(props) {
   const classes = useStyles();
 
   return (
-    <Card
-      className={classes.card}
-      sx={{ maxWidth: 1140, minHeight: 176, maxHeight: 176, mb: 5, mx: 2 }}
-    >
-      <Grid
-        sx={{ minHeight: 176 }}
-        container
-        justifyContent="center"
-        alignItems="center"
+    <Grid item xs={12} sx={{ mb: 5 }}>
+      <Card
+        className={classes.card}
+        sx={{ maxWidth: 1140, minHeight: 176, maxHeight: 176, mb: 5, mx: 2 }}
       >
-        <Grid item xs={12}>
-          <Grid container justifyContent="space-between" alignItems="center">
+        <Grid
+          sx={{ minHeight: 176 }}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid
+            item
+            xs={12}
+            container
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Grid item xs={4} md={2}>
               <Typography className={classes.roomName}>Room01</Typography>
             </Grid>
@@ -65,10 +71,14 @@ function LiveMatchRoomCard(props) {
               </Button>
             </Grid>
           </Grid>
-        </Grid>
 
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" alignItems="center">
+          <Grid
+            item
+            xs={12}
+            container
+            justifyContent="center"
+            alignItems="center"
+          >
             <Grid item xs={4}>
               <Typography className={classes.roomDetailsTitle}>
                 Room ID:
@@ -91,8 +101,8 @@ function LiveMatchRoomCard(props) {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Card>
+      </Card>
+    </Grid>
   );
 }
 

@@ -62,52 +62,60 @@ function LiveRoomCard(props) {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={12}>
-            <Grid container justifyContent="space-between" alignItems="center">
-              <Grid item xs={4} md={2}>
-                <Typography className={classes.roomName}>Room01</Typography>
-              </Grid>
+          <Grid
+            item
+            xs={12}
+            container
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Grid item xs={4} md={2}>
+              <Typography className={classes.roomName}>Room01</Typography>
+            </Grid>
 
-              <Grid item xs={3} sm={2} className={classes.vs}>
-                <img className={classes.teamLogo} src={team1Img} alt="team1" />
+            <Grid item xs={3} sm={2} className={classes.vs}>
+              <img className={classes.teamLogo} src={team1Img} alt="team1" />
 
-                <img className={classes.teamLogo} src={team2Img} alt="team2" />
-              </Grid>
+              <img className={classes.teamLogo} src={team2Img} alt="team2" />
+            </Grid>
 
-              <Grid item xs={3} md={1}>
-                <Button
-                  className={classes.joinBtn}
-                  variant="outlined"
-                  color="error"
-                >
-                  Join
-                </Button>
-              </Grid>
+            <Grid item xs={3} md={1}>
+              <Button
+                className={classes.joinBtn}
+                variant="outlined"
+                color="error"
+              >
+                Join
+              </Button>
             </Grid>
           </Grid>
 
-          <Grid item xs={12}>
-            <Grid container justifyContent="center" alignItems="center">
-              <Grid item xs={4}>
-                <Typography className={classes.roomDetailsTitle}>
-                  Room ID:
-                </Typography>
-                <Typography className={classes.roomDetails}>211</Typography>
-              </Grid>
+          <Grid
+            item
+            xs={12}
+            container
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item xs={4}>
+              <Typography className={classes.roomDetailsTitle}>
+                Room ID:
+              </Typography>
+              <Typography className={classes.roomDetails}>211</Typography>
+            </Grid>
 
-              <Grid item xs={4}>
-                <Typography className={classes.roomDetailsTitle}>
-                  Created By:
-                </Typography>
-                <Typography className={classes.roomDetails}>Admin01</Typography>
-              </Grid>
+            <Grid item xs={4}>
+              <Typography className={classes.roomDetailsTitle}>
+                Created By:
+              </Typography>
+              <Typography className={classes.roomDetails}>Admin01</Typography>
+            </Grid>
 
-              <Grid item xs={4}>
-                <Typography className={classes.roomDetailsTitle}>
-                  Current:
-                </Typography>
-                <Typography className={classes.roomDetails}>25</Typography>
-              </Grid>
+            <Grid item xs={4}>
+              <Typography className={classes.roomDetailsTitle}>
+                Current:
+              </Typography>
+              <Typography className={classes.roomDetails}>25</Typography>
             </Grid>
           </Grid>
         </Grid>
