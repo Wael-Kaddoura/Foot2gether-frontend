@@ -49,38 +49,37 @@ function Rooms() {
         direction="row"
         justifyContent="center"
       >
-        <Grid item xs={12} className={classes.roomsContainer} sx={{ mx: 2 }}>
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            sx={{ mt: 5 }}
-          >
-            <Grid item xs={12} sx={{ mb: 5 }}>
-              <Grid container>
-                <Grid item xs={7}>
-                  <Grid
-                    container
-                    direction="row"
-                    alignItems="center"
-                    className={classes.bodyTitle}
-                  >
-                    <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
-                    Live Rooms
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={5} style={{ textAlign: "right" }}>
-                  <CreateNewRoom />
-                </Grid>
-              </Grid>
+        <Grid
+          item
+          xs={12}
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className={classes.roomsContainer}
+          sx={{ mx: 2, mt: 5 }}
+        >
+          <Grid item xs={12} container sx={{ mb: 5 }}>
+            <Grid
+              item
+              xs={7}
+              container
+              direction="row"
+              alignItems="center"
+              className={classes.bodyTitle}
+            >
+              <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
+              Live Rooms
             </Grid>
 
-            <LiveRoomCard />
-            <LiveRoomCard />
-            <LiveRoomCard />
+            <Grid item xs={5} style={{ textAlign: "right" }}>
+              <CreateNewRoom />
+            </Grid>
           </Grid>
+
+          <LiveRoomCard />
+          <LiveRoomCard />
+          <LiveRoomCard />
         </Grid>
       </Grid>
     </div>
