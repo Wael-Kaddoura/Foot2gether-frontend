@@ -5,7 +5,6 @@ import { Grid, Button } from "@mui/material";
 import axios from "axios";
 
 import MainNavBar from "../components/NavBar/MainNavBar";
-import HomeMatchCard from "../components/Home/HomeMatchCard";
 import HomeBlogs from "../components/Home/HomeBlogs";
 import HomeNextMatchCard from "../components/Home/HomeNextMatchCard";
 
@@ -85,7 +84,6 @@ function Home() {
   return (
     <div>
       <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />
-      <HomeMatchCard />
       <Grid
         container
         className={classes.homeContent}
