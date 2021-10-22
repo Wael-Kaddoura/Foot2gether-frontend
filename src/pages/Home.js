@@ -91,7 +91,9 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        {isLoaded && <HomeNextMatchCard nextMatch={nextMatchData} />}
+        {isLoaded && nextMatchData && (
+          <HomeNextMatchCard nextMatch={nextMatchData} />
+        )}
         {isLoaded && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
     </div>
