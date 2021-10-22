@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogComments() {
+function BlogComments({ blogComments }) {
   const classes = useStyles();
 
   return (
@@ -46,12 +46,13 @@ function BlogComments() {
           justifyContent="center"
           alignItems="center"
         >
-          <BlogComment />
-          <BlogComment />
-          <BlogComment />
-          <BlogComment />
-          <BlogComment />
-          <BlogComment />
+          {blogComments.map((comment) => (
+            <BlogComment
+              commentAuthor={comment.comment_author.username}
+              commentDate={comment.updatedAt}
+              commentBody={comment.body}
+            />
+          ))}
         </Grid>
 
         <BlogNewComment />

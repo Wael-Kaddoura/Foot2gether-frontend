@@ -30,20 +30,39 @@ function BlogView() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [blogData, setBlogData] = useState(null);
+  const [blogComments, setBlogComments] = useState(null);
 
   async function getBlogData() {
     try {
       let response = await axios.get("http://localhost:8000/blog/" + blog_id);
       let blog_data = response.data;
       setBlogData(blog_data);
-      setIsLoaded(true);
     } catch (error) {
       console.log(error);
     }
   }
 
+  async function getBlogComments() {
+    try {
+      let response = await axios.get(
+        "http://localhost:8000/blog/comments/" + blog_id
+      );
+      let blog_comments = response.data;
+      console.log(blog_comments);
+      setBlogComments(blog_comments);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    await getBlogData();
+    await getBlogComments();
+    setIsLoaded(true);
+  }
+
   useEffect(() => {
-    getBlogData();
+    fetchData();
   }, []);
 
   const NavBarContent = (
@@ -79,7 +98,7 @@ function BlogView() {
             blogBody={blogData.body}
             blogImg={blogData.image}
           />
-          <BlogCommentsSection />
+          <BlogCommentsSection blogComments={blogComments} />
         </div>
       )}
     </div>

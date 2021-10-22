@@ -40,7 +40,9 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogComment() {
+function BlogComment(props) {
+  const { commentAuthor, commentDate, commentBody } = props;
+
   const classes = useStyles();
 
   return (
@@ -50,15 +52,12 @@ function BlogComment() {
           <img className={classes.userImg} src={person1} alt="blogImage" />
         </Grid>
         <Grid item xs={10}>
-          <Typography className={classes.userName}>John Doe</Typography>
+          <Typography className={classes.userName}>{commentAuthor}</Typography>
           <Typography className={classes.commentTime}>
-            JANUARY 9, 2018 AT 2:21PM
+            {`${new Date(commentDate)}`.substring(0, 24)}
           </Typography>
           <Typography className={classes.commentBody} sx={{ mt: 1 }}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
-            quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-            officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
-            impedit necessitatibus, nihil?
+            {commentBody}
           </Typography>
         </Grid>
       </Grid>
