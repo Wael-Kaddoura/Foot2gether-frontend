@@ -4,12 +4,26 @@ import { makeStyles } from "@mui/styles";
 import { useLocation } from "react-router-dom";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import RoomMatchCard from "../components/Matches/MatchCards/RoomMatchCard";
-import LiveRoomCard from "../components/Rooms/LiveMatchRoomCard";
+import LiveMatchRoomCard from "../components/Rooms/LiveMatchRoomCard";
+import CircleIcon from "@mui/icons-material/Circle";
 import axios from "axios";
+import { useToastContainer } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
-  roomContainer: {
-    padding: 24,
+  pageTitle: {
+    fontSize: "50px !important",
+    fontWeight: 700,
+  },
+  roomsContainer: {
+    maxWidth: 1140,
+  },
+  bodyTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: 500,
+  },
+  roomContent: {
+    minWidth: "100%",
   },
 }));
 
@@ -20,6 +34,7 @@ function MatchRooms() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [matchData, setMatchData] = useState(null);
+  const [liveRooms, setLiveRooms] = useState(null);
 
   const NavBarContent = (
     <div className="row align-items-center">
@@ -33,6 +48,8 @@ function MatchRooms() {
     try {
       let response = await axios.get("http://localhost:8000/match/" + match_id);
       let match_data = response.data;
+      console.log("match", match_data);
+
       setMatchData(match_data);
     } catch (error) {
       console.log(error);
@@ -41,16 +58,12 @@ function MatchRooms() {
 
   async function getMatchRooms() {
     try {
-      let config = {
-        data: { match_id: 2 },
-      };
       let response = await axios.get(
-        "http://localhost:8000/room/match",
-        config
+        `http://localhost:8000/room/match/${match_id}`
       );
       let match_rooms_data = response.data;
-      setMatchData(match_rooms_data);
-      console.log(match_rooms_data);
+      console.log("rooms", match_rooms_data);
+      setLiveRooms(match_rooms_data);
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +71,7 @@ function MatchRooms() {
 
   async function fetchData() {
     await getMatchData();
-    // await getMatchRooms();
+    await getMatchRooms();
     setIsLoaded(true);
   }
 
@@ -70,10 +83,44 @@ function MatchRooms() {
     <div>
       {isLoaded && <MainNavBar NavBarContent={NavBarContent} />}
       {isLoaded && (
-        <Grid className={classes.roomContainer} sx={{ mt: 5 }}>
-          <LiveRoomCard />
-          <LiveRoomCard />
-          <LiveRoomCard />
+        <Grid
+          container
+          className={classes.roomContent}
+          direction="row"
+          justifyContent="center"
+        >
+          <Grid
+            item
+            xs={12}
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            className={classes.roomsContainer}
+            sx={{ mx: 2, mt: 5 }}
+          >
+            <Grid
+              item
+              xs={12}
+              container
+              direction="row"
+              alignItems="center"
+              className={classes.bodyTitle}
+              sx={{ mb: 5 }}
+            >
+              <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
+              Live Rooms
+            </Grid>
+
+            {liveRooms.map((room) => (
+              <LiveMatchRoomCard
+                roomName={room.name}
+                roomID={room.id}
+                roomCreator={room.creator.username}
+                roomCurrentCapacity={room.current_participants_number}
+              />
+            ))}
+          </Grid>
         </Grid>
       )}
     </div>

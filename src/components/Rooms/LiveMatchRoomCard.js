@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LiveMatchRoomCard(props) {
-  const {} = props;
+  const { roomName, roomID, roomCreator, roomCurrentCapacity } = props;
   const classes = useStyles();
 
   return (
@@ -58,7 +58,7 @@ function LiveMatchRoomCard(props) {
             alignItems="center"
           >
             <Grid item xs={4} md={2}>
-              <Typography className={classes.roomName}>Room01</Typography>
+              <Typography className={classes.roomName}>{roomName}</Typography>
             </Grid>
 
             <Grid item xs={3} md={1}>
@@ -83,21 +83,25 @@ function LiveMatchRoomCard(props) {
               <Typography className={classes.roomDetailsTitle}>
                 Room ID:
               </Typography>
-              <Typography className={classes.roomDetails}>211</Typography>
+              <Typography className={classes.roomDetails}>{roomID}</Typography>
             </Grid>
 
             <Grid item xs={4}>
               <Typography className={classes.roomDetailsTitle}>
                 Created By:
               </Typography>
-              <Typography className={classes.roomDetails}>Admin01</Typography>
+              <Typography className={classes.roomDetails}>
+                {roomCreator}
+              </Typography>
             </Grid>
 
             <Grid item xs={4}>
               <Typography className={classes.roomDetailsTitle}>
                 Current:
               </Typography>
-              <Typography className={classes.roomDetails}>25</Typography>
+              <Typography className={classes.roomDetails}>
+                {roomCurrentCapacity}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
