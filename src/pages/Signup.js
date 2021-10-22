@@ -1,5 +1,5 @@
 import Overlay from "../components/NavBar/Overlay";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Grid,
   Box,
@@ -16,8 +16,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import team1Img from "../Images/manchester_city.png";
-import team2Img from "../Images/manchester_united.png";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -46,12 +45,12 @@ const useStyles = makeStyles((theme) => ({
   },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
-      width: 35,
-      height: 35,
+      maxWidth: 35,
+      maxHeight: 35,
     },
     [theme.breakpoints.between("sm", "xl")]: {
-      width: 40,
-      height: 40,
+      maxWidth: 40,
+      maxHeight: 40,
     },
   },
 }));
@@ -59,7 +58,28 @@ const useStyles = makeStyles((theme) => ({
 function Signup() {
   const classes = useStyles();
 
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [teamsData, setTeamsData] = useState(null);
   const [favTeam, setFavTeam] = useState("");
+
+  async function getTeamsData() {
+    try {
+      let response = await axios.get(`http://localhost:8000/team`);
+      let teams_data = response.data;
+      setTeamsData(teams_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    await getTeamsData();
+    setIsLoaded(true);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleChange = (event) => {
     setFavTeam(event.target.value);
@@ -131,14 +151,26 @@ function Signup() {
             onChange={handleChange}
             sx={{ mb: 3 }}
           >
-            <MenuItem value={10}>
-              <img src={team2Img} className={classes.teamLogo} alt="t2" />
-              <Typography sx={{ ml: 3 }}>Manchester United</Typography>
-            </MenuItem>
-            <MenuItem value={30}>
-              <img src={team1Img} className={classes.teamLogo} alt="t2" />
-              <Typography sx={{ ml: 3 }}>Manchester City</Typography>
-            </MenuItem>
+            {isLoaded &&
+              teamsData.map((team) => (
+                <MenuItem value={team.id}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={2} container justifyContent="center">
+                      <img
+                        src={team.logo}
+                        className={classes.teamLogo}
+                        alt={team.name}
+                      />
+                    </Grid>
+
+                    <Grid item xs={10}>
+                      <Typography sx={{ ml: 3 }} style={{ color: "#000000" }}>
+                        {team.name}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </MenuItem>
+              ))}
           </Select>
 
           <FormLabel component="legend">Gender</FormLabel>
