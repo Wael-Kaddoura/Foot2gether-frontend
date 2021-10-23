@@ -15,6 +15,7 @@ import {
   Menu,
   MenuItem,
   ListItem,
+  ListItemText,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
@@ -61,9 +62,9 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
       onClose={handleMenuClose}
       sx={{ mt: 3, ml: 5 }}
     >
-      <MenuItem onClick={handleMenuClose}>Name</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem style={{ color: "red !important" }}>Name</MenuItem>
+      <MenuItem style={{ color: "red !important" }}>My Profile</MenuItem>
+      <MenuItem style={{ color: "red !important" }}>Logout</MenuItem>
     </Menu>
   );
 
@@ -108,21 +109,27 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
             />
 
             {isLoggedIn ? (
-              <ListItem style={{ width: "100%" }} sx={{ ml: 5 }}>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="primary"
+              <div>
+                <Link
+                  to="/userprofile"
+                  className="nav-link"
+                  style={{ textDecoration: "none", color: "black" }}
                 >
-                  <AccountCircle />
-                </IconButton>
-                <p>My Profile</p>
-                {renderMenu}
-              </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="PROFILE" />
+                  </ListItem>
+                </Link>
+
+                <Link
+                  to="/userprofile"
+                  className="nav-link"
+                  style={{ textDecoration: "none", color: "red" }}
+                >
+                  <ListItem button>
+                    <ListItemText primary="LOG OUT" />
+                  </ListItem>
+                </Link>
+              </div>
             ) : (
               <ListItem>
                 <Link to={"/login"}>
