@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogNewComment({ blog_id, getBlogComments }) {
+function BlogNewComment({ blog_id, getCommentsData }) {
   const token = JSON.parse(localStorage.getItem("login")).token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -46,7 +46,7 @@ function BlogNewComment({ blog_id, getBlogComments }) {
 
       if (response.status === 201) {
         console.log("Successfully Added Comment!");
-        getBlogComments();
+        getCommentsData();
       } else {
         console.log("Something went wrong!");
       }

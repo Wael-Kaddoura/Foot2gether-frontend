@@ -67,10 +67,14 @@ function BlogView() {
     }
   }
 
-  async function fetchData() {
-    await getBlogData();
+  async function getCommentsData() {
     await getBlogComments();
     await getBlogCommentsCount();
+  }
+
+  async function fetchData() {
+    await getBlogData();
+    await getCommentsData();
     setIsLoaded(true);
   }
 
@@ -115,7 +119,7 @@ function BlogView() {
             blogComments={blogComments}
             blogCommentsCount={blogCommentsCount}
             blog_id={blog_id}
-            getBlogComments={getBlogComments}
+            getCommentsData={getCommentsData}
           />
         </div>
       )}

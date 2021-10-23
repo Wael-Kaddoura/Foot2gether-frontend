@@ -1,6 +1,5 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import person1 from "../../Images/person_1.jpg";
 
 const useStyles = makeStyles({
   blogTitle: {
@@ -41,7 +40,7 @@ const useStyles = makeStyles({
 });
 
 function BlogComment(props) {
-  const { commentAuthor, commentDate, commentBody } = props;
+  const { commentAuthor, commentDate, commentBody, commentAuthorPP } = props;
 
   const classes = useStyles();
 
@@ -49,12 +48,16 @@ function BlogComment(props) {
     <Grid item xs={12} sx={{ mb: 5 }}>
       <Grid container>
         <Grid item xs={2}>
-          <img className={classes.userImg} src={person1} alt="blogImage" />
+          <img
+            className={classes.userImg}
+            src={commentAuthorPP}
+            alt="blogImage"
+          />
         </Grid>
         <Grid item xs={10}>
           <Typography className={classes.userName}>{commentAuthor}</Typography>
           <Typography className={classes.commentTime}>
-            {`${new Date(commentDate)}`.substring(0, 24)}
+            {`${new Date(commentDate)}`.substring(0, 21)}
           </Typography>
           <Typography className={classes.commentBody} sx={{ mt: 1 }}>
             {commentBody}

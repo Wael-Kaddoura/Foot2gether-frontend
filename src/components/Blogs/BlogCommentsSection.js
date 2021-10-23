@@ -29,7 +29,7 @@ function BlogComments({
   blogComments,
   blogCommentsCount,
   blog_id,
-  getBlogComments,
+  getCommentsData,
 }) {
   const classes = useStyles();
 
@@ -54,13 +54,14 @@ function BlogComments({
           {blogComments.map((comment) => (
             <BlogComment
               commentAuthor={comment.comment_author.username}
+              commentAuthorPP={comment.comment_author.profile_picture}
               commentDate={comment.updatedAt}
               commentBody={comment.body}
             />
           ))}
         </Grid>
 
-        <BlogNewComment blog_id={blog_id} getBlogComments={getBlogComments} />
+        <BlogNewComment blog_id={blog_id} getCommentsData={getCommentsData} />
       </Grid>
     </Grid>
   );
