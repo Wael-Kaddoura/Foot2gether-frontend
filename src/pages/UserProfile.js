@@ -1,9 +1,19 @@
+import { useState, useEffect } from "react";
 import UserNavBar from "../components/NavBar/UserNavBar";
-import userProfilePicture from "../Images/john doe.png";
 import UserInfo from "../components/NavBar/UserInfo";
 import LiveRoomCard from "../components/Rooms/LiveMatchRoomCard";
 import { Grid, Button, Badge, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import Avatar from "@mui/material/Avatar";
+import { useHistory } from "react-router-dom";
+
+import axios from "axios";
+
+const SmallAvatar = styled(Avatar)(({ theme }) => ({
+  width: 65,
+  height: 65,
+}));
 
 const useStyles = makeStyles({
   followBtn: {
@@ -22,9 +32,8 @@ const useStyles = makeStyles({
   userImage: {
     height: 200,
     width: 200,
-    border: "5px solid",
-    borderRadius: "50%",
-    borderColor: "#fff",
+    // border: "5px solid",
+    // borderColor: "#fff",
   },
   favTeam: {
     height: 70,
@@ -42,6 +51,45 @@ const useStyles = makeStyles({
 function UserProfile() {
   const classes = useStyles();
 
+  const history = useHistory();
+  let config = {};
+
+  function loginStatusCheck() {
+    let login_status = JSON.parse(localStorage.getItem("login"));
+    if (login_status.login) {
+      const token = login_status.token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+    } else {
+      history.push("/login");
+    }
+  }
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [myProfileData, setMyProfileData] = useState(null);
+
+  async function getMyProfileData() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/user/my_profile`,
+        config
+      );
+      let my_profile_data = response.data;
+      console.log(my_profile_data);
+      setMyProfileData(my_profile_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function fetchData() {
+    loginStatusCheck();
+    await getMyProfileData();
+    setIsLoaded(true);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const NavBarContent = (
     <Grid
       className={classes.userCover}
@@ -50,41 +98,39 @@ function UserProfile() {
       justifyContent="space-between"
       alignItems="flex-end"
     >
-      <Grid item xs={8} lg={6} sx={{ mb: 5 }}>
-        <Grid
-          container
-          direction="row"
-          justifyContent="flex-start"
-          alignItems="flex-end"
-        >
-          <Grid item xs={12} md={5}>
-            <Badge
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              badgeContent={
-                <img
-                  src={"http://localhost:8000/logos/Manchester_United.png"}
-                  className={classes.favTeam}
-                  alt="userProfile"
+      {isLoaded && (
+        <Grid item xs={8} lg={6} sx={{ mb: 5 }}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-end"
+          >
+            <Grid item xs={12} md={5}>
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                badgeContent={
+                  <SmallAvatar
+                    alt="user_fav_team"
+                    src="http://localhost:8000/logos/Manchester_United.png"
+                  />
+                }
+              >
+                <Avatar
+                  alt="user_profile_picture"
+                  src={myProfileData.profile_picture}
+                  className={classes.userImage}
                 />
-              }
-            >
-              <img
-                src={userProfilePicture}
-                className={classes.userImage}
-                alt="userProfile"
-              />
-            </Badge>
-          </Grid>
+              </Badge>
+            </Grid>
 
-          <Grid item xs={12} md={5} sx={{ ml: 2, mt: 3 }}>
-            <Typography className={classes.userName}>Bilal Azzam</Typography>
+            <Grid item xs={12} md={5} sx={{ ml: 2, mt: 3 }}>
+              <Typography className={classes.userName}>Bilal Azzam</Typography>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-
+      )}
       <Grid item xs={4} sm={1} sx={{ mb: 8 }}>
         <Button className={classes.followBtn} variant="outlined" color="error">
           Follow
