@@ -13,10 +13,22 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Alert,
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const style = {
   position: "absolute",
@@ -53,14 +65,20 @@ const useStyles = makeStyles((theme) => ({
       maxHeight: 40,
     },
   },
+  passwordError: {
+    color: "red !important",
+  },
 }));
 
 function Signup() {
+  const history = useHistory();
   const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [teamsData, setTeamsData] = useState(null);
   const [favTeam, setFavTeam] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [signUpError, setSignUpError] = useState(false);
 
   async function getTeamsData() {
     try {
@@ -84,6 +102,55 @@ function Signup() {
   const handleChange = (event) => {
     setFavTeam(event.target.value);
   };
+
+  const handleSubmit = async (event) => {
+    setPasswordMatch(true);
+
+    event.preventDefault();
+    const signup_data = new FormData(event.currentTarget);
+    const username = signup_data.get("username");
+    const email = signup_data.get("email");
+    const password = signup_data.get("password");
+    const confirm_password = signup_data.get("confirm_password");
+    const fav_team_id = favTeam;
+    const gender = signup_data.get("gender");
+
+    if (password !== confirm_password) {
+      setPasswordMatch(false);
+    } else {
+      const data = {
+        username,
+        email,
+        password,
+        confirm_password,
+        fav_team_id,
+        gender,
+      };
+
+      try {
+        let response = await axios.post(
+          "http://localhost:8000/user/signup",
+          data
+        );
+
+        if (response.status === 201) {
+          console.log("Successfully Signed Up!");
+          setSignUpError(false);
+          history.push("/login");
+        } else {
+          console.log("Something went wrong!");
+          setSignUpError(true);
+        }
+      } catch (err) {
+        if (err.response.status === 401) {
+          console.log("Something went wrong!");
+          setSignUpError(true);
+        }
+        console.log(err);
+      }
+    }
+  };
+
   const signup_form = (
     <Grid
       container
@@ -102,54 +169,86 @@ function Signup() {
           Create a New Account
         </Typography>
 
-        <Box component="form" sx={{ mb: 5 }}>
+        {signUpError && (
+          <Alert
+            severity="error"
+            onClose={() => {
+              setSignUpError(false);
+            }}
+            sx={{ mb: 2 }}
+          >
+            Something went wrong! Try again.
+          </Alert>
+        )}
+        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
           <TextField
             className={classes.formField}
             sx={{ mb: 3 }}
             required
-            id="outlined-basic"
+            id="username"
+            name="username"
             label="Username"
             placeholder="Username"
+            inputProps={{
+              minLength: 2,
+            }}
           />
 
           <TextField
-            className={classes.formField}
             sx={{ mb: 3 }}
             required
-            id="outlined-basic"
-            label="Email"
-            placeholder="Email"
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            inputProps={{
+              type: "email",
+              maxLength: 100,
+            }}
           />
 
           <TextField
-            className={classes.formField}
-            id="outlined-password-input"
+            required
+            fullWidth
+            name="password"
             label="Password"
             type="password"
-            required
+            id="password"
             autoComplete="current-password"
             sx={{ mb: 3 }}
+            inputProps={{
+              minLength: 6,
+            }}
           />
-
           <TextField
-            className={classes.formField}
-            id="outlined-password-input"
+            required
+            fullWidth
+            name="confirm_password"
             label="Confirm Password"
             type="password"
-            required
+            id="confirmPassword"
             autoComplete="current-password"
             sx={{ mb: 3 }}
           />
 
-          <InputLabel id="demo-simple-select-label">Favorite Team</InputLabel>
+          {!passwordMatch && (
+            <Typography className={classes.passwordError} sx={{ mb: 2 }}>
+              Passwords didn't match!
+            </Typography>
+          )}
+
+          <InputLabel id="fav_team">Favorite Team</InputLabel>
           <Select
             className={classes.formField}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="fav_team"
+            id="fav_team"
             value={favTeam}
             label="Favorite Team"
             onChange={handleChange}
+            required
             sx={{ mb: 3 }}
+            MenuProps={MenuProps}
           >
             {isLoaded &&
               teamsData.map((team) => (
@@ -174,24 +273,21 @@ function Signup() {
           </Select>
 
           <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <RadioGroup row aria-label="gender" name="gender" defaultValue="0">
+            <FormControlLabel value="0" control={<Radio />} label="Male" />
+            <FormControlLabel value="1" control={<Radio />} label="Female" />
+            <FormControlLabel value="2" control={<Radio />} label="Other" />
           </RadioGroup>
-        </Box>
 
-        <Grid container justifyContent="space-between">
-          <Link to={"/signup"} style={{ color: "blue" }}></Link>
-
-          <Button variant="contained" color="success">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
             Sign Up
           </Button>
-        </Grid>
+        </Box>
       </Box>
     </Grid>
   );
