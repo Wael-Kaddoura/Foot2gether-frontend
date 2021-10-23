@@ -10,12 +10,20 @@ import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import UserOverlay from "./UserOverlay";
 
-function UserNavBar({ currentPageName, NavBarContent }) {
+function UserNavBar({
+  currentPageName,
+  NavBarContent,
+  coverPhoto,
+  dontShowProfileIcon,
+}) {
   return (
     <div>
       <MobileDrawer currentPageName={currentPageName} />
-      <DesktopHeader currentPageName={currentPageName} />
-      <UserOverlay NavBarContent={NavBarContent} />
+      <DesktopHeader
+        currentPageName={currentPageName}
+        dontShowProfileIcon={dontShowProfileIcon}
+      />
+      <UserOverlay NavBarContent={NavBarContent} coverPhoto={coverPhoto} />
     </div>
   );
 }

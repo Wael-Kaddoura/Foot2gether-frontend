@@ -31,7 +31,12 @@ const useStyles = makeStyles({
   },
 });
 
-function DesktopHeader({ currentPageName, isLoggedIn, myProfileData }) {
+function DesktopHeader({
+  currentPageName,
+  isLoggedIn,
+  myProfileData,
+  dontShowProfileIcon,
+}) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -46,27 +51,35 @@ function DesktopHeader({ currentPageName, isLoggedIn, myProfileData }) {
     setAnchorEl(null);
   };
 
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "left",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "left",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      sx={{ mt: 6.5, ml: 6.25 }}
-    >
-      <MenuItem onClick={handleMenuClose}>{myProfileData.username}</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-    </Menu>
+  const renderMenu = !dontShowProfileIcon ? (
+    isLoggedIn ? (
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+        sx={{ mt: 6.5, ml: 6.25 }}
+      >
+        <MenuItem onClick={handleMenuClose}>{myProfileData.username}</MenuItem>
+        <Link to={"/my_profile"}>
+          <MenuItem>My Profile</MenuItem>
+        </Link>
+        <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      </Menu>
+    ) : (
+      <div></div>
+    )
+  ) : (
+    <div></div>
   );
 
   return (
@@ -106,32 +119,36 @@ function DesktopHeader({ currentPageName, isLoggedIn, myProfileData }) {
                   isActive={currentPageName === "Blog" ? "active" : ""}
                 />
 
-                {isLoggedIn ? (
-                  <ListItem style={{ width: 100 }} sx={{ ml: 5 }}>
-                    <IconButton
-                      size="large"
-                      edge="end"
-                      aria-label="account of current user"
-                      aria-controls={menuId}
-                      aria-haspopup="true"
-                      onClick={handleProfileMenuOpen}
-                      color="primary"
-                    >
-                      <Avatar alt="PP" src={myProfileData.profile_picture} />
-                    </IconButton>
-                    {renderMenu}
-                  </ListItem>
+                {!dontShowProfileIcon ? (
+                  isLoggedIn ? (
+                    <ListItem style={{ width: 100 }} sx={{ ml: 5 }}>
+                      <IconButton
+                        size="large"
+                        edge="end"
+                        aria-label="account of current user"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={handleProfileMenuOpen}
+                        color="primary"
+                      >
+                        <Avatar alt="PP" src={myProfileData.profile_picture} />
+                      </IconButton>
+                      {renderMenu}
+                    </ListItem>
+                  ) : (
+                    <Link to={"/login"}>
+                      <Button
+                        className={classes.loginBtn}
+                        variant="outlined"
+                        color="success"
+                        sx={{ ml: 5 }}
+                      >
+                        Log in
+                      </Button>
+                    </Link>
+                  )
                 ) : (
-                  <Link to={"/login"}>
-                    <Button
-                      className={classes.loginBtn}
-                      variant="outlined"
-                      color="success"
-                      sx={{ ml: 5 }}
-                    >
-                      Log in
-                    </Button>
-                  </Link>
+                  <div> </div>
                 )}
               </List>
             </nav>
