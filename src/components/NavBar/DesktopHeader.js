@@ -6,11 +6,68 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import { List } from "@mui/material";
+import { useState } from "react";
+import {
+  List,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Box,
+  ListItem,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 import NavBarItem from "./NavBarItem";
 
-function DesktopHeader({ currentPageName }) {
+const useStyles = makeStyles({
+  loginBtn: {
+    color: "#fff",
+    backgroundColor: "#2e7d32",
+    borderColor: "#2e7d32",
+  },
+});
+
+function DesktopHeader({ currentPageName, isLoggedIn }) {
+  const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+
+  const menuId = "primary-search-account-menu";
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      sx={{ mt: 3, ml: 5 }}
+    >
+      <MenuItem onClick={handleMenuClose}>Name</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+    </Menu>
+  );
+
   return (
     <header className="site-navbar py-4" role="banner">
       <div className="container">
@@ -47,6 +104,34 @@ function DesktopHeader({ currentPageName }) {
                   color="white"
                   isActive={currentPageName === "Blog" ? "active" : ""}
                 />
+
+                {isLoggedIn ? (
+                  <ListItem style={{ width: 100 }} sx={{ ml: 5 }}>
+                    <IconButton
+                      size="large"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                      color="primary"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                    {renderMenu}
+                  </ListItem>
+                ) : (
+                  <Link to={"/login"}>
+                    <Button
+                      className={classes.loginBtn}
+                      variant="outlined"
+                      color="success"
+                      sx={{ ml: 5 }}
+                    >
+                      Log in
+                    </Button>
+                  </Link>
+                )}
               </List>
             </nav>
 
