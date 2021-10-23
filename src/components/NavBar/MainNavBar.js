@@ -32,14 +32,14 @@ function MainNavBar({ currentPageName, NavBarContent }) {
 
   return (
     <div>
-      <MobileDrawer currentPageName={currentPageName} />
+      <MobileDrawer currentPageName={currentPageName} isLoggedIn={isLoggedIn} />
 
       <DesktopHeader
         currentPageName={currentPageName}
         isLoggedIn={isLoggedIn}
       />
 
-      <Overlay NavBarContent={NavBarContent} isLoggedIn={isLoggedIn} />
+      <Overlay NavBarContent={NavBarContent} />
     </div>
   );
 }
