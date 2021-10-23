@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   followInfo: {
-    color: "#ee1e46 !important",
+    color: "#fff !important",
     fontWeight: 700,
     fontSize: 23,
     textAlign: "center",
