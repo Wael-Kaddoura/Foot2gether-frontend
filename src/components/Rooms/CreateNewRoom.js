@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -12,6 +12,9 @@ import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
 import MenuItem from "@mui/material/MenuItem";
+import { useHistory } from "react-router-dom";
+
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -36,17 +39,87 @@ const useStyles = makeStyles({
   },
 });
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 function CreateNewRoom() {
+  const history = useHistory();
   const classes = useStyles();
+
+  const token = JSON.parse(localStorage.getItem("login")).token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [age, setAge] = React.useState("");
+  const [match, setMatch] = React.useState("");
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [availableMatches, setAvailableMatches] = useState(null);
+
+  async function getAvailableMatches() {
+    try {
+      let response = await axios.get(`http://localhost:8000/match/available`);
+      let available_matches_data = response.data;
+      setAvailableMatches(available_matches_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    await getAvailableMatches();
+    setIsLoaded(true);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setMatch(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const new_room_data = new FormData(event.currentTarget);
+    const name = new_room_data.get("room_name");
+    const match_id = new_room_data.get("match_id");
+
+    const data = {
+      name,
+      match_id,
+    };
+
+    try {
+      console.log(config);
+      let response = await axios.post(
+        "http://localhost:8000/room",
+        data,
+        config
+      );
+
+      if (response.status === 201) {
+        console.log("Successfully Created Room!");
+        setOpen(false);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.log("Something went wrong!");
+      }
+      console.log(err);
+    }
   };
 
   return (
@@ -78,7 +151,7 @@ function CreateNewRoom() {
             >
               Create New Room:
             </Typography>
-            <Box component="form" sx={{ mb: 5 }}>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
                 className={classes.formField}
                 sx={{ mb: 3 }}
@@ -86,36 +159,43 @@ function CreateNewRoom() {
                 id="outlined-required"
                 label="Room Name"
                 placeholder="Room Name"
+                name="room_name"
               />
 
-              <InputLabel id="demo-simple-select-label">Match</InputLabel>
+              <InputLabel id="match_room">Match</InputLabel>
               <Select
                 className={classes.formField}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
+                labelId="match_room"
+                id="match_room"
+                name="match_id"
+                value={match}
+                label="Favorite Team"
                 onChange={handleChange}
+                required
+                sx={{ mb: 3 }}
+                MenuProps={MenuProps}
               >
-                <MenuItem value={10}>
-                  <CreateNewRoomMenuItem />
-                </MenuItem>
-
-                <MenuItem value={20}>
-                  <CreateNewRoomMenuItem />
-                </MenuItem>
-
-                <MenuItem value={30}>
-                  <CreateNewRoomMenuItem />
-                </MenuItem>
+                {isLoaded &&
+                  availableMatches.map((match) => (
+                    <MenuItem value={match.id}>
+                      <CreateNewRoomMenuItem
+                        team1Logo={match.team1.logo}
+                        team2Logo={match.team2.logo}
+                      />
+                    </MenuItem>
+                  ))}
               </Select>
-            </Box>
 
-            <Grid container justifyContent="flex-end">
-              <Button variant="contained" color="success">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="success"
+                sx={{ mt: 3, mb: 2 }}
+              >
                 Create Room
               </Button>
-            </Grid>
+            </Box>
           </Box>
         </Fade>
       </Modal>

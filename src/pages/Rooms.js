@@ -6,6 +6,8 @@ import SearchBar from "../components/SearchBar";
 import LiveRoomCard from "../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../components/Rooms/CreateNewRoom";
 import CircleIcon from "@mui/icons-material/Circle";
+import { useHistory } from "react-router-dom";
+
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -27,6 +29,19 @@ const useStyles = makeStyles({
 });
 
 function Rooms() {
+  const history = useHistory();
+  let config = {};
+
+  function loginStatusCheck() {
+    let login_status = JSON.parse(localStorage.getItem("login"));
+    if (login_status.login) {
+      const token = login_status.token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+    } else {
+      history.push("/login");
+    }
+  }
+
   const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -54,6 +69,7 @@ function Rooms() {
   }
 
   async function fetchData() {
+    await loginStatusCheck();
     await getLiveRooms();
     await getLiveRoomsCount();
     setIsLoaded(true);
