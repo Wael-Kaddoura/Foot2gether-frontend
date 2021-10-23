@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Overlay from "../components/NavBar/Overlay";
-import { Grid, Box, Button, Typography, TextField } from "@mui/material";
+import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -31,7 +34,46 @@ const useStyles = makeStyles({
 });
 
 function Login() {
+  const history = useHistory();
+
   const classes = useStyles();
+
+  const [isPending, setIsPending] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+
+  const handleSubmit = async (event) => {
+    setIsPending(true);
+    event.preventDefault();
+    const login_data = new FormData(event.currentTarget);
+    const email = login_data.get("email");
+    const password = login_data.get("password");
+    try {
+      let response = await axios.post("http://localhost:8000/user/login", {
+        email,
+        password,
+      });
+      if (response.status === 200) {
+        console.log("Successfully logged in!");
+        localStorage.setItem(
+          "login",
+          JSON.stringify({ login: true, token: response.data.token })
+        );
+        setLoginError(false);
+        history.push("/home");
+      } else {
+        console.log("Something went wrong!");
+        setIsPending(false);
+        setLoginError(true);
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.log("Wrong Credentials!");
+        setIsPending(false);
+        setLoginError(true);
+      }
+      console.log(err);
+    }
+  };
 
   const login_form = (
     <Grid
@@ -50,35 +92,55 @@ function Login() {
         >
           Login
         </Typography>
-        <Box component="form" sx={{ mb: 5 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
+          {loginError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              Wrong Credentials! Try again.
+            </Alert>
+          )}
+
           <TextField
-            className={classes.formField}
             sx={{ mb: 3 }}
             required
-            id="outlined-basic"
+            fullWidth
+            id="email"
             label="Email"
-            placeholder="Email"
+            name="email"
+            autoComplete="email"
+            inputProps={{
+              type: "email",
+              maxLength: 100,
+            }}
           />
 
           <TextField
-            className={classes.formField}
-            id="outlined-password-input"
+            sx={{ mb: 3 }}
+            required
+            fullWidth
+            name="password"
             label="Password"
             type="password"
-            required
+            id="password"
             autoComplete="current-password"
-            sx={{ mb: 3 }}
+            inputProps={{
+              minLength: 6,
+            }}
           />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Log In
+          </Button>
         </Box>
 
         <Grid container justifyContent="space-between">
           <Link to={"/signup"} style={{ color: "blue" }}>
             Create Account
           </Link>
-
-          <Button variant="contained" color="success">
-            Login
-          </Button>
         </Grid>
       </Box>
     </Grid>
