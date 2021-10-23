@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  width: 65,
+  width: 55,
   height: 65,
 }));
 
@@ -34,14 +34,6 @@ const useStyles = makeStyles({
     width: 200,
     // border: "5px solid",
     // borderColor: "#fff",
-  },
-  favTeam: {
-    height: 70,
-    width: 70,
-  },
-  badge: {
-    backgroundColor: "#fff",
-    color: "#fff",
   },
   roomContainer: {
     padding: 24,
@@ -80,6 +72,7 @@ function UserProfile() {
       console.log(error);
     }
   }
+
   async function fetchData() {
     loginStatusCheck();
     await getMyProfileData();
@@ -113,7 +106,7 @@ function UserProfile() {
                 badgeContent={
                   <SmallAvatar
                     alt="user_fav_team"
-                    src="http://localhost:8000/logos/Manchester_United.png"
+                    src={myProfileData.fav_team.logo}
                   />
                 }
               >
@@ -126,7 +119,9 @@ function UserProfile() {
             </Grid>
 
             <Grid item xs={12} md={5} sx={{ ml: 2, mt: 3 }}>
-              <Typography className={classes.userName}>Bilal Azzam</Typography>
+              <Typography className={classes.userName}>
+                {myProfileData.username}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>

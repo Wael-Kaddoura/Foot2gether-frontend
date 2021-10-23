@@ -15,6 +15,7 @@ import {
   MenuItem,
   Box,
   ListItem,
+  Avatar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-function DesktopHeader({ currentPageName, isLoggedIn }) {
+function DesktopHeader({ currentPageName, isLoggedIn, myProfileData }) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -60,9 +61,9 @@ function DesktopHeader({ currentPageName, isLoggedIn }) {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-      sx={{ mt: 3, ml: 5 }}
+      sx={{ mt: 6.5, ml: 6.25 }}
     >
-      <MenuItem onClick={handleMenuClose}>Name</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{myProfileData.username}</MenuItem>
       <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
@@ -116,7 +117,7 @@ function DesktopHeader({ currentPageName, isLoggedIn }) {
                       onClick={handleProfileMenuOpen}
                       color="primary"
                     >
-                      <AccountCircle />
+                      <Avatar alt="PP" src={myProfileData.profile_picture} />
                     </IconButton>
                     {renderMenu}
                   </ListItem>
