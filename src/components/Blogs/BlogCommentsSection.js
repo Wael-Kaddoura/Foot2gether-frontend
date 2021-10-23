@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogComments({ blogComments }) {
+function BlogComments({ blogComments, blog_id, getBlogComments }) {
   const classes = useStyles();
 
   return (
@@ -55,7 +55,7 @@ function BlogComments({ blogComments }) {
           ))}
         </Grid>
 
-        <BlogNewComment />
+        <BlogNewComment blog_id={blog_id} getBlogComments={getBlogComments} />
       </Grid>
     </Grid>
   );

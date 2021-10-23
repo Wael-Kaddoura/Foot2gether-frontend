@@ -48,7 +48,6 @@ function BlogView() {
         "http://localhost:8000/blog/comments/" + blog_id
       );
       let blog_comments = response.data;
-      console.log(blog_comments);
       setBlogComments(blog_comments);
     } catch (error) {
       console.log(error);
@@ -98,7 +97,11 @@ function BlogView() {
             blogBody={blogData.body}
             blogImg={blogData.image}
           />
-          <BlogCommentsSection blogComments={blogComments} />
+          <BlogCommentsSection
+            blogComments={blogComments}
+            blog_id={blog_id}
+            getBlogComments={getBlogComments}
+          />
         </div>
       )}
     </div>
