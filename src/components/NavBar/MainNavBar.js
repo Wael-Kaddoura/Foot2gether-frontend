@@ -39,7 +39,7 @@ function MainNavBar({ currentPageName, NavBarContent }) {
         isLoggedIn={isLoggedIn}
       />
 
-      <Overlay NavBarContent={NavBarContent} />
+      <Overlay NavBarContent={NavBarContent} isLoggedIn={isLoggedIn} />
     </div>
   );
 }
