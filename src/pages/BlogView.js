@@ -31,6 +31,7 @@ function BlogView() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [blogData, setBlogData] = useState(null);
   const [blogComments, setBlogComments] = useState(null);
+  const [blogCommentsCount, setBlogCommentsCount] = useState(null);
 
   async function getBlogData() {
     try {
@@ -54,9 +55,22 @@ function BlogView() {
     }
   }
 
+  async function getBlogCommentsCount() {
+    try {
+      let response = await axios.get(
+        "http://localhost:8000/blog/comments_count/" + blog_id
+      );
+      let blog_comments_count = response.data.comments_count;
+      setBlogCommentsCount(blog_comments_count);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchData() {
     await getBlogData();
     await getBlogComments();
+    await getBlogCommentsCount();
     setIsLoaded(true);
   }
 
@@ -99,6 +113,7 @@ function BlogView() {
           />
           <BlogCommentsSection
             blogComments={blogComments}
+            blogCommentsCount={blogCommentsCount}
             blog_id={blog_id}
             getBlogComments={getBlogComments}
           />

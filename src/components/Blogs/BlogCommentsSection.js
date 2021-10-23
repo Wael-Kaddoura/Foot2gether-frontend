@@ -25,7 +25,12 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogComments({ blogComments, blog_id, getBlogComments }) {
+function BlogComments({
+  blogComments,
+  blogCommentsCount,
+  blog_id,
+  getBlogComments,
+}) {
   const classes = useStyles();
 
   return (
@@ -38,7 +43,7 @@ function BlogComments({ blogComments, blog_id, getBlogComments }) {
     >
       <Grid item xs={12} sm={9} md={7} lg={5}>
         <Typography className={classes.blogTitle} sx={{ mb: 5 }}>
-          6 Comments
+          {blogCommentsCount} Comments
         </Typography>
         <Grid
           container
