@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-import team1Img from "../../Images/manchester_city.png";
-import team2Img from "../../Images/manchester_united.png";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
