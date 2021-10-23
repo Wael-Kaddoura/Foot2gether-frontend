@@ -125,11 +125,13 @@ function MyProfile() {
   );
   return (
     <div>
-      <UserNavBar
-        NavBarContent={NavBarContent}
-        dontShowProfileIcon={true}
-        coverPhoto={myProfileData.cover_photo}
-      />
+      {isLoaded && (
+        <UserNavBar
+          NavBarContent={NavBarContent}
+          dontShowProfileIcon={true}
+          coverPhoto={myProfileData.cover_photo}
+        />
+      )}
       <UserInfo />
       <Grid className={classes.roomContainer} sx={{ mt: 5 }}>
         <LiveRoomCard />
