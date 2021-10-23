@@ -1,6 +1,4 @@
 import { Grid } from "@mui/material";
-import team1Img from "../../Images/manchester_city.png";
-import team2Img from "../../Images/manchester_united.png";
 
 function HomeNextMatchCard({ nextMatch }) {
   return (
