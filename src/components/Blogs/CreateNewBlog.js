@@ -6,11 +6,8 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -36,16 +33,51 @@ const useStyles = makeStyles({
 });
 
 function CreateNewBlog() {
+  const token = JSON.parse(localStorage.getItem("login")).token;
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [age, setAge] = React.useState("");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const new_blog_data = new FormData(event.currentTarget);
+    const title = new_blog_data.get("blog_title");
+    const body = new_blog_data.get("blog_body");
+    const image = new_blog_data.get("blog_image");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("body", body);
+    formData.append("image", image);
+
+    try {
+      let response = await axios.post(
+        "http://localhost:8000/blog",
+        formData,
+        config
+      );
+
+      if (response.status === 201) {
+        console.log("Successfully Created Blog!");
+        setOpen(false);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.log("Something went wrong!");
+      }
+      console.log(err);
+    }
   };
 
   return (
@@ -77,7 +109,7 @@ function CreateNewBlog() {
             >
               Create New Blog:
             </Typography>
-            <Box component="form" sx={{ mb: 5 }}>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
                 className={classes.formField}
                 sx={{ mb: 3 }}
@@ -85,6 +117,7 @@ function CreateNewBlog() {
                 id="outlined-required"
                 label="Blog Title"
                 placeholder="Blog Title"
+                name="blog_title"
               />
 
               <TextField
@@ -92,21 +125,27 @@ function CreateNewBlog() {
                 id="outlined-multiline-static"
                 label="Blog Body"
                 multiline
+                required
                 rows={4}
                 sx={{ mb: 3 }}
+                name="blog_body"
               />
 
               <Button variant="outlined" component="label" color="inherit">
                 Upload Blog Image
-                <input type="file" hidden />
+                <input type="file" required name="blog_image" />
               </Button>
-            </Box>
 
-            <Grid container justifyContent="flex-end">
-              <Button variant="contained" color="success">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="success"
+                sx={{ mt: 3, mb: 2 }}
+              >
                 Create Blog
               </Button>
-            </Grid>
+            </Box>
           </Box>
         </Fade>
       </Modal>

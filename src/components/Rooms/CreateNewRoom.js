@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
 import MenuItem from "@mui/material/MenuItem";
