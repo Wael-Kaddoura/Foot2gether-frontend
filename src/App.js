@@ -7,6 +7,7 @@ import Matches from "./pages/Matches";
 import Blog from "./pages/Blogs";
 import Standings from "./pages/Standings";
 import MatchRooms from "./pages/MatchRooms";
+import MyProfile from "./pages/MyProfile";
 import UserProfile from "./pages/UserProfile";
 import BlogView from "./pages/BlogView";
 import Rooms from "./pages/Rooms";
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route exact path="/match/rooms">
           <MatchRooms />
+        </Route>
+        <Route exact path="/my_profile">
+          <MyProfile />
         </Route>
         <Route exact path="/userprofile">
           <UserProfile />
