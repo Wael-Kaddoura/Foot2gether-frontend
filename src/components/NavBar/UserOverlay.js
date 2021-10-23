@@ -6,13 +6,12 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import backgroundImage from "../../Images/united_fan.jpg";
 
-function Overlay({ NavBarContent }) {
+function Overlay({ NavBarContent, coverPhoto }) {
   return (
     <div
       className="hero-user-profile overlay"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: `url(${coverPhoto})` }}
     >
       <div className="container">{NavBarContent}</div>
     </div>
