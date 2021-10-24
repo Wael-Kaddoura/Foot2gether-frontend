@@ -17,7 +17,13 @@ const useStyles = makeStyles({
   },
 });
 
-function UserInfo({ followingCount, followersCount, bio, getMyProfileData }) {
+function UserInfo({
+  followingCount,
+  followersCount,
+  bio,
+  isMyProfile,
+  getMyProfileData,
+}) {
   const classes = useStyles();
 
   return (
@@ -30,17 +36,22 @@ function UserInfo({ followingCount, followersCount, bio, getMyProfileData }) {
           alignItems="center"
         >
           <Grid item xs={12} md={8}>
-            <Badge
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              badgeContent={<ChangeBio getMyProfileData={getMyProfileData} />}
-              color="warning"
-            >
+            {isMyProfile ? (
+              <Badge
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                badgeContent={<ChangeBio getMyProfileData={getMyProfileData} />}
+                color="warning"
+              >
+                <Typography className={classes.userBio}>{bio}</Typography>
+              </Badge>
+            ) : (
               <Typography className={classes.userBio}>{bio}</Typography>
-            </Badge>
+            )}
           </Grid>
+
           <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Followers</Typography>
             <Typography className={classes.followInfo}>
