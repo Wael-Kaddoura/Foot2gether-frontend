@@ -7,6 +7,7 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import axios from "axios";
 
@@ -43,6 +44,8 @@ const useStyles = makeStyles({
 function UserProfile() {
   const classes = useStyles();
 
+  const user_id = new URLSearchParams(useLocation().search).get("id");
+
   const history = useHistory();
   let config = {};
 
@@ -57,17 +60,17 @@ function UserProfile() {
   }
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [myProfileData, setMyProfileData] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  async function getMyProfileData() {
+  async function getUserData() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/user/my_profile`,
+        `http://localhost:8000/user/` + user_id,
         config
       );
-      let my_profile_data = response.data;
-      console.log(my_profile_data);
-      setMyProfileData(my_profile_data);
+      let user_data = response.data;
+      console.log(user_data);
+      setUserData(user_data);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +78,7 @@ function UserProfile() {
 
   async function fetchData() {
     loginStatusCheck();
-    await getMyProfileData();
+    await getUserData();
     setIsLoaded(true);
   }
 
@@ -106,13 +109,13 @@ function UserProfile() {
                 badgeContent={
                   <SmallAvatar
                     alt="user_fav_team"
-                    src={myProfileData.fav_team.logo}
+                    src={userData.fav_team.logo}
                   />
                 }
               >
                 <Avatar
                   alt="user_profile_picture"
-                  src={myProfileData.profile_picture}
+                  src={userData.profile_picture}
                   className={classes.userImage}
                 />
               </Badge>
@@ -120,7 +123,7 @@ function UserProfile() {
 
             <Grid item xs={12} md={5} sx={{ ml: 2, mt: 3 }}>
               <Typography className={classes.userName}>
-                {myProfileData.username}
+                {userData.username}
               </Typography>
             </Grid>
           </Grid>
@@ -135,8 +138,20 @@ function UserProfile() {
   );
   return (
     <div>
-      <UserNavBar NavBarContent={NavBarContent} />
-      <UserInfo />
+      {isLoaded && (
+        <div>
+          <UserNavBar
+            NavBarContent={NavBarContent}
+            dontShowProfileIcon={true}
+            coverPhoto={userData.cover_photo}
+          />
+          <UserInfo
+            followingCount={userData.following.length}
+            followersCount={userData.follower.length}
+            bio={userData.bio}
+          />
+        </div>
+      )}
       <Grid className={classes.roomContainer} sx={{ mt: 5 }}>
         <LiveRoomCard />
         <LiveRoomCard />

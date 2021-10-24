@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function UserInfo({ followingCount, followersCount }) {
+function UserInfo({ followingCount, followersCount, bio }) {
   const classes = useStyles();
 
   return (
@@ -28,9 +28,7 @@ function UserInfo({ followingCount, followersCount }) {
           alignItems="center"
         >
           <Grid item xs={12} md={8}>
-            <Typography className={classes.userBio}>
-              "United is Life, the rest are more details" - ERIC CANTONA
-            </Typography>
+            <Typography className={classes.userBio}>{bio}</Typography>
           </Grid>
           <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Followers</Typography>
