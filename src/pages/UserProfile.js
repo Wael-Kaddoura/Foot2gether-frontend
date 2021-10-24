@@ -128,7 +128,8 @@ function UserProfile() {
   async function getUserLiveRooms() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/room/user/` + user_id
+        `http://localhost:8000/room/user/` + user_id,
+        config
       );
       let user_live_rooms_data = response.data;
       setUserLiveRooms(user_live_rooms_data);

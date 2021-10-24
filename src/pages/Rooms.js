@@ -50,7 +50,7 @@ function Rooms() {
 
   async function getLiveRooms() {
     try {
-      let response = await axios.get(`http://localhost:8000/room`);
+      let response = await axios.get(`http://localhost:8000/room`, config);
       let live_rooms_data = response.data;
       setLiveRooms(live_rooms_data);
     } catch (error) {
@@ -60,7 +60,10 @@ function Rooms() {
 
   async function getLiveRoomsCount() {
     try {
-      let response = await axios.get(`http://localhost:8000/room/count`);
+      let response = await axios.get(
+        `http://localhost:8000/room/count`,
+        config
+      );
       let live_rooms_count = response.data.live_rooms_count;
       setLiveRoomsCount(live_rooms_count);
     } catch (error) {
