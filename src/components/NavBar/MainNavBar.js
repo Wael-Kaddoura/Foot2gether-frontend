@@ -48,6 +48,7 @@ function MainNavBar({ currentPageName, NavBarContent }) {
       setIsLoaded(true);
     } else {
       setIsloggedIn(false);
+      setIsLoaded(true);
     }
   }
 

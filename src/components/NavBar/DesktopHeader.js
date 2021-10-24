@@ -18,9 +18,9 @@ import {
   Avatar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles({
@@ -37,6 +37,7 @@ function DesktopHeader({
   myProfileData,
   dontShowProfileIcon,
 }) {
+  const history = useHistory();
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -49,6 +50,11 @@ function DesktopHeader({
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const logoutHandler = () => {
+    localStorage.setItem("login", JSON.stringify({ login: false }));
+    history.push("/login");
   };
 
   const renderMenu = !dontShowProfileIcon ? (
@@ -73,7 +79,7 @@ function DesktopHeader({
         <Link to={"/my_profile"}>
           <MenuItem>My Profile</MenuItem>
         </Link>
-        <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+        <MenuItem onClick={logoutHandler}>Logout</MenuItem>
       </Menu>
     ) : (
       <div></div>
