@@ -16,13 +16,21 @@ import {
   MenuItem,
   ListItem,
   ListItemText,
+  Avatar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles({
+  profilePicture: {
+    width: 70,
+    height: 70,
+    border: "2px solid",
+  },
+
   loginBtn: {
     color: "#fff",
     backgroundColor: "#2e7d32",
@@ -30,43 +38,14 @@ const useStyles = makeStyles({
   },
 });
 
-function MobileDrawer({ currentPageName, isLoggedIn }) {
+function MobileDrawer({ currentPageName, isLoggedIn, myProfileData }) {
+  const history = useHistory();
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const isMenuOpen = Boolean(anchorEl);
-
-  const menuId = "primary-search-account-menu";
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const logoutHandler = () => {
+    localStorage.setItem("login", JSON.stringify({ login: false }));
+    history.push("/login");
   };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "left",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "left",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      sx={{ mt: 3, ml: 5 }}
-    >
-      <MenuItem style={{ color: "red !important" }}>Name</MenuItem>
-      <MenuItem style={{ color: "red !important" }}>My Profile</MenuItem>
-      <MenuItem style={{ color: "red !important" }}>Logout</MenuItem>
-    </Menu>
-  );
 
   return (
     <div className="site-mobile-menu site-navbar-target">
@@ -83,6 +62,15 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
           role="navigation"
         >
           <List>
+            {isLoggedIn && (
+              <ListItem sx={{ ml: 12, mb: 2 }}>
+                <Avatar
+                  alt="PP"
+                  className={classes.profilePicture}
+                  src={myProfileData.profile_picture}
+                />
+              </ListItem>
+            )}
             <NavBarItem
               name="HOME"
               color="black"
@@ -111,22 +99,21 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
             {isLoggedIn ? (
               <div>
                 <Link
-                  to="/userprofile"
+                  to="/my_profile"
                   className="nav-link"
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <ListItem button>
-                    <ListItemText primary="PROFILE" />
+                    <ListItemText primary="MY PROFILE" />
                   </ListItem>
                 </Link>
 
-                <Link
-                  to="/userprofile"
-                  className="nav-link"
-                  style={{ textDecoration: "none", color: "red" }}
-                >
-                  <ListItem button>
-                    <ListItemText primary="LOG OUT" />
+                <Link to="/login" className="nav-link">
+                  <ListItem button onClick={logoutHandler}>
+                    <ListItemText
+                      style={{ color: "#212529" }}
+                      primary="LOG OUT"
+                    />
                   </ListItem>
                 </Link>
               </div>

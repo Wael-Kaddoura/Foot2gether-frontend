@@ -63,6 +63,7 @@ function MainNavBar({ currentPageName, NavBarContent }) {
           <MobileDrawer
             currentPageName={currentPageName}
             isLoggedIn={isLoggedIn}
+            myProfileData={myProfileData}
           />
 
           <DesktopHeader

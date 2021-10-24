@@ -61,15 +61,21 @@ function UserNavBar({
 
   return (
     <div>
-      <MobileDrawer currentPageName={currentPageName} />
       {isLoaded && (
-        <DesktopHeader
-          currentPageName={currentPageName}
-          dontShowProfileIcon={dontShowProfileIcon}
-          myProfileData={myProfileData}
-          isLoggedIn={isLoggedIn}
-        />
-      )}{" "}
+        <div>
+          <MobileDrawer
+            currentPageName={currentPageName}
+            myProfileData={myProfileData}
+            isLoggedIn={isLoggedIn}
+          />
+          <DesktopHeader
+            currentPageName={currentPageName}
+            dontShowProfileIcon={dontShowProfileIcon}
+            myProfileData={myProfileData}
+            isLoggedIn={isLoggedIn}
+          />
+        </div>
+      )}
       <UserOverlay NavBarContent={NavBarContent} coverPhoto={coverPhoto} />
     </div>
   );
