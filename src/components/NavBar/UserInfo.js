@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function UserInfo() {
+function UserInfo({ followingCount, followersCount }) {
   const classes = useStyles();
 
   return (
@@ -34,11 +34,15 @@ function UserInfo() {
           </Grid>
           <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Followers</Typography>
-            <Typography className={classes.followInfo}>75</Typography>
+            <Typography className={classes.followInfo}>
+              {followersCount}
+            </Typography>
           </Grid>
           <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Following</Typography>
-            <Typography className={classes.followInfo}>28</Typography>
+            <Typography className={classes.followInfo}>
+              {followingCount}
+            </Typography>
           </Grid>
         </Grid>
       </div>

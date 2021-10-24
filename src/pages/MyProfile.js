@@ -61,7 +61,7 @@ function MyProfile() {
         config
       );
       let my_profile_data = response.data;
-      console.log(my_profile_data);
+      console.log(my_profile_data.following.length);
       setMyProfileData(my_profile_data);
     } catch (error) {
       console.log(error);
@@ -126,13 +126,19 @@ function MyProfile() {
   return (
     <div>
       {isLoaded && (
-        <UserNavBar
-          NavBarContent={NavBarContent}
-          dontShowProfileIcon={true}
-          coverPhoto={myProfileData.cover_photo}
-        />
+        <div>
+          <UserNavBar
+            NavBarContent={NavBarContent}
+            dontShowProfileIcon={true}
+            coverPhoto={myProfileData.cover_photo}
+          />
+          <UserInfo
+            followingCount={myProfileData.following.length}
+            followersCount={myProfileData.follower.length}
+          />
+        </div>
       )}
-      <UserInfo />
+
       <Grid className={classes.roomContainer} sx={{ mt: 5 }}>
         <LiveRoomCard />
         <LiveRoomCard />
