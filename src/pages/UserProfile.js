@@ -22,6 +22,11 @@ const useStyles = makeStyles({
     backgroundColor: "#ee1e46",
     borderColor: "#ee1e46",
   },
+  unfollowBtn: {
+    color: "#fff",
+    backgroundColor: "#bf1737",
+    borderColor: "#bf1737",
+  },
   userCover: {
     height: "60vh",
   },
@@ -49,6 +54,10 @@ function UserProfile() {
   const history = useHistory();
   let config = {};
 
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [isFollowed, setIsFollowed] = useState(false);
+
   function loginStatusCheck() {
     let login_status = JSON.parse(localStorage.getItem("login"));
     if (login_status.login) {
@@ -59,8 +68,39 @@ function UserProfile() {
     }
   }
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState(null);
+  async function followUser() {
+    try {
+      let token = JSON.parse(localStorage.getItem("login")).token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+
+      let response = await axios.post(
+        `http://localhost:8000/user/follow`,
+        { followed_user_id: user_id },
+        config
+      );
+      console.log(response.data.message);
+      setIsFollowed(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function unFollowUser() {
+    try {
+      let token = JSON.parse(localStorage.getItem("login")).token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+
+      let response = await axios.post(
+        `http://localhost:8000/user/unfollow`,
+        { unfollowed_user_id: user_id },
+        config
+      );
+      console.log(response.data.message);
+      setIsFollowed(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function getUserData() {
     try {
@@ -69,7 +109,6 @@ function UserProfile() {
         config
       );
       let user_data = response.data;
-      console.log(user_data);
       setUserData(user_data);
     } catch (error) {
       console.log(error);
@@ -130,9 +169,25 @@ function UserProfile() {
         </Grid>
       )}
       <Grid item xs={4} sm={1} sx={{ mb: 8 }}>
-        <Button className={classes.followBtn} variant="outlined" color="error">
-          Follow
-        </Button>
+        {isFollowed ? (
+          <Button
+            className={classes.unfollowBtn}
+            onClick={unFollowUser}
+            variant="outlined"
+            color="inherit"
+          >
+            Unfollow
+          </Button>
+        ) : (
+          <Button
+            className={classes.followBtn}
+            onClick={followUser}
+            variant="outlined"
+            color="error"
+          >
+            Follow
+          </Button>
+        )}
       </Grid>
     </Grid>
   );
