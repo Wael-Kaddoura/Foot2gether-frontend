@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/my_profile">
           <MyProfile />
         </Route>
-        <Route exact path="/userprofile">
+        <Route exact path="/user_profile">
           <UserProfile />
         </Route>
         <Route exact path="/blogview">
