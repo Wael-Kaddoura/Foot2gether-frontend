@@ -197,7 +197,6 @@ function UserProfile() {
         <div>
           <UserNavBar
             NavBarContent={NavBarContent}
-            dontShowProfileIcon={true}
             coverPhoto={userData.cover_photo}
           />
           <UserInfo
