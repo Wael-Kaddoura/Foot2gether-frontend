@@ -1,5 +1,6 @@
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -35,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LiveMatchRoomCard(props) {
-  const { roomName, roomID, roomCreator, roomCurrentCapacity } = props;
+  const { roomName, roomID, roomCreator, roomCreatorID, roomCurrentCapacity } =
+    props;
   const classes = useStyles();
 
   return (
@@ -90,9 +92,11 @@ function LiveMatchRoomCard(props) {
               <Typography className={classes.roomDetailsTitle}>
                 Created By:
               </Typography>
-              <Typography className={classes.roomDetails}>
-                {roomCreator}
-              </Typography>
+              <Link to={"/user_profile?id=" + roomCreatorID}>
+                <Typography className={classes.roomDetails}>
+                  {roomCreator}
+                </Typography>
+              </Link>
             </Grid>
 
             <Grid item xs={4}>

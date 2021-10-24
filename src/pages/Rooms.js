@@ -136,6 +136,7 @@ function Rooms() {
                   roomName={room.name}
                   roomID={room.id}
                   roomCreator={room.creator.username}
+                  roomCreatorID={room.creator_id}
                   roomCurrentCapacity={room.current_participants_number}
                   team1ID={room.matchroom.team1_id}
                   team2ID={room.matchroom.team2_id}

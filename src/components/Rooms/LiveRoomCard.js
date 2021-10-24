@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +53,7 @@ function LiveRoomCard(props) {
     roomName,
     roomID,
     roomCreator,
+    roomCreatorID,
     roomCurrentCapacity,
     team1ID,
     team2ID,
@@ -153,9 +156,11 @@ function LiveRoomCard(props) {
               <Typography className={classes.roomDetailsTitle}>
                 Created By:
               </Typography>
-              <Typography className={classes.roomDetails}>
-                {roomCreator}
-              </Typography>
+              <Link to={"/user_profile?id=" + roomCreatorID}>
+                <Typography className={classes.roomDetails}>
+                  {roomCreator}
+                </Typography>
+              </Link>
             </Grid>
 
             <Grid item xs={4}>

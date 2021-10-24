@@ -113,6 +113,7 @@ function MatchRooms() {
                 roomName={room.name}
                 roomID={room.id}
                 roomCreator={room.creator.username}
+                roomCreatorID={room.creator_id}
                 roomCurrentCapacity={room.current_participants_number}
               />
             ))}
