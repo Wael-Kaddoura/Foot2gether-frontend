@@ -75,8 +75,10 @@ function DesktopHeader({
         onClose={handleMenuClose}
         sx={{ mt: 6.5, ml: 6.25 }}
       >
-        <MenuItem onClick={handleMenuClose}>{myProfileData.username}</MenuItem>
-        <Link to={"/my_profile"}>
+        <MenuItem style={{ color: "#ee1e46" }}>
+          {myProfileData.username}
+        </MenuItem>
+        <Link to={"/my_profile"} style={{ color: "#212529" }}>
           <MenuItem>My Profile</MenuItem>
         </Link>
         <MenuItem onClick={logoutHandler}>Logout</MenuItem>
