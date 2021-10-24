@@ -7,6 +7,8 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import { useHistory } from "react-router-dom";
+import ChangeProfilePicture from "../components/User/ChangeProfilePicture";
+import ChangeCoverPhoto from "../components/User/ChangeCoverPhoto";
 
 import axios from "axios";
 
@@ -41,14 +43,12 @@ function MyProfile() {
   const history = useHistory();
   let config = {};
 
-  function loginStatusCheck() {
-    let login_status = JSON.parse(localStorage.getItem("login"));
-    if (login_status.login) {
-      const token = login_status.token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-    } else {
-      history.push("/login");
-    }
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
   }
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -61,7 +61,6 @@ function MyProfile() {
         config
       );
       let my_profile_data = response.data;
-      console.log(my_profile_data.following.length);
       setMyProfileData(my_profile_data);
     } catch (error) {
       console.log(error);
@@ -69,7 +68,6 @@ function MyProfile() {
   }
 
   async function fetchData() {
-    loginStatusCheck();
     await getMyProfileData();
     setIsLoaded(true);
   }
@@ -105,11 +103,19 @@ function MyProfile() {
                   />
                 }
               >
-                <Avatar
-                  alt="user_profile_picture"
-                  src={myProfileData.profile_picture}
-                  className={classes.userImage}
-                />
+                <Badge
+                  overlap="circular"
+                  badgeContent={
+                    <ChangeProfilePicture getMyProfileData={getMyProfileData} />
+                  }
+                  color="warning"
+                >
+                  <Avatar
+                    alt="user_profile_picture"
+                    src={myProfileData.profile_picture}
+                    className={classes.userImage}
+                  />
+                </Badge>
               </Badge>
             </Grid>
 
@@ -121,6 +127,8 @@ function MyProfile() {
           </Grid>
         </Grid>
       )}
+
+      <ChangeCoverPhoto getMyProfileData={getMyProfileData} />
     </Grid>
   );
   return (
@@ -133,8 +141,10 @@ function MyProfile() {
             coverPhoto={myProfileData.cover_photo}
           />
           <UserInfo
+            bio={myProfileData.bio}
             followingCount={myProfileData.following.length}
             followersCount={myProfileData.follower.length}
+            getMyProfileData={getMyProfileData}
           />
         </div>
       )}

@@ -1,5 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Badge } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import EditIcon from "@mui/icons-material/Edit";
+import ChangeBio from "../User/ChangeBio";
 
 const useStyles = makeStyles({
   followInfo: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-function UserInfo({ followingCount, followersCount, bio }) {
+function UserInfo({ followingCount, followersCount, bio, getMyProfileData }) {
   const classes = useStyles();
 
   return (
@@ -28,7 +30,16 @@ function UserInfo({ followingCount, followersCount, bio }) {
           alignItems="center"
         >
           <Grid item xs={12} md={8}>
-            <Typography className={classes.userBio}>{bio}</Typography>
+            <Badge
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              badgeContent={<ChangeBio getMyProfileData={getMyProfileData} />}
+              color="warning"
+            >
+              <Typography className={classes.userBio}>{bio}</Typography>
+            </Badge>
           </Grid>
           <Grid item xs={6} md={2} sx={{ mt: 1 }}>
             <Typography className={classes.followInfo}>Followers</Typography>
