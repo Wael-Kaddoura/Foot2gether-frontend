@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import UserNavBar from "../components/NavBar/UserNavBar";
 import UserInfo from "../components/NavBar/UserInfo";
-import LiveRoomCard from "../components/Rooms/LiveMatchRoomCard";
+import LiveRoomCard from "../components/Rooms/LiveRoomCard";
 import { Grid, Button, Badge, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
+import CircleIcon from "@mui/icons-material/Circle";
 import { useHistory } from "react-router-dom";
 import ChangeProfilePicture from "../components/User/ChangeProfilePicture";
 import ChangeCoverPhoto from "../components/User/ChangeCoverPhoto";
@@ -32,8 +33,16 @@ const useStyles = makeStyles({
     // border: "5px solid",
     // borderColor: "#fff",
   },
-  roomContainer: {
-    padding: 24,
+  roomsContainer: {
+    maxWidth: 1140,
+  },
+  roomContent: {
+    minWidth: "100%",
+  },
+  bodyTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: 500,
   },
 });
 
@@ -53,6 +62,7 @@ function MyProfile() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [myProfileData, setMyProfileData] = useState(null);
+  const [myLiveRooms, setMyLiveRooms] = useState(null);
 
   async function getMyProfileData() {
     try {
@@ -67,8 +77,22 @@ function MyProfile() {
     }
   }
 
+  async function getMyLiveRooms() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/room/my_rooms`,
+        config
+      );
+      let my_live_rooms = response.data;
+      setMyLiveRooms(my_live_rooms);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchData() {
     await getMyProfileData();
+    await getMyLiveRooms();
     setIsLoaded(true);
   }
 
@@ -145,15 +169,54 @@ function MyProfile() {
             followingCount={myProfileData.following.length}
             followersCount={myProfileData.follower.length}
             getMyProfileData={getMyProfileData}
+            isMyProfile={true}
           />
+
+          <Grid
+            container
+            className={classes.roomContent}
+            direction="row"
+            justifyContent="center"
+          >
+            <Grid
+              item
+              xs={12}
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              className={classes.roomsContainer}
+              sx={{ mx: 2, mt: 5 }}
+            >
+              <Grid item xs={12} container sx={{ mb: 5 }}>
+                <Grid
+                  item
+                  xs={7}
+                  container
+                  direction="row"
+                  alignItems="center"
+                  className={classes.bodyTitle}
+                >
+                  <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
+                  Live Rooms
+                </Grid>
+              </Grid>
+
+              {myLiveRooms.map((room) => (
+                <LiveRoomCard
+                  roomName={room.name}
+                  roomID={room.id}
+                  roomCreator={room.creator.username}
+                  roomCreatorID={room.creator_id}
+                  roomCurrentCapacity={room.current_participants_number}
+                  team1ID={room.matchroom.team1_id}
+                  team2ID={room.matchroom.team2_id}
+                />
+              ))}
+            </Grid>
+          </Grid>
         </div>
       )}
-
-      <Grid className={classes.roomContainer} sx={{ mt: 5 }}>
-        <LiveRoomCard />
-        <LiveRoomCard />
-        <LiveRoomCard />
-      </Grid>
     </div>
   );
 }
