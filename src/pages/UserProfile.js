@@ -118,8 +118,10 @@ function UserProfile() {
         `http://localhost:8000/user/` + user_id,
         config
       );
-      let user_data = response.data;
+      let user_data = response.data.user_data;
+      let is_followed = response.data.is_followed;
       setUserData(user_data);
+      setIsFollowed(is_followed);
     } catch (error) {
       console.log(error);
     }
