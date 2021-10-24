@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
-import { Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import MainNavBar from "../components/NavBar/MainNavBar";
 import SearchBar from "../components/SearchBar";
 import LiveRoomCard from "../components/Rooms/LiveRoomCard";
@@ -32,19 +32,19 @@ function Rooms() {
   const history = useHistory();
   let config = {};
 
-  function loginStatusCheck() {
-    let login_status = JSON.parse(localStorage.getItem("login"));
-    if (login_status.login) {
-      const token = login_status.token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-    } else {
-      history.push("/login");
-    }
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
   }
 
   const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isSearchRoom, setIsSearchRoom] = useState(false);
+  const [searchResult, setSearchResult] = useState(null);
   const [liveRooms, setLiveRooms] = useState(null);
   const [liveRoomsCount, setLiveRoomsCount] = useState(null);
 
@@ -71,8 +71,25 @@ function Rooms() {
     }
   }
 
+  async function searchHandler(room_id) {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/room/` + room_id,
+        config
+      );
+      let searched_room_data = response.data;
+      setSearchResult(searched_room_data);
+      setIsSearchRoom(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function showAllRooms() {
+    setIsSearchRoom(false);
+  }
+
   async function fetchData() {
-    await loginStatusCheck();
     await getLiveRooms();
     await getLiveRoomsCount();
     setIsLoaded(true);
@@ -89,7 +106,7 @@ function Rooms() {
         <p className={classes.pageSubTitle}>
           There are currently {liveRoomsCount} Live Rooms!
         </p>
-        <SearchBar />
+        <SearchBar searchHandler={searchHandler} />
       </div>
     </div>
   );
@@ -129,22 +146,43 @@ function Rooms() {
                   Live Rooms
                 </Grid>
 
-                <Grid item xs={5} style={{ textAlign: "right" }}>
-                  <CreateNewRoom />
-                </Grid>
+                {isSearchRoom ? (
+                  <Grid item xs={5} style={{ textAlign: "right" }}>
+                    <Button variant="contained" onClick={showAllRooms}>
+                      Show All Rooms
+                    </Button>
+                  </Grid>
+                ) : (
+                  <Grid item xs={5} style={{ textAlign: "right" }}>
+                    <CreateNewRoom />
+                  </Grid>
+                )}
               </Grid>
 
-              {liveRooms.map((room) => (
+              {isSearchRoom && (
                 <LiveRoomCard
-                  roomName={room.name}
-                  roomID={room.id}
-                  roomCreator={room.creator.username}
-                  roomCreatorID={room.creator_id}
-                  roomCurrentCapacity={room.current_participants_number}
-                  team1ID={room.matchroom.team1_id}
-                  team2ID={room.matchroom.team2_id}
+                  roomName={searchResult.name}
+                  roomID={searchResult.id}
+                  roomCreator={searchResult.creator.username}
+                  roomCreatorID={searchResult.creator_id}
+                  roomCurrentCapacity={searchResult.current_participants_number}
+                  team1ID={searchResult.matchroom.team1_id}
+                  team2ID={searchResult.matchroom.team2_id}
                 />
-              ))}
+              )}
+
+              {!isSearchRoom &&
+                liveRooms.map((room) => (
+                  <LiveRoomCard
+                    roomName={room.name}
+                    roomID={room.id}
+                    roomCreator={room.creator.username}
+                    roomCreatorID={room.creator_id}
+                    roomCurrentCapacity={room.current_participants_number}
+                    team1ID={room.matchroom.team1_id}
+                    team2ID={room.matchroom.team2_id}
+                  />
+                ))}
             </Grid>
           </Grid>
         </div>
