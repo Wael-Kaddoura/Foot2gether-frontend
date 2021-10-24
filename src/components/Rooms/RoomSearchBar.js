@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from "@mui/material/Grid";
 
-export default function SearchBar({ searchHandler }) {
+export default function RoomSearchBar({ searchHandler }) {
   const [searchField, setSearchField] = useState("initialState");
 
   const handleChange = (e) => {
