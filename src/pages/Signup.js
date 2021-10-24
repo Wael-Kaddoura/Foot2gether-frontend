@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const ITEM_HEIGHT = 48;
@@ -79,6 +80,8 @@ function Signup() {
   const [favTeam, setFavTeam] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [signUpError, setSignUpError] = useState(false);
+  const [emailUsedError, setEmailUsedError] = useState(false);
+  const [usernameUsedError, setUsernameUsedError] = useState(false);
 
   async function getTeamsData() {
     try {
@@ -105,6 +108,8 @@ function Signup() {
 
   const handleSubmit = async (event) => {
     setPasswordMatch(true);
+    setEmailUsedError(false);
+    setUsernameUsedError(false);
 
     event.preventDefault();
     const signup_data = new FormData(event.currentTarget);
@@ -145,6 +150,15 @@ function Signup() {
         if (err.response.status === 401) {
           console.log("Something went wrong!");
           setSignUpError(true);
+        } else if (err.response.status === 409) {
+          let conflict_type = err.response.data.conflict;
+          if (conflict_type === "Email") {
+            console.log("Email already used!");
+            setEmailUsedError(true);
+          } else if (conflict_type === "Username") {
+            console.log("Username already used!");
+            setUsernameUsedError(true);
+          }
         }
         console.log(err);
       }
@@ -180,6 +194,31 @@ function Signup() {
             Something went wrong! Try again.
           </Alert>
         )}
+
+        {emailUsedError && (
+          <Alert
+            severity="error"
+            onClose={() => {
+              setEmailUsedError(false);
+            }}
+            sx={{ mb: 2 }}
+          >
+            Email already used!
+          </Alert>
+        )}
+
+        {usernameUsedError && (
+          <Alert
+            severity="error"
+            onClose={() => {
+              setUsernameUsedError(false);
+            }}
+            sx={{ mb: 2 }}
+          >
+            Username already used!
+          </Alert>
+        )}
+
         <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
           <TextField
             className={classes.formField}
@@ -288,6 +327,13 @@ function Signup() {
             Sign Up
           </Button>
         </Box>
+
+        <Grid container justifyContent="space-between">
+          Already have an account?
+          <Link to={"/login"} style={{ color: "blue" }}>
+            Log in
+          </Link>
+        </Grid>
       </Box>
     </Grid>
   );
