@@ -65,13 +65,15 @@ function LiveMatchRoomCard(props) {
             </Grid>
 
             <Grid item xs={3} md={1}>
-              <Button
-                className={classes.joinBtn}
-                variant="outlined"
-                color="error"
-              >
-                Join
-              </Button>
+              <Link to={"/video_room?id=" + roomID}>
+                <Button
+                  className={classes.joinBtn}
+                  variant="outlined"
+                  color="error"
+                >
+                  Join
+                </Button>
+              </Link>
             </Grid>
           </Grid>
 

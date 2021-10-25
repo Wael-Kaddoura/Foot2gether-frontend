@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function LiveRoomCard(props) {
   const {
+    config,
     roomName,
     roomID,
     roomCreator,
@@ -67,7 +68,8 @@ function LiveRoomCard(props) {
   async function getTeam1Logo() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/team/logo/` + team1ID
+        `http://localhost:8000/team/logo/` + team1ID,
+        config
       );
       let team1_logo = response.data.logo;
       setTeam1Logo(team1_logo);
@@ -79,7 +81,8 @@ function LiveRoomCard(props) {
   async function getTeam2Logo() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/team/logo/` + team2ID
+        `http://localhost:8000/team/logo/` + team2ID,
+        config
       );
       let team2_logo = response.data.logo;
       setTeam2Logo(team2_logo);
@@ -127,13 +130,15 @@ function LiveRoomCard(props) {
               </Grid>
             )}
             <Grid item xs={3} md={1}>
-              <Button
-                className={classes.joinBtn}
-                variant="outlined"
-                color="error"
-              >
-                Join
-              </Button>
+              <Link to={"/video_room?id=" + roomID}>
+                <Button
+                  className={classes.joinBtn}
+                  variant="outlined"
+                  color="error"
+                >
+                  Join
+                </Button>
+              </Link>
             </Grid>
           </Grid>
 
