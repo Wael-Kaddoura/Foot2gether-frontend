@@ -162,6 +162,7 @@ function Rooms() {
               {isSearchRoom ? (
                 searchResult ? (
                   <LiveRoomCard
+                    config={config}
                     roomName={searchResult.name}
                     roomID={searchResult.id}
                     roomCreator={searchResult.creator.username}
@@ -182,6 +183,7 @@ function Rooms() {
               {!isSearchRoom &&
                 liveRooms.map((room) => (
                   <LiveRoomCard
+                    config={config}
                     roomName={room.name}
                     roomID={room.id}
                     roomCreator={room.creator.username}

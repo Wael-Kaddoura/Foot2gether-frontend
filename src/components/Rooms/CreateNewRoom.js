@@ -66,7 +66,10 @@ function CreateNewRoom() {
 
   async function getAvailableMatches() {
     try {
-      let response = await axios.get(`http://localhost:8000/match/available`);
+      let response = await axios.get(
+        `http://localhost:8000/match/available`,
+        config
+      );
       let available_matches_data = response.data;
       setAvailableMatches(available_matches_data);
     } catch (error) {
