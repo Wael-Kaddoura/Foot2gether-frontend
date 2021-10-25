@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
+import firebase from "../server/firebase-notifications/firebase";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -41,6 +43,38 @@ function Login() {
   const [isPending, setIsPending] = useState(false);
   const [loginError, setLoginError] = useState(false);
 
+  async function getNotificationToken() {
+    const msg = firebase.messaging();
+    await msg.requestPermission();
+
+    try {
+      const token = await msg.getToken();
+      return token;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function saveNotificationToken(notification_token) {
+    try {
+      const token = JSON.parse(localStorage.getItem("login")).token;
+      let config = { headers: { Authorization: `Bearer ${token}` } };
+
+      let response = await axios.post(
+        "http://localhost:8000/user/save_notification_token",
+        { notification_token },
+        config
+      );
+      if (response.status === 200) {
+        console.log("Successfully Saved Token!");
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const handleSubmit = async (event) => {
     setIsPending(true);
     event.preventDefault();
@@ -54,11 +88,16 @@ function Login() {
       });
       if (response.status === 200) {
         console.log("Successfully logged in!");
+
+        let JWT_token = response.data.token;
         localStorage.setItem(
           "login",
-          JSON.stringify({ login: true, token: response.data.token })
+          JSON.stringify({ login: true, token: JWT_token })
         );
         setLoginError(false);
+        getNotificationToken();
+        let notification_token = await getNotificationToken();
+        saveNotificationToken(notification_token);
         history.push("/home");
       } else {
         console.log("Something went wrong!");
