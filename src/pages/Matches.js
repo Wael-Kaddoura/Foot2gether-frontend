@@ -29,11 +29,8 @@ function Matches() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [liveMatches, setLiveMatches] = useState(null);
-  const [liveMatchesCount, setLiveMatchesCount] = useState(null);
   const [upcomingMatches, setUpcomingMatches] = useState(null);
-  const [upcomingMatchesCount, setUpcomingMatchesCount] = useState(null);
   const [finishedMatches, setFinishedMatches] = useState(null);
-  const [finishedMatchesCount, setFinishedMatchesCount] = useState(null);
 
   async function getLiveMatches() {
     try {
@@ -43,19 +40,6 @@ function Matches() {
       );
       let live_matches_data = response.data;
       setLiveMatches(live_matches_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getLiveMatchesCount() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/live_count",
-        config
-      );
-      let live_matches_count = response.data.live_count;
-      setLiveMatchesCount(live_matches_count);
     } catch (error) {
       console.log(error);
     }
@@ -74,19 +58,6 @@ function Matches() {
     }
   }
 
-  async function getUpcomingMatchesCount() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/upcoming_count",
-        config
-      );
-      let upcoming_matches_count = response.data.upcoming_count;
-      setUpcomingMatchesCount(upcoming_matches_count);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function getFinishedMatches() {
     try {
       let response = await axios.get(
@@ -100,26 +71,10 @@ function Matches() {
     }
   }
 
-  async function getFinishedMatchesCount() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/finished_count",
-        config
-      );
-      let finished_matches_count = response.data.finished_count;
-      setFinishedMatchesCount(finished_matches_count);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function fetchData() {
     await getLiveMatches();
-    await getLiveMatchesCount();
     await getUpcomingMatches();
-    await getUpcomingMatchesCount();
     await getFinishedMatches();
-    await getFinishedMatchesCount();
 
     setIsLoaded(true);
   }
@@ -145,11 +100,8 @@ function Matches() {
       {isLoaded && (
         <MatchesTab
           liveMatches={liveMatches}
-          liveMatchesCount={liveMatchesCount}
           upcomingMatches={upcomingMatches}
-          upcomingMatchesCount={upcomingMatchesCount}
           finishedMatches={finishedMatches}
-          finishedMatchesCount={finishedMatchesCount}
         />
       )}
     </div>

@@ -108,10 +108,10 @@ function CreateNewRoom() {
         data,
         config
       );
+      setOpen(false);
 
       if (response.status === 201) {
         console.log("Successfully Created Room!");
-        setOpen(false);
       } else {
         console.log("Something went wrong!");
       }

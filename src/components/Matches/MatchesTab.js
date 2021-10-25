@@ -58,14 +58,7 @@ function a11yProps(index) {
 }
 
 function MatchTabs(props) {
-  const {
-    liveMatches,
-    liveMatchesCount,
-    upcomingMatches,
-    upcomingMatchesCount,
-    finishedMatches,
-    finishedMatchesCount,
-  } = props;
+  const { liveMatches, upcomingMatches, finishedMatches } = props;
 
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -112,7 +105,7 @@ function MatchTabs(props) {
               <div>
                 {"Live    ."}
                 <Badge
-                  badgeContent={liveMatchesCount}
+                  badgeContent={liveMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -136,7 +129,7 @@ function MatchTabs(props) {
               <div>
                 {"Upcoming    ."}
                 <Badge
-                  badgeContent={upcomingMatchesCount}
+                  badgeContent={upcomingMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -160,7 +153,7 @@ function MatchTabs(props) {
               <div>
                 {"Finished    ."}
                 <Badge
-                  badgeContent={finishedMatchesCount}
+                  badgeContent={finishedMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
