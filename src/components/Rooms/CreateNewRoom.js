@@ -15,6 +15,7 @@ import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
 import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
+import CreateRoomSnackbar from "./CreateRoomSnackbar";
 
 const style = {
   position: "absolute",
@@ -57,12 +58,25 @@ function CreateNewRoom() {
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [open, setOpen] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [match, setMatch] = React.useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [availableMatches, setAvailableMatches] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleClick = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
 
   async function getAvailableMatches() {
     try {
@@ -101,14 +115,14 @@ function CreateNewRoom() {
       match_id,
     };
 
+    setOpen(false);
+
     try {
-      console.log(config);
       let response = await axios.post(
         "http://localhost:8000/room",
         data,
         config
       );
-      setOpen(false);
 
       if (response.status === 201) {
         console.log("Successfully Created Room!");
@@ -128,7 +142,6 @@ function CreateNewRoom() {
       <Button variant="contained" color="success" onClick={handleOpen}>
         Create New Room
       </Button>
-
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -192,6 +205,7 @@ function CreateNewRoom() {
                 fullWidth
                 variant="contained"
                 color="success"
+                onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Create Room
@@ -200,6 +214,10 @@ function CreateNewRoom() {
           </Box>
         </Fade>
       </Modal>
+      <CreateRoomSnackbar
+        open={snackbarOpen}
+        handleClose={handleCloseSnackbar}
+      />
     </div>
   );
 }
