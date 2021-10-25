@@ -12,6 +12,7 @@ import UserProfile from "./pages/UserProfile";
 import BlogView from "./pages/BlogView";
 import Rooms from "./pages/Rooms";
 import UserSearch from "./pages/UserSearch";
+import VideoRoom from "./pages/VideoRoom";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route exact path="/blog_view">
           <BlogView />
+        </Route>
+        <Route exact path="/video_room">
+          <VideoRoom />
         </Route>
       </Switch>
     </Router>
