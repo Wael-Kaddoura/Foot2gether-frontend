@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+
 import BlogComment from "./BlogComment";
 import BlogNewComment from "./BlogNewComment";
 
@@ -30,6 +31,7 @@ function BlogComments({
   blogCommentsCount,
   blog_id,
   getCommentsData,
+  config,
 }) {
   const classes = useStyles();
 
@@ -61,7 +63,11 @@ function BlogComments({
           ))}
         </Grid>
 
-        <BlogNewComment blog_id={blog_id} getCommentsData={getCommentsData} />
+        <BlogNewComment
+          blog_id={blog_id}
+          getCommentsData={getCommentsData}
+          config={config}
+        />
       </Grid>
     </Grid>
   );

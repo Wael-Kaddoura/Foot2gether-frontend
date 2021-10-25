@@ -1,10 +1,7 @@
 import { useState } from "react";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
+import { Grid, Paper, InputBase, Divider } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import Grid from "@mui/material/Grid";
 
 export default function UserSearchBar({ searchHandler }) {
   const [searchField, setSearchField] = useState("initialState");

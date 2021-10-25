@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
+import { Grid, Button, Badge, Typography, Avatar } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 import UserNavBar from "../components/NavBar/UserNavBar";
 import UserInfo from "../components/NavBar/UserInfo";
 import LiveRoomCard from "../components/Rooms/LiveRoomCard";
-import { Grid, Button, Badge, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
-import CircleIcon from "@mui/icons-material/Circle";
-import { useHistory } from "react-router-dom";
 import ChangeProfilePicture from "../components/User/ChangeProfilePicture";
 import ChangeCoverPhoto from "../components/User/ChangeCoverPhoto";
-
-import axios from "axios";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 55,
@@ -47,8 +46,6 @@ const useStyles = makeStyles({
 });
 
 function MyProfile() {
-  const classes = useStyles();
-
   const history = useHistory();
   let config = {};
 
@@ -59,6 +56,8 @@ function MyProfile() {
   } else {
     history.push("/login");
   }
+
+  const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [myProfileData, setMyProfileData] = useState(null);
@@ -155,6 +154,7 @@ function MyProfile() {
       <ChangeCoverPhoto getMyProfileData={getMyProfileData} />
     </Grid>
   );
+
   return (
     <div>
       {isLoaded && (

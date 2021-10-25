@@ -1,6 +1,7 @@
 import { Button, LinearProgress, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+
 import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({

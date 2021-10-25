@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+import axios from "axios";
+
 import MainNavBar from "../components/NavBar/MainNavBar";
 import RoomMatchCard from "../components/Matches/MatchCards/RoomMatchCard";
 import LiveMatchRoomCard from "../components/Rooms/LiveMatchRoomCard";
-import CircleIcon from "@mui/icons-material/Circle";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   pageTitle: {
@@ -27,6 +28,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MatchRooms() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const match_id = new URLSearchParams(useLocation().search).get("id");
@@ -35,17 +47,12 @@ function MatchRooms() {
   const [matchData, setMatchData] = useState(null);
   const [liveRooms, setLiveRooms] = useState(null);
 
-  const NavBarContent = (
-    <div className="row align-items-center">
-      <div className="col-lg-7 mx-auto text-center">
-        <RoomMatchCard matchData={matchData} />
-      </div>
-    </div>
-  );
-
   async function getMatchData() {
     try {
-      let response = await axios.get("http://localhost:8000/match/" + match_id);
+      let response = await axios.get(
+        "http://localhost:8000/match/" + match_id,
+        config
+      );
       let match_data = response.data;
       setMatchData(match_data);
     } catch (error) {
@@ -56,7 +63,8 @@ function MatchRooms() {
   async function getMatchRooms() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/room/match/${match_id}`
+        `http://localhost:8000/room/match/${match_id}`,
+        config
       );
       let match_rooms_data = response.data;
       setLiveRooms(match_rooms_data);
@@ -74,6 +82,14 @@ function MatchRooms() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const NavBarContent = (
+    <div className="row align-items-center">
+      <div className="col-lg-7 mx-auto text-center">
+        <RoomMatchCard matchData={matchData} />
+      </div>
+    </div>
+  );
 
   return (
     <div>

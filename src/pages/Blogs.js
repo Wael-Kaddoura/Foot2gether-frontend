@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import MainNavBar from "../components/NavBar/MainNavBar";
-import BlogCard from "../components/Blogs/BlogCard";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import CreateNewBlog from "../components/Blogs/CreateNewBlog";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+
+import MainNavBar from "../components/NavBar/MainNavBar";
+import CreateNewBlog from "../components/Blogs/CreateNewBlog";
+import BlogCard from "../components/Blogs/BlogCard";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -24,6 +26,17 @@ const useStyles = makeStyles({
 });
 
 function Blog() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,7 +44,7 @@ function Blog() {
 
   async function getBlogsData() {
     try {
-      let response = await axios.get(`http://localhost:8000/blog`);
+      let response = await axios.get(`http://localhost:8000/blog`, config);
       let blogs_data = response.data;
       setBlogsData(blogs_data);
       setIsLoaded(true);

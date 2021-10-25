@@ -1,18 +1,8 @@
-import { Button, LinearProgress, Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { LinearProgress, Grid } from "@mui/material";
+
 import MatchCard from "./MatchCard";
 
-const useStyles = makeStyles({
-  showRoomBtn: {
-    color: "#fff",
-    backgroundColor: "#ee1e46",
-    borderColor: "#ee1e46",
-  },
-});
-
 function RoomMatchCard({ matchData }) {
-  const classes = useStyles();
-
   return (
     <MatchCard
       team1Name={matchData.team1.name}

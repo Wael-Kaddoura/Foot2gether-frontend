@@ -40,7 +40,7 @@ function BlogCard(props) {
 
   return (
     <Grid item xs={12} md={4} lg={3} sx={{ mb: 5, mr: 1 }}>
-      <Link to={"/blogview?id=" + blogID}>
+      <Link to={"/blog_view?id=" + blogID}>
         <img className={classes.blogImg} src={blogImg} alt="blogImage" />
         <Box className={classes.blogInfo} sx={{ mt: 3 }}>
           <Typography className={classes.blogDate}>

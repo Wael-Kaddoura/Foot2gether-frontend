@@ -1,12 +1,7 @@
 import * as React from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
+import { Backdrop, Box, Modal, Fade, Button, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
 const style = {

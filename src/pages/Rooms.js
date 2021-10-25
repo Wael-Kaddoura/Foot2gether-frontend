@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { makeStyles } from "@mui/styles";
 import { Grid, Button } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
+import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 import MainNavBar from "../components/NavBar/MainNavBar";
-import SearchBar from "../components/SearchBar";
+import RoomSearchBar from "../components/Rooms/RoomSearchBar";
 import LiveRoomCard from "../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../components/Rooms/CreateNewRoom";
-import CircleIcon from "@mui/icons-material/Circle";
-import { useHistory } from "react-router-dom";
-
-import axios from "axios";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -48,6 +48,24 @@ function Rooms() {
   const [liveRooms, setLiveRooms] = useState(null);
   const [liveRoomsCount, setLiveRoomsCount] = useState(null);
 
+  function showAllRooms() {
+    setIsSearchRoom(false);
+  }
+
+  async function searchHandler(room_id) {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/room/` + room_id,
+        config
+      );
+      let searched_room_data = response.data;
+      setSearchResult(searched_room_data);
+      setIsSearchRoom(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function getLiveRooms() {
     try {
       let response = await axios.get(`http://localhost:8000/room`, config);
@@ -71,24 +89,6 @@ function Rooms() {
     }
   }
 
-  async function searchHandler(room_id) {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/room/` + room_id,
-        config
-      );
-      let searched_room_data = response.data;
-      setSearchResult(searched_room_data);
-      setIsSearchRoom(true);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function showAllRooms() {
-    setIsSearchRoom(false);
-  }
-
   async function fetchData() {
     await getLiveRooms();
     await getLiveRoomsCount();
@@ -106,7 +106,7 @@ function Rooms() {
         <p className={classes.pageSubTitle}>
           There are currently {liveRoomsCount} Live Rooms!
         </p>
-        <SearchBar searchHandler={searchHandler} />
+        <RoomSearchBar searchHandler={searchHandler} />
       </div>
     </div>
   );
@@ -159,16 +159,24 @@ function Rooms() {
                 )}
               </Grid>
 
-              {isSearchRoom && (
-                <LiveRoomCard
-                  roomName={searchResult.name}
-                  roomID={searchResult.id}
-                  roomCreator={searchResult.creator.username}
-                  roomCreatorID={searchResult.creator_id}
-                  roomCurrentCapacity={searchResult.current_participants_number}
-                  team1ID={searchResult.matchroom.team1_id}
-                  team2ID={searchResult.matchroom.team2_id}
-                />
+              {isSearchRoom ? (
+                searchResult ? (
+                  <LiveRoomCard
+                    roomName={searchResult.name}
+                    roomID={searchResult.id}
+                    roomCreator={searchResult.creator.username}
+                    roomCreatorID={searchResult.creator_id}
+                    roomCurrentCapacity={
+                      searchResult.current_participants_number
+                    }
+                    team1ID={searchResult.matchroom.team1_id}
+                    team2ID={searchResult.matchroom.team2_id}
+                  />
+                ) : (
+                  <Grid style={{ height: 200 }}>No Rooms Found</Grid>
+                )
+              ) : (
+                ""
               )}
 
               {!isSearchRoom &&

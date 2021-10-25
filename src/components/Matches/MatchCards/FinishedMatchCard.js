@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+
 import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({

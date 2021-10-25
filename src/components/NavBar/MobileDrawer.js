@@ -6,7 +6,6 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import {
   List,
@@ -18,10 +17,10 @@ import {
   ListItemText,
   Avatar,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@mui/styles";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+
 import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles({

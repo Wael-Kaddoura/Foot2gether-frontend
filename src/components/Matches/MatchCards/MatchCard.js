@@ -36,6 +36,7 @@ function MatchCard(props) {
     league,
     kickOff,
   } = props;
+
   const classes = useStyles();
 
   return (

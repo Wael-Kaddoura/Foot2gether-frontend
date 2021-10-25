@@ -1,6 +1,6 @@
 import { Grid, Typography, Badge } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import EditIcon from "@mui/icons-material/Edit";
+
 import ChangeBio from "../User/ChangeBio";
 
 const useStyles = makeStyles({
@@ -17,13 +17,10 @@ const useStyles = makeStyles({
   },
 });
 
-function UserInfo({
-  followingCount,
-  followersCount,
-  bio,
-  isMyProfile,
-  getMyProfileData,
-}) {
+function UserInfo(props) {
+  const { followingCount, followersCount, bio, isMyProfile, getMyProfileData } =
+    props;
+
   const classes = useStyles();
 
   return (

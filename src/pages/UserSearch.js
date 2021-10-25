@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Grid } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 import SecondaryNavBar from "../components/NavBar/SecondaryNavBar";
 import UserSearchBar from "../components/User/UserSearchBar";
 import UserCard from "../components/User/UserCard";
-import { useHistory } from "react-router-dom";
-
-import axios from "axios";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -50,7 +50,7 @@ function UserSearch() {
         config
       );
       let search_results = response.data;
-      console.log(search_results);
+
       setSearchResults(search_results);
     } catch (error) {
       console.log(error);

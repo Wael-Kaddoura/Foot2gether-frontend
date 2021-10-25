@@ -1,10 +1,6 @@
-import { useState, useEffect } from "react";
-import { Card, Grid, Typography, Button, Badge, Avatar } from "@mui/material";
+import { Card, Grid, Badge, Avatar } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
-
-import { Link } from "react-router-dom";
-import axios from "axios";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 40,

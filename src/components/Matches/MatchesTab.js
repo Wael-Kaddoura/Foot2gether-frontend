@@ -1,7 +1,8 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { Tabs, Tab, Typography, Box, Badge, useTheme } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+import PropTypes from "prop-types";
+
 import UpcomingMatchCard from "./MatchCards/UpcomingMatchCard";
 import FinishedMatchCard from "./MatchCards/FinishedMatchCard";
 import LiveMatchCard from "./MatchCards/LiveMatchCard";

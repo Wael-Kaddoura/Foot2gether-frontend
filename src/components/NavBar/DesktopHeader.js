@@ -17,10 +17,10 @@ import {
   ListItem,
   Avatar,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import { makeStyles } from "@mui/styles";
+import { Link, useHistory } from "react-router-dom";
+
 import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles({
@@ -31,12 +31,10 @@ const useStyles = makeStyles({
   },
 });
 
-function DesktopHeader({
-  currentPageName,
-  isLoggedIn,
-  myProfileData,
-  dontShowProfileIcon,
-}) {
+function DesktopHeader(props) {
+  const { currentPageName, isLoggedIn, myProfileData, dontShowProfileIcon } =
+    props;
+
   const history = useHistory();
   const classes = useStyles();
 
@@ -45,16 +43,16 @@ function DesktopHeader({
 
   const menuId = "primary-search-account-menu";
 
+  const logoutHandler = () => {
+    localStorage.setItem("login", JSON.stringify({ login: false }));
+    history.push("/login");
+  };
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
-  };
-
-  const logoutHandler = () => {
-    localStorage.setItem("login", JSON.stringify({ login: false }));
-    history.push("/login");
   };
 
   const renderMenu = !dontShowProfileIcon ? (

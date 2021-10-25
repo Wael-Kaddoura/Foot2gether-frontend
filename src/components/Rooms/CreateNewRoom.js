@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+import {
+  Backdrop,
+  Box,
+  Modal,
+  Fade,
+  Button,
+  Typography,
+  TextField,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
-import MenuItem from "@mui/material/MenuItem";
-import { useHistory } from "react-router-dom";
-
 import axios from "axios";
+
+import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
 
 const style = {
   position: "absolute",
@@ -50,20 +51,18 @@ const MenuProps = {
 };
 
 function CreateNewRoom() {
-  const history = useHistory();
   const classes = useStyles();
 
   const token = JSON.parse(localStorage.getItem("login")).token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   const [match, setMatch] = React.useState("");
-
   const [isLoaded, setIsLoaded] = useState(false);
   const [availableMatches, setAvailableMatches] = useState(null);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   async function getAvailableMatches() {
     try {

@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useLocation, useHistory } from "react-router-dom";
+import axios from "axios";
+
 import MainNavBar from "../components/NavBar/MainNavBar";
 import BlogBody from "../components/Blogs/BlogBody";
 import BlogCommentsSection from "../components/Blogs/BlogCommentsSection";
-import { Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -24,6 +25,17 @@ const useStyles = makeStyles({
 });
 
 function BlogView() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const blog_id = new URLSearchParams(useLocation().search).get("id");
@@ -35,7 +47,10 @@ function BlogView() {
 
   async function getBlogData() {
     try {
-      let response = await axios.get("http://localhost:8000/blog/" + blog_id);
+      let response = await axios.get(
+        "http://localhost:8000/blog/" + blog_id,
+        config
+      );
       let blog_data = response.data;
       setBlogData(blog_data);
     } catch (error) {
@@ -46,7 +61,8 @@ function BlogView() {
   async function getBlogComments() {
     try {
       let response = await axios.get(
-        "http://localhost:8000/blog/comments/" + blog_id
+        "http://localhost:8000/blog/comments/" + blog_id,
+        config
       );
       let blog_comments = response.data;
       setBlogComments(blog_comments);
@@ -58,7 +74,8 @@ function BlogView() {
   async function getBlogCommentsCount() {
     try {
       let response = await axios.get(
-        "http://localhost:8000/blog/comments_count/" + blog_id
+        "http://localhost:8000/blog/comments_count/" + blog_id,
+        config
       );
       let blog_comments_count = response.data.comments_count;
       setBlogCommentsCount(blog_comments_count);
@@ -108,6 +125,7 @@ function BlogView() {
   return (
     <div>
       <MainNavBar NavBarContent={NavBarContent} />
+
       {isLoaded && (
         <div>
           <BlogBody
@@ -120,6 +138,7 @@ function BlogView() {
             blogCommentsCount={blogCommentsCount}
             blog_id={blog_id}
             getCommentsData={getCommentsData}
+            config={config}
           />
         </div>
       )}

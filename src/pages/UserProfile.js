@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
+import { Grid, Button, Badge, Typography, Avatar } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { useLocation, useHistory } from "react-router-dom";
+import axios from "axios";
+
 import UserNavBar from "../components/NavBar/UserNavBar";
 import UserInfo from "../components/NavBar/UserInfo";
 import LiveRoomCard from "../components/Rooms/LiveRoomCard";
-import { Grid, Button, Badge, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
-import CircleIcon from "@mui/icons-material/Circle";
-import { useHistory } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-
-import axios from "axios";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 55,
@@ -56,33 +54,28 @@ const useStyles = makeStyles({
 });
 
 function UserProfile() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const user_id = new URLSearchParams(useLocation().search).get("id");
-
-  const history = useHistory();
-  let config = {};
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userLiveRooms, setUserLiveRooms] = useState(null);
   const [isFollowed, setIsFollowed] = useState(false);
 
-  function loginStatusCheck() {
-    let login_status = JSON.parse(localStorage.getItem("login"));
-    if (login_status.login) {
-      const token = login_status.token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-    } else {
-      history.push("/login");
-    }
-  }
-
   async function followUser() {
     try {
-      let token = JSON.parse(localStorage.getItem("login")).token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-
       let response = await axios.post(
         `http://localhost:8000/user/follow`,
         { followed_user_id: user_id },
@@ -97,9 +90,6 @@ function UserProfile() {
 
   async function unFollowUser() {
     try {
-      let token = JSON.parse(localStorage.getItem("login")).token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-
       let response = await axios.post(
         `http://localhost:8000/user/unfollow`,
         { unfollowed_user_id: user_id },
@@ -120,6 +110,7 @@ function UserProfile() {
       );
       let user_data = response.data.user_data;
       let is_followed = response.data.is_followed;
+
       setUserData(user_data);
       setIsFollowed(is_followed);
     } catch (error) {
@@ -134,6 +125,7 @@ function UserProfile() {
         config
       );
       let user_live_rooms_data = response.data;
+
       setUserLiveRooms(user_live_rooms_data);
     } catch (error) {
       console.log(error);
@@ -141,7 +133,6 @@ function UserProfile() {
   }
 
   async function fetchData() {
-    loginStatusCheck();
     await getUserData();
     await getUserLiveRooms();
     setIsLoaded(true);

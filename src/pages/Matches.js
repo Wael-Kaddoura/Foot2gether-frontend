@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 import MainNavBar from "../components/NavBar/MainNavBar";
 import MatchesTab from "../components/Matches/MatchesTab";
-import { makeStyles } from "@mui/styles";
-import axios from "axios";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -12,6 +14,17 @@ const useStyles = makeStyles({
 });
 
 function Matches() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,7 +37,10 @@ function Matches() {
 
   async function getLiveMatches() {
     try {
-      let response = await axios.get("http://localhost:8000/match/live");
+      let response = await axios.get(
+        "http://localhost:8000/match/live",
+        config
+      );
       let live_matches_data = response.data;
       setLiveMatches(live_matches_data);
     } catch (error) {
@@ -34,7 +50,10 @@ function Matches() {
 
   async function getLiveMatchesCount() {
     try {
-      let response = await axios.get("http://localhost:8000/match/live_count");
+      let response = await axios.get(
+        "http://localhost:8000/match/live_count",
+        config
+      );
       let live_matches_count = response.data.live_count;
       setLiveMatchesCount(live_matches_count);
     } catch (error) {
@@ -44,7 +63,10 @@ function Matches() {
 
   async function getUpcomingMatches() {
     try {
-      let response = await axios.get("http://localhost:8000/match/upcoming");
+      let response = await axios.get(
+        "http://localhost:8000/match/upcoming",
+        config
+      );
       let upcoming_matches_data = response.data;
       setUpcomingMatches(upcoming_matches_data);
     } catch (error) {
@@ -55,7 +77,8 @@ function Matches() {
   async function getUpcomingMatchesCount() {
     try {
       let response = await axios.get(
-        "http://localhost:8000/match/upcoming_count"
+        "http://localhost:8000/match/upcoming_count",
+        config
       );
       let upcoming_matches_count = response.data.upcoming_count;
       setUpcomingMatchesCount(upcoming_matches_count);
@@ -66,7 +89,10 @@ function Matches() {
 
   async function getFinishedMatches() {
     try {
-      let response = await axios.get("http://localhost:8000/match/finished");
+      let response = await axios.get(
+        "http://localhost:8000/match/finished",
+        config
+      );
       let finished_matches_data = response.data;
       setFinishedMatches(finished_matches_data);
     } catch (error) {
@@ -77,7 +103,8 @@ function Matches() {
   async function getFinishedMatchesCount() {
     try {
       let response = await axios.get(
-        "http://localhost:8000/match/finished_count"
+        "http://localhost:8000/match/finished_count",
+        config
       );
       let finished_matches_count = response.data.finished_count;
       setFinishedMatchesCount(finished_matches_count);
@@ -114,6 +141,7 @@ function Matches() {
   return (
     <div>
       <MainNavBar currentPageName="Matches" NavBarContent={NavBarContent} />
+
       {isLoaded && (
         <MatchesTab
           liveMatches={liveMatches}

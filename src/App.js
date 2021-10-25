@@ -11,6 +11,7 @@ import MyProfile from "./pages/MyProfile";
 import UserProfile from "./pages/UserProfile";
 import BlogView from "./pages/BlogView";
 import Rooms from "./pages/Rooms";
+import UserSearch from "./pages/UserSearch";
 
 function App() {
   return (
@@ -46,7 +47,10 @@ function App() {
         <Route exact path="/user_profile">
           <UserProfile />
         </Route>
-        <Route exact path="/blogview">
+        <Route exact path="/user_search">
+          <UserSearch />
+        </Route>
+        <Route exact path="/blog_view">
           <BlogView />
         </Route>
       </Switch>

@@ -7,17 +7,16 @@ import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
+
 import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import UserOverlay from "./UserOverlay";
-import axios from "axios";
 
-function UserNavBar({
-  currentPageName,
-  NavBarContent,
-  coverPhoto,
-  dontShowProfileIcon,
-}) {
+function UserNavBar(props) {
+  const { currentPageName, NavBarContent, coverPhoto, dontShowProfileIcon } =
+    props;
+
   let config = {};
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,7 +30,6 @@ function UserNavBar({
         config
       );
       let my_profile_data = response.data;
-      console.log(my_profile_data);
       setMyProfileData(my_profile_data);
     } catch (error) {
       console.log(error);

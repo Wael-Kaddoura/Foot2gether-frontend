@@ -6,6 +6,7 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
+
 import backgroundImage from "../../Images/bg_3.jpg";
 
 function Overlay({ NavBarContent }) {

@@ -16,13 +16,11 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogNewComment({ blog_id, getCommentsData }) {
-  const token = JSON.parse(localStorage.getItem("login")).token;
-  const config = { headers: { Authorization: `Bearer ${token}` } };
-
+function BlogNewComment({ blog_id, getCommentsData, config }) {
   const classes = useStyles();
 
   const [value, setValue] = useState("");
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -36,7 +34,9 @@ function BlogNewComment({ blog_id, getCommentsData }) {
       body,
       blog_id,
     };
+
     setValue("");
+
     try {
       let response = await axios.post(
         "http://localhost:8000/blog/comment",

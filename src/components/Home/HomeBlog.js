@@ -32,7 +32,7 @@ function HomeBlog(props) {
 
   return (
     <Grid item xs={12} md={6} sx={{ mb: 5 }}>
-      <Link to={"/blogview?id=" + blogID}>
+      <Link to={"/blog_view?id=" + blogID}>
         <Grid container>
           <Grid item xs={4} sx={{ mr: 2 }}>
             <img className={classes.blogImg} src={blogImg} alt="blogImage" />

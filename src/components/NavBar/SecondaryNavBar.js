@@ -7,14 +7,13 @@ import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
+
 import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import SecondaryOverlay from "./SecondaryOverlay";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
 
 function MainNavBar({ currentPageName }) {
-  const history = useHistory();
   let config = {};
 
   const [isLoaded, setIsLoaded] = useState(false);

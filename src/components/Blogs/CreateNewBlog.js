@@ -1,11 +1,13 @@
 import * as React from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import {
+  Backdrop,
+  Box,
+  Modal,
+  Fade,
+  Button,
+  Typography,
+  TextField,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
@@ -44,11 +46,13 @@ function CreateNewBlog() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const new_blog_data = new FormData(event.currentTarget);
     const title = new_blog_data.get("blog_title");
     const body = new_blog_data.get("blog_body");

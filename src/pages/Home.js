@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import { Grid, Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import MainNavBar from "../components/NavBar/MainNavBar";
-import HomeBlogs from "../components/Home/HomeBlogs";
 import HomeNextMatchCard from "../components/Home/HomeNextMatchCard";
+import HomeBlogs from "../components/Home/HomeBlogs";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
@@ -32,7 +32,6 @@ function Home() {
     try {
       let response = await axios.get("http://localhost:8000/match/next");
       let next_match_data = response.data;
-      console.log(next_match_data);
       setNextMatchData(next_match_data);
     } catch (error) {
       console.log(error);
