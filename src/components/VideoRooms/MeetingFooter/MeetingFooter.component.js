@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
@@ -10,10 +11,11 @@ import {
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
 const MeetingFooter = (props) => {
+  const history = useHistory();
+
   const [streamState, setStreamState] = useState({
-    mic: true,
+    mic: false,
     video: false,
-    screen: false,
   });
   const micClick = () => {
     setStreamState((currentState) => {
@@ -22,6 +24,10 @@ const MeetingFooter = (props) => {
         mic: !currentState.mic,
       };
     });
+  };
+
+  const onExitRoom = () => {
+    history.push("/login");
   };
 
   const onVideoClick = () => {
@@ -73,7 +79,7 @@ const MeetingFooter = (props) => {
       <div
         className="meeting-icons"
         data-tip="Share Screen"
-        onClick={onScreenClick}
+        onClick={onExitRoom}
         disabled={streamState.screen}
       >
         <FontAwesomeIcon icon={faDesktop} />

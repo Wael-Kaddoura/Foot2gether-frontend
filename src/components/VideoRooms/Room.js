@@ -22,6 +22,7 @@ function Room(props) {
 
     return localStream;
   };
+
   useEffect(async () => {
     const stream = await getUserStream();
     stream.getVideoTracks()[0].enabled = false;
@@ -30,9 +31,8 @@ function Room(props) {
     connectedRef.on("value", (snap) => {
       if (snap.val()) {
         const defaultPreference = {
-          audio: true,
+          audio: false,
           video: false,
-          screen: false,
         };
         const userStatusRef = participantRef.push({
           userName,
