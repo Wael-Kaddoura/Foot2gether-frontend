@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import date from "date-and-time";
 
 const useStyles = makeStyles({
   blogTitle: {
@@ -42,6 +43,12 @@ const useStyles = makeStyles({
 function BlogComment(props) {
   const { commentAuthor, commentDate, commentBody, commentAuthorPP } = props;
 
+  //formating comment date and time
+  let comment_date_time = date.format(
+    new Date(commentDate),
+    "ddd, MMM DD YYYY hh:mm A"
+  );
+
   const classes = useStyles();
 
   return (
@@ -57,7 +64,7 @@ function BlogComment(props) {
         <Grid item xs={10}>
           <Typography className={classes.userName}>{commentAuthor}</Typography>
           <Typography className={classes.commentTime}>
-            {`${new Date(commentDate)}`.substring(0, 21)}
+            {comment_date_time}
           </Typography>
           <Typography className={classes.commentBody} sx={{ mt: 1 }}>
             {commentBody}

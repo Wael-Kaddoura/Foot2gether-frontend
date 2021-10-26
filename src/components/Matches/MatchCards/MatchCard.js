@@ -1,5 +1,6 @@
 import { Card, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+import date from "date-and-time";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -39,6 +40,12 @@ function MatchCard(props) {
 
   const classes = useStyles();
 
+  //converting kick off time to AM/PM format
+  let kick_off_time = kickOff;
+  if (kick_off_time) {
+    kick_off_time = date.transform(kick_off_time, "HH:mm:ss", "hh:mm A");
+  }
+
   return (
     <Card
       className={classes.card}
@@ -69,7 +76,7 @@ function MatchCard(props) {
                 {league}
               </Typography>
               <Typography className={classes.matchTime} sx={{ mb: 1 }}>
-                {kickOff}
+                {kick_off_time}
               </Typography>
               <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
                 Emirates Stadium

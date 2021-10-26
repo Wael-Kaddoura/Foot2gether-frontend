@@ -1,6 +1,13 @@
 import { Grid } from "@mui/material";
+import date from "date-and-time";
 
 function HomeNextMatchCard({ nextMatch }) {
+  //converting kick off time to AM/PM format
+  let kick_off_time = nextMatch[0].kick_off;
+  if (kick_off_time) {
+    kick_off_time = date.transform(kick_off_time, "HH:mm:ss", "hh:mm A");
+  }
+
   return (
     <Grid item xs={12}>
       <div className="site-section bg-dark">
@@ -35,7 +42,7 @@ function HomeNextMatchCard({ nextMatch }) {
                 <div className="text-center widget-vs-contents mb-4">
                   <h4>{nextMatch[0].competition.name}</h4>
                   <p className="mb-5">
-                    <span className="d-block">{nextMatch[0].kick_off}</span>
+                    <span className="d-block">{kick_off_time}</span>
                     <strong className="text-primary">
                       Tottenham Hotspur Staduim
                     </strong>
