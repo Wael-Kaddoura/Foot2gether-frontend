@@ -32,7 +32,7 @@ function UserInfo(props) {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={8} container justifyContent="center">
             {isMyProfile ? (
               <Badge
                 anchorOrigin={{
@@ -49,13 +49,13 @@ function UserInfo(props) {
             )}
           </Grid>
 
-          <Grid item xs={6} md={2} sx={{ mt: 1 }}>
+          <Grid item xs={6} md={2} sx={{ my: 2 }}>
             <Typography className={classes.followInfo}>Followers</Typography>
             <Typography className={classes.followInfo}>
               {followersCount}
             </Typography>
           </Grid>
-          <Grid item xs={6} md={2} sx={{ mt: 1 }}>
+          <Grid item xs={6} md={2} sx={{ my: 2 }}>
             <Typography className={classes.followInfo}>Following</Typography>
             <Typography className={classes.followInfo}>
               {followingCount}

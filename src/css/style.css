@@ -954,8 +954,8 @@ h5,
 }
 .hero-tertiary,
 .hero-tertiary > .container > .row {
-  height: 10vh;
-  min-height: 0px;
+  /* height: 10vh; */
+  min-height: 88px;
 }
 .hero-tertiary.overlay:after {
   content: "";
