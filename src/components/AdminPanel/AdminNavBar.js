@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function NavBar({ pageTitle, children }) {
+export default function NavBar({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -126,7 +126,7 @@ export default function NavBar({ pageTitle, children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {pageTitle}
+            Foot2gether Admin Panel
           </Typography>
         </Toolbar>
       </AppBar>
@@ -214,8 +214,6 @@ export default function NavBar({ pageTitle, children }) {
         container
         direction="row"
         justifyContent="center"
-        alignItems="center"
-        // style={{ minHeight: "100vh" }}
       >
         {/* <DrawerHeader /> */}
         {children}

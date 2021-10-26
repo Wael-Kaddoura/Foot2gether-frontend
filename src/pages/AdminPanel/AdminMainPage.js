@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import AdminNavBar from "../components/AdminPanel/AdminNavBar";
-import AdminDashboardCard from "../components/AdminPanel/AdminDashboardCard";
+import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
+import AdminDashboardCard from "../../components/AdminPanel/AdminDashboardCard";
 
 function AdminMainPage() {
   return (
