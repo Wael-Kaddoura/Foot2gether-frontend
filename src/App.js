@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import AdminMainPage from "./pages/AdminMainPage";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Blog from "./pages/Blogs";
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route exact path="/signup">
           <Signup />
+        </Route>
+        <Route exact path="/admin/home">
+          <AdminMainPage />
         </Route>
         <Route exact path="/home">
           <Home />

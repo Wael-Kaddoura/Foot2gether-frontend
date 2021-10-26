@@ -15,17 +15,14 @@ import {
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import HomeIcon from "@mui/icons-material/Home";
-import ImageIcon from "@mui/icons-material/Image";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import SportsIcon from "@mui/icons-material/Sports";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -129,7 +126,6 @@ export default function NavBar({ pageTitle, children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <SportsSoccerIcon sx={{ mr: 1 }} />
             {pageTitle}
           </Typography>
         </Toolbar>
@@ -160,14 +156,14 @@ export default function NavBar({ pageTitle, children }) {
           </Link>
 
           <Link
-            to="/admin/matches_list"
+            to="/admin/all_matches"
             style={{ textDecoration: "none", color: "black" }}
           >
             <ListItem button>
               <ListItemIcon>
-                <FormatListBulletedIcon />
+                <SportsSoccerIcon />
               </ListItemIcon>
-              <ListItemText primary="Matches List" />
+              <ListItemText primary="All Matches" />
             </ListItem>
           </Link>
 
@@ -214,15 +210,14 @@ export default function NavBar({ pageTitle, children }) {
 
       <Grid
         component="main"
-        sx={{ flexGrow: 1, p: 3 }}
+        sx={{ mt: 5 }}
         container
-        spacing={0}
-        direction="column"
+        direction="row"
+        justifyContent="center"
         alignItems="center"
-        // justifyContent="center"
-        style={{ minHeight: "100vh" }}
+        // style={{ minHeight: "100vh" }}
       >
-        <DrawerHeader />
+        {/* <DrawerHeader /> */}
         {children}
       </Grid>
     </Box>
