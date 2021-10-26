@@ -16,6 +16,7 @@ import {
   Box,
   ListItem,
   Avatar,
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
@@ -28,6 +29,10 @@ const useStyles = makeStyles({
     color: "#fff",
     backgroundColor: "#2e7d32",
     borderColor: "#2e7d32",
+  },
+  mainLogo: {
+    fontSize: 24,
+    fontWeight: 900,
   },
 });
 
@@ -93,9 +98,9 @@ function DesktopHeader(props) {
       <div className="container">
         <div className="d-flex align-items-center">
           <div className="site-logo">
-            <a href="index.html">
-              <span className="h1 main-logo">Foot2gether</span>
-            </a>
+            <Link to="/home">
+              <Typography className={classes.mainLogo}>Foot2gether</Typography>
+            </Link>
           </div>
 
           <div className="ml-auto">
