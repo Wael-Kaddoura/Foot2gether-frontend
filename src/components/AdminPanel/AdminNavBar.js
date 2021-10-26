@@ -126,7 +126,7 @@ export default function NavBar({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Foot2gether Admin Panel
+            Foot2gether | Admin Panel
           </Typography>
         </Toolbar>
       </AppBar>
