@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import AdminMainPage from "./pages/AdminPanel/AdminMainPage";
 import AdminAllMatches from "./pages/AdminPanel/AdminAllMatches";
 import AdminTodaysMatches from "./pages/AdminPanel/AdminTodaysMatches";
+import AdminTodaysRooms from "./pages/AdminPanel/AdminTodaysRooms";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Blog from "./pages/Blogs";
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route exact path="/admin/todays_matches">
           <AdminTodaysMatches />
+        </Route>
+        <Route exact path="/admin/todays_rooms">
+          <AdminTodaysRooms />
         </Route>
         <Route exact path="/home">
           <Home />
