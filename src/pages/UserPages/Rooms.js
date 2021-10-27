@@ -45,6 +45,7 @@ function Rooms() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSearchRoom, setIsSearchRoom] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
+  const [userType, setUserType] = useState(1);
   const [liveRooms, setLiveRooms] = useState(null);
   const [liveRoomsCount, setLiveRoomsCount] = useState(null);
 
@@ -61,6 +62,16 @@ function Rooms() {
       let searched_room_data = response.data;
       setSearchResult(searched_room_data);
       setIsSearchRoom(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getUserType() {
+    try {
+      let response = await axios.get(`http://localhost:8000/user/type`, config);
+      let user_type_data = response.data.user_type_id;
+      setUserType(user_type_data);
     } catch (error) {
       console.log(error);
     }
@@ -90,6 +101,7 @@ function Rooms() {
   }
 
   async function fetchData() {
+    await getUserType();
     await getLiveRooms();
     await getLiveRoomsCount();
     setIsLoaded(true);
@@ -154,7 +166,7 @@ function Rooms() {
                   </Grid>
                 ) : (
                   <Grid item xs={5} style={{ textAlign: "right" }}>
-                    <CreateNewRoom />
+                    {userType === 2 ? <CreateNewRoom /> : ""}
                   </Grid>
                 )}
               </Grid>
