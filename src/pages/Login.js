@@ -81,24 +81,35 @@ function Login() {
     const login_data = new FormData(event.currentTarget);
     const email = login_data.get("email");
     const password = login_data.get("password");
+
     try {
-      let response = await axios.post("http://localhost:8000/user/login", {
+      const response = await axios.post("http://localhost:8000/user/login", {
         email,
         password,
       });
+
       if (response.status === 200) {
         console.log("Successfully logged in!");
 
         let JWT_token = response.data.token;
+        let is_admin = response.data.isAdmin;
+
         localStorage.setItem(
           "login",
-          JSON.stringify({ login: true, token: JWT_token })
+          JSON.stringify({ login: true, token: JWT_token, is_admin: is_admin })
         );
+
         setLoginError(false);
         getNotificationToken();
+
         let notification_token = await getNotificationToken();
         saveNotificationToken(notification_token);
-        history.push("/home");
+
+        if (is_admin) {
+          history.push("/admin/home");
+        } else {
+          history.push("/home");
+        }
       } else {
         console.log("Something went wrong!");
         setIsPending(false);
