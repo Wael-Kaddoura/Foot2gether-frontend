@@ -1,11 +1,11 @@
-import backgroundImage from "../../Images/bg_3.jpg";
-
 function SecondaryOverlay() {
   return (
     <div>
       <div
         className="hero-secondary overlay"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{
+          backgroundImage: `url(http://localhost:8000/cover_photo/default_cover_photo.jpg)`,
+        }}
       >
         <div className="container">
           <div className="row align-items-center"></div>

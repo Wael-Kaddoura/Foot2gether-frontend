@@ -7,13 +7,13 @@ import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
 
-import backgroundImage from "../../Images/bg_3.jpg";
-
 function Overlay({ NavBarContent }) {
   return (
     <div
       className="hero overlay"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{
+        backgroundImage: `url(http://localhost:8000/cover_photo/default_cover_photo.jpg)`,
+      }}
     >
       <div className="container">{NavBarContent}</div>
     </div>
