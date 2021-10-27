@@ -1,6 +1,5 @@
 import { Card, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-import date from "date-and-time";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -40,25 +39,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AdminRoomCard(props) {
-  // const {
-  //   children,
-  //   team1Name,
-  //   team1Logo,
-  //   team2Name,
-  //   team2Logo,
-  //   league,
-  //   kickOff,
-  // } = props;
+  const { roomName, roomID, roomCreator, team1Logo, team2Logo } = props;
 
-  const team1Logo = "http://localhost:8000/logos/Manchester_United.png";
-  const team2Logo = "http://localhost:8000/logos/Liverpool.png";
   const classes = useStyles();
-
-  //converting kick off time to AM/PM format
-  // let kick_off_time = kickOff;
-  // if (kick_off_time) {
-  //   kick_off_time = date.transform(kick_off_time, "HH:mm:ss", "hh:mm A");
-  // }
 
   return (
     <Grid item xs={12} sx={{ mb: 1 }}>
@@ -75,7 +58,7 @@ function AdminRoomCard(props) {
           sx={{ my: 2 }}
         >
           <Grid item xs={4} md={2}>
-            <Typography className={classes.roomName}>Room01</Typography>
+            <Typography className={classes.roomName}>{roomName}</Typography>
           </Grid>
 
           <Grid item xs={3} sm={2} className={classes.vs}>
@@ -96,7 +79,7 @@ function AdminRoomCard(props) {
             <Typography className={classes.roomDetailsTitle}>
               Room ID:
             </Typography>
-            <Typography className={classes.roomDetails}>23</Typography>
+            <Typography className={classes.roomDetails}>{roomID}</Typography>
           </Grid>
 
           <Grid item xs={4}>
@@ -104,7 +87,7 @@ function AdminRoomCard(props) {
               Created By:
             </Typography>
             <Typography className={classes.roomDetails}>
-              Khalil.Alameh
+              {roomCreator}
             </Typography>
           </Grid>
 

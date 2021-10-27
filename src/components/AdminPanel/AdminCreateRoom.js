@@ -14,7 +14,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
-// import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
+import AdminCreateNewRoomMenuItem from "./AdminCreateNewRoomMenuItem";
 // import CreateRoomSnackbar from "./CreateRoomSnackbar";
 
 const style = {
@@ -51,17 +51,12 @@ const MenuProps = {
   },
 };
 
-function AdminCreateRoom() {
+function AdminCreateRoom({ availableMatches, getTodaysRooms }) {
   const classes = useStyles();
-
-  const token = JSON.parse(localStorage.getItem("login")).token;
-  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [open, setOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [match, setMatch] = React.useState("");
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [availableMatches, setAvailableMatches] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -78,64 +73,39 @@ function AdminCreateRoom() {
     setSnackbarOpen(false);
   };
 
-  //   async function getAvailableMatches() {
-  //     try {
-  //       let response = await axios.get(
-  //         `http://localhost:8000/match/available`,
-  //         config
-  //       );
-  //       let available_matches_data = response.data;
-  //       setAvailableMatches(available_matches_data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-
-  //   async function fetchData() {
-  //     await getAvailableMatches();
-  //     setIsLoaded(true);
-  //   }
-
-  //   useEffect(() => {
-  //     fetchData();
-  //   }, []);
-
   const handleChange = (event) => {
     setMatch(event.target.value);
   };
 
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     const new_room_data = new FormData(event.currentTarget);
-  //     const name = new_room_data.get("room_name");
-  //     const match_id = new_room_data.get("match_id");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const new_room_data = new FormData(event.currentTarget);
+    const name = new_room_data.get("room_name");
+    const match_id = new_room_data.get("match_id");
 
-  //     const data = {
-  //       name,
-  //       match_id,
-  //     };
+    const data = {
+      name,
+      match_id,
+    };
 
-  //     setOpen(false);
+    setOpen(false);
 
-  //     try {
-  //       let response = await axios.post(
-  //         "http://localhost:8000/room",
-  //         data,
-  //         config
-  //       );
+    try {
+      let response = await axios.post("http://localhost:8000/admin/room", data);
 
-  //       if (response.status === 201) {
-  //         console.log("Successfully Created Room!");
-  //       } else {
-  //         console.log("Something went wrong!");
-  //       }
-  //     } catch (err) {
-  //       if (err.response.status === 401) {
-  //         console.log("Something went wrong!");
-  //       }
-  //       console.log(err);
-  //     }
-  //   };
+      if (response.status === 200) {
+        console.log("Successfully Created Room!");
+        getTodaysRooms();
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.log("Something went wrong!");
+      }
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -165,11 +135,7 @@ function AdminCreateRoom() {
             >
               Create New Room:
             </Typography>
-            <Box
-              component="form"
-              // onSubmit={handleSubmit}
-              sx={{ mb: 5 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
                 className={classes.formField}
                 sx={{ mb: 3 }}
@@ -193,15 +159,14 @@ function AdminCreateRoom() {
                 sx={{ mb: 3 }}
                 MenuProps={MenuProps}
               >
-                {/* {isLoaded &&
-                  availableMatches.map((match) => (
-                    <MenuItem value={match.id}>
-                      <CreateNewRoomMenuItem
-                        team1Logo={match.team1.logo}
-                        team2Logo={match.team2.logo}
-                      />
-                    </MenuItem>
-                  ))} */}
+                {availableMatches.map((match) => (
+                  <MenuItem value={match.id}>
+                    <AdminCreateNewRoomMenuItem
+                      team1Logo={match.team1.logo}
+                      team2Logo={match.team2.logo}
+                    />
+                  </MenuItem>
+                ))}
               </Select>
 
               <Button

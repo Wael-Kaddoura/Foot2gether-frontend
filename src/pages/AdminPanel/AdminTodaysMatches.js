@@ -1,5 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminTodaysMatchCard from "../../components/AdminPanel/AdminTodaysMatchCard";
@@ -21,9 +23,50 @@ const useStyles = makeStyles({
 function AdminTodaysMatches() {
   const classes = useStyles();
 
+  const [isPending, setIsPending] = useState(true);
+  const [todaysMatches, setTodaysMatches] = useState(null);
+  const [open, setOpen] = useState(true);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  async function getTodaysMatches() {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/admin/match/today"
+      );
+      const todays_matches_data = response.data;
+      setTodaysMatches(todays_matches_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    await getTodaysMatches();
+    handleClose();
+    setIsPending(false);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div>
       <AdminNavBar>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          onClick={handleClose}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+
         <Grid item xs={12} container direction="row" sx={{ mt: 4, ml: 1 }}>
           <Grid item xs={12}>
             <Typography className={classes.pageTitle} sx={{ ml: 2 }}>
@@ -31,46 +74,50 @@ function AdminTodaysMatches() {
             </Typography>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            container
-            className={classes.roomContent}
-            direction="row"
-            justifyContent="center"
-            sx={{ mt: 3 }}
-          >
+          {!isPending && (
             <Grid
               item
               xs={12}
               container
+              className={classes.roomContent}
               direction="row"
               justifyContent="center"
-              // alignItems="center"
-              className={classes.roomsContainer}
-              sx={{ mx: 2 }}
+              sx={{ mt: 3 }}
             >
               <Grid
                 item
                 xs={12}
                 container
-                justifyContent="flex-end"
-                sx={{ mb: 2 }}
-              ></Grid>
+                direction="row"
+                justifyContent="center"
+                className={classes.roomsContainer}
+                sx={{ mx: 2 }}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  justifyContent="flex-end"
+                  sx={{ mb: 2 }}
+                ></Grid>
 
-              {/* Match Card */}
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              <AdminTodaysMatchCard />
-              {/* Room Card */}
+                {todaysMatches.map((match) => (
+                  <AdminTodaysMatchCard
+                    matchID={match.id}
+                    kickOff={match.kick_off}
+                    competition={match.competition.name}
+                    team1={match.team1.name}
+                    team1Logo={match.team1.logo}
+                    team1Score={match.team1_score}
+                    team2={match.team2.name}
+                    team2Logo={match.team2.logo}
+                    team2Score={match.team2_score}
+                    getTodaysMatches={getTodaysMatches}
+                  />
+                ))}
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Grid>
       </AdminNavBar>
     </div>

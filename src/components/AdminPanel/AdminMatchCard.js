@@ -28,25 +28,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AdminMatchCard(props) {
-  // const {
-  //   children,
-  //   team1Name,
-  //   team1Logo,
-  //   team2Name,
-  //   team2Logo,
-  //   league,
-  //   kickOff,
-  // } = props;
+  const {
+    matchDay,
+    kickOff,
+    competition,
+    stadium,
+    team1,
+    team1Logo,
+    team2,
+    team2Logo,
+  } = props;
 
-  const team1Logo = "http://localhost:8000/logos/Manchester_United.png";
-  const team2Logo = "http://localhost:8000/logos/Liverpool.png";
   const classes = useStyles();
 
-  //converting kick off time to AM/PM format
-  // let kick_off_time = kickOff;
-  // if (kick_off_time) {
-  //   kick_off_time = date.transform(kick_off_time, "HH:mm:ss", "hh:mm A");
-  // }
+  //extracting and formating match date
+  let match_date = date.parse(matchDay + " " + kickOff, "YYYY-MM-DD HH:mm:ss");
+  match_date = date.format(match_date, "DD MMM YYYY hh:mm A");
 
   return (
     <Grid item xs={12} sx={{ mb: 1 }}>
@@ -63,9 +60,7 @@ function AdminMatchCard(props) {
         >
           <Grid item xs={4} className={classes.teamSide}>
             <img className={classes.teamLogo} src={team1Logo} alt="team1" />
-            <Typography className={classes.teamName}>
-              Manchester United
-            </Typography>
+            <Typography className={classes.teamName}>{team1} </Typography>
           </Grid>
 
           <Grid item xs={4} className={classes.matchDetails}>
@@ -78,24 +73,21 @@ function AdminMatchCard(props) {
             >
               <Grid item xs={4}>
                 <Typography className={classes.matchLeague} sx={{ mb: 1 }}>
-                  Premier League
+                  {competition}
                 </Typography>
                 <Typography className={classes.matchTime} sx={{ mb: 1 }}>
-                  28 Oct 2021 6:00 PM
+                  {match_date}
                 </Typography>
                 <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
-                  Emirates Stadium
+                  {stadium}
                 </Typography>
-              </Grid>
-              <Grid item xs={4}>
-                {/* {children} */}
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={4} className={classes.teamSide}>
             <img className={classes.teamLogo} src={team2Logo} alt="team2" />
-            <Typography className={classes.teamName}>Liverpool</Typography>
+            <Typography className={classes.teamName}>{team2}</Typography>
           </Grid>
         </Grid>
       </Card>

@@ -1,42 +1,80 @@
-import { Grid } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Grid, Backdrop, CircularProgress } from "@mui/material";
+import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminDashboardCard from "../../components/AdminPanel/AdminDashboardCard";
 
 function AdminMainPage() {
+  const [isPending, setIsPending] = useState(true);
+  const [cardsCount, setCardsCount] = useState(null);
+  const [open, setOpen] = useState(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  async function getCardsCount() {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/admin/cards_count"
+      );
+      const cards_count_data = response.data;
+      setCardsCount(cards_count_data);
+      handleClose();
+      setIsPending(false);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    getCardsCount();
+  }, []);
+
   return (
     <div>
       <AdminNavBar pageTitle="Foot2gether Admin Panel">
-        <Grid
-          item
-          xs={12}
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          style={{ minHeight: "100vh" }}
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          onClick={handleClose}
         >
-          <AdminDashboardCard
-            cardTitle="Total Matches"
-            cardIconName="SportsSoccerIcon"
-            cardCount="15"
-            pageLink="all_matches"
-          />
+          <CircularProgress color="inherit" />
+        </Backdrop>
 
-          <AdminDashboardCard
-            cardTitle="Today's Matches"
-            cardIconName="SportsIcon"
-            cardCount="6"
-            pageLink="todays_matches"
-          />
+        {!isPending && (
+          <Grid
+            item
+            xs={12}
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            style={{ minHeight: "100vh" }}
+          >
+            <AdminDashboardCard
+              cardTitle="Total Matches"
+              cardIconName="SportsSoccerIcon"
+              cardCount={cardsCount.total_matches_count}
+              pageLink="all_matches"
+            />
 
-          <AdminDashboardCard
-            cardTitle="Today's Rooms"
-            cardIconName="PersonalVideoIcon"
-            cardCount="32"
-            pageLink="todays_rooms"
-          />
-        </Grid>
+            <AdminDashboardCard
+              cardTitle="Today's Matches"
+              cardIconName="SportsIcon"
+              cardCount={cardsCount.todays_matches_count}
+              pageLink="todays_matches"
+            />
+
+            <AdminDashboardCard
+              cardTitle="Today's Rooms"
+              cardIconName="PersonalVideoIcon"
+              cardCount={cardsCount.todays_rooms_count}
+              pageLink="todays_rooms"
+            />
+          </Grid>
+        )}
       </AdminNavBar>
     </div>
   );

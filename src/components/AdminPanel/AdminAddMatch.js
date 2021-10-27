@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
+  Grid,
+  Stack,
   Backdrop,
   Box,
   Modal,
@@ -11,10 +13,14 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import TimePicker from "@mui/lab/TimePicker";
+import { makeStyles } from "@material-ui/core";
+import date from "date-and-time";
 import axios from "axios";
 
-// import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
 // import CreateRoomSnackbar from "./CreateRoomSnackbar";
 
 const style = {
@@ -29,7 +35,7 @@ const style = {
   p: 4,
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   formTitle: {
     color: "#000000",
     fontSize: 25,
@@ -38,7 +44,17 @@ const useStyles = makeStyles({
   formField: {
     width: "100%",
   },
-});
+  teamLogo: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      maxWidth: 35,
+      maxHeight: 35,
+    },
+    [theme.breakpoints.between("sm", "xl")]: {
+      maxWidth: 40,
+      maxHeight: 40,
+    },
+  },
+}));
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -51,17 +67,42 @@ const MenuProps = {
   },
 };
 
-function AdminAddMatch() {
+function AdminAddMatch({ matchOptions, getAllMatches }) {
   const classes = useStyles();
+  const competitions = matchOptions.competitions;
+  const teams = matchOptions.teams;
 
-  const token = JSON.parse(localStorage.getItem("login")).token;
-  const config = { headers: { Authorization: `Bearer ${token}` } };
-
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [matchDay, setMatchDay] = useState(new Date("2021-10-18T21:11:54"));
+  const [kickOff, setKickOff] = useState(new Date("2021-10-18T21:11:54"));
+  const [fulltime, setFulltime] = useState(new Date("2021-10-18T21:11:54"));
+  const [competitionID, setCompetitionID] = useState("");
+  const [team1ID, setTeam1ID] = useState("");
+  const [team2ID, setTeam2ID] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [match, setMatch] = React.useState("");
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [availableMatches, setAvailableMatches] = useState(null);
+
+  const handleChangeMatchDay = (newValue) => {
+    setMatchDay(newValue);
+  };
+
+  const handleChangeKickOff = (newValue) => {
+    setKickOff(newValue);
+  };
+
+  const handleChangeFulltime = (newValue) => {
+    setFulltime(newValue);
+  };
+  const handleChangeCompetition = (event) => {
+    setCompetitionID(event.target.value);
+  };
+
+  const handleChangeTeam1 = (event) => {
+    setTeam1ID(event.target.value);
+  };
+
+  const handleChangeTeam2 = (event) => {
+    setTeam2ID(event.target.value);
+  };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -78,64 +119,52 @@ function AdminAddMatch() {
     setSnackbarOpen(false);
   };
 
-  //   async function getAvailableMatches() {
-  //     try {
-  //       let response = await axios.get(
-  //         `http://localhost:8000/match/available`,
-  //         config
-  //       );
-  //       let available_matches_data = response.data;
-  //       setAvailableMatches(available_matches_data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const new_match_data = new FormData(event.currentTarget);
+    const match_day = date
+      .format(matchDay, "YYYY-MM-DD HH:mm:ss")
+      .substring(0, 10);
+    const kick_off = date.format(kickOff, "YYYY-MM-DD HH:mm:ss").substring(11);
+    const full_time = date
+      .format(fulltime, "YYYY-MM-DD HH:mm:ss")
+      .substring(11);
+    const competition_id = competitionID;
+    const stadium = new_match_data.get("stadium");
+    const team1_id = team1ID;
+    const team2_id = team2ID;
 
-  //   async function fetchData() {
-  //     await getAvailableMatches();
-  //     setIsLoaded(true);
-  //   }
+    const data = {
+      match_day,
+      kick_off,
+      full_time,
+      competition_id,
+      stadium,
+      team1_id,
+      team2_id,
+    };
 
-  //   useEffect(() => {
-  //     fetchData();
-  //   }, []);
+    setOpen(false);
 
-  const handleChange = (event) => {
-    setMatch(event.target.value);
+    try {
+      let response = await axios.post(
+        "http://localhost:8000/admin/match",
+        data
+      );
+
+      if (response.status === 200) {
+        console.log("Successfully Created Match!");
+        getAllMatches();
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.log("Something went wrong!");
+      }
+      console.log(err);
+    }
   };
-
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     const new_room_data = new FormData(event.currentTarget);
-  //     const name = new_room_data.get("room_name");
-  //     const match_id = new_room_data.get("match_id");
-
-  //     const data = {
-  //       name,
-  //       match_id,
-  //     };
-
-  //     setOpen(false);
-
-  //     try {
-  //       let response = await axios.post(
-  //         "http://localhost:8000/room",
-  //         data,
-  //         config
-  //       );
-
-  //       if (response.status === 201) {
-  //         console.log("Successfully Created Room!");
-  //       } else {
-  //         console.log("Something went wrong!");
-  //       }
-  //     } catch (err) {
-  //       if (err.response.status === 401) {
-  //         console.log("Something went wrong!");
-  //       }
-  //       console.log(err);
-  //     }
-  //   };
 
   return (
     <div>
@@ -163,46 +192,133 @@ function AdminAddMatch() {
               className={classes.formTitle}
               sx={{ mb: 5 }}
             >
-              Create New Room:
+              Add New Match:
             </Typography>
-            <Box
-              component="form"
-              // onSubmit={handleSubmit}
-              sx={{ mb: 5 }}
-            >
-              <TextField
-                className={classes.formField}
-                sx={{ mb: 3 }}
-                required
-                id="outlined-required"
-                label="Room Name"
-                placeholder="Room Name"
-                name="room_name"
-              />
-
-              <InputLabel id="match_room">Match</InputLabel>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
+              <InputLabel id="match_room">Competition</InputLabel>
               <Select
                 className={classes.formField}
-                labelId="match_room"
-                id="match_room"
-                name="match_id"
-                value={match}
+                labelId="competition_id"
+                id="competition_id"
+                name="competition_id"
+                value={competitionID}
                 label="Favorite Team"
-                onChange={handleChange}
+                onChange={handleChangeCompetition}
                 required
-                sx={{ mb: 3 }}
+                sx={{ mb: 2 }}
                 MenuProps={MenuProps}
               >
-                {/* {isLoaded &&
-                  availableMatches.map((match) => (
-                    <MenuItem value={match.id}>
-                      <CreateNewRoomMenuItem
-                        team1Logo={match.team1.logo}
-                        team2Logo={match.team2.logo}
-                      />
-                    </MenuItem>
-                  ))} */}
+                {competitions.map((competition) => (
+                  <MenuItem value={competition.id}>{competition.name}</MenuItem>
+                ))}
               </Select>
+
+              <InputLabel id="match_room">Team 1</InputLabel>
+              <Select
+                className={classes.formField}
+                labelId="team1_id"
+                id="team1_id"
+                name="team1_id"
+                value={team1ID}
+                label="Favorite Team"
+                onChange={handleChangeTeam1}
+                required
+                sx={{ mb: 2 }}
+                MenuProps={MenuProps}
+              >
+                {teams.map((team) => (
+                  <MenuItem value={team.id}>
+                    <Grid container alignItems="center">
+                      <Grid item xs={2} container justifyContent="center">
+                        <img
+                          src={team.logo}
+                          className={classes.teamLogo}
+                          alt={team.name}
+                        />
+                      </Grid>
+
+                      <Grid item xs={10}>
+                        <Typography sx={{ ml: 3 }} style={{ color: "#000000" }}>
+                          {team.name}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </MenuItem>
+                ))}
+              </Select>
+
+              <InputLabel id="match_room">Team 2</InputLabel>
+              <Select
+                className={classes.formField}
+                labelId="team2_id"
+                id="team2_id"
+                name="team2_id"
+                value={team2ID}
+                label="Favorite Team"
+                onChange={handleChangeTeam2}
+                required
+                sx={{ mb: 2 }}
+                MenuProps={MenuProps}
+              >
+                {teams.map((team) => (
+                  <MenuItem value={team.id}>
+                    <Grid container alignItems="center">
+                      <Grid item xs={2} container justifyContent="center">
+                        <img
+                          src={team.logo}
+                          className={classes.teamLogo}
+                          alt={team.name}
+                        />
+                      </Grid>
+
+                      <Grid item xs={10}>
+                        <Typography sx={{ ml: 3 }} style={{ color: "#000000" }}>
+                          {team.name}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </MenuItem>
+                ))}
+              </Select>
+
+              <TextField
+                className={classes.formField}
+                sx={{ mb: 2 }}
+                required
+                id="outlined-required"
+                label="Stadium"
+                placeholder="Stadium"
+                name="stadium"
+              />
+
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Stack spacing={2}>
+                  <DesktopDatePicker
+                    className={classes.formField}
+                    label="Match Day"
+                    inputFormat="MM/dd/yyyy"
+                    value={matchDay}
+                    onChange={handleChangeMatchDay}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+
+                  <TimePicker
+                    className={classes.formField}
+                    label="Kick Off"
+                    value={kickOff}
+                    onChange={handleChangeKickOff}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+
+                  <TimePicker
+                    className={classes.formField}
+                    label="Full Time"
+                    value={fulltime}
+                    onChange={handleChangeFulltime}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
 
               <Button
                 type="submit"
