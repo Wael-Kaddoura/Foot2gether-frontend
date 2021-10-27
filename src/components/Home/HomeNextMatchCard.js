@@ -12,7 +12,7 @@ function HomeNextMatchCard({ nextMatch }) {
     <Grid item xs={12}>
       <div className="site-section bg-dark">
         <div className="container">
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="widget-next-match">
                 <div className="widget-title">

@@ -28,7 +28,7 @@ function UpcomingMatchCard(props) {
 
   const Ref = useRef(null);
 
-  const [timer, setTimer] = useState("  :  :  ");
+  const [timer, setTimer] = useState("--:--:--");
 
   //Getting hours, minutes & seconds from our time
   const getTimeRemaining = (e) => {
