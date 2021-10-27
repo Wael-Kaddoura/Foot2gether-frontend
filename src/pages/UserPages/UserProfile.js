@@ -259,8 +259,8 @@ function UserProfile() {
                   roomCreator={room.creator.username}
                   roomCreatorID={room.creator_id}
                   roomCurrentCapacity={room.current_participants_number}
-                  team1ID={room.matchroom.team1_id}
-                  team2ID={room.matchroom.team2_id}
+                  team1Logo={room.matchroom.team1.logo}
+                  team2Logo={room.matchroom.team2.logo}
                 />
               ))}
             </Grid>

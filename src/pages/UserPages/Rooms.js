@@ -174,8 +174,8 @@ function Rooms() {
                     roomCurrentCapacity={
                       searchResult.current_participants_number
                     }
-                    team1ID={searchResult.matchroom.team1_id}
-                    team2ID={searchResult.matchroom.team2_id}
+                    team1Logo={searchResult.matchroom.team1.logo}
+                    team2Logo={searchResult.matchroom.team2.logo}
                   />
                 ) : (
                   <Grid style={{ height: 200 }}>No Rooms Found</Grid>
