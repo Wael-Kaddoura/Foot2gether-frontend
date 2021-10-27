@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
   faVideo,
-  faDesktop,
+  faPhone,
   faVideoSlash,
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -78,11 +78,11 @@ const MeetingFooter = (props) => {
       </div>
       <div
         className="meeting-icons"
-        data-tip="Share Screen"
+        data-tip="Exit Room"
         onClick={onExitRoom}
         disabled={streamState.screen}
       >
-        <FontAwesomeIcon icon={faDesktop} />
+        <FontAwesomeIcon icon={faPhone} />
       </div>
       <ReactTooltip />
     </div>
