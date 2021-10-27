@@ -125,9 +125,9 @@ function DesktopHeader(props) {
                   isActive={currentPageName === "Rooms" ? "active" : ""}
                 />
                 <NavBarItem
-                  name="BLOG"
+                  name="BLOGS"
                   color="white"
-                  isActive={currentPageName === "Blog" ? "active" : ""}
+                  isActive={currentPageName === "Blogs" ? "active" : ""}
                 />
 
                 {!dontShowProfileIcon ? (
