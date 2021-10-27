@@ -82,19 +82,7 @@ function Rooms() {
       let response = await axios.get(`http://localhost:8000/room`, config);
       let live_rooms_data = response.data;
       setLiveRooms(live_rooms_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getLiveRoomsCount() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/room/count`,
-        config
-      );
-      let live_rooms_count = response.data.live_rooms_count;
-      setLiveRoomsCount(live_rooms_count);
+      setLiveRoomsCount(live_rooms_data.length);
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +91,6 @@ function Rooms() {
   async function fetchData() {
     await getUserType();
     await getLiveRooms();
-    await getLiveRoomsCount();
     setIsLoaded(true);
   }
 
@@ -166,7 +153,11 @@ function Rooms() {
                   </Grid>
                 ) : (
                   <Grid item xs={5} style={{ textAlign: "right" }}>
-                    {userType === 2 ? <CreateNewRoom /> : ""}
+                    {userType === 2 ? (
+                      <CreateNewRoom getLiveRooms={getLiveRooms} />
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                 )}
               </Grid>
@@ -201,8 +192,8 @@ function Rooms() {
                     roomCreator={room.creator.username}
                     roomCreatorID={room.creator_id}
                     roomCurrentCapacity={room.current_participants_number}
-                    team1ID={room.matchroom.team1_id}
-                    team2ID={room.matchroom.team2_id}
+                    team1Logo={room.matchroom.team1.logo}
+                    team2Logo={room.matchroom.team2.logo}
                   />
                 ))}
             </Grid>

@@ -51,7 +51,7 @@ const MenuProps = {
   },
 };
 
-function CreateNewRoom() {
+function CreateNewRoom({ getLiveRooms }) {
   const classes = useStyles();
 
   const token = JSON.parse(localStorage.getItem("login")).token;
@@ -124,8 +124,9 @@ function CreateNewRoom() {
         config
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log("Successfully Created Room!");
+        getLiveRooms();
       } else {
         console.log("Something went wrong!");
       }
