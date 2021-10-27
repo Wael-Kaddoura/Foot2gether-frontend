@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
@@ -21,6 +22,21 @@ const useStyles = makeStyles({
 });
 
 function AdminTodaysMatches() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    if (login_status.is_admin) {
+      const token = login_status.token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+    } else {
+      history.push("/home");
+    }
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const [isPending, setIsPending] = useState(true);
@@ -37,7 +53,8 @@ function AdminTodaysMatches() {
   async function getTodaysMatches() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/match/today"
+        "http://localhost:8000/admin/match/today",
+        config
       );
       const todays_matches_data = response.data;
       setTodaysMatches(todays_matches_data);
@@ -103,6 +120,7 @@ function AdminTodaysMatches() {
 
                 {todaysMatches.map((match) => (
                   <AdminTodaysMatchCard
+                    config={config}
                     matchID={match.id}
                     kickOff={match.kick_off}
                     competition={match.competition.name}

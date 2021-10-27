@@ -51,7 +51,7 @@ const MenuProps = {
   },
 };
 
-function AdminCreateRoom({ availableMatches, getTodaysRooms }) {
+function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -91,7 +91,11 @@ function AdminCreateRoom({ availableMatches, getTodaysRooms }) {
     setOpen(false);
 
     try {
-      let response = await axios.post("http://localhost:8000/admin/room", data);
+      let response = await axios.post(
+        "http://localhost:8000/admin/room",
+        data,
+        config
+      );
 
       if (response.status === 200) {
         console.log("Successfully Created Room!");

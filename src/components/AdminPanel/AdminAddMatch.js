@@ -67,7 +67,7 @@ const MenuProps = {
   },
 };
 
-function AdminAddMatch({ matchOptions, getAllMatches }) {
+function AdminAddMatch({ config, matchOptions, getAllMatches }) {
   const classes = useStyles();
   const competitions = matchOptions.competitions;
   const teams = matchOptions.teams;
@@ -149,7 +149,8 @@ function AdminAddMatch({ matchOptions, getAllMatches }) {
     try {
       let response = await axios.post(
         "http://localhost:8000/admin/match",
-        data
+        data,
+        config
       );
 
       if (response.status === 200) {

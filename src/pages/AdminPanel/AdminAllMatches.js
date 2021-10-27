@@ -7,6 +7,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
@@ -27,6 +28,21 @@ const useStyles = makeStyles({
 });
 
 function AdminAllMatches() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    if (login_status.is_admin) {
+      const token = login_status.token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+    } else {
+      history.push("/home");
+    }
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const [isPending, setIsPending] = useState(true);
@@ -43,7 +59,10 @@ function AdminAllMatches() {
 
   async function getAllMatches() {
     try {
-      const response = await axios.get("http://localhost:8000/admin/match/all");
+      const response = await axios.get(
+        "http://localhost:8000/admin/match/all",
+        config
+      );
       const all_matches_data = response.data;
       setAllMatches(all_matches_data);
     } catch (error) {
@@ -54,7 +73,8 @@ function AdminAllMatches() {
   async function getCreateMatchOptions() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/match/create_options"
+        "http://localhost:8000/admin/match/create_options",
+        config
       );
       const create_match_opitons_data = response.data;
       setCreateMatchOptions(create_match_opitons_data);
@@ -118,6 +138,7 @@ function AdminAllMatches() {
                   sx={{ mb: 2 }}
                 >
                   <AdminAddMatch
+                    config={config}
                     matchOptions={createMatchOptions}
                     getAllMatches={getAllMatches}
                   />

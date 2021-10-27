@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AdminTodaysMatchCard(props) {
   const {
+    config,
     matchID,
     team1,
     team1Logo,
@@ -97,6 +98,7 @@ function AdminTodaysMatchCard(props) {
               </Grid>
               <Grid item xs={4}>
                 <AdminChangeScore
+                  config={config}
                   matchID={matchID}
                   team1Logo={team1Logo}
                   team2Logo={team2Logo}

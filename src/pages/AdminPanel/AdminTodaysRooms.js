@@ -7,6 +7,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
@@ -28,6 +29,21 @@ const useStyles = makeStyles({
 });
 
 function AdminTodaysRooms() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    if (login_status.is_admin) {
+      const token = login_status.token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+    } else {
+      history.push("/home");
+    }
+  } else {
+    history.push("/login");
+  }
+
   const classes = useStyles();
 
   const [isPending, setIsPending] = useState(true);
@@ -45,7 +61,8 @@ function AdminTodaysRooms() {
   async function getTodaysRooms() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/room/today"
+        "http://localhost:8000/admin/room/today",
+        config
       );
       const todays_rooms_data = response.data;
       setTodaysRooms(todays_rooms_data);
@@ -57,7 +74,8 @@ function AdminTodaysRooms() {
   async function getAvailableMatches() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/match/available"
+        "http://localhost:8000/admin/match/available",
+        config
       );
       const available_matches_data = response.data;
       setAvailableMatches(available_matches_data);
@@ -122,6 +140,7 @@ function AdminTodaysRooms() {
                   sx={{ mb: 2 }}
                 >
                   <AdminCreateRoom
+                    config={config}
                     availableMatches={availableMatches}
                     getTodaysRooms={getTodaysRooms}
                   />

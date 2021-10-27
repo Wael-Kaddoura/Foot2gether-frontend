@@ -1,11 +1,27 @@
 import { useState, useEffect } from "react";
 import { Grid, Backdrop, CircularProgress } from "@mui/material";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminDashboardCard from "../../components/AdminPanel/AdminDashboardCard";
 
 function AdminMainPage() {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    if (login_status.is_admin) {
+      const token = login_status.token;
+      config = { headers: { Authorization: `Bearer ${token}` } };
+    } else {
+      history.push("/home");
+    }
+  } else {
+    history.push("/login");
+  }
+
   const [isPending, setIsPending] = useState(true);
   const [cardsCount, setCardsCount] = useState(null);
   const [open, setOpen] = useState(true);
@@ -19,7 +35,8 @@ function AdminMainPage() {
   async function getCardsCount() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/cards_count"
+        "http://localhost:8000/admin/cards_count",
+        config
       );
       const cards_count_data = response.data;
       setCardsCount(cards_count_data);

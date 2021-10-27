@@ -60,7 +60,13 @@ const MenuProps = {
   },
 };
 
-function AdminChangeScore({ matchID, team1Logo, team2Logo, getTodaysMatches }) {
+function AdminChangeScore({
+  config,
+  matchID,
+  team1Logo,
+  team2Logo,
+  getTodaysMatches,
+}) {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -107,7 +113,8 @@ function AdminChangeScore({ matchID, team1Logo, team2Logo, getTodaysMatches }) {
     try {
       let response = await axios.put(
         "http://localhost:8000/admin/match_score",
-        data
+        data,
+        config
       );
 
       if (response.status === 200) {
