@@ -5,9 +5,9 @@ import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import MainNavBar from "../components/NavBar/MainNavBar";
-import RoomMatchCard from "../components/Matches/MatchCards/RoomMatchCard";
-import LiveMatchRoomCard from "../components/Rooms/LiveMatchRoomCard";
+import MainNavBar from "../../components/NavBar/MainNavBar";
+import RoomMatchCard from "../../components/Matches/MatchCards/RoomMatchCard";
+import LiveMatchRoomCard from "../../components/Rooms/LiveMatchRoomCard";
 
 const useStyles = makeStyles((theme) => ({
   pageTitle: {

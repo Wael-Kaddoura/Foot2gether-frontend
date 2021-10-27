@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import VideoRoomConnection from "../components/VideoRooms/VideoRoom";
+import VideoRoomConnection from "../../components/VideoRooms/VideoRoom";
 
 function VideoRoom() {
   const history = useHistory();

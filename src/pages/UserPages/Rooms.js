@@ -5,10 +5,10 @@ import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import MainNavBar from "../components/NavBar/MainNavBar";
-import RoomSearchBar from "../components/Rooms/RoomSearchBar";
-import LiveRoomCard from "../components/Rooms/LiveRoomCard";
-import CreateNewRoom from "../components/Rooms/CreateNewRoom";
+import MainNavBar from "../../components/NavBar/MainNavBar";
+import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
+import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
+import CreateNewRoom from "../../components/Rooms/CreateNewRoom";
 
 const useStyles = makeStyles({
   pageTitle: {

@@ -4,9 +4,9 @@ import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import MainNavBar from "../components/NavBar/MainNavBar";
-import HomeNextMatchCard from "../components/Home/HomeNextMatchCard";
-import HomeBlogs from "../components/Home/HomeBlogs";
+import MainNavBar from "../../components/NavBar/MainNavBar";
+import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
+import HomeBlogs from "../../components/Home/HomeBlogs";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {

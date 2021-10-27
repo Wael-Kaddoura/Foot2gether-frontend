@@ -4,9 +4,9 @@ import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import MainNavBar from "../components/NavBar/MainNavBar";
-import CreateNewBlog from "../components/Blogs/CreateNewBlog";
-import BlogCard from "../components/Blogs/BlogCard";
+import MainNavBar from "../../components/NavBar/MainNavBar";
+import CreateNewBlog from "../../components/Blogs/CreateNewBlog";
+import BlogCard from "../../components/Blogs/BlogCard";
 
 const useStyles = makeStyles({
   pageTitle: {

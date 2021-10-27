@@ -6,17 +6,17 @@ import AdminMainPage from "./pages/AdminPanel/AdminMainPage";
 import AdminAllMatches from "./pages/AdminPanel/AdminAllMatches";
 import AdminTodaysMatches from "./pages/AdminPanel/AdminTodaysMatches";
 import AdminTodaysRooms from "./pages/AdminPanel/AdminTodaysRooms";
-import Home from "./pages/Home";
-import Matches from "./pages/Matches";
-import Blog from "./pages/Blogs";
-import Standings from "./pages/Standings";
-import MatchRooms from "./pages/MatchRooms";
-import MyProfile from "./pages/MyProfile";
-import UserProfile from "./pages/UserProfile";
-import BlogView from "./pages/BlogView";
-import Rooms from "./pages/Rooms";
-import UserSearch from "./pages/UserSearch";
-import VideoRoom from "./pages/VideoRoom";
+import Home from "./pages/UserPages/Home";
+import Matches from "./pages/UserPages/Matches";
+import Blog from "./pages/UserPages/Blogs";
+import Standings from "./pages/UserPages/Standings";
+import MatchRooms from "./pages/UserPages/MatchRooms";
+import MyProfile from "./pages/UserPages/MyProfile";
+import UserProfile from "./pages/UserPages/UserProfile";
+import BlogView from "./pages/UserPages/BlogView";
+import Rooms from "./pages/UserPages/Rooms";
+import UserSearch from "./pages/UserPages/UserSearch";
+import VideoRoom from "./pages/UserPages/VideoRoom";
 
 function App() {
   return (

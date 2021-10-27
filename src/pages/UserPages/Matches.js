@@ -3,8 +3,8 @@ import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import MainNavBar from "../components/NavBar/MainNavBar";
-import MatchesTab from "../components/Matches/MatchesTab";
+import MainNavBar from "../../components/NavBar/MainNavBar";
+import MatchesTab from "../../components/Matches/MatchesTab";
 
 const useStyles = makeStyles({
   pageTitle: {
