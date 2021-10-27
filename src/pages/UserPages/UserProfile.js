@@ -211,7 +211,7 @@ function UserProfile() {
   return (
     <div>
       {isLoaded && (
-        <div>
+        <div style={{ backgroundColor: "#1a1e25 " }}>
           <UserNavBar
             NavBarContent={NavBarContent}
             coverPhoto={userData.cover_photo}

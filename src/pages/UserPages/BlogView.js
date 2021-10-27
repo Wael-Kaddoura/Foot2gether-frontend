@@ -127,7 +127,7 @@ function BlogView() {
       <MainNavBar NavBarContent={NavBarContent} />
 
       {isLoaded && (
-        <div>
+        <div style={{ backgroundColor: "#1a1e25 " }}>
           <BlogBody
             blogTitle={blogData.title}
             blogBody={blogData.body}

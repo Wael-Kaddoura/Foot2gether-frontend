@@ -100,6 +100,7 @@ function MatchRooms() {
           className={classes.roomContent}
           direction="row"
           justifyContent="center"
+          style={{ backgroundColor: "#1a1e25 " }}
         >
           <Grid
             item

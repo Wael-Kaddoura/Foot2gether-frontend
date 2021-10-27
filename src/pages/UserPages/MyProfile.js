@@ -158,7 +158,7 @@ function MyProfile() {
   return (
     <div>
       {isLoaded && (
-        <div>
+        <div style={{ backgroundColor: "#1a1e25 " }}>
           <UserNavBar
             NavBarContent={NavBarContent}
             dontShowProfileIcon={true}

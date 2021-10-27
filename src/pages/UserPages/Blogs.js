@@ -72,7 +72,7 @@ function Blog() {
 
   return (
     <div>
-      <MainNavBar currentPageName="Blog" NavBarContent={NavBarContent} />
+      <MainNavBar currentPageName="Blogs" NavBarContent={NavBarContent} />
 
       {isLoaded && (
         <Grid
@@ -80,8 +80,9 @@ function Blog() {
           container
           direction="row"
           justifyContent="space-around"
-          alignItems="center"
-          sx={{ mt: 10 }}
+          alignItems="flex-end"
+          sx={{ pt: 10 }}
+          style={{ backgroundColor: "#1a1e25 " }}
         >
           {blogsData.map((blog) => (
             <BlogCard

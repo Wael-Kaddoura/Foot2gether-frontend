@@ -32,7 +32,7 @@ function UserInfo(props) {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={12} md={8} container justifyContent="center">
+          <Grid item xs={12} md={8} container>
             {isMyProfile ? (
               <Badge
                 anchorOrigin={{
