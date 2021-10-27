@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -49,55 +47,16 @@ const useStyles = makeStyles((theme) => ({
 
 function LiveRoomCard(props) {
   const {
-    config,
     roomName,
     roomID,
     roomCreator,
     roomCreatorID,
     roomCurrentCapacity,
-    team1ID,
-    team2ID,
+    team1Logo,
+    team2Logo,
   } = props;
 
   const classes = useStyles();
-
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [team1Logo, setTeam1Logo] = useState(null);
-  const [team2Logo, setTeam2Logo] = useState(null);
-
-  async function getTeam1Logo() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/team/logo/` + team1ID,
-        config
-      );
-      let team1_logo = response.data.logo;
-      setTeam1Logo(team1_logo);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getTeam2Logo() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/team/logo/` + team2ID,
-        config
-      );
-      let team2_logo = response.data.logo;
-      setTeam2Logo(team2_logo);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function fetchData() {
-    await getTeam1Logo();
-    await getTeam2Logo();
-    setIsLoaded(true);
-  }
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <Grid item xs={12} sx={{ mb: 5 }}>
@@ -122,13 +81,12 @@ function LiveRoomCard(props) {
               <Typography className={classes.roomName}>{roomName}</Typography>
             </Grid>
 
-            {isLoaded && (
-              <Grid item xs={3} sm={2} className={classes.vs}>
-                <img className={classes.teamLogo} src={team1Logo} alt="team1" />
+            <Grid item xs={3} sm={2} className={classes.vs}>
+              <img className={classes.teamLogo} src={team1Logo} alt="team1" />
 
-                <img className={classes.teamLogo} src={team2Logo} alt="team2" />
-              </Grid>
-            )}
+              <img className={classes.teamLogo} src={team2Logo} alt="team2" />
+            </Grid>
+
             <Grid item xs={3} md={1}>
               <Link to={"/video_room?id=" + roomID}>
                 <Button
@@ -172,7 +130,7 @@ function LiveRoomCard(props) {
                 Current:
               </Typography>
               <Typography className={classes.roomDetails}>
-                {roomCurrentCapacity}
+                {roomCurrentCapacity ? roomCurrentCapacity : 0}
               </Typography>
             </Grid>
           </Grid>
