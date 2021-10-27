@@ -73,6 +73,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup() {
   const history = useHistory();
+
+  //check if user already logged in
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    if (login_status.is_admin) {
+      history.push("/admin/home");
+    } else {
+      history.push("/home");
+    }
+  }
+
   const classes = useStyles();
 
   const [isLoaded, setIsLoaded] = useState(false);
