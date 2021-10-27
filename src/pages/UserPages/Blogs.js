@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
-import CreateNewBlog from "../../components/Blogs/CreateNewBlog";
 import BlogCard from "../../components/Blogs/BlogCard";
 
 const useStyles = makeStyles({
@@ -32,7 +31,12 @@ function Blog() {
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (login_status.login) {
     const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
+    config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    };
   } else {
     history.push("/login");
   }
@@ -65,7 +69,11 @@ function Blog() {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta,
           molestias repudiandae pariatur.
         </p>
-        <CreateNewBlog />
+        <Link to="/create_blog">
+          <Button variant="contained" color="success" o>
+            Create New Blog
+          </Button>
+        </Link>
       </div>
     </div>
   );

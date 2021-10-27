@@ -9,11 +9,12 @@ import AdminTodaysRooms from "./pages/AdminPanel/AdminTodaysRooms";
 import Home from "./pages/UserPages/Home";
 import Matches from "./pages/UserPages/Matches";
 import Blog from "./pages/UserPages/Blogs";
+import BlogView from "./pages/UserPages/BlogView";
+import CreateBlog from "./pages/UserPages/CreateBlog";
 import Standings from "./pages/UserPages/Standings";
 import MatchRooms from "./pages/UserPages/MatchRooms";
 import MyProfile from "./pages/UserPages/MyProfile";
 import UserProfile from "./pages/UserPages/UserProfile";
-import BlogView from "./pages/UserPages/BlogView";
 import Rooms from "./pages/UserPages/Rooms";
 import UserSearch from "./pages/UserPages/UserSearch";
 import VideoRoom from "./pages/UserPages/VideoRoom";
@@ -69,6 +70,12 @@ function App() {
         </Route>
         <Route exact path="/blog_view">
           <BlogView />
+        </Route>
+        <Route exact path="/blog_view">
+          <BlogView />
+        </Route>
+        <Route exact path="/create_blog">
+          <CreateBlog />
         </Route>
         <Route exact path="/video_room">
           <VideoRoom />
