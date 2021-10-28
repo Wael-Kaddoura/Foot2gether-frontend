@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
+
+import videoRoomsFirebase from "../../server/firebase-videoRooms/firebase";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -40,6 +43,20 @@ function LiveMatchRoomCard(props) {
     props;
 
   const classes = useStyles();
+  const [participantsNumber, setParticipantsNumber] = useState(0);
+
+  //getting current number of participants in the room
+  useEffect(() => {
+    var firepadRef = videoRoomsFirebase
+      .database()
+      .ref()
+      .child(roomID)
+      .child("participants");
+
+    firepadRef.on("value", (snap) => {
+      setParticipantsNumber(snap.numChildren());
+    });
+  }, []);
 
   return (
     <Grid item xs={12} sx={{ mb: 5 }}>
@@ -107,7 +124,7 @@ function LiveMatchRoomCard(props) {
                 Current:
               </Typography>
               <Typography className={classes.roomDetails}>
-                {roomCurrentCapacity}
+                {participantsNumber}
               </Typography>
             </Grid>
           </Grid>
