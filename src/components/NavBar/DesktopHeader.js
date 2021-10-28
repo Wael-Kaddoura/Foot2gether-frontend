@@ -73,7 +73,7 @@ function DesktopHeader(props) {
   }
 
   const logoutHandler = () => {
-    localStorage.setItem("login", JSON.stringify({ login: false }));
+    localStorage.clear();
     clearNotificationToken();
     history.push("/login");
   };

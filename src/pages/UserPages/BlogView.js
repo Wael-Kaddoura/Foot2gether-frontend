@@ -30,7 +30,7 @@ function BlogView() {
   let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status.login) {
+  if (login_status && login_status.login) {
     const token = login_status.token;
     config = { headers: { Authorization: `Bearer ${token}` } };
   } else {

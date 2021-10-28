@@ -176,7 +176,7 @@ function MatchTabs(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {!liveMatches ? (
+        {liveMatches ? (
           liveMatches.map((match) => (
             <LiveMatchCard
               matchID={match.id}
