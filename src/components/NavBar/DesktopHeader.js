@@ -21,6 +21,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import NavBarItem from "./NavBarItem";
 
@@ -40,6 +41,14 @@ function DesktopHeader(props) {
   const { currentPageName, isLoggedIn, myProfileData, dontShowProfileIcon } =
     props;
 
+  const token = JSON.parse(localStorage.getItem("login")).token;
+  let config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const history = useHistory();
   const classes = useStyles();
 
@@ -48,8 +57,20 @@ function DesktopHeader(props) {
 
   const menuId = "primary-search-account-menu";
 
+  async function clearNotificationToken() {
+    try {
+      let response = await axios.delete(
+        `http://localhost:8000/user/clear_notification_token`,
+        config
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const logoutHandler = () => {
     localStorage.setItem("login", JSON.stringify({ login: false }));
+    clearNotificationToken();
     history.push("/login");
   };
 
@@ -84,7 +105,7 @@ function DesktopHeader(props) {
         <Link to={"/my_profile"} style={{ color: "#212529" }}>
           <MenuItem>My Profile</MenuItem>
         </Link>
-        <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+        <MenuItem onClick={logoutHandler}>Log out</MenuItem>
       </Menu>
     ) : (
       <div></div>
