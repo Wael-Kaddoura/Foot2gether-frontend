@@ -58,10 +58,12 @@ const useStyles = makeStyles({
 function UserProfile() {
   const history = useHistory();
   let config = {};
+  let my_id = "";
 
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (login_status && login_status.login) {
     const token = login_status.token;
+    my_id = login_status.user_id;
     config = { headers: { Authorization: `Bearer ${token}` } };
   } else {
     history.push("/login");
@@ -70,6 +72,10 @@ function UserProfile() {
   const classes = useStyles();
 
   const user_id = new URLSearchParams(useLocation().search).get("id");
+
+  if (my_id == user_id) {
+    history.push("/my_profile");
+  }
 
   const [isPending, setIsPending] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -141,6 +147,7 @@ function UserProfile() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData();
   }, []);
 
@@ -269,10 +276,10 @@ function UserProfile() {
               ))}
             </Grid>
           </Grid>
+
+          <Footer />
         </div>
       )}
-
-      <Footer />
     </div>
   );
 }

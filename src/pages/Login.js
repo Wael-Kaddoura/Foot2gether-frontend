@@ -103,6 +103,7 @@ function Login() {
 
         const JWT_token = response.data.token;
         const is_admin = response.data.isAdmin;
+        const user_id = response.data.user.id;
         const username = response.data.user.username;
         const user_profile_picture = response.data.user.userProfilePicture;
 
@@ -112,6 +113,7 @@ function Login() {
             login: true,
             token: JWT_token,
             is_admin,
+            user_id,
             username,
             user_profile_picture,
           })

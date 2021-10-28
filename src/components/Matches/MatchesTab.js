@@ -106,7 +106,7 @@ function MatchTabs(props) {
               <div>
                 {"Live    ."}
                 <Badge
-                  badgeContent={liveMatches.length}
+                  badgeContent={liveMatches ? liveMatches.length : 0}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -130,7 +130,7 @@ function MatchTabs(props) {
               <div>
                 {"Upcoming    ."}
                 <Badge
-                  badgeContent={upcomingMatches.length}
+                  badgeContent={upcomingMatches ? upcomingMatches.length : 0}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -154,7 +154,7 @@ function MatchTabs(props) {
               <div>
                 {"Finished    ."}
                 <Badge
-                  badgeContent={finishedMatches.length}
+                  badgeContent={finishedMatches ? finishedMatches.length : 0}
                   color="error"
                   showZero
                   anchorOrigin={{

@@ -99,6 +99,7 @@ function Rooms() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData();
   }, []);
 

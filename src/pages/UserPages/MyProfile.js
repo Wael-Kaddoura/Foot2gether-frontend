@@ -98,6 +98,7 @@ function MyProfile() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData();
   }, []);
 
@@ -219,10 +220,10 @@ function MyProfile() {
               ))}
             </Grid>
           </Grid>
+
+          <Footer />
         </div>
       )}
-
-      <Footer />
     </div>
   );
 }
