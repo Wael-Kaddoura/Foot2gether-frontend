@@ -8,10 +8,13 @@ import {
   faVideoSlash,
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
+
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
 const MeetingFooter = (props) => {
   const history = useHistory();
+  const userKeyFB = props.userKeyFB;
+  const streamTrack = props.streamTrack;
 
   const [streamState, setStreamState] = useState({
     mic: false,
@@ -27,7 +30,20 @@ const MeetingFooter = (props) => {
   };
 
   const onExitRoom = () => {
-    history.push("/login");
+    userKeyFB.remove();
+    history.go(-1);
+
+    // const stream = streamTrack.srcObject;
+    // const tracks = stream.getTracks();
+
+    // tracks.forEach(function (track) {
+    //   track.stop();
+    // });
+
+    // streamTrack.srcObject = null;
+
+    // window.location = window.location;
+    // console.log(streamTrack);
   };
 
   const onVideoClick = () => {

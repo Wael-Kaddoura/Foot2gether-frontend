@@ -1,3 +1,4 @@
+import { useState } from "react";
 import MainScreen from "./MainScreen/MainScreen.component";
 import { db } from "../../server/firebase-videoRooms/firebase";
 import "../../App.css";
@@ -9,10 +10,16 @@ import {
   removeParticipant,
   updateParticipant,
 } from "../../store/actioncreator";
+import { useLocation, useHistory } from "react-router-dom";
+
 import { connect } from "react-redux";
 
 function Room(props) {
   let { firepadRef, userName } = props;
+  const history = useHistory();
+
+  const [userKeyFB, setUserKeyFB] = useState("");
+  const [streamTrack, setStreamTrack] = useState("");
 
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
@@ -38,6 +45,10 @@ function Room(props) {
           userName,
           preferences: defaultPreference,
         });
+
+        setUserKeyFB(userStatusRef);
+        setStreamTrack(props.mainStream);
+
         props.setUser({
           [userStatusRef.key]: { name: userName, ...defaultPreference },
         });
@@ -81,7 +92,7 @@ function Room(props) {
 
   return (
     <div className="App">
-      <MainScreen />
+      <MainScreen userKeyFB={userKeyFB} streamTrack={streamTrack} />
     </div>
   );
 }

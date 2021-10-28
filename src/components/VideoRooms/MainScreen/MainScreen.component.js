@@ -7,6 +7,8 @@ import { setMainStream, updateUser } from "../../../store/actioncreator";
 
 const MainScreen = (props) => {
   const participantRef = useRef(props.participants);
+  const userKeyFB = props.userKeyFB;
+  const streamTrack = props.streamTrack;
 
   const onMicClick = (micEnabled) => {
     if (props.stream) {
@@ -83,6 +85,8 @@ const MainScreen = (props) => {
           onScreenClick={onScreenClick}
           onMicClick={onMicClick}
           onVideoClick={onVideoClick}
+          userKeyFB={userKeyFB}
+          streamTrack={streamTrack}
         />
       </div>
     </div>
