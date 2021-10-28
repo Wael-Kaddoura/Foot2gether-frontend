@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import UpcomingMatchCard from "./MatchCards/UpcomingMatchCard";
 import FinishedMatchCard from "./MatchCards/FinishedMatchCard";
 import LiveMatchCard from "./MatchCards/LiveMatchCard";
+import NoMatchMsg from "./NoMatchMsg";
 
 const useStyles = makeStyles((theme) => ({
   tab: {
@@ -175,46 +176,60 @@ function MatchTabs(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {liveMatches.map((match) => (
-          <LiveMatchCard
-            matchID={match.id}
-            team1Name={match.team1.name}
-            team1Logo={match.team1.logo}
-            team2Name={match.team2.name}
-            team2Logo={match.team2.logo}
-            stadium={match.stadium}
-            league={match.competition.name}
-            kickOff={match.kick_off}
-          />
-        ))}
+        {!liveMatches ? (
+          liveMatches.map((match) => (
+            <LiveMatchCard
+              matchID={match.id}
+              team1Name={match.team1.name}
+              team1Logo={match.team1.logo}
+              team2Name={match.team2.name}
+              team2Logo={match.team2.logo}
+              stadium={match.stadium}
+              league={match.competition.name}
+              kickOff={match.kick_off}
+            />
+          ))
+        ) : (
+          <NoMatchMsg msg="There are no Live Matches right now!" />
+        )}
       </TabPanel>
+
       <TabPanel value={value} index={1}>
-        {upcomingMatches.map((match) => (
-          <UpcomingMatchCard
-            team1Name={match.team1.name}
-            team1Logo={match.team1.logo}
-            team2Name={match.team2.name}
-            team2Logo={match.team2.logo}
-            stadium={match.stadium}
-            league={match.competition.name}
-            matchDay={match.match_day}
-            kickOff={match.kick_off}
-          />
-        ))}
+        {upcomingMatches ? (
+          upcomingMatches.map((match) => (
+            <UpcomingMatchCard
+              team1Name={match.team1.name}
+              team1Logo={match.team1.logo}
+              team2Name={match.team2.name}
+              team2Logo={match.team2.logo}
+              stadium={match.stadium}
+              league={match.competition.name}
+              matchDay={match.match_day}
+              kickOff={match.kick_off}
+            />
+          ))
+        ) : (
+          <NoMatchMsg msg="There are no Upcoming Matches today!" />
+        )}
       </TabPanel>
+
       <TabPanel value={value} index={2}>
-        {finishedMatches.map((match) => (
-          <FinishedMatchCard
-            team1Name={match.team1.name}
-            team1Logo={match.team1.logo}
-            team1Score={match.team1_score}
-            team2Name={match.team2.name}
-            team2Logo={match.team2.logo}
-            team2Score={match.team2_score}
-            stadium={match.stadium}
-            league={match.competition.name}
-          />
-        ))}
+        {finishedMatches ? (
+          finishedMatches.map((match) => (
+            <FinishedMatchCard
+              team1Name={match.team1.name}
+              team1Logo={match.team1.logo}
+              team1Score={match.team1_score}
+              team2Name={match.team2.name}
+              team2Logo={match.team2.logo}
+              team2Score={match.team2_score}
+              stadium={match.stadium}
+              league={match.competition.name}
+            />
+          ))
+        ) : (
+          <NoMatchMsg msg="There are no Finished Matches today!" />
+        )}
       </TabPanel>
     </Box>
   );

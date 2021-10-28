@@ -7,6 +7,7 @@ import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
+import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import HomeBlogs from "../../components/Home/HomeBlogs";
 import Footer from "../../components/Footer";
 
@@ -93,8 +94,17 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        {isLoaded && nextMatchData && (
-          <HomeNextMatchCard nextMatch={nextMatchData} />
+        {isLoaded ? (
+          nextMatchData ? (
+            <HomeNextMatchCard nextMatch={nextMatchData} />
+          ) : (
+            <NoMatchMsg
+              msg="There are no Upcoming Matches today!"
+              home={true}
+            />
+          )
+        ) : (
+          ""
         )}
         {isLoaded && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
