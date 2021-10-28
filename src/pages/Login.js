@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 import Overlay from "../components/NavBar/Overlay";
 import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -36,11 +38,13 @@ const useStyles = makeStyles({
 });
 
 function Login() {
+  const { user, setUser } = useContext(UserContext);
+
   const history = useHistory();
 
   //check if user already logged in
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status.login) {
+  if (login_status && login_status.login) {
     if (login_status.is_admin) {
       history.push("/admin/home");
     } else {
@@ -100,6 +104,7 @@ function Login() {
 
       if (response.status === 200) {
         console.log("Successfully logged in!");
+        setUser(response.data.user);
 
         let JWT_token = response.data.token;
         let is_admin = response.data.isAdmin;

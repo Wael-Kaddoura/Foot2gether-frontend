@@ -6,7 +6,10 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import { useState } from "react";
+
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+
 import {
   List,
   Button,
@@ -38,8 +41,9 @@ const useStyles = makeStyles({
 });
 
 function DesktopHeader(props) {
-  const { currentPageName, isLoggedIn, myProfileData, dontShowProfileIcon } =
-    props;
+  const { currentPageName, isLoggedIn, dontShowProfileIcon } = props;
+
+  const { user } = useContext(UserContext);
 
   const token = JSON.parse(localStorage.getItem("login")).token;
   let config = {
@@ -59,7 +63,7 @@ function DesktopHeader(props) {
 
   async function clearNotificationToken() {
     try {
-      let response = await axios.delete(
+      await axios.delete(
         `http://localhost:8000/user/clear_notification_token`,
         config
       );
@@ -99,9 +103,7 @@ function DesktopHeader(props) {
         onClose={handleMenuClose}
         sx={{ mt: 6.5, ml: 6.25 }}
       >
-        <MenuItem style={{ color: "#ee1e46" }}>
-          {myProfileData.username}
-        </MenuItem>
+        <MenuItem style={{ color: "#ee1e46" }}>{user.username}</MenuItem>
         <Link to={"/my_profile"} style={{ color: "#212529" }}>
           <MenuItem>My Profile</MenuItem>
         </Link>
@@ -163,7 +165,7 @@ function DesktopHeader(props) {
                         onClick={handleProfileMenuOpen}
                         color="primary"
                       >
-                        <Avatar alt="PP" src={myProfileData.profile_picture} />
+                        <Avatar alt="PP" src={user.profile_picture} />
                       </IconButton>
                       {renderMenu}
                     </ListItem>

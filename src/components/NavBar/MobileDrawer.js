@@ -6,7 +6,10 @@ import "../../css/jquery.fancybox.min.css";
 import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
-import { useState } from "react";
+
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+
 import {
   List,
   Button,
@@ -37,9 +40,11 @@ const useStyles = makeStyles({
   },
 });
 
-function MobileDrawer({ currentPageName, isLoggedIn, myProfileData }) {
+function MobileDrawer({ currentPageName, isLoggedIn }) {
   const history = useHistory();
   const classes = useStyles();
+
+  const { user } = useContext(UserContext);
 
   const logoutHandler = () => {
     localStorage.setItem("login", JSON.stringify({ login: false }));
@@ -66,7 +71,7 @@ function MobileDrawer({ currentPageName, isLoggedIn, myProfileData }) {
                 <Avatar
                   alt="PP"
                   className={classes.profilePicture}
-                  src={myProfileData.profile_picture}
+                  src={user.profile_picture}
                 />
               </ListItem>
             )}

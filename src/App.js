@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { UserContext } from "./context/UserContext";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AdminMainPage from "./pages/AdminPanel/AdminMainPage";
@@ -20,66 +21,72 @@ import UserSearch from "./pages/UserPages/UserSearch";
 import VideoRoom from "./pages/UserPages/VideoRoom";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+
   return (
     <Router>
       <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/signup">
-          <Signup />
-        </Route>
-        <Route exact path="/admin/home">
-          <AdminMainPage />
-        </Route>
-        <Route exact path="/admin/all_matches">
-          <AdminAllMatches />
-        </Route>
-        <Route exact path="/admin/todays_matches">
-          <AdminTodaysMatches />
-        </Route>
-        <Route exact path="/admin/todays_rooms">
-          <AdminTodaysRooms />
-        </Route>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/matches">
-          <Matches />
-        </Route>
-        <Route exact path="/rooms">
-          <Rooms />
-        </Route>
-        <Route exact path="/blogs">
-          <Blog />
-        </Route>
-        <Route exact path="/standings">
-          <Standings />
-        </Route>
-        <Route exact path="/match/rooms">
-          <MatchRooms />
-        </Route>
-        <Route exact path="/my_profile">
-          <MyProfile />
-        </Route>
-        <Route exact path="/user_profile">
-          <UserProfile />
-        </Route>
-        <Route exact path="/user_search">
-          <UserSearch />
-        </Route>
-        <Route exact path="/blog_view">
-          <BlogView />
-        </Route>
-        <Route exact path="/blog_view">
-          <BlogView />
-        </Route>
-        <Route exact path="/create_blog">
-          <CreateBlog />
-        </Route>
-        <Route exact path="/video_room">
-          <VideoRoom />
-        </Route>
+        <UserContext.Provider value={value}>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/admin/home">
+            <AdminMainPage />
+          </Route>
+          <Route exact path="/admin/all_matches">
+            <AdminAllMatches />
+          </Route>
+          <Route exact path="/admin/todays_matches">
+            <AdminTodaysMatches />
+          </Route>
+          <Route exact path="/admin/todays_rooms">
+            <AdminTodaysRooms />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/matches">
+            <Matches />
+          </Route>
+          <Route exact path="/rooms">
+            <Rooms />
+          </Route>
+          <Route exact path="/blogs">
+            <Blog />
+          </Route>
+          <Route exact path="/standings">
+            <Standings />
+          </Route>
+          <Route exact path="/match/rooms">
+            <MatchRooms />
+          </Route>
+          <Route exact path="/my_profile">
+            <MyProfile />
+          </Route>
+          <Route exact path="/user_profile">
+            <UserProfile />
+          </Route>
+          <Route exact path="/user_search">
+            <UserSearch />
+          </Route>
+          <Route exact path="/blog_view">
+            <BlogView />
+          </Route>
+          <Route exact path="/blog_view">
+            <BlogView />
+          </Route>
+          <Route exact path="/create_blog">
+            <CreateBlog />
+          </Route>
+          <Route exact path="/video_room">
+            <VideoRoom />
+          </Route>
+        </UserContext.Provider>
       </Switch>
     </Router>
   );
