@@ -1,6 +1,4 @@
-import { useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
-
+import { useState } from "react";
 import Overlay from "../components/NavBar/Overlay";
 import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -38,8 +36,6 @@ const useStyles = makeStyles({
 });
 
 function Login() {
-  const { user, setUser } = useContext(UserContext);
-
   const history = useHistory();
 
   //check if user already logged in
@@ -104,14 +100,21 @@ function Login() {
 
       if (response.status === 200) {
         console.log("Successfully logged in!");
-        setUser(response.data.user);
 
-        let JWT_token = response.data.token;
-        let is_admin = response.data.isAdmin;
+        const JWT_token = response.data.token;
+        const is_admin = response.data.isAdmin;
+        const username = response.data.user.username;
+        const user_profile_picture = response.data.user.userProfilePicture;
 
         localStorage.setItem(
           "login",
-          JSON.stringify({ login: true, token: JWT_token, is_admin: is_admin })
+          JSON.stringify({
+            login: true,
+            token: JWT_token,
+            is_admin,
+            username,
+            user_profile_picture,
+          })
         );
 
         setLoginError(false);

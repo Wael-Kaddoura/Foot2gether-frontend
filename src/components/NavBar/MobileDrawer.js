@@ -7,22 +7,11 @@ import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
 
-import { useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-
-import {
-  List,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  ListItem,
-  ListItemText,
-  Avatar,
-} from "@mui/material";
+import { List, Button, ListItem, ListItemText, Avatar } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@mui/styles";
+import axios from "axios";
 
 import NavBarItem from "./NavBarItem";
 
@@ -44,10 +33,39 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
   const history = useHistory();
   const classes = useStyles();
 
-  const { user } = useContext(UserContext);
+  const login_status = JSON.parse(localStorage.getItem("login"));
+
+  let token = "";
+  let username = "";
+  let user_profile_picture = "";
+
+  if (login_status) {
+    token = login_status.token;
+    username = login_status.username;
+    user_profile_picture = login_status.user_profile_picture;
+  }
+
+  let config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  async function clearNotificationToken() {
+    try {
+      await axios.delete(
+        `http://localhost:8000/user/clear_notification_token`,
+        config
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const logoutHandler = () => {
-    localStorage.setItem("login", JSON.stringify({ login: false }));
+    localStorage.clear();
+    clearNotificationToken();
     history.push("/login");
   };
 
@@ -71,7 +89,7 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
                 <Avatar
                   alt="PP"
                   className={classes.profilePicture}
-                  src={user.profile_picture}
+                  src={user_profile_picture}
                 />
               </ListItem>
             )}

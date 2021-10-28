@@ -9,6 +9,7 @@ import MainNavBar from "../../components/NavBar/MainNavBar";
 import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
 import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import HomeBlogs from "../../components/Home/HomeBlogs";
+import Backdrop from "../../components/Backdrop";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -28,7 +29,8 @@ const useStyles = makeStyles({
 function Home() {
   const classes = useStyles();
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
+  const [openBackdrop, setOpenBackdrop] = useState(true);
   const [latestBlogsData, setLatestBlogsData] = useState(null);
   const [nextMatchData, setNextMatchData] = useState(null);
 
@@ -55,7 +57,8 @@ function Home() {
   async function fetchData() {
     await getLatestBlogs();
     await getNextMatchData();
-    setIsLoaded(true);
+    setOpenBackdrop(false);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -87,6 +90,8 @@ function Home() {
   return (
     <div>
       <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />
+      {/* <Backdrop open={openBackdrop} /> */}
+
       <Grid
         container
         className={classes.homeContent}
@@ -94,7 +99,7 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        {isLoaded ? (
+        {!isPending ? (
           nextMatchData ? (
             <HomeNextMatchCard nextMatch={nextMatchData} />
           ) : (
@@ -106,7 +111,7 @@ function Home() {
         ) : (
           ""
         )}
-        {isLoaded && <HomeBlogs latestBlogs={latestBlogsData} />}
+        {!isPending && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
       <Footer />
     </div>

@@ -7,8 +7,7 @@ import "../../css/bootstrap-datepicker.css";
 import "../../css/aos.css";
 import "../../css/style.css";
 
-import { useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { useState } from "react";
 
 import {
   List,
@@ -43,9 +42,18 @@ const useStyles = makeStyles({
 function DesktopHeader(props) {
   const { currentPageName, isLoggedIn, dontShowProfileIcon } = props;
 
-  const { user } = useContext(UserContext);
+  const login_status = JSON.parse(localStorage.getItem("login"));
 
-  const token = JSON.parse(localStorage.getItem("login")).token;
+  let token = "";
+  let username = "";
+  let user_profile_picture = "";
+
+  if (login_status) {
+    token = login_status.token;
+    username = login_status.username;
+    user_profile_picture = login_status.user_profile_picture;
+  }
+
   let config = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -103,7 +111,7 @@ function DesktopHeader(props) {
         onClose={handleMenuClose}
         sx={{ mt: 6.5, ml: 6.25 }}
       >
-        <MenuItem style={{ color: "#ee1e46" }}>{user.username}</MenuItem>
+        <MenuItem style={{ color: "#ee1e46" }}>{username}</MenuItem>
         <Link to={"/my_profile"} style={{ color: "#212529" }}>
           <MenuItem>My Profile</MenuItem>
         </Link>
@@ -165,7 +173,7 @@ function DesktopHeader(props) {
                         onClick={handleProfileMenuOpen}
                         color="primary"
                       >
-                        <Avatar alt="PP" src={user.profile_picture} />
+                        <Avatar alt="PP" src={user_profile_picture} />
                       </IconButton>
                       {renderMenu}
                     </ListItem>
