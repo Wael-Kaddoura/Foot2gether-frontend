@@ -9,6 +9,7 @@ import axios from "axios";
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserInfo from "../../components/NavBar/UserInfo";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
@@ -70,7 +71,7 @@ function UserProfile() {
 
   const user_id = new URLSearchParams(useLocation().search).get("id");
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [userData, setUserData] = useState(null);
   const [userLiveRooms, setUserLiveRooms] = useState(null);
   const [isFollowed, setIsFollowed] = useState(false);
@@ -136,7 +137,7 @@ function UserProfile() {
   async function fetchData() {
     await getUserData();
     await getUserLiveRooms();
-    setIsLoaded(true);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -151,7 +152,7 @@ function UserProfile() {
       justifyContent="space-between"
       alignItems="flex-end"
     >
-      {isLoaded && (
+      {!isPending && (
         <Grid item xs={8} lg={6} sx={{ mb: 5 }}>
           <Grid
             container
@@ -211,7 +212,9 @@ function UserProfile() {
   );
   return (
     <div>
-      {isLoaded && (
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>
           <UserNavBar
             NavBarContent={NavBarContent}

@@ -5,6 +5,7 @@ import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import MatchesTab from "../../components/Matches/MatchesTab";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -28,7 +29,7 @@ function Matches() {
 
   const classes = useStyles();
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [liveMatches, setLiveMatches] = useState(null);
   const [upcomingMatches, setUpcomingMatches] = useState(null);
   const [finishedMatches, setFinishedMatches] = useState(null);
@@ -77,7 +78,7 @@ function Matches() {
     await getUpcomingMatches();
     await getFinishedMatches();
 
-    setIsLoaded(true);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -98,7 +99,9 @@ function Matches() {
     <div>
       <MainNavBar currentPageName="Matches" NavBarContent={NavBarContent} />
 
-      {isLoaded && (
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
         <MatchesTab
           liveMatches={liveMatches}
           upcomingMatches={upcomingMatches}

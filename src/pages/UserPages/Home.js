@@ -9,7 +9,7 @@ import MainNavBar from "../../components/NavBar/MainNavBar";
 import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
 import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import HomeBlogs from "../../components/Home/HomeBlogs";
-import Backdrop from "../../components/Backdrop";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -30,7 +30,6 @@ function Home() {
   const classes = useStyles();
 
   const [isPending, setIsPending] = useState(true);
-  const [openBackdrop, setOpenBackdrop] = useState(true);
   const [latestBlogsData, setLatestBlogsData] = useState(null);
   const [nextMatchData, setNextMatchData] = useState(null);
 
@@ -57,7 +56,6 @@ function Home() {
   async function fetchData() {
     await getLatestBlogs();
     await getNextMatchData();
-    setOpenBackdrop(false);
     setIsPending(false);
   }
 
@@ -90,7 +88,8 @@ function Home() {
   return (
     <div>
       <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />
-      {/* <Backdrop open={openBackdrop} /> */}
+
+      <BackdropComponent open={isPending} />
 
       <Grid
         container

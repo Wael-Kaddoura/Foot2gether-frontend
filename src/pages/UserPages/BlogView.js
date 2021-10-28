@@ -7,6 +7,7 @@ import axios from "axios";
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogBody from "../../components/Blogs/BlogBody";
 import BlogCommentsSection from "../../components/Blogs/BlogCommentsSection";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -41,7 +42,7 @@ function BlogView() {
 
   const blog_id = new URLSearchParams(useLocation().search).get("id");
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [blogData, setBlogData] = useState(null);
   const [blogComments, setBlogComments] = useState(null);
   const [blogCommentsCount, setBlogCommentsCount] = useState(null);
@@ -93,7 +94,7 @@ function BlogView() {
   async function fetchData() {
     await getBlogData();
     await getCommentsData();
-    setIsLoaded(true);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -103,7 +104,7 @@ function BlogView() {
   const NavBarContent = (
     <div className="row align-items-center">
       <div className="col-lg-5 mx-auto text-center">
-        {isLoaded && (
+        {!isPending && (
           <div>
             <h1 className={classes.pageTitle}>{blogData.title} </h1>
 
@@ -127,7 +128,9 @@ function BlogView() {
     <div>
       <MainNavBar NavBarContent={NavBarContent} />
 
-      {isLoaded && (
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>
           <BlogBody
             blogTitle={blogData.title}

@@ -6,6 +6,7 @@ import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogCard from "../../components/Blogs/BlogCard";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -44,7 +45,7 @@ function Blog() {
 
   const classes = useStyles();
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [blogsData, setBlogsData] = useState(null);
 
   async function getBlogsData() {
@@ -52,7 +53,7 @@ function Blog() {
       let response = await axios.get(`http://localhost:8000/blog`, config);
       let blogs_data = response.data;
       setBlogsData(blogs_data);
-      setIsLoaded(true);
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +84,9 @@ function Blog() {
     <div>
       <MainNavBar currentPageName="Blogs" NavBarContent={NavBarContent} />
 
-      {isLoaded && (
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
         <Grid
           className={classes.blogsContainer}
           container

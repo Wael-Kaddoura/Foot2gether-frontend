@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Button, Badge, Typography, Avatar } from "@mui/material";
+import { Grid, Badge, Typography, Avatar } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
@@ -11,6 +11,7 @@ import UserInfo from "../../components/NavBar/UserInfo";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import ChangeProfilePicture from "../../components/User/ChangeProfilePicture";
 import ChangeCoverPhoto from "../../components/User/ChangeCoverPhoto";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
@@ -51,7 +52,7 @@ function MyProfile() {
   let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
+  if (login_status.login) {
     const token = login_status.token;
     config = { headers: { Authorization: `Bearer ${token}` } };
   } else {
@@ -60,7 +61,7 @@ function MyProfile() {
 
   const classes = useStyles();
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [myProfileData, setMyProfileData] = useState(null);
   const [myLiveRooms, setMyLiveRooms] = useState(null);
 
@@ -93,7 +94,7 @@ function MyProfile() {
   async function fetchData() {
     await getMyProfileData();
     await getMyLiveRooms();
-    setIsLoaded(true);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -108,7 +109,7 @@ function MyProfile() {
       justifyContent="space-between"
       alignItems="flex-end"
     >
-      {isLoaded && (
+      {!isPending && (
         <Grid item xs={8} lg={6} sx={{ mb: 5 }}>
           <Grid
             container
@@ -158,7 +159,9 @@ function MyProfile() {
 
   return (
     <div>
-      {isLoaded && (
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>
           <UserNavBar
             NavBarContent={NavBarContent}

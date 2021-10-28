@@ -8,6 +8,7 @@ import axios from "axios";
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomMatchCard from "../../components/Matches/MatchCards/RoomMatchCard";
 import LiveMatchRoomCard from "../../components/Rooms/LiveMatchRoomCard";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +45,7 @@ function MatchRooms() {
 
   const match_id = new URLSearchParams(useLocation().search).get("id");
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [matchData, setMatchData] = useState(null);
   const [liveRooms, setLiveRooms] = useState(null);
 
@@ -77,7 +78,7 @@ function MatchRooms() {
   async function fetchData() {
     await getMatchData();
     await getMatchRooms();
-    setIsLoaded(true);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -87,15 +88,18 @@ function MatchRooms() {
   const NavBarContent = (
     <div className="row align-items-center">
       <div className="col-lg-7 mx-auto text-center">
-        <RoomMatchCard matchData={matchData} />
+        {!isPending && <RoomMatchCard matchData={matchData} />}
       </div>
     </div>
   );
 
   return (
     <div>
-      {isLoaded && <MainNavBar NavBarContent={NavBarContent} />}
-      {isLoaded && (
+      <MainNavBar NavBarContent={NavBarContent} />
+
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
         <Grid
           container
           className={classes.roomContent}

@@ -9,6 +9,7 @@ import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../../components/Rooms/CreateNewRoom";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -43,7 +44,7 @@ function Rooms() {
 
   const classes = useStyles();
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [isSearchRoom, setIsSearchRoom] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
   const [userType, setUserType] = useState(1);
@@ -55,6 +56,7 @@ function Rooms() {
   }
 
   async function searchHandler(room_id) {
+    setIsPending(true);
     try {
       let response = await axios.get(
         `http://localhost:8000/room/` + room_id,
@@ -63,6 +65,7 @@ function Rooms() {
       let searched_room_data = response.data;
       setSearchResult(searched_room_data);
       setIsSearchRoom(true);
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +95,7 @@ function Rooms() {
   async function fetchData() {
     await getUserType();
     await getLiveRooms();
-    setIsLoaded(true);
+    setIsPending(false);
   }
 
   useEffect(() => {
@@ -103,9 +106,11 @@ function Rooms() {
     <div className="row align-items-center">
       <div className="col-lg-5 mx-auto text-center">
         <h1 className={classes.pageTitle}>Rooms</h1>
-        <p className={classes.pageSubTitle}>
-          There are currently {liveRoomsCount} Live Rooms!
-        </p>
+        {!isPending && (
+          <p className={classes.pageSubTitle}>
+            There are currently {liveRoomsCount} Live Rooms!
+          </p>
+        )}
         <RoomSearchBar searchHandler={searchHandler} />
       </div>
     </div>
@@ -113,94 +118,92 @@ function Rooms() {
 
   return (
     <div>
-      {isLoaded && (
-        <div>
-          <MainNavBar currentPageName="Rooms" NavBarContent={NavBarContent} />
+      <MainNavBar currentPageName="Rooms" NavBarContent={NavBarContent} />
 
+      <BackdropComponent open={isPending} />
+
+      {!isPending && (
+        <Grid
+          container
+          className={classes.roomContent}
+          direction="row"
+          justifyContent="center"
+          style={{ backgroundColor: "#1a1e25 " }}
+        >
           <Grid
+            item
+            xs={12}
             container
-            className={classes.roomContent}
             direction="row"
             justifyContent="center"
-            style={{ backgroundColor: "#1a1e25 " }}
+            alignItems="center"
+            className={classes.roomsContainer}
+            sx={{ mx: 2, mt: 5 }}
           >
-            <Grid
-              item
-              xs={12}
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              className={classes.roomsContainer}
-              sx={{ mx: 2, mt: 5 }}
-            >
-              <Grid item xs={12} container sx={{ mb: 5 }}>
-                <Grid
-                  item
-                  xs={7}
-                  container
-                  direction="row"
-                  alignItems="center"
-                  className={classes.bodyTitle}
-                >
-                  <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
-                  Live Rooms
-                </Grid>
-
-                {isSearchRoom ? (
-                  <Grid item xs={5} style={{ textAlign: "right" }}>
-                    <Button variant="contained" onClick={showAllRooms}>
-                      Show All Rooms
-                    </Button>
-                  </Grid>
-                ) : (
-                  <Grid item xs={5} style={{ textAlign: "right" }}>
-                    {userType === 2 ? (
-                      <CreateNewRoom getLiveRooms={getLiveRooms} />
-                    ) : (
-                      ""
-                    )}
-                  </Grid>
-                )}
+            <Grid item xs={12} container sx={{ mb: 5 }}>
+              <Grid
+                item
+                xs={7}
+                container
+                direction="row"
+                alignItems="center"
+                className={classes.bodyTitle}
+              >
+                <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
+                Live Rooms
               </Grid>
 
               {isSearchRoom ? (
-                searchResult ? (
-                  <LiveRoomCard
-                    config={config}
-                    roomName={searchResult.name}
-                    roomID={searchResult.id}
-                    roomCreator={searchResult.creator.username}
-                    roomCreatorID={searchResult.creator_id}
-                    roomCurrentCapacity={
-                      searchResult.current_participants_number
-                    }
-                    team1Logo={searchResult.matchroom.team1.logo}
-                    team2Logo={searchResult.matchroom.team2.logo}
-                  />
-                ) : (
-                  <Grid style={{ height: 200 }}>No Rooms Found</Grid>
-                )
+                <Grid item xs={5} style={{ textAlign: "right" }}>
+                  <Button variant="contained" onClick={showAllRooms}>
+                    Show All Rooms
+                  </Button>
+                </Grid>
               ) : (
-                ""
+                <Grid item xs={5} style={{ textAlign: "right" }}>
+                  {userType === 2 ? (
+                    <CreateNewRoom getLiveRooms={getLiveRooms} />
+                  ) : (
+                    ""
+                  )}
+                </Grid>
               )}
-
-              {!isSearchRoom &&
-                liveRooms.map((room) => (
-                  <LiveRoomCard
-                    config={config}
-                    roomName={room.name}
-                    roomID={room.id}
-                    roomCreator={room.creator.username}
-                    roomCreatorID={room.creator_id}
-                    roomCurrentCapacity={room.current_participants_number}
-                    team1Logo={room.matchroom.team1.logo}
-                    team2Logo={room.matchroom.team2.logo}
-                  />
-                ))}
             </Grid>
+
+            {isSearchRoom ? (
+              searchResult ? (
+                <LiveRoomCard
+                  config={config}
+                  roomName={searchResult.name}
+                  roomID={searchResult.id}
+                  roomCreator={searchResult.creator.username}
+                  roomCreatorID={searchResult.creator_id}
+                  roomCurrentCapacity={searchResult.current_participants_number}
+                  team1Logo={searchResult.matchroom.team1.logo}
+                  team2Logo={searchResult.matchroom.team2.logo}
+                />
+              ) : (
+                <Grid style={{ height: 200 }}>No Rooms Found</Grid>
+              )
+            ) : (
+              ""
+            )}
+
+            {!isSearchRoom &&
+              liveRooms.map((room) => (
+                <LiveRoomCard
+                  config={config}
+                  roomName={room.name}
+                  roomID={room.id}
+                  roomCreator={room.creator.username}
+                  roomCreatorID={room.creator_id}
+                  roomCurrentCapacity={room.current_participants_number}
+                  team1Logo={room.matchroom.team1.logo}
+                  team2Logo={room.matchroom.team2.logo}
+                />
+              ))}
           </Grid>
-        </div>
+        </Grid>
       )}
 
       <Footer />

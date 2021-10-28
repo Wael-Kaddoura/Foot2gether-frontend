@@ -1,7 +1,7 @@
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function SimpleBackdrop({ open }) {
+function BackdropComponent({ open }) {
   return (
     <div>
       <Backdrop
@@ -13,3 +13,5 @@ export default function SimpleBackdrop({ open }) {
     </div>
   );
 }
+
+export default BackdropComponent;

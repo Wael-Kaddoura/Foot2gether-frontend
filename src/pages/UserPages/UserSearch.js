@@ -8,6 +8,7 @@ import axios from "axios";
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
 import UserSearchBar from "../../components/User/UserSearchBar";
 import UserCard from "../../components/User/UserCard";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -42,17 +43,21 @@ function UserSearch() {
 
   const classes = useStyles();
 
+  const [isPending, setIsPending] = useState(true);
   const [searchResults, setSearchResults] = useState(null);
 
   async function searchHandler(search_word) {
+    setIsPending(true);
     try {
       let response = await axios.get(
         `http://localhost:8000/user/search/` + search_word,
         config
       );
-      let search_results = response.data;
 
+      let search_results = response.data;
       setSearchResults(search_results);
+
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +66,8 @@ function UserSearch() {
   return (
     <div>
       <SecondaryNavBar />
+
+      <BackdropComponent open={isPending} />
 
       <Grid
         container

@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Box, Button, Typography, TextField, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
+import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -44,8 +45,12 @@ function CreateBlog() {
   }
   const classes = useStyles();
 
+  const [isPending, setIsPending] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setIsPending(true);
 
     const new_blog_data = new FormData(event.currentTarget);
     const title = new_blog_data.get("blog_title");
@@ -66,6 +71,7 @@ function CreateBlog() {
 
       if (response.status === 201) {
         console.log("Successfully Created Blog!");
+        setIsPending(false);
         history.push("/blogs");
       } else {
         console.log("Something went wrong!");
@@ -81,6 +87,8 @@ function CreateBlog() {
   return (
     <div>
       <SecondaryNavBar />
+
+      <BackdropComponent open={isPending} />
 
       <Grid className={classes.pageContainer} container>
         <Grid item xs={12} sx={{ mb: 2 }}>
