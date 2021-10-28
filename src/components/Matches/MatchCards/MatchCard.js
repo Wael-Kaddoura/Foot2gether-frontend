@@ -34,6 +34,7 @@ function MatchCard(props) {
     team1Logo,
     team2Name,
     team2Logo,
+    stadium,
     league,
     kickOff,
   } = props;
@@ -79,7 +80,7 @@ function MatchCard(props) {
                 {kick_off_time}
               </Typography>
               <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
-                Emirates Stadium
+                {stadium}
               </Typography>
             </Grid>
             <Grid item xs={4}>

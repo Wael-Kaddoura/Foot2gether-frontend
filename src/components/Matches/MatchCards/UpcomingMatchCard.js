@@ -19,6 +19,7 @@ function UpcomingMatchCard(props) {
     team1Logo,
     team2Name,
     team2Logo,
+    stadium,
     league,
     matchDay,
     kickOff,
@@ -85,6 +86,7 @@ function UpcomingMatchCard(props) {
       team1Logo={team1Logo}
       team2Name={team2Name}
       team2Logo={team2Logo}
+      stadium={stadium}
       league={league}
       kickOff={kickOff}
     >

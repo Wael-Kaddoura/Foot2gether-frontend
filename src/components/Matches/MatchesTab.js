@@ -182,6 +182,7 @@ function MatchTabs(props) {
             team1Logo={match.team1.logo}
             team2Name={match.team2.name}
             team2Logo={match.team2.logo}
+            stadium={match.stadium}
             league={match.competition.name}
             kickOff={match.kick_off}
           />
@@ -194,6 +195,7 @@ function MatchTabs(props) {
             team1Logo={match.team1.logo}
             team2Name={match.team2.name}
             team2Logo={match.team2.logo}
+            stadium={match.stadium}
             league={match.competition.name}
             matchDay={match.match_day}
             kickOff={match.kick_off}
@@ -209,6 +211,7 @@ function MatchTabs(props) {
             team2Name={match.team2.name}
             team2Logo={match.team2.logo}
             team2Score={match.team2_score}
+            stadium={match.stadium}
             league={match.competition.name}
           />
         ))}

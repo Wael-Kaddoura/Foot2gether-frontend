@@ -44,7 +44,7 @@ function HomeNextMatchCard({ nextMatch }) {
                   <p className="mb-5">
                     <span className="d-block">{kick_off_time}</span>
                     <strong className="text-primary">
-                      Tottenham Hotspur Staduim
+                      {nextMatch[0].stadium}
                     </strong>
                   </p>
                 </div>

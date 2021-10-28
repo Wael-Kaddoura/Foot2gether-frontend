@@ -21,6 +21,7 @@ function FinishedMatchCard(props) {
     team2Name,
     team2Logo,
     team2Score,
+    stadium,
     league,
   } = props;
 
@@ -30,6 +31,7 @@ function FinishedMatchCard(props) {
       team1Logo={team1Logo}
       team2Name={team2Name}
       team2Logo={team2Logo}
+      stadium={stadium}
       league={league}
     >
       <Typography className={classes.finishedScore}>
