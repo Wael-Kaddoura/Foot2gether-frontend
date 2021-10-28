@@ -7,6 +7,7 @@ import axios from "axios";
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogBody from "../../components/Blogs/BlogBody";
 import BlogCommentsSection from "../../components/Blogs/BlogCommentsSection";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -142,6 +143,8 @@ function BlogView() {
           />
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

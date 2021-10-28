@@ -5,6 +5,7 @@ import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import MatchesTab from "../../components/Matches/MatchesTab";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -104,6 +105,8 @@ function Matches() {
           finishedMatches={finishedMatches}
         />
       )}
+
+      <Footer />
     </div>
   );
 }

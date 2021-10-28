@@ -5,10 +5,12 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   pageContainer: {
     width: "100%",
+    backgroundColor: "#1a1e25 ",
   },
   pageTitle: {
     color: "#fff",
@@ -137,6 +139,8 @@ function CreateBlog() {
           </Box>
         </Grid>
       </Grid>
+
+      <Footer />
     </div>
   );
 }

@@ -11,6 +11,7 @@ import UserInfo from "../../components/NavBar/UserInfo";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import ChangeProfilePicture from "../../components/User/ChangeProfilePicture";
 import ChangeCoverPhoto from "../../components/User/ChangeCoverPhoto";
+import Footer from "../../components/Footer";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 55,
@@ -217,6 +218,8 @@ function MyProfile() {
           </Grid>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

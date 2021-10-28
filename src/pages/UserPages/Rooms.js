@@ -9,6 +9,7 @@ import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../../components/Rooms/CreateNewRoom";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -201,6 +202,8 @@ function Rooms() {
           </Grid>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

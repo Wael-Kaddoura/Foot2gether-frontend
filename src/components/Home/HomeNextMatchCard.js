@@ -9,8 +9,8 @@ function HomeNextMatchCard({ nextMatch }) {
   }
 
   return (
-    <Grid item xs={12}>
-      <div className="site-section bg-dark">
+    <Grid item xs={12} style={{ backgroundColor: "#222831 " }}>
+      <div className="site-section">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6">

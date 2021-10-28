@@ -6,6 +6,7 @@ import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogCard from "../../components/Blogs/BlogCard";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -104,6 +105,8 @@ function Blog() {
           ))}
         </Grid>
       )}
+
+      <Footer />
     </div>
   );
 }

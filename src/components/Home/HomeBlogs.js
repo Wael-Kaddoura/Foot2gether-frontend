@@ -13,6 +13,7 @@ const useStyles = makeStyles({
   blogsContainer: {
     paddingLeft: "1em",
     maxWidth: 1140,
+    minHeight: 500,
   },
 });
 
@@ -20,7 +21,13 @@ function HomeBlogs({ latestBlogs }) {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} className={classes.blogsContainer}>
+    <Grid
+      item
+      xs={12}
+      className={classes.blogsContainer}
+      container
+      alignItems="center"
+    >
       <Grid
         container
         direction="row"

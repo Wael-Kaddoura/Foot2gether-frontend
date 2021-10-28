@@ -7,6 +7,7 @@ import axios from "axios";
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
 import HomeBlogs from "../../components/Home/HomeBlogs";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
   },
   homeContent: {
     minWidth: "100%",
+    backgroundColor: "#1a1e25",
   },
 });
 
@@ -95,6 +97,7 @@ function Home() {
         )}
         {isLoaded && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
+      <Footer />
     </div>
   );
 }

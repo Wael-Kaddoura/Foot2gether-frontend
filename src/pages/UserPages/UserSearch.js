@@ -8,6 +8,7 @@ import axios from "axios";
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
 import UserSearchBar from "../../components/User/UserSearchBar";
 import UserCard from "../../components/User/UserCard";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -93,6 +94,8 @@ function UserSearch() {
             ))}
         </Grid>
       </Grid>
+
+      <Footer />
     </div>
   );
 }

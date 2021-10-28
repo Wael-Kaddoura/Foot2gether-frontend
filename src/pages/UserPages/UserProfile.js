@@ -9,6 +9,7 @@ import axios from "axios";
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserInfo from "../../components/NavBar/UserInfo";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
+import Footer from "../../components/Footer";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 55,
@@ -267,6 +268,8 @@ function UserProfile() {
           </Grid>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

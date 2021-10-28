@@ -8,6 +8,7 @@ import axios from "axios";
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomMatchCard from "../../components/Matches/MatchCards/RoomMatchCard";
 import LiveMatchRoomCard from "../../components/Rooms/LiveMatchRoomCard";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   pageTitle: {
@@ -137,6 +138,8 @@ function MatchRooms() {
           </Grid>
         </Grid>
       )}
+
+      <Footer />
     </div>
   );
 }
