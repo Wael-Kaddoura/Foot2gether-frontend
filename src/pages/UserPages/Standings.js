@@ -63,9 +63,11 @@ function Standings({ currentPageName, isLoggedIn }) {
       <div className="container">
         <div className="d-flex align-items-center">
           <div className="site-logo">
-            <a href="index.html">
-              <span className="h1 main-logo">Foot2gether</span>
-            </a>
+            <NavBarItem
+              name="HOME"
+              color="white"
+              isActive={currentPageName === "Home" ? "active" : ""}
+            />
           </div>
 
           <div className="ml-auto">
