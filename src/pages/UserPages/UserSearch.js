@@ -7,6 +7,7 @@ import axios from "axios";
 
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
 import UserSearchBar from "../../components/User/UserSearchBar";
+import UserSearchNoResults from "../../components/User/UserSearchNoResults";
 import UserCard from "../../components/User/UserCard";
 import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
@@ -90,7 +91,7 @@ function UserSearch() {
             <UserSearchBar searchHandler={searchHandler} />
           </Grid>
 
-          {searchResults &&
+          {searchResults ? (
             searchResults.map((result) => (
               <UserCard
                 username={result.username}
@@ -98,7 +99,10 @@ function UserSearch() {
                 userFavTeamLogo={result.fav_team.logo}
                 followersCount={result.follower.length}
               />
-            ))}
+            ))
+          ) : (
+            <UserSearchNoResults />
+          )}
         </Grid>
       </Grid>
 
