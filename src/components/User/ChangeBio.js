@@ -36,9 +36,12 @@ const useStyles = makeStyles({
 });
 
 function ChangeCoverPhoto({ getMyProfileData }) {
-  const token = JSON.parse(localStorage.getItem("login")).token;
+  let user_data = JSON.parse(localStorage.getItem("login"));
+
+  const token = user_data.token;
   const config = {
     headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   };
@@ -65,6 +68,10 @@ function ChangeCoverPhoto({ getMyProfileData }) {
 
       if (response.status === 200) {
         console.log("Successfully Changed Bio!");
+
+        user_data.bio = response.data;
+        localStorage.setItem("login", JSON.stringify(user_data));
+
         getMyProfileData();
         setOpen(false);
       } else {

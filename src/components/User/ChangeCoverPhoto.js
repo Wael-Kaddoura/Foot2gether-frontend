@@ -28,14 +28,15 @@ const useStyles = makeStyles({
 });
 
 function ChangeCoverPhoto({ getMyProfileData }) {
-  const token = JSON.parse(localStorage.getItem("login")).token;
+  let user_data = JSON.parse(localStorage.getItem("login"));
+
+  const token = user_data.token;
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   };
-
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -59,6 +60,10 @@ function ChangeCoverPhoto({ getMyProfileData }) {
 
       if (response.status === 200) {
         console.log("Successfully Changed Cover Photo!");
+
+        user_data.cover_photo = response.data;
+        localStorage.setItem("login", JSON.stringify(user_data));
+
         getMyProfileData();
         setOpen(false);
       } else {

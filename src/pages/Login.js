@@ -103,9 +103,13 @@ function Login() {
 
         const JWT_token = response.data.token;
         const is_admin = response.data.isAdmin;
-        const user_id = response.data.user.id;
-        const username = response.data.user.username;
-        const user_profile_picture = response.data.user.userProfilePicture;
+        const {
+          user_id,
+          username,
+          user_profile_picture,
+          user_cover_photo,
+          user_bio,
+        } = response.data.user;
 
         localStorage.setItem(
           "login",
@@ -116,6 +120,8 @@ function Login() {
             user_id,
             username,
             user_profile_picture,
+            user_cover_photo,
+            user_bio,
           })
         );
 

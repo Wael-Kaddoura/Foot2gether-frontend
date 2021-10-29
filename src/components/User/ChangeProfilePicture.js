@@ -28,7 +28,9 @@ const useStyles = makeStyles({
 });
 
 function ChangeProfilePicture({ getMyProfileData }) {
-  const token = JSON.parse(localStorage.getItem("login")).token;
+  let user_data = JSON.parse(localStorage.getItem("login"));
+
+  const token = user_data.token;
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -59,6 +61,10 @@ function ChangeProfilePicture({ getMyProfileData }) {
 
       if (response.status === 200) {
         console.log("Successfully Changed Profile Picture!");
+
+        user_data.user_profile_picture = response.data;
+        localStorage.setItem("login", JSON.stringify(user_data));
+
         getMyProfileData();
         setOpen(false);
       } else {
@@ -101,15 +107,9 @@ function ChangeProfilePicture({ getMyProfileData }) {
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
-              <Button
-                variant="outlined"
-                fullWidth
-                component="label"
-                color="inherit"
-              >
-                Upload Image
-                <input type="file" required name="profile_picture" />
-              </Button>
+              <Typography sx={{ mb: 1 }}>Upload Image</Typography>
+
+              <input type="file" required name="profile_picture" />
 
               <Button
                 type="submit"
