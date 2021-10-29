@@ -43,7 +43,7 @@ function UserSearch() {
 
   const classes = useStyles();
 
-  const [isPending, setIsPending] = useState(true);
+  const [isPending, setIsPending] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
 
   async function searchHandler(search_word) {
