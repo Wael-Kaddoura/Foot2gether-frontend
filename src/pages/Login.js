@@ -142,12 +142,14 @@ function Login() {
         setLoginError(true);
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Wrong Credentials!");
-        setIsPending(false);
-        setLoginError(true);
+      if (err) {
+        if (err.response.status === 401) {
+          console.log("Wrong Credentials!");
+        }
+        console.log(err);
       }
-      console.log(err);
+      setIsPending(false);
+      setLoginError(true);
     }
   };
 
