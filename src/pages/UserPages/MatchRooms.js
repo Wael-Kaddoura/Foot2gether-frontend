@@ -8,6 +8,7 @@ import axios from "axios";
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomMatchCard from "../../components/Matches/MatchCards/RoomMatchCard";
 import LiveMatchRoomCard from "../../components/Rooms/LiveMatchRoomCard";
+import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
@@ -131,15 +132,19 @@ function MatchRooms() {
               Live Rooms
             </Grid>
 
-            {liveRooms.map((room) => (
-              <LiveMatchRoomCard
-                roomName={room.name}
-                roomID={room.id}
-                roomCreator={room.creator.username}
-                roomCreatorID={room.creator_id}
-                roomCurrentCapacity={room.current_participants_number}
-              />
-            ))}
+            {liveRooms.length ? (
+              liveRooms.map((room) => (
+                <LiveMatchRoomCard
+                  roomName={room.name}
+                  roomID={room.id}
+                  roomCreator={room.creator.username}
+                  roomCreatorID={room.creator_id}
+                  roomCurrentCapacity={room.current_participants_number}
+                />
+              ))
+            ) : (
+              <NoMatchMsg msg="There are no Live Rooms right now!" />
+            )}
           </Grid>
         </Grid>
       )}

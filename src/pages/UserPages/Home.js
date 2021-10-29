@@ -100,7 +100,7 @@ function Home() {
         alignItems="center"
       >
         {!isPending ? (
-          nextMatchData ? (
+          nextMatchData.length ? (
             <HomeNextMatchCard nextMatch={nextMatchData} />
           ) : (
             <NoMatchMsg

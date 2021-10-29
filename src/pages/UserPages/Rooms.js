@@ -9,6 +9,7 @@ import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../../components/Rooms/CreateNewRoom";
+import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
@@ -190,7 +191,7 @@ function Rooms() {
               ""
             )}
 
-            {!isSearchRoom &&
+            {!isSearchRoom && liveRooms.length ? (
               liveRooms.map((room) => (
                 <LiveRoomCard
                   config={config}
@@ -202,7 +203,10 @@ function Rooms() {
                   team1Logo={room.matchroom.team1.logo}
                   team2Logo={room.matchroom.team2.logo}
                 />
-              ))}
+              ))
+            ) : (
+              <NoMatchMsg msg="There are no Live Rooms right now!" />
+            )}
           </Grid>
         </Grid>
       )}

@@ -106,7 +106,7 @@ function MatchTabs(props) {
               <div>
                 {"Live    ."}
                 <Badge
-                  badgeContent={liveMatches ? liveMatches.length : 0}
+                  badgeContent={liveMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -130,7 +130,7 @@ function MatchTabs(props) {
               <div>
                 {"Upcoming    ."}
                 <Badge
-                  badgeContent={upcomingMatches ? upcomingMatches.length : 0}
+                  badgeContent={upcomingMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -154,7 +154,7 @@ function MatchTabs(props) {
               <div>
                 {"Finished    ."}
                 <Badge
-                  badgeContent={finishedMatches ? finishedMatches.length : 0}
+                  badgeContent={finishedMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
@@ -176,7 +176,7 @@ function MatchTabs(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {liveMatches ? (
+        {liveMatches.length ? (
           liveMatches.map((match) => (
             <LiveMatchCard
               matchID={match.id}
@@ -195,7 +195,7 @@ function MatchTabs(props) {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        {upcomingMatches ? (
+        {upcomingMatches.length ? (
           upcomingMatches.map((match) => (
             <UpcomingMatchCard
               team1Name={match.team1.name}
@@ -214,7 +214,7 @@ function MatchTabs(props) {
       </TabPanel>
 
       <TabPanel value={value} index={2}>
-        {finishedMatches ? (
+        {finishedMatches.length ? (
           finishedMatches.map((match) => (
             <FinishedMatchCard
               team1Name={match.team1.name}
