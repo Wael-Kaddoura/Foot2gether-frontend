@@ -17,7 +17,6 @@ import AdminCreateRoom from "../../components/AdminPanel/AdminCreateRoom";
 const useStyles = makeStyles({
   pageTitle: {
     fontSize: 40,
-    // fontWeight: 700,
   },
   roomContent: {
     minWidth: "100%",

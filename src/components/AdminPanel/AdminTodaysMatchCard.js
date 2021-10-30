@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 60,
     },
     [theme.breakpoints.between("sm", "xl")]: {
-      minHeight: 70,
-      maxHeight: 70,
-      maxWidth: 70,
+      minHeight: 75,
+      maxHeight: 75,
+      maxWidth: 75,
     },
   },
   finishedScore: {
@@ -61,7 +61,7 @@ function AdminTodaysMatchCard(props) {
     <Grid item xs={12} sx={{ mb: 1 }}>
       <Card
         className={classes.card}
-        sx={{ maxWidth: 1140, minHeight: 180, mb: 2, mx: 2 }}
+        sx={{ maxWidth: 1140, minHeight: 180, mb: 2, mx: 2, pb: 2 }}
       >
         <Grid
           sx={{ minHeight: 180 }}

@@ -47,7 +47,7 @@ function AdminRoomCard(props) {
     <Grid item xs={12} sx={{ mb: 1 }}>
       <Card
         className={classes.card}
-        sx={{ maxWidth: 1140, minHeight: 120, mb: 1, mx: 2 }}
+        sx={{ maxWidth: 1140, minHeight: 120, mb: 1, mx: 2, pb: 2 }}
       >
         <Grid
           item
