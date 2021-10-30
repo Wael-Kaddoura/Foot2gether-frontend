@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 import date from "date-and-time";
 
 const useStyles = makeStyles({
@@ -41,7 +42,13 @@ const useStyles = makeStyles({
 });
 
 function BlogComment(props) {
-  const { commentAuthor, commentDate, commentBody, commentAuthorPP } = props;
+  const {
+    commentAuthorID,
+    commentAuthor,
+    commentDate,
+    commentBody,
+    commentAuthorPP,
+  } = props;
 
   //formating comment date and time
   let comment_date_time = date.format(
@@ -62,7 +69,14 @@ function BlogComment(props) {
           />
         </Grid>
         <Grid item xs={10}>
-          <Typography className={classes.userName}>{commentAuthor}</Typography>
+          <Typography className={classes.userName}>
+            <Link
+              to={"/user_profile?id=" + commentAuthorID}
+              style={{ color: "#fff" }}
+            >
+              {commentAuthor}
+            </Link>
+          </Typography>
           <Typography className={classes.commentTime}>
             {comment_date_time}
           </Typography>

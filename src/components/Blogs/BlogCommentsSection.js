@@ -55,6 +55,7 @@ function BlogComments({
         >
           {blogComments.map((comment) => (
             <BlogComment
+              commentAuthorID={comment.comment_author.id}
               commentAuthor={comment.comment_author.username}
               commentAuthorPP={comment.comment_author.profile_picture}
               commentDate={comment.updatedAt}

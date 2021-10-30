@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -45,7 +45,6 @@ function BlogView() {
   const [isPending, setIsPending] = useState(true);
   const [blogData, setBlogData] = useState(null);
   const [blogComments, setBlogComments] = useState(null);
-  const [blogCommentsCount, setBlogCommentsCount] = useState(null);
 
   async function getBlogData() {
     try {
@@ -73,22 +72,8 @@ function BlogView() {
     }
   }
 
-  async function getBlogCommentsCount() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/blog/comments_count/" + blog_id,
-        config
-      );
-      let blog_comments_count = response.data.comments_count;
-      setBlogCommentsCount(blog_comments_count);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function getCommentsData() {
     await getBlogComments();
-    await getBlogCommentsCount();
   }
 
   async function fetchData() {
@@ -117,7 +102,12 @@ function BlogView() {
               className={classes.pageSubtitle}
               sx={{ mx: 3 }}
             >
-              by {blogData.author.username}
+              <Link
+                to={"/user_profile?id=" + blogData.author.id}
+                style={{ color: "#fff" }}
+              >
+                by {blogData.author.username}
+              </Link>
             </Box>
           </div>
         )}
@@ -140,7 +130,7 @@ function BlogView() {
           />
           <BlogCommentsSection
             blogComments={blogComments}
-            blogCommentsCount={blogCommentsCount}
+            blogCommentsCount={blogComments.length}
             blog_id={blog_id}
             getCommentsData={getCommentsData}
             config={config}
