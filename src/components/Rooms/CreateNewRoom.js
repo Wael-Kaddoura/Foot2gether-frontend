@@ -190,9 +190,21 @@ function CreateNewRoom({ getLiveRooms }) {
                 MenuProps={MenuProps}
               >
                 {isLoaded &&
-                  availableMatches.map((match) => (
+                  availableMatches.live_matches.map((match) => (
                     <MenuItem value={match.id}>
                       <CreateNewRoomMenuItem
+                        matchType="Live"
+                        team1Logo={match.team1.logo}
+                        team2Logo={match.team2.logo}
+                      />
+                    </MenuItem>
+                  ))}
+
+                {isLoaded &&
+                  availableMatches.upcoming_matches.map((match) => (
+                    <MenuItem value={match.id}>
+                      <CreateNewRoomMenuItem
+                        matchType="Upcoming"
                         team1Logo={match.team1.logo}
                         team2Logo={match.team2.logo}
                       />
