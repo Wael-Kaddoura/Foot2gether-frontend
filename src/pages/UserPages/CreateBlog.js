@@ -139,7 +139,6 @@ function CreateBlog() {
               type="submit"
               fullWidth
               variant="contained"
-              color="success"
               sx={{ mt: 4, mb: 2 }}
             >
               Create Blog

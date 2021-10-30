@@ -140,7 +140,7 @@ function CreateNewRoom({ getLiveRooms }) {
 
   return (
     <div>
-      <Button variant="contained" color="success" onClick={handleOpen}>
+      <Button variant="contained" onClick={handleOpen}>
         Create New Room
       </Button>
       <Modal
@@ -205,7 +205,6 @@ function CreateNewRoom({ getLiveRooms }) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >

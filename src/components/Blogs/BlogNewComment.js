@@ -84,7 +84,6 @@ function BlogNewComment({ blog_id, getCommentsData, config }) {
           type="submit"
           fullWidth
           variant="contained"
-          color="success"
           sx={{ mt: 3, mb: 2 }}
         >
           Post Comment

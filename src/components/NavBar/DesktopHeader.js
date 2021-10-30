@@ -22,8 +22,6 @@ import DrawerComponent from "./MobileDrawer";
 const useStyles = makeStyles({
   loginBtn: {
     color: "#fff",
-    backgroundColor: "#2e7d32",
-    borderColor: "#2e7d32",
   },
   mainLogo: {
     fontSize: 24,
@@ -181,8 +179,7 @@ function DesktopHeader(props) {
                       <Link to={"/login"}>
                         <Button
                           className={classes.loginBtn}
-                          variant="outlined"
-                          color="success"
+                          variant="contained"
                           sx={{ ml: 5 }}
                         >
                           Log in

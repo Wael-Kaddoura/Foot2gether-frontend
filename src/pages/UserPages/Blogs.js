@@ -73,9 +73,7 @@ function Blog() {
           molestias repudiandae pariatur.
         </p>
         <Link to="/create_blog">
-          <Button variant="contained" color="success" o>
-            Create New Blog
-          </Button>
+          <Button variant="contained">Create New Blog</Button>
         </Link>
       </div>
     </div>
