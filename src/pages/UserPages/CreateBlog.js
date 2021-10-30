@@ -15,10 +15,10 @@ const useStyles = makeStyles({
   },
   pageTitle: {
     color: "#fff",
-    fontSize: 50,
+    fontSize: 40,
   },
   form: {
-    width: "50%",
+    width: "60%",
   },
   formField: {
     width: "100%",
@@ -90,14 +90,12 @@ function CreateBlog() {
 
       <BackdropComponent open={isPending} />
 
-      <Grid className={classes.pageContainer} container>
-        <Grid item xs={12} sx={{ mb: 2 }}>
-          <Typography className={classes.pageTitle} sx={{ ml: 2 }}>
-            Create New Blog
-          </Typography>
+      <Grid className={classes.pageContainer} container sx={{ pt: 1 }}>
+        <Grid item xs={12} sx={{ mb: 2 }} container justifyContent="center">
+          <Typography className={classes.pageTitle}>Create New Blog</Typography>
         </Grid>
 
-        <Grid item xs={12} sx={{ ml: 2 }}>
+        <Grid item xs={12} sx={{ ml: 2 }} container justifyContent="center">
           <Box
             component="form"
             onSubmit={handleSubmit}
