@@ -5,10 +5,10 @@ import {
   List,
   ListItem,
   ListItemText,
-  makeStyles,
   Typography,
   Grid,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Button, Avatar } from "@mui/material";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -31,7 +31,6 @@ const useStyles = makeStyles(() => ({
     height: 70,
     border: "2px solid",
   },
-
   loginBtn: {
     color: "#fff",
     backgroundColor: "#2e7d32",
