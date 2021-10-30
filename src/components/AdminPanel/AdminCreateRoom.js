@@ -15,7 +15,6 @@ import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
 import AdminCreateNewRoomMenuItem from "./AdminCreateNewRoomMenuItem";
-// import CreateRoomSnackbar from "./CreateRoomSnackbar";
 
 const style = {
   position: "absolute",
@@ -113,7 +112,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
 
   return (
     <div>
-      <Button variant="contained" color="success" onClick={handleOpen}>
+      <Button variant="contained" onClick={handleOpen}>
         Create New Room
       </Button>
       <Modal
@@ -177,7 +176,6 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
@@ -187,10 +185,6 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
           </Box>
         </Fade>
       </Modal>
-      {/* <CreateRoomSnackbar
-        open={snackbarOpen}
-        handleClose={handleCloseSnackbar}
-      /> */}
     </div>
   );
 }

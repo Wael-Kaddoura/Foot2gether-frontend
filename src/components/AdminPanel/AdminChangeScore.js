@@ -14,8 +14,6 @@ import {
 import { makeStyles } from "@material-ui/core";
 import axios from "axios";
 
-// import CreateRoomSnackbar from "./CreateRoomSnackbar";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -133,7 +131,7 @@ function AdminChangeScore({
 
   return (
     <div>
-      <Button variant="contained" color="warning" onClick={handleOpen}>
+      <Button variant="contained" onClick={handleOpen}>
         Change Score
       </Button>
       <Modal
@@ -230,7 +228,6 @@ function AdminChangeScore({
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
@@ -240,10 +237,6 @@ function AdminChangeScore({
           </Box>
         </Fade>
       </Modal>
-      {/* <CreateRoomSnackbar
-        open={snackbarOpen}
-        handleClose={handleCloseSnackbar}
-      /> */}
     </div>
   );
 }

@@ -128,7 +128,6 @@ function AdminTodaysRooms() {
                 container
                 direction="row"
                 justifyContent="center"
-                // alignItems="center"
                 className={classes.roomsContainer}
                 sx={{ mx: 2 }}
               >

@@ -21,8 +21,6 @@ import { makeStyles } from "@material-ui/core";
 import date from "date-and-time";
 import axios from "axios";
 
-// import CreateRoomSnackbar from "./CreateRoomSnackbar";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -169,7 +167,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
 
   return (
     <div>
-      <Button variant="contained" color="success" onClick={handleOpen}>
+      <Button variant="contained" onClick={handleOpen}>
         Add New Match
       </Button>
       <Modal
@@ -325,7 +323,6 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
@@ -335,10 +332,6 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
           </Box>
         </Fade>
       </Modal>
-      {/* <CreateRoomSnackbar
-        open={snackbarOpen}
-        handleClose={handleCloseSnackbar}
-      /> */}
     </div>
   );
 }
