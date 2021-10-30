@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Grid } from "@mui/material";
-import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -94,10 +93,12 @@ function UserSearch() {
           {searchResults ? (
             searchResults.map((result) => (
               <UserCard
+                userID={result.id}
                 username={result.username}
                 userPP={result.profile_picture}
                 userFavTeamLogo={result.fav_team.logo}
                 followersCount={result.follower.length}
+                is_followed={result.is_followed}
               />
             ))
           ) : (

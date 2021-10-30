@@ -198,12 +198,7 @@ function UserProfile() {
             Unfollow
           </Button>
         ) : (
-          <Button
-            className={classes.followBtn}
-            onClick={followUser}
-            variant="contained"
-            color="error"
-          >
+          <Button onClick={followUser} variant="contained" color="error">
             Follow
           </Button>
         )}
