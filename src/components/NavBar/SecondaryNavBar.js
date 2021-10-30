@@ -35,11 +35,6 @@ function MainNavBar({ currentPageName }) {
     <div>
       {isLoaded && (
         <div>
-          <MobileDrawer
-            currentPageName={currentPageName}
-            isLoggedIn={isLoggedIn}
-          />
-
           <DesktopHeader
             currentPageName={currentPageName}
             isLoggedIn={isLoggedIn}

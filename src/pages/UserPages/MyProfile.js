@@ -31,8 +31,6 @@ const useStyles = makeStyles({
   userImage: {
     height: 200,
     width: 200,
-    // border: "5px solid",
-    // borderColor: "#fff",
   },
   roomsContainer: {
     maxWidth: 1140,

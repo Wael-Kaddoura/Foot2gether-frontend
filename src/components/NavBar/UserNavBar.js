@@ -23,10 +23,6 @@ function UserNavBar(props) {
   return (
     <div>
       <div>
-        <MobileDrawer
-          currentPageName={currentPageName}
-          isLoggedIn={isLoggedIn}
-        />
         <DesktopHeader
           currentPageName={currentPageName}
           dontShowProfileIcon={dontShowProfileIcon}
