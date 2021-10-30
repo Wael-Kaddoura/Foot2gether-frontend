@@ -4,7 +4,7 @@ import date from "date-and-time";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "rgba(255, 255, 255, 0.07)",
     marginLeft: "auto",
     marginRight: "auto",
   },

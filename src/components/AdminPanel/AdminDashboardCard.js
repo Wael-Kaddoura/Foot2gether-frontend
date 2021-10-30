@@ -48,7 +48,7 @@ function AdminDashboardCard(props) {
       <Link to={"/admin/" + pageLink} style={{ textDecoration: "none" }}>
         <Card
           sx={{ minWidth: 350, minHeight: 450, py: 2 }}
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.03)" }}
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.04)" }}
         >
           <Grid container>
             <Grid
