@@ -19,7 +19,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -133,7 +132,6 @@ function ChangeCoverPhoto({ getMyProfileData }) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Change

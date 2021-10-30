@@ -11,7 +11,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -106,21 +105,19 @@ function ChangeCoverPhoto({ getMyProfileData }) {
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
-              <Button
-                variant="outlined"
-                fullWidth
-                component="label"
-                color="inherit"
+              <Typography
+                style={{ color: "#000", fontWeight: 700 }}
+                sx={{ mb: 1 }}
               >
                 Upload Image
-                <input type="file" required name="cover_photo" />
-              </Button>
+              </Typography>
+
+              <input type="file" required name="cover_photo" />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Upload Image

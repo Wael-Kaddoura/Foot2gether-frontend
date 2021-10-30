@@ -11,7 +11,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -107,15 +106,18 @@ function ChangeProfilePicture({ getMyProfileData }) {
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
-              <Typography sx={{ mb: 1 }}>Upload Image</Typography>
-
+              <Typography
+                style={{ color: "#000", fontWeight: 700 }}
+                sx={{ mb: 1 }}
+              >
+                Upload Image
+              </Typography>
               <input type="file" required name="profile_picture" />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="success"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Upload Image
