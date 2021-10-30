@@ -18,11 +18,6 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 const useStyles = makeStyles({
-  followBtn: {
-    color: "#fff",
-    backgroundColor: "#ee1e46",
-    borderColor: "#ee1e46",
-  },
   unfollowBtn: {
     color: "#fff",
     backgroundColor: "#bf1737",
@@ -39,8 +34,6 @@ const useStyles = makeStyles({
   userImage: {
     height: 200,
     width: 200,
-    // border: "5px solid",
-    // borderColor: "#fff",
   },
   roomsContainer: {
     maxWidth: 1140,
@@ -199,8 +192,8 @@ function UserProfile() {
           <Button
             className={classes.unfollowBtn}
             onClick={unFollowUser}
-            variant="outlined"
-            color="inherit"
+            variant="contained"
+            color="error"
           >
             Unfollow
           </Button>
@@ -208,7 +201,7 @@ function UserProfile() {
           <Button
             className={classes.followBtn}
             onClick={followUser}
-            variant="outlined"
+            variant="contained"
             color="error"
           >
             Follow
