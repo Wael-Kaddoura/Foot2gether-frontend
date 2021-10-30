@@ -12,6 +12,7 @@ import Footer from "../../components/Footer";
 const useStyles = makeStyles({
   pageTitle: {
     fontSize: "50px !important",
+    color: "#fff",
     fontWeight: 700,
   },
   pageSubtitle: {
