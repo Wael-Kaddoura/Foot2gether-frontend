@@ -22,11 +22,6 @@ function MainNavBar({ currentPageName, NavBarContent }) {
   return (
     <div>
       <div>
-        <MobileDrawer
-          currentPageName={currentPageName}
-          isLoggedIn={isLoggedIn}
-        />
-
         <DesktopHeader
           currentPageName={currentPageName}
           isLoggedIn={isLoggedIn}

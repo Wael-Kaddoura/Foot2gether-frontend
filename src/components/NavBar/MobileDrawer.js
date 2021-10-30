@@ -1,37 +1,35 @@
-import "../../css/bootstrap/bootstrap.css";
-import "../../css/owl.carousel.min.css";
-import "../../css/owl.theme.default.min.css";
-import "../../css/jquery-ui.css";
-import "../../css/jquery.fancybox.min.css";
-import "../../css/bootstrap-datepicker.css";
-import "../../css/aos.css";
-import "../../css/style.css";
+import React, { useState } from "react";
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  makeStyles,
+} from "@material-ui/core";
+import { Button, Avatar } from "@mui/material";
 
-import { List, Button, ListItem, ListItemText, Avatar } from "@mui/material";
+import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
-import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
 import NavBarItem from "./NavBarItem";
 
-const useStyles = makeStyles({
-  profilePicture: {
-    width: 70,
-    height: 70,
-    border: "2px solid",
+const useStyles = makeStyles(() => ({
+  link: {
+    textDecoration: "none",
+    color: "blue",
+    fontSize: "20px",
   },
-
-  loginBtn: {
-    color: "#fff",
-    backgroundColor: "#2e7d32",
-    borderColor: "#2e7d32",
+  icon: {
+    color: "white",
   },
-});
+}));
 
-function MobileDrawer({ currentPageName, isLoggedIn }) {
-  const history = useHistory();
+function DrawerComponent({ currentPageName, isLoggedIn }) {
   const classes = useStyles();
+  const history = useHistory();
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const login_status = JSON.parse(localStorage.getItem("login"));
 
@@ -70,94 +68,82 @@ function MobileDrawer({ currentPageName, isLoggedIn }) {
   };
 
   return (
-    <div className="site-mobile-menu site-navbar-target">
-      <div className="site-mobile-menu-header">
-        <div className="site-mobile-menu-close">
-          <span className="icon-close2 js-menu-toggle">
-            <CloseIcon />
-          </span>
-        </div>
-      </div>
-      <div className="">
-        <nav
-          className="site-navigation position-relative text-right"
-          role="navigation"
-        >
-          <List>
-            {isLoggedIn && (
-              <ListItem sx={{ ml: 12, mb: 2 }}>
-                <Avatar
-                  alt="PP"
-                  className={classes.profilePicture}
-                  src={user_profile_picture}
-                />
-              </ListItem>
-            )}
-            <NavBarItem
-              name="HOME"
-              color="black"
-              isActiveDrawer={currentPageName === "Home" ? "drawer-active" : ""}
-            />
-            <NavBarItem
-              name="MATCHES"
-              color="black"
-              isActiveDrawer={
-                currentPageName === "Matches" ? "drawer-active" : ""
-              }
-            />
-            <NavBarItem
-              name="ROOMS"
-              color="black"
-              isActiveDrawer={
-                currentPageName === "Rooms" ? "drawer-active" : ""
-              }
-            />
-            <NavBarItem
-              name="BLOG"
-              color="black"
-              isActiveDrawer={currentPageName === "Blog" ? "drawer-active" : ""}
-            />
+    <>
+      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+        <List>
+          {isLoggedIn && (
+            <ListItem sx={{ ml: 12, mb: 2 }}>
+              <Avatar
+                alt="PP"
+                className={classes.profilePicture}
+                src={user_profile_picture}
+              />
+            </ListItem>
+          )}
+          <NavBarItem
+            name="HOME"
+            color="black"
+            isActiveDrawer={currentPageName === "Home" ? "drawer-active" : ""}
+          />
+          <NavBarItem
+            name="MATCHES"
+            color="black"
+            isActiveDrawer={
+              currentPageName === "Matches" ? "drawer-active" : ""
+            }
+          />
+          <NavBarItem
+            name="ROOMS"
+            color="black"
+            isActiveDrawer={currentPageName === "Rooms" ? "drawer-active" : ""}
+          />
+          <NavBarItem
+            name="BLOG"
+            color="black"
+            isActiveDrawer={currentPageName === "Blog" ? "drawer-active" : ""}
+          />
 
-            {isLoggedIn ? (
-              <div>
-                <Link
-                  to="/my_profile"
-                  className="nav-link"
-                  style={{ textDecoration: "none", color: "black" }}
+          {isLoggedIn ? (
+            <div>
+              <Link
+                to="/my_profile"
+                className="nav-link"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <ListItem button>
+                  <ListItemText primary="MY PROFILE" />
+                </ListItem>
+              </Link>
+
+              <Link to="/login" className="nav-link">
+                <ListItem button onClick={logoutHandler}>
+                  <ListItemText
+                    style={{ color: "#212529" }}
+                    primary="LOG OUT"
+                  />
+                </ListItem>
+              </Link>
+            </div>
+          ) : (
+            <ListItem>
+              <Link to={"/login"}>
+                <Button
+                  className={classes.loginBtn}
+                  variant="outlined"
+                  color="success"
+                  sx={{ ml: 2, mt: 2 }}
                 >
-                  <ListItem button>
-                    <ListItemText primary="MY PROFILE" />
-                  </ListItem>
-                </Link>
-
-                <Link to="/login" className="nav-link">
-                  <ListItem button onClick={logoutHandler}>
-                    <ListItemText
-                      style={{ color: "#212529" }}
-                      primary="LOG OUT"
-                    />
-                  </ListItem>
-                </Link>
-              </div>
-            ) : (
-              <ListItem>
-                <Link to={"/login"}>
-                  <Button
-                    className={classes.loginBtn}
-                    variant="outlined"
-                    color="success"
-                    sx={{ ml: 2, mt: 2 }}
-                  >
-                    Log in
-                  </Button>
-                </Link>
-              </ListItem>
-            )}
-          </List>
-        </nav>
-      </div>
-    </div>
+                  Log in
+                </Button>
+              </Link>
+            </ListItem>
+          )}
+        </List>
+      </Drawer>
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+        <MenuIcon />
+      </IconButton>
+    </>
   );
 }
-
-export default MobileDrawer;
+export default DrawerComponent;
