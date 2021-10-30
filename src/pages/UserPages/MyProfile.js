@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Grid, Badge, Typography, Avatar } from "@mui/material";
-import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
@@ -8,7 +7,7 @@ import axios from "axios";
 
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserInfo from "../../components/NavBar/UserInfo";
-import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
+import UserProfileTabs from "../../components/User/UserProfileTabs";
 import ChangeProfilePicture from "../../components/User/ChangeProfilePicture";
 import ChangeCoverPhoto from "../../components/User/ChangeCoverPhoto";
 import BackdropComponent from "../../components/BackdropComponent";
@@ -65,6 +64,7 @@ function MyProfile() {
   const [isPending, setIsPending] = useState(true);
   const [myProfileData, setMyProfileData] = useState(null);
   const [myLiveRooms, setMyLiveRooms] = useState(null);
+  const [myBlogs, setMyBlogs] = useState(null);
 
   async function getMyProfileData() {
     try {
@@ -92,9 +92,23 @@ function MyProfile() {
     }
   }
 
+  async function getMyBlogs() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/blog/my_blogs`,
+        config
+      );
+      let my_blogs_data = response.data;
+      setMyBlogs(my_blogs_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchData() {
     await getMyProfileData();
     await getMyLiveRooms();
+    await getMyBlogs();
     setIsPending(false);
   }
 
@@ -167,6 +181,7 @@ function MyProfile() {
             NavBarContent={NavBarContent}
             coverPhoto={user_cover_photo}
           />
+
           <UserInfo
             bio={user_bio}
             followingCount={myProfileData.following.length}
@@ -175,49 +190,11 @@ function MyProfile() {
             isMyProfile={true}
           />
 
-          <Grid
-            container
-            className={classes.roomContent}
-            direction="row"
-            justifyContent="center"
-          >
-            <Grid
-              item
-              xs={12}
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              className={classes.roomsContainer}
-              sx={{ mx: 2, mt: 5 }}
-            >
-              <Grid item xs={12} container sx={{ mb: 5 }}>
-                <Grid
-                  item
-                  xs={7}
-                  container
-                  direction="row"
-                  alignItems="center"
-                  className={classes.bodyTitle}
-                >
-                  <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
-                  Live Rooms
-                </Grid>
-              </Grid>
-
-              {myLiveRooms.map((room) => (
-                <LiveRoomCard
-                  roomName={room.name}
-                  roomID={room.id}
-                  roomCreator={room.creator.username}
-                  roomCreatorID={room.creator_id}
-                  roomCurrentCapacity={room.current_participants_number}
-                  team1Logo={room.matchroom.team1.logo}
-                  team2Logo={room.matchroom.team2.logo}
-                />
-              ))}
-            </Grid>
-          </Grid>
+          <UserProfileTabs
+            username={myProfileData.username}
+            userLiveRooms={myLiveRooms}
+            userBlogs={myBlogs}
+          />
 
           <Footer />
         </div>

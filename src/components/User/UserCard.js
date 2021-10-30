@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, Grid, Badge, Avatar, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
@@ -128,59 +128,61 @@ function UserCard(props) {
 
   return (
     <Grid item xs={12} sx={{ mb: 5, mx: 2 }}>
-      <Card
-        className={classes.card}
-        sx={{ maxWidth: 800, minHeight: 176, maxHeight: 176, mx: 2 }}
-      >
-        <Grid
-          sx={{ minHeight: 176 }}
-          container
-          justifyContent="center"
-          alignItems="center"
+      <Link to={"/user_profile?id=" + userID}>
+        <Card
+          className={classes.card}
+          sx={{ maxWidth: 800, minHeight: 176, maxHeight: 176, mx: 2 }}
         >
-          <Grid item xs={3} sm={3}>
-            <Badge
-              overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              badgeContent={
-                <SmallAvatar alt="user_fav_team" src={userFavTeamLogo} />
-              }
-            >
-              <Avatar
-                alt="user_profile_picture"
-                src={userPP}
-                className={classes.userImage}
-              />
-            </Badge>
-          </Grid>
-
-          <Grid item container xs={5} sm={5} className={classes.userInfo}>
-            <Grid item xs={12}>
-              {username}
-            </Grid>
-            <Grid item xs={12}>
-              {followersCount} Followers
-            </Grid>
-          </Grid>
-
-          <Grid item container xs={3} sm={3}>
-            {isFollowed ? (
-              <Button
-                className={classes.unfollowBtn}
-                onClick={unFollowUser}
-                variant="contained"
-                color="error"
+          <Grid
+            sx={{ minHeight: 176 }}
+            container
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item xs={3} sm={3}>
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                badgeContent={
+                  <SmallAvatar alt="user_fav_team" src={userFavTeamLogo} />
+                }
               >
-                Unfollow
-              </Button>
-            ) : (
-              <Button onClick={followUser} variant="contained" color="error">
-                Follow
-              </Button>
-            )}
+                <Avatar
+                  alt="user_profile_picture"
+                  src={userPP}
+                  className={classes.userImage}
+                />
+              </Badge>
+            </Grid>
+
+            <Grid item container xs={5} sm={5} className={classes.userInfo}>
+              <Grid item xs={12}>
+                {username}
+              </Grid>
+              <Grid item xs={12}>
+                {followersCount} Followers
+              </Grid>
+            </Grid>
+
+            <Grid item container xs={3} sm={3}>
+              {isFollowed ? (
+                <Button
+                  className={classes.unfollowBtn}
+                  onClick={unFollowUser}
+                  variant="contained"
+                  color="error"
+                >
+                  Unfollow
+                </Button>
+              ) : (
+                <Button onClick={followUser} variant="contained" color="error">
+                  Follow
+                </Button>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </Card>
+        </Card>
+      </Link>
     </Grid>
   );
 }

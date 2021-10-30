@@ -33,7 +33,7 @@ a {
   transition: 0.3s all ease;
 }
 a:hover {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 h1,

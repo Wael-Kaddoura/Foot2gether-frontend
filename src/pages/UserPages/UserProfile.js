@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Grid, Button, Badge, Typography, Avatar } from "@mui/material";
-import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useLocation, useHistory } from "react-router-dom";
@@ -8,7 +7,7 @@ import axios from "axios";
 
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserInfo from "../../components/NavBar/UserInfo";
-import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
+import UserProfileTabs from "../../components/User/UserProfileTabs";
 import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
@@ -73,6 +72,7 @@ function UserProfile() {
   const [isPending, setIsPending] = useState(true);
   const [userData, setUserData] = useState(null);
   const [userLiveRooms, setUserLiveRooms] = useState(null);
+  const [userBlogs, setUserBlogs] = useState(null);
   const [isFollowed, setIsFollowed] = useState(false);
 
   async function followUser() {
@@ -133,9 +133,24 @@ function UserProfile() {
     }
   }
 
+  async function getUserBlogs() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/blog/user/` + user_id,
+        config
+      );
+      let user_blogs_data = response.data;
+
+      setUserBlogs(user_blogs_data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchData() {
     await getUserData();
     await getUserLiveRooms();
+    await getUserBlogs();
     setIsPending(false);
   }
 
@@ -221,49 +236,11 @@ function UserProfile() {
             bio={userData.bio}
           />
 
-          <Grid
-            container
-            className={classes.roomContent}
-            direction="row"
-            justifyContent="center"
-          >
-            <Grid
-              item
-              xs={12}
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              className={classes.roomsContainer}
-              sx={{ mx: 2, mt: 5 }}
-            >
-              <Grid item xs={12} container sx={{ mb: 5 }}>
-                <Grid
-                  item
-                  xs={7}
-                  container
-                  direction="row"
-                  alignItems="center"
-                  className={classes.bodyTitle}
-                >
-                  <CircleIcon style={{ fill: "#ee1e46" }} sx={{ mr: 1 }} />
-                  Live Rooms
-                </Grid>
-              </Grid>
-
-              {userLiveRooms.map((room) => (
-                <LiveRoomCard
-                  roomName={room.name}
-                  roomID={room.id}
-                  roomCreator={room.creator.username}
-                  roomCreatorID={room.creator_id}
-                  roomCurrentCapacity={room.current_participants_number}
-                  team1Logo={room.matchroom.team1.logo}
-                  team2Logo={room.matchroom.team2.logo}
-                />
-              ))}
-            </Grid>
-          </Grid>
+          <UserProfileTabs
+            username={userData.username}
+            userLiveRooms={userLiveRooms}
+            userBlogs={userBlogs}
+          />
 
           <Footer />
         </div>
