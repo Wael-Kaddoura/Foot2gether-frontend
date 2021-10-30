@@ -6,6 +6,8 @@ import {
   ListItem,
   ListItemText,
   makeStyles,
+  Typography,
+  Grid,
 } from "@material-ui/core";
 import { Button, Avatar } from "@mui/material";
 
@@ -16,13 +18,24 @@ import axios from "axios";
 import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: "none",
-    color: "blue",
-    fontSize: "20px",
+  mainLogo: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: 900,
   },
-  icon: {
-    color: "white",
+  drawer: {
+    width: "65%",
+  },
+  profilePicture: {
+    width: 70,
+    height: 70,
+    border: "2px solid",
+  },
+
+  loginBtn: {
+    color: "#fff",
+    backgroundColor: "#2e7d32",
+    borderColor: "#2e7d32",
   },
 }));
 
@@ -69,14 +82,19 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
 
   return (
     <>
-      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        classes={{ paper: classes.drawer }}
+      >
         <List>
           {isLoggedIn && (
-            <ListItem sx={{ ml: 12, mb: 2 }}>
+            <ListItem>
               <Avatar
                 alt="PP"
                 className={classes.profilePicture}
                 src={user_profile_picture}
+                sx={{ ml: 8, mb: 2 }}
               />
             </ListItem>
           )}
@@ -98,9 +116,9 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
             isActiveDrawer={currentPageName === "Rooms" ? "drawer-active" : ""}
           />
           <NavBarItem
-            name="BLOG"
+            name="BLOGS"
             color="black"
-            isActiveDrawer={currentPageName === "Blog" ? "drawer-active" : ""}
+            isActiveDrawer={currentPageName === "Blogs" ? "drawer-active" : ""}
           />
 
           {isLoggedIn ? (
@@ -140,9 +158,23 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
           )}
         </List>
       </Drawer>
-      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-        <MenuIcon />
-      </IconButton>
+
+      {!openDrawer && (
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+            <MenuIcon style={{ color: "#fff" }} />
+          </IconButton>
+
+          <Link to="/home">
+            <Typography className={classes.mainLogo}>Foot2gether</Typography>
+          </Link>
+        </Grid>
+      )}
     </>
   );
 }

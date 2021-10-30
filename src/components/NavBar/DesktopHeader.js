@@ -6,12 +6,11 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Box,
+  Grid,
   ListItem,
   Avatar,
   Typography,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -24,6 +23,7 @@ const useStyles = makeStyles({
     color: "#fff",
   },
   mainLogo: {
+    color: "#fff",
     fontSize: 24,
     fontWeight: 900,
   },
@@ -85,33 +85,29 @@ function DesktopHeader(props) {
     setAnchorEl(null);
   };
 
-  const renderMenu = !dontShowProfileIcon ? (
-    isLoggedIn ? (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-        sx={{ mt: 6.5, ml: 6.25 }}
-      >
-        <MenuItem style={{ color: "#ee1e46" }}>{username}</MenuItem>
-        <Link to={"/my_profile"} style={{ color: "#212529" }}>
-          <MenuItem>My Profile</MenuItem>
-        </Link>
-        <MenuItem onClick={logoutHandler}>Log out</MenuItem>
-      </Menu>
-    ) : (
-      <div></div>
-    )
+  const renderMenu = isLoggedIn ? (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      sx={{ mt: 6.5, ml: 6.25 }}
+    >
+      <MenuItem style={{ color: "#ee1e46" }}>{username}</MenuItem>
+      <Link to={"/my_profile"} style={{ color: "#212529" }}>
+        <MenuItem>My Profile</MenuItem>
+      </Link>
+      <MenuItem onClick={logoutHandler}>Log out</MenuItem>
+    </Menu>
   ) : (
     <div></div>
   );
@@ -119,19 +115,21 @@ function DesktopHeader(props) {
   return (
     <header className="site-navbar py-4" role="banner">
       <div className="container">
-        <div className="d-flex align-items-center">
-          <div className="site-logo">
-            <Link to="/home">
-              <Typography className={classes.mainLogo}>Foot2gether</Typography>
-            </Link>
-          </div>
+        {isMobile ? (
+          <DrawerComponent
+            currentPageName={currentPageName}
+            isLoggedIn={isLoggedIn}
+          />
+        ) : (
+          <div className="d-flex align-items-center">
+            <div className="site-logo">
+              <Link to="/home">
+                <Typography className={classes.mainLogo}>
+                  Foot2gether
+                </Typography>
+              </Link>
+            </div>
 
-          {isMobile ? (
-            <DrawerComponent
-              currentPageName={currentPageName}
-              isLoggedIn={isLoggedIn}
-            />
-          ) : (
             <div className="ml-auto">
               <nav
                 className="site-navigation position-relative text-right"
@@ -192,8 +190,8 @@ function DesktopHeader(props) {
                 </List>
               </nav>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </header>
   );

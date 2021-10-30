@@ -873,7 +873,7 @@ h5,
 }
 .hero-secondary,
 .hero-secondary > .container > .row {
-  height: 15vh;
+  height: 13vh;
   min-height: 0px;
 }
 .hero-secondary.overlay:after {
