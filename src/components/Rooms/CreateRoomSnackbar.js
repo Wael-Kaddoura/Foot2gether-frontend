@@ -11,7 +11,7 @@ export default function CreateRoomSnackbar({ open, handleClose }) {
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+        <Alert onClose={handleClose} severity="primary" sx={{ width: "100%" }}>
           New Room Created!
         </Alert>
       </Snackbar>
