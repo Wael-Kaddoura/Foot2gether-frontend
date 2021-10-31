@@ -82,7 +82,6 @@ function UserProfile() {
         { followed_user_id: user_id },
         config
       );
-      console.log(response.data.message);
       setIsFollowed(true);
     } catch (error) {
       console.log(error);
@@ -96,7 +95,6 @@ function UserProfile() {
         { unfollowed_user_id: user_id },
         config
       );
-      console.log(response.data.message);
       setIsFollowed(false);
     } catch (error) {
       console.log(error);

@@ -3,7 +3,6 @@ import "../../css/bootstrap/bootstrap.css";
 import "../../css/style.css";
 import { useState, useEffect } from "react";
 
-import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import SecondaryOverlay from "./SecondaryOverlay";
 

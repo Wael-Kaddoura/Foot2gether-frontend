@@ -15,7 +15,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -76,7 +75,6 @@ function Login() {
         config
       );
       if (response.status === 200) {
-        console.log("Successfully Saved Token!");
       } else {
         console.log("Something went wrong!");
       }
@@ -99,8 +97,6 @@ function Login() {
       });
 
       if (response.status === 200) {
-        console.log("Successfully logged in!");
-
         const JWT_token = response.data.token;
         const is_admin = response.data.isAdmin;
         const {

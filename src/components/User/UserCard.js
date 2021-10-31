@@ -105,7 +105,7 @@ function UserCard(props) {
         { followed_user_id: userID },
         config
       );
-      console.log(response.data.message);
+
       setIsFollowed(true);
     } catch (error) {
       console.log(error);
@@ -119,7 +119,7 @@ function UserCard(props) {
         { unfollowed_user_id: userID },
         config
       );
-      console.log(response.data.message);
+
       setIsFollowed(false);
     } catch (error) {
       console.log(error);

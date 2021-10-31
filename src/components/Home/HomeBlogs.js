@@ -49,6 +49,7 @@ function HomeBlogs({ latestBlogs }) {
 
         {latestBlogs.map((blog) => (
           <HomeBlog
+            key={blog.id}
             blogID={blog.id}
             blogImg={blog.image}
             blogTitle={blog.title}

@@ -179,6 +179,7 @@ function MatchTabs(props) {
         {liveMatches.length ? (
           liveMatches.map((match) => (
             <LiveMatchCard
+              key={match.id}
               matchID={match.id}
               team1Name={match.team1.name}
               team1Logo={match.team1.logo}
@@ -198,6 +199,7 @@ function MatchTabs(props) {
         {upcomingMatches.length ? (
           upcomingMatches.map((match) => (
             <UpcomingMatchCard
+              key={match.id}
               team1Name={match.team1.name}
               team1Logo={match.team1.logo}
               team2Name={match.team2.name}
@@ -217,6 +219,7 @@ function MatchTabs(props) {
         {finishedMatches.length ? (
           finishedMatches.map((match) => (
             <FinishedMatchCard
+              key={match.id}
               team1Name={match.team1.name}
               team1Logo={match.team1.logo}
               team1Score={match.team1_score}

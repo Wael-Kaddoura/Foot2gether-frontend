@@ -38,7 +38,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -150,7 +149,6 @@ function Signup() {
         );
 
         if (response.status === 201) {
-          console.log("Successfully Signed Up!");
           setSignUpError(false);
           history.push("/login");
         } else {
@@ -164,10 +162,8 @@ function Signup() {
         } else if (err.response.status === 409) {
           let conflict_type = err.response.data.conflict;
           if (conflict_type === "Email") {
-            console.log("Email already used!");
             setEmailUsedError(true);
           } else if (conflict_type === "Username") {
-            console.log("Username already used!");
             setUsernameUsedError(true);
           }
         }
@@ -302,7 +298,7 @@ function Signup() {
           >
             {isLoaded &&
               teamsData.map((team) => (
-                <MenuItem value={team.id}>
+                <MenuItem key={team.id} value={team.id}>
                   <Grid container alignItems="center">
                     <Grid item xs={2} container justifyContent="center">
                       <img
@@ -333,7 +329,7 @@ function Signup() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 1 }}
           >
             Sign Up
           </Button>

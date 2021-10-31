@@ -146,6 +146,7 @@ function AdminTodaysRooms() {
 
                 {todaysRooms.map((room) => (
                   <AdminRoomCard
+                    key={room.id}
                     roomName={room.name}
                     roomID={room.id}
                     roomCreator={room.creator.username}

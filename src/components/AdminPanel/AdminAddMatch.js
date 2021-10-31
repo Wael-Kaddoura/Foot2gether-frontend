@@ -77,7 +77,6 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
   const [competitionID, setCompetitionID] = useState("");
   const [team1ID, setTeam1ID] = useState("");
   const [team2ID, setTeam2ID] = useState("");
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChangeMatchDay = (newValue) => {
     setMatchDay(newValue);
@@ -104,18 +103,6 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleClick = () => {
-    setSnackbarOpen(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarOpen(false);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -152,15 +139,11 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
       );
 
       if (response.status === 200) {
-        console.log("Successfully Created Match!");
         getAllMatches();
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };
@@ -208,7 +191,9 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
                 MenuProps={MenuProps}
               >
                 {competitions.map((competition) => (
-                  <MenuItem value={competition.id}>{competition.name}</MenuItem>
+                  <MenuItem key={competition.id} value={competition.id}>
+                    {competition.name}
+                  </MenuItem>
                 ))}
               </Select>
 
@@ -226,7 +211,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
                 MenuProps={MenuProps}
               >
                 {teams.map((team) => (
-                  <MenuItem value={team.id}>
+                  <MenuItem key={team.id} value={team.id}>
                     <Grid container alignItems="center">
                       <Grid item xs={2} container justifyContent="center">
                         <img
@@ -260,7 +245,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
                 MenuProps={MenuProps}
               >
                 {teams.map((team) => (
-                  <MenuItem value={team.id}>
+                  <MenuItem key={team.id} value={team.id}>
                     <Grid container alignItems="center">
                       <Grid item xs={2} container justifyContent="center">
                         <img
@@ -323,7 +308,6 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Add Match

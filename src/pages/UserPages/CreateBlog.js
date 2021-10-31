@@ -70,16 +70,12 @@ function CreateBlog() {
       );
 
       if (response.status === 201) {
-        console.log("Successfully Created Blog!");
         setIsPending(false);
         history.push("/blogs");
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };

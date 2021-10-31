@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { Grid, Button, Typography, Fab } from "@mui/material";
+import { useEffect } from "react";
+import { Grid, Typography, Fab } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory, Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogCard from "../../components/Blogs/BlogCard";
@@ -40,40 +40,22 @@ const useStyles = makeStyles({
 
 function Blog() {
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
 
   const classes = useStyles();
 
-  const [isPending, setIsPending] = useState(true);
-  const [blogsData, setBlogsData] = useState(null);
-
-  async function getBlogsData() {
-    try {
-      let response = await axios.get(`http://localhost:8000/blog`, config);
-      let blogs_data = response.data;
-      setBlogsData(blogs_data);
-      setIsPending(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const {
+    data: blogsData,
+    fetchError,
+    isPending,
+  } = useAxiosFetch("http://localhost:8000/blog");
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getBlogsData();
   }, []);
 
   const NavBarContent = (
@@ -81,8 +63,7 @@ function Blog() {
       <div className="col-lg-5 mx-auto text-center">
         <h1 className={classes.pageTitle}>Blogs</h1>
         <p className={classes.pageSubTitle}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta,
-          molestias repudiandae pariatur.
+          Share your thoughts with other fans!
         </p>
 
         <Grid>
@@ -114,6 +95,7 @@ function Blog() {
         >
           {blogsData.map((blog) => (
             <BlogCard
+              key={blog.id}
               blogID={blog.id}
               blogImg={blog.image}
               blogTitle={blog.title}

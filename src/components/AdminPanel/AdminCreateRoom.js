@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Backdrop,
   Box,
@@ -54,23 +54,10 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [match, setMatch] = React.useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleClick = () => {
-    setSnackbarOpen(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarOpen(false);
-  };
 
   const handleChange = (event) => {
     setMatch(event.target.value);
@@ -97,15 +84,11 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
       );
 
       if (response.status === 200) {
-        console.log("Successfully Created Room!");
         getTodaysRooms();
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };
@@ -163,7 +146,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
                 MenuProps={MenuProps}
               >
                 {availableMatches.map((match) => (
-                  <MenuItem value={match.id}>
+                  <MenuItem key={match.id} value={match.id}>
                     <AdminCreateNewRoomMenuItem
                       team1Logo={match.team1.logo}
                       team2Logo={match.team2.logo}
@@ -176,7 +159,6 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Add Room

@@ -120,6 +120,7 @@ function AdminTodaysMatches() {
 
                 {todaysMatches.map((match) => (
                   <AdminTodaysMatchCard
+                    key={match.id}
                     config={config}
                     matchID={match.id}
                     kickOff={match.kick_off}

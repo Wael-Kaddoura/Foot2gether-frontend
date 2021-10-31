@@ -45,15 +45,11 @@ function BlogNewComment({ blog_id, getCommentsData, config }) {
       );
 
       if (response.status === 201) {
-        console.log("Successfully Added Comment!");
         getCommentsData();
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };

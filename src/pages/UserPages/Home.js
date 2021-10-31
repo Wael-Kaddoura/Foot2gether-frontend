@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Grid, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
@@ -29,39 +29,18 @@ const useStyles = makeStyles({
 function Home() {
   const classes = useStyles();
 
-  const [isPending, setIsPending] = useState(true);
-  const [latestBlogsData, setLatestBlogsData] = useState(null);
-  const [nextMatchData, setNextMatchData] = useState(null);
+  const { data: latestBlogsData } = useAxiosFetch(
+    "http://localhost:8000/blog/latest"
+  );
 
-  async function getNextMatchData() {
-    try {
-      let response = await axios.get("http://localhost:8000/match/next");
-      let next_match_data = response.data;
-      setNextMatchData(next_match_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getLatestBlogs() {
-    try {
-      let response = await axios.get("http://localhost:8000/blog/latest");
-      let latest_blogs_data = response.data;
-      setLatestBlogsData(latest_blogs_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getLatestBlogs();
-    await getNextMatchData();
-    setIsPending(false);
-  }
+  const {
+    data: nextMatchData,
+    fetchError,
+    isPending,
+  } = useAxiosFetch("http://localhost:8000/match/next");
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
   }, []);
 
   const NavBarContent = (

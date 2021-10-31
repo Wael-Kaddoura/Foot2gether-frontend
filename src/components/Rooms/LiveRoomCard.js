@@ -49,15 +49,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LiveRoomCard(props) {
-  const {
-    roomName,
-    roomID,
-    roomCreator,
-    roomCreatorID,
-    roomCurrentCapacity,
-    team1Logo,
-    team2Logo,
-  } = props;
+  const { roomName, roomID, roomCreator, roomCreatorID, team1Logo, team2Logo } =
+    props;
 
   const classes = useStyles();
 

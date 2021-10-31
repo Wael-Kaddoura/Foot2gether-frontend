@@ -146,6 +146,7 @@ function AdminAllMatches() {
 
                 {allMatches.map((match) => (
                   <AdminMatchCard
+                    key={match.id}
                     matchDay={match.match_day}
                     kickOff={match.kick_off}
                     competition={match.competition.name}

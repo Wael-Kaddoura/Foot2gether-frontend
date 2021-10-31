@@ -66,8 +66,6 @@ function ChangeCoverPhoto({ getMyProfileData }) {
       );
 
       if (response.status === 200) {
-        console.log("Successfully Changed Bio!");
-
         user_data.bio = response.data;
         localStorage.setItem("login", JSON.stringify(user_data));
 
@@ -77,9 +75,6 @@ function ChangeCoverPhoto({ getMyProfileData }) {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };

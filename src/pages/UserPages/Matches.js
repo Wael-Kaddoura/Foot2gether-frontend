@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import MatchesTab from "../../components/Matches/MatchesTab";
@@ -20,74 +20,30 @@ const useStyles = makeStyles({
 });
 
 function Matches() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
 
-  const classes = useStyles();
+  const { data: liveMatches } = useAxiosFetch(
+    "http://localhost:8000/match/live"
+  );
 
-  const [isPending, setIsPending] = useState(true);
-  const [liveMatches, setLiveMatches] = useState(null);
-  const [upcomingMatches, setUpcomingMatches] = useState(null);
-  const [finishedMatches, setFinishedMatches] = useState(null);
+  const { data: upcomingMatches } = useAxiosFetch(
+    "http://localhost:8000/match/upcoming"
+  );
 
-  async function getLiveMatches() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/live",
-        config
-      );
-      let live_matches_data = response.data;
-      setLiveMatches(live_matches_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getUpcomingMatches() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/upcoming",
-        config
-      );
-      let upcoming_matches_data = response.data;
-      setUpcomingMatches(upcoming_matches_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getFinishedMatches() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/finished",
-        config
-      );
-      let finished_matches_data = response.data;
-      setFinishedMatches(finished_matches_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getLiveMatches();
-    await getUpcomingMatches();
-    await getFinishedMatches();
-
-    setIsPending(false);
-  }
+  const {
+    data: finishedMatches,
+    fetchError,
+    isPending,
+  } = useAxiosFetch("http://localhost:8000/match/finished");
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
   }, []);
 
   const NavBarContent = (

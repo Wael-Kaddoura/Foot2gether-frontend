@@ -93,6 +93,7 @@ function UserSearch() {
           {searchResults ? (
             searchResults.map((result) => (
               <UserCard
+                key={result.id}
                 userID={result.id}
                 username={result.username}
                 userPP={result.profile_picture}

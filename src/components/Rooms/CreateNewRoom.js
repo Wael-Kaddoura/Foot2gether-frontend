@@ -124,15 +124,11 @@ function CreateNewRoom({ getLiveRooms }) {
       );
 
       if (response.status === 200) {
-        console.log("Successfully Created Room!");
         getLiveRooms();
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };
@@ -191,7 +187,7 @@ function CreateNewRoom({ getLiveRooms }) {
               >
                 {isLoaded &&
                   availableMatches.live_matches.map((match) => (
-                    <MenuItem value={match.id}>
+                    <MenuItem key={match.id} value={match.id}>
                       <CreateNewRoomMenuItem
                         matchType="Live"
                         team1Logo={match.team1.logo}
@@ -202,7 +198,7 @@ function CreateNewRoom({ getLiveRooms }) {
 
                 {isLoaded &&
                   availableMatches.upcoming_matches.map((match) => (
-                    <MenuItem value={match.id}>
+                    <MenuItem key={match.id} value={match.id}>
                       <CreateNewRoomMenuItem
                         matchType="Upcoming"
                         team1Logo={match.team1.logo}

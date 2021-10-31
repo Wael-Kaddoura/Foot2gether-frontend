@@ -209,6 +209,7 @@ function Rooms() {
               (liveRooms.length ? (
                 liveRooms.map((room) => (
                   <LiveRoomCard
+                    key={room.id}
                     config={config}
                     roomName={room.name}
                     roomID={room.id}

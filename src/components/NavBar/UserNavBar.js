@@ -2,7 +2,6 @@ import "../../css/bootstrap/bootstrap.css";
 
 import "../../css/style.css";
 
-import MobileDrawer from "./MobileDrawer";
 import DesktopHeader from "./DesktopHeader";
 import UserOverlay from "./UserOverlay";
 

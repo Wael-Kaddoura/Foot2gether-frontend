@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserInfo from "../../components/NavBar/UserInfo";
@@ -45,26 +46,30 @@ const useStyles = makeStyles({
 });
 
 function MyProfile() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
+
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const { username, user_profile_picture, user_cover_photo, user_bio } =
     login_status;
 
-  const classes = useStyles();
-
   const [isPending, setIsPending] = useState(true);
   const [myProfileData, setMyProfileData] = useState(null);
-  const [myLiveRooms, setMyLiveRooms] = useState(null);
-  const [myBlogs, setMyBlogs] = useState(null);
+
+  const { data: myLiveRooms } = useAxiosFetch(
+    "http://localhost:8000/room/my_rooms"
+  );
+
+  const { data: myBlogs } = useAxiosFetch(
+    "http://localhost:8000/blog/my_blogs"
+  );
 
   async function getMyProfileData() {
     try {
@@ -74,47 +79,15 @@ function MyProfile() {
       );
       let my_profile_data = response.data;
       setMyProfileData(my_profile_data);
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
-  }
-
-  async function getMyLiveRooms() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/room/my_rooms`,
-        config
-      );
-      let my_live_rooms = response.data;
-      setMyLiveRooms(my_live_rooms);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getMyBlogs() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/blog/my_blogs`,
-        config
-      );
-      let my_blogs_data = response.data;
-      setMyBlogs(my_blogs_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getMyProfileData();
-    await getMyLiveRooms();
-    await getMyBlogs();
-    setIsPending(false);
   }
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
+    getMyProfileData();
   }, []);
 
   const NavBarContent = (

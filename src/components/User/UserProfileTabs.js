@@ -63,7 +63,6 @@ function a11yProps(index) {
 
 function UserProfileTabs(props) {
   const { username, userLiveRooms, userBlogs } = props;
-  console.log(userBlogs);
 
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -124,6 +123,7 @@ function UserProfileTabs(props) {
         {userLiveRooms.length ? (
           userLiveRooms.map((room) => (
             <LiveRoomCard
+              key={room.id}
               roomName={room.name}
               roomID={room.id}
               roomCreator={room.creator.username}
@@ -151,6 +151,7 @@ function UserProfileTabs(props) {
           {userBlogs.length ? (
             userBlogs.map((blog) => (
               <BlogCard
+                key={blog.id}
                 blogID={blog.id}
                 blogImg={blog.image}
                 blogTitle={blog.title}

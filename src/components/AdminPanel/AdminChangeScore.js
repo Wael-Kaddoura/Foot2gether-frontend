@@ -70,7 +70,6 @@ function AdminChangeScore({
   const [open, setOpen] = useState(false);
   const [team1Score, setTeam1Score] = useState("");
   const [team2Score, setTeam2Score] = useState("");
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChangeTeam1Score = (event) => {
     setTeam1Score(event.target.value);
@@ -82,18 +81,6 @@ function AdminChangeScore({
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleClick = () => {
-    setSnackbarOpen(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarOpen(false);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -116,15 +103,11 @@ function AdminChangeScore({
       );
 
       if (response.status === 200) {
-        console.log("Successfully Changed Score!");
         getTodaysMatches();
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
-      if (err.response.status === 401) {
-        console.log("Something went wrong!");
-      }
       console.log(err);
     }
   };
@@ -228,7 +211,6 @@ function AdminChangeScore({
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Change Score

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomMatchCard from "../../components/Matches/MatchCards/RoomMatchCard";
@@ -34,13 +34,9 @@ const useStyles = makeStyles((theme) => ({
 
 function MatchRooms() {
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
 
@@ -48,45 +44,14 @@ function MatchRooms() {
 
   const match_id = new URLSearchParams(useLocation().search).get("id");
 
-  const [isPending, setIsPending] = useState(true);
-  const [matchData, setMatchData] = useState(null);
-  const [liveRooms, setLiveRooms] = useState(null);
-
-  async function getMatchData() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/match/" + match_id,
-        config
-      );
-      let match_data = response.data;
-      setMatchData(match_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getMatchRooms() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/room/match/${match_id}`,
-        config
-      );
-      let match_rooms_data = response.data;
-      setLiveRooms(match_rooms_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getMatchData();
-    await getMatchRooms();
-    setIsPending(false);
-  }
+  const {
+    data: matchData,
+    fetchError,
+    isPending,
+  } = useAxiosFetch("http://localhost:8000/match/" + match_id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
   }, []);
 
   const NavBarContent = (
@@ -141,9 +106,10 @@ function MatchRooms() {
               Live Rooms
             </Grid>
 
-            {liveRooms.length ? (
-              liveRooms.map((room) => (
+            {matchData.matchroom.length ? (
+              matchData.matchroom.map((room) => (
                 <LiveMatchRoomCard
+                  key={room.id}
                   roomName={room.name}
                   roomID={room.id}
                   roomCreator={room.creator.username}
