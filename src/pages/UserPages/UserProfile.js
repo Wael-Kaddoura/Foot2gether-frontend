@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserInfo from "../../components/NavBar/UserInfo";
@@ -71,9 +72,31 @@ function UserProfile() {
 
   const [isPending, setIsPending] = useState(true);
   const [userData, setUserData] = useState(null);
-  const [userLiveRooms, setUserLiveRooms] = useState(null);
-  const [userBlogs, setUserBlogs] = useState(null);
   const [isFollowed, setIsFollowed] = useState(false);
+
+  const { data: userLiveRooms } = useAxiosFetch(
+    "http://localhost:8000/room/user/" + user_id
+  );
+
+  const { data: userBlogs } = useAxiosFetch(
+    "http://localhost:8000/blog/user/" + user_id
+  );
+
+  async function getUserData() {
+    try {
+      let response = await axios.get(
+        `http://localhost:8000/user/` + user_id,
+        config
+      );
+      let user_data = response.data.user_data;
+      let is_followed = response.data.is_followed;
+
+      setUserData(user_data);
+      setIsFollowed(is_followed);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function followUser() {
     try {
@@ -101,54 +124,8 @@ function UserProfile() {
     }
   }
 
-  async function getUserData() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/user/` + user_id,
-        config
-      );
-      let user_data = response.data.user_data;
-      let is_followed = response.data.is_followed;
-
-      setUserData(user_data);
-      setIsFollowed(is_followed);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getUserLiveRooms() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/room/user/` + user_id,
-        config
-      );
-      let user_live_rooms_data = response.data;
-
-      setUserLiveRooms(user_live_rooms_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getUserBlogs() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/blog/user/` + user_id,
-        config
-      );
-      let user_blogs_data = response.data;
-
-      setUserBlogs(user_blogs_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function fetchData() {
     await getUserData();
-    await getUserLiveRooms();
-    await getUserBlogs();
     setIsPending(false);
   }
 

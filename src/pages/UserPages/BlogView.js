@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogBody from "../../components/Blogs/BlogBody";
@@ -43,21 +44,11 @@ function BlogView() {
   const blog_id = new URLSearchParams(useLocation().search).get("id");
 
   const [isPending, setIsPending] = useState(true);
-  const [blogData, setBlogData] = useState(null);
   const [blogComments, setBlogComments] = useState(null);
 
-  async function getBlogData() {
-    try {
-      let response = await axios.get(
-        "http://localhost:8000/blog/" + blog_id,
-        config
-      );
-      let blog_data = response.data;
-      setBlogData(blog_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const { data: blogData } = useAxiosFetch(
+    "http://localhost:8000/blog/" + blog_id
+  );
 
   async function getBlogComments() {
     try {
@@ -77,7 +68,6 @@ function BlogView() {
   }
 
   async function fetchData() {
-    await getBlogData();
     await getCommentsData();
     setIsPending(false);
   }

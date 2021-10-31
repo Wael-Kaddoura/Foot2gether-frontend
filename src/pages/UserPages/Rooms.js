@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
@@ -51,13 +52,14 @@ function Rooms() {
   const [isPending, setIsPending] = useState(true);
   const [isSearchRoom, setIsSearchRoom] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
-  const [userType, setUserType] = useState(1);
   const [liveRooms, setLiveRooms] = useState(null);
   const [liveRoomsCount, setLiveRoomsCount] = useState(null);
 
   function showAllRooms() {
     setIsSearchRoom(false);
   }
+
+  const { data: userType } = useAxiosFetch("http://localhost:8000/user/type");
 
   async function searchHandler(room_id) {
     if (room_id == "") {
@@ -79,16 +81,6 @@ function Rooms() {
     }
   }
 
-  async function getUserType() {
-    try {
-      let response = await axios.get(`http://localhost:8000/user/type`, config);
-      let user_type_data = response.data.user_type_id;
-      setUserType(user_type_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function getLiveRooms() {
     try {
       let response = await axios.get(`http://localhost:8000/room`, config);
@@ -101,7 +93,6 @@ function Rooms() {
   }
 
   async function fetchData() {
-    await getUserType();
     await getLiveRooms();
     setIsPending(false);
   }

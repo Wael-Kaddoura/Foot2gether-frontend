@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Backdrop,
   Box,
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
 import CreateRoomSnackbar from "./CreateRoomSnackbar";
@@ -56,11 +57,15 @@ function CreateNewRoom({ getLiveRooms }) {
   const token = JSON.parse(localStorage.getItem("login")).token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
+  const {
+    data: availableMatches,
+    fetchError,
+    isPending,
+  } = useAxiosFetch("http://localhost:8000/match/available");
+
   const [open, setOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [match, setMatch] = React.useState("");
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [availableMatches, setAvailableMatches] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -76,28 +81,6 @@ function CreateNewRoom({ getLiveRooms }) {
 
     setSnackbarOpen(false);
   };
-
-  async function getAvailableMatches() {
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/match/available`,
-        config
-      );
-      let available_matches_data = response.data;
-      setAvailableMatches(available_matches_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getAvailableMatches();
-    setIsLoaded(true);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const handleChange = (event) => {
     setMatch(event.target.value);
@@ -185,7 +168,7 @@ function CreateNewRoom({ getLiveRooms }) {
                 sx={{ mb: 3 }}
                 MenuProps={MenuProps}
               >
-                {isLoaded &&
+                {!isPending &&
                   availableMatches.live_matches.map((match) => (
                     <MenuItem key={match.id} value={match.id}>
                       <CreateNewRoomMenuItem
@@ -196,7 +179,7 @@ function CreateNewRoom({ getLiveRooms }) {
                     </MenuItem>
                   ))}
 
-                {isLoaded &&
+                {!isPending &&
                   availableMatches.upcoming_matches.map((match) => (
                     <MenuItem key={match.id} value={match.id}>
                       <CreateNewRoomMenuItem
