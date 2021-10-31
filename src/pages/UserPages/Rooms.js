@@ -58,18 +58,22 @@ function Rooms() {
   }
 
   async function searchHandler(room_id) {
-    setIsPending(true);
-    try {
-      let response = await axios.get(
-        `http://localhost:8000/room/` + room_id,
-        config
-      );
-      let searched_room_data = response.data;
-      setSearchResult(searched_room_data);
-      setIsSearchRoom(true);
-      setIsPending(false);
-    } catch (error) {
-      console.log(error);
+    if (room_id == "") {
+      setIsSearchRoom(false);
+    } else {
+      setIsPending(true);
+      try {
+        let response = await axios.get(
+          `http://localhost:8000/room/` + room_id,
+          config
+        );
+        let searched_room_data = response.data;
+        setSearchResult(searched_room_data);
+        setIsSearchRoom(true);
+        setIsPending(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -192,22 +196,23 @@ function Rooms() {
               ""
             )}
 
-            {!isSearchRoom && liveRooms.length ? (
-              liveRooms.map((room) => (
-                <LiveRoomCard
-                  config={config}
-                  roomName={room.name}
-                  roomID={room.id}
-                  roomCreator={room.creator.username}
-                  roomCreatorID={room.creator_id}
-                  roomCurrentCapacity={room.current_participants_number}
-                  team1Logo={room.matchroom.team1.logo}
-                  team2Logo={room.matchroom.team2.logo}
-                />
-              ))
-            ) : (
-              <NoMatchMsg msg="There are no Live Rooms right now!" />
-            )}
+            {!isSearchRoom &&
+              (liveRooms.length ? (
+                liveRooms.map((room) => (
+                  <LiveRoomCard
+                    config={config}
+                    roomName={room.name}
+                    roomID={room.id}
+                    roomCreator={room.creator.username}
+                    roomCreatorID={room.creator_id}
+                    roomCurrentCapacity={room.current_participants_number}
+                    team1Logo={room.matchroom.team1.logo}
+                    team2Logo={room.matchroom.team2.logo}
+                  />
+                ))
+              ) : (
+                <NoMatchMsg msg="There are no Live Rooms right now!" />
+              ))}
           </Grid>
         </Grid>
       )}
