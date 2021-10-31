@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -94,6 +97,12 @@ function Matches() {
         <p className={classes.pageSubTitle}>
           Choose any Match to enjoy watching the game with other fans!
         </p>
+        <Grid>
+          <ScrollLink to="matchesTab" spy={false} smooth={true}>
+            <Typography>Scroll to Matches</Typography>
+            <ArrowDownwardIcon style={{ color: "#fff" }} />
+          </ScrollLink>
+        </Grid>
       </div>
     </div>
   );
@@ -104,11 +113,13 @@ function Matches() {
       <BackdropComponent open={isPending} />
 
       {!isPending && (
-        <MatchesTab
-          liveMatches={liveMatches}
-          upcomingMatches={upcomingMatches}
-          finishedMatches={finishedMatches}
-        />
+        <div id="matchesTab">
+          <MatchesTab
+            liveMatches={liveMatches}
+            upcomingMatches={upcomingMatches}
+            finishedMatches={finishedMatches}
+          />
+        </div>
       )}
 
       <Footer />

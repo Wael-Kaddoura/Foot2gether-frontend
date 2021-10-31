@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -119,6 +121,12 @@ function Rooms() {
           </p>
         )}
         <RoomSearchBar searchHandler={searchHandler} />
+        <Grid>
+          <ScrollLink to="allLiveRooms" spy={false} smooth={true}>
+            <Typography>See All Live Rooms</Typography>
+            <ArrowDownwardIcon style={{ color: "#fff" }} />
+          </ScrollLink>
+        </Grid>
       </div>
     </div>
   );
@@ -131,6 +139,7 @@ function Rooms() {
 
       {!isPending && (
         <Grid
+          id="allLiveRooms"
           container
           className={classes.roomContent}
           direction="row"

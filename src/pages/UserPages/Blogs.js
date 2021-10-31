@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory, Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -76,6 +78,12 @@ function Blog() {
         <Link to="/create_blog">
           <Button variant="contained">Create New Blog</Button>
         </Link>
+        <Grid>
+          <ScrollLink to="allBlogs" spy={false} smooth={true}>
+            <Typography>Scroll to All Blogs</Typography>
+            <ArrowDownwardIcon style={{ color: "#fff" }} />
+          </ScrollLink>
+        </Grid>
       </div>
     </div>
   );
@@ -88,6 +96,7 @@ function Blog() {
 
       {!isPending && (
         <Grid
+          id="allBlogs"
           className={classes.blogsContainer}
           container
           direction="row"

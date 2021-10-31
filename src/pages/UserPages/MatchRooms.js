@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import axios from "axios";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -91,6 +93,12 @@ function MatchRooms() {
     <div className="row align-items-center">
       <div className="col-lg-7 mx-auto text-center">
         {!isPending && <RoomMatchCard matchData={matchData} />}
+        <Grid>
+          <ScrollLink to="liveRooms" spy={false} smooth={true}>
+            <Typography>Scroll to Rooms</Typography>
+            <ArrowDownwardIcon style={{ color: "#fff" }} />
+          </ScrollLink>
+        </Grid>
       </div>
     </div>
   );
@@ -103,6 +111,7 @@ function MatchRooms() {
 
       {!isPending && (
         <Grid
+          id="liveRooms"
           container
           className={classes.roomContent}
           direction="row"
