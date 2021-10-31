@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     fontSize: 40,
   },
   form: {
-    width: "60%",
+    width: "50%",
   },
   formField: {
     width: "100%",
@@ -133,14 +133,17 @@ function CreateBlog() {
 
             <input type="file" required name="blog_image" />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 4, mb: 2 }}
-            >
-              Create Blog
-            </Button>
+            <Grid container justifyContent="flex-end">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 4, mb: 2 }}
+                style={{ width: "35%" }}
+              >
+                Create Blog
+              </Button>
+            </Grid>
           </Box>
         </Grid>
       </Grid>

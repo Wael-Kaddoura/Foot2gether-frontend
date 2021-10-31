@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Grid, Button, Typography } from "@mui/material";
+import { Grid, Button, Typography, Fab } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory, Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
+import AddIcon from "@mui/icons-material/Add";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import axios from "axios";
 
@@ -26,6 +27,14 @@ const useStyles = makeStyles({
   blogsContainer: {
     paddingRight: "5em",
     paddingLeft: "5em",
+  },
+  createBlogFAB: {
+    margin: 0,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed",
   },
 });
 
@@ -75,9 +84,7 @@ function Blog() {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta,
           molestias repudiandae pariatur.
         </p>
-        <Link to="/create_blog">
-          <Button variant="contained">Create New Blog</Button>
-        </Link>
+
         <Grid>
           <ScrollLink to="allBlogs" spy={false} smooth={true}>
             <Typography>Scroll to All Blogs</Typography>
@@ -117,7 +124,11 @@ function Blog() {
           ))}
         </Grid>
       )}
-
+      <Link to="/create_blog">
+        <Fab color="primary" aria-label="add" className={classes.createBlogFAB}>
+          <AddIcon />
+        </Fab>
+      </Link>
       <Footer />
     </div>
   );
