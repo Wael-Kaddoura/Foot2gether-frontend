@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
-import {
-  Grid,
-  Typography,
-  Card,
-  Backdrop,
-  CircularProgress,
-} from "@mui/material";
+import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminMatchCard from "../../components/AdminPanel/AdminMatchCard";
@@ -28,34 +23,28 @@ const useStyles = makeStyles({
 });
 
 function AdminAllMatches() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    if (login_status.is_admin) {
-      const token = login_status.token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-    } else {
-      history.push("/home");
-    }
-  } else {
-    history.push("/login");
+  if (!login_status || !login_status.login || !login_status.is_admin) {
+    history.push("/home");
   }
 
-  const classes = useStyles();
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [isPending, setIsPending] = useState(true);
   const [allMatches, setAllMatches] = useState(null);
-  const [createMatchOptions, setCreateMatchOptions] = useState(null);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
   };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+
+  const { data: createMatchOptions } = useAxiosFetch(
+    "http://localhost:8000/admin/match/create_options"
+  );
 
   async function getAllMatches() {
     try {
@@ -65,33 +54,14 @@ function AdminAllMatches() {
       );
       const all_matches_data = response.data;
       setAllMatches(all_matches_data);
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
-  }
-
-  async function getCreateMatchOptions() {
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/admin/match/create_options",
-        config
-      );
-      const create_match_opitons_data = response.data;
-      setCreateMatchOptions(create_match_opitons_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getAllMatches();
-    await getCreateMatchOptions();
-    handleClose();
-    setIsPending(false);
   }
 
   useEffect(() => {
-    fetchData();
+    getAllMatches();
   }, []);
 
   return (
@@ -141,6 +111,7 @@ function AdminAllMatches() {
                     config={config}
                     matchOptions={createMatchOptions}
                     getAllMatches={getAllMatches}
+                    handleClose={handleClose}
                   />
                 </Grid>
 

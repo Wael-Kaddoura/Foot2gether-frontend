@@ -10,7 +10,6 @@ import AdminTodaysMatchCard from "../../components/AdminPanel/AdminTodaysMatchCa
 const useStyles = makeStyles({
   pageTitle: {
     fontSize: 40,
-    // fontWeight: 700,
   },
   roomContent: {
     minWidth: "100%",
@@ -41,14 +40,6 @@ function AdminTodaysMatches() {
 
   const [isPending, setIsPending] = useState(true);
   const [todaysMatches, setTodaysMatches] = useState(null);
-  const [open, setOpen] = useState(true);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
 
   async function getTodaysMatches() {
     try {
@@ -65,7 +56,6 @@ function AdminTodaysMatches() {
 
   async function fetchData() {
     await getTodaysMatches();
-    handleClose();
     setIsPending(false);
   }
 
@@ -78,8 +68,7 @@ function AdminTodaysMatches() {
       <AdminNavBar>
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={open}
-          onClick={handleClose}
+          open={isPending}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
