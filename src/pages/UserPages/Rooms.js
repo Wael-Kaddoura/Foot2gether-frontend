@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     fontWeight: 700,
   },
   roomsContainer: {
-    maxWidth: 1140,
+    maxWidth: "1140px !important",
   },
   bodyTitle: {
     color: "#fff",
@@ -59,7 +59,9 @@ function Rooms() {
     setIsSearchRoom(false);
   }
 
-  const { data: userType } = useAxiosFetch("http://localhost:8000/user/type");
+  const { data: userType, isPending: isUserTypePending } = useAxiosFetch(
+    "http://localhost:8000/user/type"
+  );
 
   async function searchHandler(room_id) {
     if (room_id == "") {
@@ -126,9 +128,9 @@ function Rooms() {
     <div>
       <MainNavBar currentPageName="Rooms" NavBarContent={NavBarContent} />
 
-      <BackdropComponent open={isPending} />
+      <BackdropComponent open={isPending || isUserTypePending} />
 
-      {!isPending && (
+      {!isPending && !isUserTypePending && (
         <Grid
           id="allLiveRooms"
           container
@@ -168,7 +170,7 @@ function Rooms() {
                 </Grid>
               ) : (
                 <Grid item xs={5} style={{ textAlign: "right" }}>
-                  {userType === 2 ? (
+                  {userType.user_type_id === 2 ? (
                     <CreateNewRoom getLiveRooms={getLiveRooms} />
                   ) : (
                     ""

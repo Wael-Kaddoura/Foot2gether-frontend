@@ -12,8 +12,8 @@ const useStyles = makeStyles({
   },
   blogsContainer: {
     paddingLeft: "1em",
-    maxWidth: 1140,
-    minHeight: 500,
+    maxWidth: "1140px !important",
+    minHeight: "500px !important",
   },
 });
 

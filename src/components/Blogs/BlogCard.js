@@ -13,13 +13,13 @@ const useStyles = makeStyles({
   },
   blogDate: {
     color: "rgba(255, 255, 255, 0.3)",
-    fontSize: 12,
-    fontWeight: 700,
+    fontSize: "12px !important",
+    fontWeight: "700 !important",
   },
   blogTitle: {
     color: "#fff",
-    fontSize: 18,
-    fontWeight: 500,
+    fontSize: "18px !important",
+    fontWeight: "500 !important",
   },
   blogBody: {
     color: "gray",

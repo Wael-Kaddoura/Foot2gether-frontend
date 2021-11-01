@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   msgBox: {
     minHeight: 500,
   },
-  msg: { fontSize: 25 },
+  msg: { fontSize: "25px !important" },
 });
 
 function UserSearchNoResults({ msg }) {

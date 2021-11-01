@@ -12,43 +12,18 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  roomName: {
-    color: "#fff",
-    fontSize: 22,
-    fontWeight: 700,
-    textAlign: "center",
-  },
-  joinBtn: {
-    color: "#fff",
-    backgroundColor: "#ee1e46",
-    borderColor: "#ee1e46",
-    fontSize: 16,
-    fontWeight: 700,
-  },
-  roomDetailsTitle: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: 300,
-    textAlign: "center",
-  },
-  roomDetails: {
-    color: "#fff",
-    fontSize: 17,
-    fontWeight: 300,
-    textAlign: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.05) !important",
+    marginLeft: "auto !important",
+    marginRight: "auto !important",
   },
   userImage: {
     [theme.breakpoints.between("xs", "sm")]: {
-      height: 80,
-      width: 80,
+      height: "80px !important",
+      width: "80px !important",
     },
     [theme.breakpoints.between("sm", "xl")]: {
-      height: 140,
-      width: 140,
+      height: "140px !important",
+      width: "140px !important",
     },
   },
   teamLogo: {
@@ -67,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
   },
   unfollowBtn: {
     color: "#fff",
-    backgroundColor: "#bf1737",
-    borderColor: "#bf1737",
+    backgroundColor: "#bf1737 !important",
+    borderColor: "#bf1737 !important",
   },
 }));
 

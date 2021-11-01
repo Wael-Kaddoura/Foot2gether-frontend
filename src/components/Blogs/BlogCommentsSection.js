@@ -5,10 +5,10 @@ import BlogComment from "./BlogComment";
 import BlogNewComment from "./BlogNewComment";
 
 const useStyles = makeStyles({
-  blogTitle: {
+  sectionTitle: {
     color: "#fff",
-    fontSize: 30,
-    fontWeight: 700,
+    fontSize: "30px !important",
+    fontWeight: "700 !important",
   },
   blogContent: {
     color: "rgba(255, 255, 255, 0.7)",
@@ -44,7 +44,7 @@ function BlogComments({
       alignItems="center"
     >
       <Grid item xs={12} sm={9} md={7} lg={5}>
-        <Typography className={classes.blogTitle} sx={{ mb: 5 }}>
+        <Typography className={classes.sectionTitle} sx={{ mb: 5 }}>
           {blogCommentsCount} Comments
         </Typography>
         <Grid

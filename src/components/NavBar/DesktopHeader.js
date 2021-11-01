@@ -23,8 +23,8 @@ const useStyles = makeStyles({
   },
   mainLogo: {
     color: "#fff",
-    fontSize: 24,
-    fontWeight: 900,
+    fontSize: "24px !important",
+    fontWeight: "900 !important",
   },
 });
 
@@ -74,7 +74,7 @@ function DesktopHeader(props) {
   const logoutHandler = () => {
     localStorage.clear();
     clearNotificationToken();
-    history.push("/login");
+    history.push("/home");
   };
 
   const handleProfileMenuOpen = (event) => {

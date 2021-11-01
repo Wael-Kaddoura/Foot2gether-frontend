@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
   pageTitle: {
     color: "#fff",
-    fontSize: 40,
+    fontSize: "40px !important",
   },
   form: {
     width: "50%",
@@ -24,11 +24,11 @@ const useStyles = makeStyles({
     width: "100%",
   },
   formLabel: {
-    color: "#fff",
+    color: "#fff !important",
   },
   multilineColor: {
-    color: "#fff",
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    color: "#fff !important",
+    backgroundColor: "rgba(255, 255, 255, 0.08) ",
   },
 });
 

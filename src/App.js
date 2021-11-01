@@ -11,7 +11,6 @@ import Matches from "./pages/UserPages/Matches";
 import Blog from "./pages/UserPages/Blogs";
 import BlogView from "./pages/UserPages/BlogView";
 import CreateBlog from "./pages/UserPages/CreateBlog";
-import Standings from "./pages/UserPages/Standings";
 import MatchRooms from "./pages/UserPages/MatchRooms";
 import MyProfile from "./pages/UserPages/MyProfile";
 import UserProfile from "./pages/UserPages/UserProfile";
@@ -52,9 +51,6 @@ function App() {
         </Route>
         <Route exact path="/blogs">
           <Blog />
-        </Route>
-        <Route exact path="/standings">
-          <Standings />
         </Route>
         <Route exact path="/match/rooms">
           <MatchRooms />

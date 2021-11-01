@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     fontWeight: 700,
   },
   usersContainer: {
-    maxWidth: 800,
+    maxWidth: "800px !important",
   },
   bodyTitle: {
     color: "#fff",

@@ -1,5 +1,4 @@
 import "../../css/bootstrap/bootstrap.css";
-
 import "../../css/style.css";
 
 import DesktopHeader from "./DesktopHeader";

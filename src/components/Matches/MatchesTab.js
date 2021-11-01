@@ -11,16 +11,16 @@ import NoMatchMsg from "./NoMatchMsg";
 const useStyles = makeStyles((theme) => ({
   tab: {
     [theme.breakpoints.between("xs", "sm")]: {
-      minWidth: 135,
-      width: 135,
+      minWidth: "135px !important",
+      width: "135px !important",
     },
     [theme.breakpoints.between("sm", "md")]: {
-      minWidth: 204,
-      width: 204,
+      minWidth: "204px !important",
+      width: "204px !important",
     },
     [theme.breakpoints.up("md")]: {
-      minWidth: 380,
-      width: 380,
+      minWidth: "380px !important",
+      width: "380px !important",
     },
   },
 }));

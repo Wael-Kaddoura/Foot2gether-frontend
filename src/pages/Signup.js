@@ -1,5 +1,5 @@
 import Overlay from "../components/NavBar/Overlay";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Grid,
   Box,
@@ -19,6 +19,7 @@ import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -85,32 +86,15 @@ function Signup() {
 
   const classes = useStyles();
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [teamsData, setTeamsData] = useState(null);
   const [favTeam, setFavTeam] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [signUpError, setSignUpError] = useState(false);
   const [emailUsedError, setEmailUsedError] = useState(false);
   const [usernameUsedError, setUsernameUsedError] = useState(false);
 
-  async function getTeamsData() {
-    try {
-      let response = await axios.get(`http://localhost:8000/team`);
-      let teams_data = response.data;
-      setTeamsData(teams_data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchData() {
-    await getTeamsData();
-    setIsLoaded(true);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data: teamsData, isPending } = useAxiosFetch(
+    "http://localhost:8000/team"
+  );
 
   const handleChange = (event) => {
     setFavTeam(event.target.value);
@@ -296,7 +280,7 @@ function Signup() {
             sx={{ mb: 3 }}
             MenuProps={MenuProps}
           >
-            {isLoaded &&
+            {!isPending &&
               teamsData.map((team) => (
                 <MenuItem key={team.id} value={team.id}>
                   <Grid container alignItems="center">

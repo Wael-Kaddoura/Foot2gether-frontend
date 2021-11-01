@@ -20,24 +20,22 @@ import NavBarItem from "./NavBarItem";
 const useStyles = makeStyles(() => ({
   mainLogo: {
     color: "#fff",
-    fontSize: 24,
-    fontWeight: 900,
+    fontSize: "24px !important",
+    fontWeight: "900 !important",
   },
   drawer: {
     width: "65%",
   },
   profilePicture: {
-    width: 70,
-    height: 70,
+    width: "70px !important",
+    height: "70px !important",
     border: "2px solid",
   },
   username: {
-    fontWeight: 700,
+    fontWeight: "700 !important",
   },
   loginBtn: {
     color: "#fff",
-    backgroundColor: "#2e7d32",
-    borderColor: "#2e7d32",
   },
 }));
 
@@ -80,7 +78,7 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
   const logoutHandler = () => {
     localStorage.clear();
     clearNotificationToken();
-    history.push("/login");
+    history.push("/home");
   };
 
   return (
@@ -147,7 +145,7 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
                 </ListItem>
               </Link>
 
-              <Link to="/login" className="nav-link">
+              <Link to="/home" className="nav-link">
                 <ListItem button onClick={logoutHandler}>
                   <ListItemText
                     style={{ color: "#212529" }}
@@ -161,8 +159,7 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
               <Link to={"/login"}>
                 <Button
                   className={classes.loginBtn}
-                  variant="outlined"
-                  color="success"
+                  variant="contained"
                   sx={{ ml: 2, mt: 2 }}
                 >
                   Log in

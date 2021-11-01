@@ -7,8 +7,8 @@ import MatchCard from "./MatchCard";
 const useStyles = makeStyles({
   showRoomBtn: {
     color: "#fff",
-    backgroundColor: "#ee1e46",
-    borderColor: "#ee1e46",
+    backgroundColor: "#ee1e46 !important",
+    borderColor: "#ee1e46 !important",
   },
 });
 
@@ -50,7 +50,7 @@ function LiveMatchCard(props) {
       <Link to={"/match/rooms?id=" + matchID}>
         <Button
           className={classes.showRoomBtn}
-          variant="outlined"
+          variant="contained"
           color="error"
         >
           Show Rooms

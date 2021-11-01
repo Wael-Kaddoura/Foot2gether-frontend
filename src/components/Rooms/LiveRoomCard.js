@@ -7,33 +7,33 @@ import videoRoomsFirebase from "../../server/firebase-videoRooms/firebase";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    marginLeft: "auto",
-    marginRight: "auto",
+    backgroundColor: "rgba(255, 255, 255, 0.05) !important",
+    marginLeft: "auto !important",
+    marginRight: "auto !important",
   },
   roomName: {
     color: "#fff",
-    fontSize: 22,
-    fontWeight: 700,
+    fontSize: "22px !important",
+    fontWeight: "700 !important",
     textAlign: "center",
   },
   joinBtn: {
     color: "#fff",
-    backgroundColor: "#ee1e46",
-    borderColor: "#ee1e46",
-    fontSize: 16,
-    fontWeight: 700,
+    backgroundColor: "#ee1e46 !important",
+    borderColor: "#ee1e46 !important",
+    fontSize: "16px !important",
+    fontWeight: "700 !important",
   },
   roomDetailsTitle: {
     color: "#fff",
-    fontSize: 18,
-    fontWeight: 300,
+    fontSize: "18px !important",
+    fontWeight: "300 !important",
     textAlign: "center",
   },
   roomDetails: {
     color: "#fff",
-    fontSize: 17,
-    fontWeight: 300,
+    fontSize: "17px !important",
+    fontWeight: "300 !important",
     textAlign: "center",
   },
   teamLogo: {
@@ -102,7 +102,7 @@ function LiveRoomCard(props) {
               <Link to={"/video_room?id=" + roomID}>
                 <Button
                   className={classes.joinBtn}
-                  variant="outlined"
+                  variant="contained"
                   color="error"
                 >
                   Join

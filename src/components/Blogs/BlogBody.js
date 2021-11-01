@@ -4,8 +4,8 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   blogTitle: {
     color: "#fff",
-    fontSize: 30,
-    fontWeight: 700,
+    fontSize: "30px !important",
+    fontWeight: "700 !important",
   },
   blogContent: {
     color: "rgba(255, 255, 255, 0.7)",

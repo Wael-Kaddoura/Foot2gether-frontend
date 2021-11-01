@@ -4,16 +4,32 @@ import date from "date-and-time";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "rgba(255, 255, 255, 0.07)",
-    marginLeft: "auto",
-    marginRight: "auto",
+    backgroundColor: "rgba(255, 255, 255, 0.07) !important",
+    marginLeft: "auto !important",
+    marginRight: "auto !important",
   },
   teamSide: { textAlign: "center" },
-  teamName: { color: "#fff", fontSize: 18, fontWeight: 700 },
+  teamName: {
+    color: "#fff",
+    fontSize: "18px !important",
+    fontWeight: "700 !important",
+  },
   matchDetails: { textAlign: "center" },
-  matchLeague: { color: "#fff", fontSize: 20, fontWeight: 700 },
-  matchTime: { color: "#808080", fontSize: 17, fontWeight: 300 },
-  matchStadium: { color: "#808080", fontSize: 17, fontWeight: 300 },
+  matchLeague: {
+    color: "#fff",
+    fontSize: "20px !important",
+    fontWeight: "700 !important",
+  },
+  matchTime: {
+    color: "#808080",
+    fontSize: "17px !important",
+    fontWeight: "300 !important",
+  },
+  matchStadium: {
+    color: "#808080",
+    fontSize: "17px !important",
+    fontWeight: "300 !important",
+  },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
       maxHeight: 90,

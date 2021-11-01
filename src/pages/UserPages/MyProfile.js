@@ -24,13 +24,13 @@ const useStyles = makeStyles({
     height: "60vh",
   },
   userName: {
-    fontSize: 30,
-    fontWeight: 800,
+    fontSize: "30px !important",
+    fontWeight: "800 !important",
     color: "#fff !important",
   },
   userImage: {
-    height: 200,
-    width: 200,
+    height: "200px !important",
+    width: "200px !important",
   },
   roomsContainer: {
     maxWidth: 1140,

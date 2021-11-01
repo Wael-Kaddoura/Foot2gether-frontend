@@ -7,9 +7,7 @@ import MatchCard from "./MatchCard";
 const useStyles = makeStyles({
   upcomingBtn: {
     color: "#fff !important",
-    backgroundColor: "grey",
-    borderColor: "#ee1e46",
-    textTransform: "lowercase",
+    backgroundColor: "grey !important",
   },
 });
 

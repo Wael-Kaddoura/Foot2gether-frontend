@@ -6,16 +6,32 @@ import AdminChangeScore from "../../components/AdminPanel/AdminChangeScore";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-    marginLeft: "auto",
-    marginRight: "auto",
+    backgroundColor: "rgba(0, 0, 0, 0.05) !important",
+    marginLeft: "auto !important",
+    marginRight: "auto !important",
   },
   teamSide: { textAlign: "center" },
-  teamName: { color: "#000", fontSize: 18, fontWeight: 700 },
+  teamName: {
+    color: "#000",
+    fontSize: "18px !important",
+    fontWeight: "700 !important",
+  },
   matchDetails: { textAlign: "center" },
-  matchLeague: { color: "#000", fontSize: 20, fontWeight: 700 },
-  matchTime: { color: "#808080", fontSize: 17, fontWeight: 700 },
-  matchStadium: { color: "#808080", fontSize: 17, fontWeight: 700 },
+  matchLeague: {
+    color: "#000",
+    fontSize: "20px !important",
+    fontWeight: "700 !important",
+  },
+  matchTime: {
+    color: "#808080",
+    fontSize: "17px !important",
+    fontWeight: "700 !important",
+  },
+  matchStadium: {
+    color: "#808080",
+    fontSize: "17px !important",
+    fontWeight: "700 !important",
+  },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
       maxHeight: 60,
@@ -29,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   finishedScore: {
     color: "#000",
-    fontSize: 40,
-    fontWeight: 500,
+    fontSize: "40px !important",
+    fontWeight: "500 !important",
   },
 }));
 

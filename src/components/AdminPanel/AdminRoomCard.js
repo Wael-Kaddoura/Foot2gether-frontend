@@ -1,28 +1,31 @@
+import { useState, useEffect } from "react";
 import { Card, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 
+import videoRoomsFirebase from "../../server/firebase-videoRooms/firebase";
+
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-    marginLeft: "auto",
-    marginRight: "auto",
+    backgroundColor: "rgba(0, 0, 0, 0.05) !important",
+    marginLeft: "auto !important",
+    marginRight: "auto !important",
   },
   roomName: {
     color: "#000",
-    fontSize: 22,
-    fontWeight: 700,
+    fontSize: "22px !important",
+    fontWeight: "700 !important",
     textAlign: "center",
   },
   roomDetailsTitle: {
     color: "#000",
-    fontSize: 18,
-    fontWeight: 300,
+    fontSize: "18px !important",
+    fontWeight: "300 !important",
     textAlign: "center",
   },
   roomDetails: {
     color: "#000",
-    fontSize: 17,
-    fontWeight: 300,
+    fontSize: "17px !important",
+    fontWeight: "300 !important",
     textAlign: "center",
   },
   teamLogo: {
@@ -42,6 +45,20 @@ function AdminRoomCard(props) {
   const { roomName, roomID, roomCreator, team1Logo, team2Logo } = props;
 
   const classes = useStyles();
+
+  const [participantsNumber, setParticipantsNumber] = useState(0);
+
+  useEffect(() => {
+    var firepadRef = videoRoomsFirebase
+      .database()
+      .ref()
+      .child(roomID)
+      .child("participants");
+
+    firepadRef.on("value", (snap) => {
+      setParticipantsNumber(snap.numChildren());
+    });
+  }, []);
 
   return (
     <Grid item xs={12} sx={{ mb: 1 }}>
@@ -95,7 +112,9 @@ function AdminRoomCard(props) {
             <Typography className={classes.roomDetailsTitle}>
               Current:
             </Typography>
-            <Typography className={classes.roomDetails}>6</Typography>
+            <Typography className={classes.roomDetails}>
+              {participantsNumber}
+            </Typography>
           </Grid>
         </Grid>
       </Card>

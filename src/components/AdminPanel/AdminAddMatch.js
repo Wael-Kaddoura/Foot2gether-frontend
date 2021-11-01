@@ -35,8 +35,8 @@ const style = {
 const useStyles = makeStyles((theme) => ({
   formTitle: {
     color: "#000000",
-    fontSize: 25,
-    fontWeight: 600,
+    fontSize: "25px !important",
+    fontWeight: "600 !important",
   },
   formField: {
     width: "100%",

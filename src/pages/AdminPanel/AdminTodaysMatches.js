@@ -9,14 +9,14 @@ import AdminTodaysMatchCard from "../../components/AdminPanel/AdminTodaysMatchCa
 
 const useStyles = makeStyles({
   pageTitle: {
-    fontSize: 40,
+    fontSize: "40px !important",
   },
   roomContent: {
     minWidth: "100%",
   },
 
   roomsContainer: {
-    maxWidth: 1140,
+    maxWidth: "1140px !important",
   },
 });
 

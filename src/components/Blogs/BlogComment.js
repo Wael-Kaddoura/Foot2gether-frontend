@@ -26,12 +26,12 @@ const useStyles = makeStyles({
   },
   userName: {
     color: "#fff",
-    fontSize: 20,
+    fontSize: "20px !important",
     fontWeight: 500,
   },
   commentTime: {
     color: "#ccc",
-    fontSize: 13,
+    fontSize: "13px !important",
     fontWeight: 300,
   },
   commentBody: {

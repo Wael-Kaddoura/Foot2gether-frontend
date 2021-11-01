@@ -6,12 +6,12 @@ import axios from "axios";
 const useStyles = makeStyles({
   sectionTitle: {
     color: "#fff",
-    fontSize: 28,
-    fontWeight: 500,
+    fontSize: "28px !important",
+    fontWeight: "500 !important",
   },
   multilineColor: {
-    color: "#fff",
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    color: "#fff !important",
+    backgroundColor: "rgba(255, 255, 255, 0.05) !important",
     maxLength: 12,
   },
 });

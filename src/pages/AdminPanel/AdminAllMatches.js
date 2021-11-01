@@ -11,14 +11,14 @@ import AdminAddMatch from "../../components/AdminPanel/AdminAddMatch";
 
 const useStyles = makeStyles({
   pageTitle: {
-    fontSize: 40,
+    fontSize: "40px !important",
   },
   roomContent: {
     minWidth: "100%",
   },
 
   roomsContainer: {
-    maxWidth: 1140,
+    maxWidth: "1140px !important",
   },
 });
 
@@ -42,9 +42,8 @@ function AdminAllMatches() {
     setOpen(false);
   };
 
-  const { data: createMatchOptions } = useAxiosFetch(
-    "http://localhost:8000/admin/match/create_options"
-  );
+  const { data: createMatchOptions, isPending: isOptionsPending } =
+    useAxiosFetch("http://localhost:8000/admin/match/create_options");
 
   async function getAllMatches() {
     try {
@@ -81,7 +80,8 @@ function AdminAllMatches() {
               All Matches
             </Typography>
           </Grid>
-          {!isPending && (
+
+          {!isPending && !isOptionsPending && (
             <Grid
               item
               xs={12}

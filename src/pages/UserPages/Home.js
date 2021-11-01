@@ -14,13 +14,13 @@ import Footer from "../../components/Footer";
 const useStyles = makeStyles({
   viewMatchesBtn: {
     color: "#fff",
-    backgroundColor: "#ee1e46",
-    borderColor: "#ee1e46",
+    backgroundColor: "#ee1e46 !important",
+    borderColor: "#ee1e46 !important",
     width: 150,
     height: 55,
   },
   homeContent: {
-    minWidth: "100%",
+    minWidth: "100% ",
     backgroundColor: "#1a1e25",
   },
 });
@@ -53,7 +53,7 @@ function Home() {
           <Link to="/MATCHES">
             <Button
               className={classes.viewMatchesBtn}
-              variant="outlined"
+              variant="contained"
               color="error"
             >
               View Matches

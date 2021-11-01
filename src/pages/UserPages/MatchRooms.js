@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
   },
   roomsContainer: {
-    maxWidth: 1140,
+    maxWidth: "1140px !important",
   },
   bodyTitle: {
     color: "#fff",

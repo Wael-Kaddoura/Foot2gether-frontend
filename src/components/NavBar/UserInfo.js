@@ -6,14 +6,14 @@ import ChangeBio from "../User/ChangeBio";
 const useStyles = makeStyles({
   followInfo: {
     color: "#fff !important",
-    fontWeight: 700,
-    fontSize: 23,
+    fontWeight: "700 !important",
+    fontSize: "23px !important",
     textAlign: "center",
   },
   userBio: {
     color: "#fff",
-    fontWeight: 400,
-    fontSize: 18,
+    fontWeight: "400 !important",
+    fontSize: "18px !important",
   },
 });
 
