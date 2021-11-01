@@ -63,11 +63,11 @@ function MyProfile() {
   const [isPending, setIsPending] = useState(true);
   const [myProfileData, setMyProfileData] = useState(null);
 
-  const { data: myLiveRooms } = useAxiosFetch(
+  const { data: myLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
     "http://localhost:8000/room/my_rooms"
   );
 
-  const { data: myBlogs } = useAxiosFetch(
+  const { data: myBlogs, isPending: isBlogsPending } = useAxiosFetch(
     "http://localhost:8000/blog/my_blogs"
   );
 
@@ -146,9 +146,9 @@ function MyProfile() {
 
   return (
     <div>
-      <BackdropComponent open={isPending} />
+      <BackdropComponent open={isPending || isRoomsPending || isBlogsPending} />
 
-      {!isPending && (
+      {!isPending && !isRoomsPending && !isBlogsPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>
           <UserNavBar
             NavBarContent={NavBarContent}

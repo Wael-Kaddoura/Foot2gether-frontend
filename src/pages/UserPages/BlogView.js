@@ -46,7 +46,7 @@ function BlogView() {
   const [isPending, setIsPending] = useState(true);
   const [blogComments, setBlogComments] = useState(null);
 
-  const { data: blogData } = useAxiosFetch(
+  const { data: blogData, isPending: isBlogPending } = useAxiosFetch(
     "http://localhost:8000/blog/" + blog_id
   );
 
@@ -80,7 +80,7 @@ function BlogView() {
   const NavBarContent = (
     <div className="row align-items-center">
       <div className="col-lg-5 mx-auto text-center">
-        {!isPending && (
+        {!isPending && !isBlogPending && (
           <div>
             <h1 className={classes.pageTitle}>{blogData.title} </h1>
 
@@ -109,9 +109,9 @@ function BlogView() {
     <div>
       <MainNavBar NavBarContent={NavBarContent} />
 
-      <BackdropComponent open={isPending} />
+      <BackdropComponent open={isPending || isBlogPending} />
 
-      {!isPending && (
+      {!isPending && !isBlogPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>
           <BlogBody
             blogTitle={blogData.title}

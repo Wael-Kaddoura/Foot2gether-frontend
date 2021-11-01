@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 function Home() {
   const classes = useStyles();
 
-  const { data: latestBlogsData } = useAxiosFetch(
+  const { data: latestBlogsData, isPending: isBlogsPending } = useAxiosFetch(
     "http://localhost:8000/blog/latest"
   );
 
@@ -68,7 +68,7 @@ function Home() {
     <div>
       <MainNavBar currentPageName="Home" NavBarContent={NavBarContent} />
 
-      <BackdropComponent open={isPending} />
+      <BackdropComponent open={isPending || isBlogsPending} />
 
       <Grid
         container
@@ -77,19 +77,17 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        {!isPending ? (
-          nextMatchData.length ? (
+        {!isPending &&
+          (nextMatchData.length ? (
             <HomeNextMatchCard nextMatch={nextMatchData} />
           ) : (
             <NoMatchMsg
               msg="There are no Upcoming Matches today!"
               home={true}
             />
-          )
-        ) : (
-          ""
-        )}
-        {!isPending && <HomeBlogs latestBlogs={latestBlogsData} />}
+          ))}
+
+        {!isBlogsPending && <HomeBlogs latestBlogs={latestBlogsData} />}
       </Grid>
       <Footer />
     </div>

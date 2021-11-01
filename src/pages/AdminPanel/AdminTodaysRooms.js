@@ -37,7 +37,7 @@ function AdminTodaysRooms() {
   const [isPending, setIsPending] = useState(true);
   const [todaysRooms, setTodaysRooms] = useState(null);
 
-  const { data: availableMatches } = useAxiosFetch(
+  const { data: availableMatches, isPending: isMatchesPending } = useAxiosFetch(
     "http://localhost:8000/admin/match/available"
   );
 
@@ -67,7 +67,7 @@ function AdminTodaysRooms() {
       <AdminNavBar>
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={isPending}
+          open={isPending || isMatchesPending}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
@@ -79,7 +79,7 @@ function AdminTodaysRooms() {
             </Typography>
           </Grid>
 
-          {!isPending && (
+          {!isPending && !isMatchesPending && (
             <Grid
               item
               xs={12}

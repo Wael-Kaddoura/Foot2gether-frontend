@@ -28,11 +28,11 @@ function Matches() {
     history.push("/login");
   }
 
-  const { data: liveMatches } = useAxiosFetch(
+  const { data: liveMatches, isPending: isLivePending } = useAxiosFetch(
     "http://localhost:8000/match/live"
   );
 
-  const { data: upcomingMatches } = useAxiosFetch(
+  const { data: upcomingMatches, isPending: isUpcomingPending } = useAxiosFetch(
     "http://localhost:8000/match/upcoming"
   );
 
@@ -66,9 +66,11 @@ function Matches() {
     <div>
       <MainNavBar currentPageName="Matches" NavBarContent={NavBarContent} />
 
-      <BackdropComponent open={isPending} />
+      <BackdropComponent
+        open={isPending || isLivePending || isUpcomingPending}
+      />
 
-      {!isPending && (
+      {!isPending && !isLivePending && !isUpcomingPending && (
         <div id="matchesTab">
           <MatchesTab
             liveMatches={liveMatches}
