@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import BlogComment from "./BlogComment";
@@ -30,8 +30,8 @@ function BlogComments({
   blogComments,
   blogCommentsCount,
   blog_id,
-  getCommentsData,
-  config,
+  postNewComment,
+  postError,
 }) {
   const classes = useStyles();
 
@@ -65,11 +65,13 @@ function BlogComments({
           ))}
         </Grid>
 
-        <BlogNewComment
-          blog_id={blog_id}
-          getCommentsData={getCommentsData}
-          config={config}
-        />
+        {postError && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {postError}
+          </Alert>
+        )}
+
+        <BlogNewComment blog_id={blog_id} postNewComment={postNewComment} />
       </Grid>
     </Grid>
   );

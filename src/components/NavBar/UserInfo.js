@@ -18,8 +18,14 @@ const useStyles = makeStyles({
 });
 
 function UserInfo(props) {
-  const { followingCount, followersCount, bio, isMyProfile, getMyProfileData } =
-    props;
+  const {
+    followingCount,
+    followersCount,
+    bio,
+    isMyProfile,
+    getMyProfileData,
+    changeBio,
+  } = props;
 
   const classes = useStyles();
 
@@ -39,7 +45,12 @@ function UserInfo(props) {
                   vertical: "bottom",
                   horizontal: "right",
                 }}
-                badgeContent={<ChangeBio getMyProfileData={getMyProfileData} />}
+                badgeContent={
+                  <ChangeBio
+                    getMyProfileData={getMyProfileData}
+                    changeBio={changeBio}
+                  />
+                }
                 color="warning"
               >
                 <Typography className={classes.userBio}>{bio}</Typography>

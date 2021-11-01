@@ -2,7 +2,6 @@ import * as React from "react";
 import { Backdrop, Box, Modal, Fade, Button, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
-import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -17,29 +16,20 @@ const style = {
 
 const useStyles = makeStyles({
   formTitle: {
-    color: "#000000",
-    fontSize: 25,
-    fontWeight: 600,
+    color: "#000000 !important",
+    fontSize: "25px !important",
+    fontWeight: "600 !important",
   },
   formField: {
     width: "100%",
   },
 });
 
-function ChangeProfilePicture({ getMyProfileData }) {
-  let user_data = JSON.parse(localStorage.getItem("login"));
-
-  const token = user_data.token;
-  const config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
+function ChangeProfilePicture({ getMyProfileData, changeProfilePicture }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -51,25 +41,8 @@ function ChangeProfilePicture({ getMyProfileData }) {
     const formData = new FormData();
     formData.append("image", image);
 
-    try {
-      let response = await axios.post(
-        "http://localhost:8000/user/change_profile_picture",
-        formData,
-        config
-      );
-
-      if (response.status === 200) {
-        user_data.user_profile_picture = response.data;
-        localStorage.setItem("login", JSON.stringify(user_data));
-
-        getMyProfileData();
-        setOpen(false);
-      } else {
-        console.log("Something went wrong!");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    await changeProfilePicture(formData);
+    setOpen(false);
   };
 
   return (

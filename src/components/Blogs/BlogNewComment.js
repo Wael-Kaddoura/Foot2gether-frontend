@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Grid, Typography, TextField, Button, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import axios from "axios";
 
 const useStyles = makeStyles({
   sectionTitle: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogNewComment({ blog_id, getCommentsData, config }) {
+function BlogNewComment({ blog_id, postNewComment }) {
   const classes = useStyles();
 
   const [value, setValue] = useState("");
@@ -35,23 +34,8 @@ function BlogNewComment({ blog_id, getCommentsData, config }) {
       blog_id,
     };
 
+    await postNewComment(data);
     setValue("");
-
-    try {
-      let response = await axios.post(
-        "http://localhost:8000/blog/comment",
-        data,
-        config
-      );
-
-      if (response.status === 201) {
-        getCommentsData();
-      } else {
-        console.log("Something went wrong!");
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (

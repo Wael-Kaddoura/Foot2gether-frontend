@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Typography, TextField, Grid } from "@mui/material";
+import { Box, Button, Typography, TextField, Grid, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -46,6 +46,7 @@ function CreateBlog() {
   const classes = useStyles();
 
   const [isPending, setIsPending] = useState(false);
+  const [postError, setPostError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,12 +72,15 @@ function CreateBlog() {
 
       if (response.status === 201) {
         setIsPending(false);
+        setPostError(null);
         history.push("/blogs");
       } else {
         console.log("Something went wrong!");
       }
     } catch (err) {
       console.log(err);
+      setPostError(err.message);
+      setIsPending(false);
     }
   };
 
@@ -90,8 +94,8 @@ function CreateBlog() {
 
       <BackdropComponent open={isPending} />
 
-      <Grid className={classes.pageContainer} container sx={{ pt: 1 }}>
-        <Grid item xs={12} sx={{ mb: 2 }} container justifyContent="center">
+      <Grid className={classes.pageContainer} container sx={{ pt: 3 }}>
+        <Grid item xs={12} sx={{ mb: 3 }} container justifyContent="center">
           <Typography className={classes.pageTitle}>Create New Blog</Typography>
         </Grid>
 
@@ -102,6 +106,12 @@ function CreateBlog() {
             sx={{ mb: 5 }}
             className={classes.form}
           >
+            {postError && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {postError}
+              </Alert>
+            )}
+
             <TextField
               className={classes.formField}
               sx={{ mb: 3 }}

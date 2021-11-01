@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Button, Badge, Typography, Avatar } from "@mui/material";
+import { Grid, Button, Badge, Typography, Avatar, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useLocation, useHistory } from "react-router-dom";
@@ -73,6 +73,7 @@ function UserProfile() {
   const [isPending, setIsPending] = useState(true);
   const [userData, setUserData] = useState(null);
   const [isFollowed, setIsFollowed] = useState(false);
+  const [postError, setPostError] = useState(null);
 
   const { data: userLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
     "http://localhost:8000/room/user/" + user_id
@@ -100,31 +101,35 @@ function UserProfile() {
 
   async function followUser() {
     try {
-      let response = await axios.post(
+      await axios.post(
         `http://localhost:8000/user/follow`,
         { followed_user_id: user_id },
         config
       );
 
       await getUserData();
+      setPostError(null);
       setIsFollowed(true);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      setPostError(err.message);
     }
   }
 
   async function unFollowUser() {
     try {
-      let response = await axios.post(
+      await axios.post(
         `http://localhost:8000/user/unfollow`,
         { unfollowed_user_id: user_id },
         config
       );
 
       await getUserData();
+      setPostError(null);
       setIsFollowed(false);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      setPostError(err.message);
     }
   }
 
@@ -202,6 +207,8 @@ function UserProfile() {
   return (
     <div>
       <BackdropComponent open={isPending || isRoomsPending || isBlogsPending} />
+
+      {postError && <Alert severity="error">{postError}</Alert>}
 
       {!isPending && !isRoomsPending && !isBlogsPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>

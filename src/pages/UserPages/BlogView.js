@@ -45,6 +45,7 @@ function BlogView() {
 
   const [isPending, setIsPending] = useState(true);
   const [blogComments, setBlogComments] = useState(null);
+  const [postError, setPostError] = useState(null);
 
   const { data: blogData, isPending: isBlogPending } = useAxiosFetch(
     "http://localhost:8000/blog/" + blog_id
@@ -63,12 +64,8 @@ function BlogView() {
     }
   }
 
-  async function getCommentsData() {
-    await getBlogComments();
-  }
-
   async function fetchData() {
-    await getCommentsData();
+    await getBlogComments();
     setIsPending(false);
   }
 
@@ -76,6 +73,25 @@ function BlogView() {
     window.scrollTo(0, 0);
     fetchData();
   }, []);
+
+  async function postNewComment(data) {
+    try {
+      let response = await axios.post(
+        "http://localhost:8000/blog/comment",
+        data,
+        config
+      );
+
+      if (response.status === 201) {
+        getBlogComments();
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      console.log(err);
+      setPostError(err.message);
+    }
+  }
 
   const NavBarContent = (
     <div className="row align-items-center">
@@ -118,12 +134,13 @@ function BlogView() {
             blogBody={blogData.body}
             blogImg={blogData.image}
           />
+
           <BlogCommentsSection
             blogComments={blogComments}
             blogCommentsCount={blogComments.length}
             blog_id={blog_id}
-            getCommentsData={getCommentsData}
-            config={config}
+            postNewComment={postNewComment}
+            postError={postError}
           />
         </div>
       )}

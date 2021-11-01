@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Badge, Typography, Avatar } from "@mui/material";
+import { Grid, Badge, Typography, Avatar, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
@@ -56,12 +56,14 @@ function MyProfile() {
 
   const token = login_status.token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
+  let user_data = JSON.parse(localStorage.getItem("login"));
 
   const { username, user_profile_picture, user_cover_photo, user_bio } =
     login_status;
 
   const [isPending, setIsPending] = useState(true);
   const [myProfileData, setMyProfileData] = useState(null);
+  const [postError, setPostError] = useState(null);
 
   const { data: myLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
     "http://localhost:8000/room/my_rooms"
@@ -89,6 +91,81 @@ function MyProfile() {
     window.scrollTo(0, 0);
     getMyProfileData();
   }, []);
+
+  async function changeProfilePicture(formData) {
+    setIsPending(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/user/change_profile_picture",
+        formData,
+        config
+      );
+
+      if (response.status === 200) {
+        user_data.user_profile_picture = response.data;
+        localStorage.setItem("login", JSON.stringify(user_data));
+
+        getMyProfileData();
+        setPostError(null);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      console.log(err);
+      setPostError(err.message);
+      setIsPending(false);
+    }
+  }
+
+  async function changeCoverPhoto(formData) {
+    setIsPending(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/user/change_cover_photo",
+        formData,
+        config
+      );
+
+      if (response.status === 200) {
+        user_data.user_cover_photo = response.data;
+        localStorage.setItem("login", JSON.stringify(user_data));
+
+        getMyProfileData();
+        setPostError(null);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      console.log(err);
+      setPostError(err.message);
+      setIsPending(false);
+    }
+  }
+
+  async function changeBio(data) {
+    setIsPending(true);
+    try {
+      let response = await axios.post(
+        "http://localhost:8000/user/change_bio",
+        data,
+        config
+      );
+
+      if (response.status === 200) {
+        user_data.user_bio = response.data;
+        localStorage.setItem("login", JSON.stringify(user_data));
+
+        getMyProfileData();
+        setPostError(null);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      console.log(err);
+      setPostError(err.message);
+      setIsPending(false);
+    }
+  }
 
   const NavBarContent = (
     <Grid
@@ -120,7 +197,10 @@ function MyProfile() {
                 <Badge
                   overlap="circular"
                   badgeContent={
-                    <ChangeProfilePicture getMyProfileData={getMyProfileData} />
+                    <ChangeProfilePicture
+                      getMyProfileData={getMyProfileData}
+                      changeProfilePicture={changeProfilePicture}
+                    />
                   }
                   color="warning"
                 >
@@ -140,13 +220,18 @@ function MyProfile() {
         </Grid>
       )}
 
-      <ChangeCoverPhoto getMyProfileData={getMyProfileData} />
+      <ChangeCoverPhoto
+        getMyProfileData={getMyProfileData}
+        changeCoverPhoto={changeCoverPhoto}
+      />
     </Grid>
   );
 
   return (
     <div>
       <BackdropComponent open={isPending || isRoomsPending || isBlogsPending} />
+
+      {postError && <Alert severity="error">{postError}</Alert>}
 
       {!isPending && !isRoomsPending && !isBlogsPending && (
         <div style={{ backgroundColor: "#1a1e25 " }}>
@@ -161,6 +246,7 @@ function MyProfile() {
             followersCount={myProfileData.follower.length}
             getMyProfileData={getMyProfileData}
             isMyProfile={true}
+            changeBio={changeBio}
           />
 
           <UserProfileTabs
