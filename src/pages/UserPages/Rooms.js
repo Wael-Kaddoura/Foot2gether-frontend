@@ -192,7 +192,7 @@ function Rooms() {
                   team2Logo={searchResult.matchroom.team2.logo}
                 />
               ) : (
-                <Grid style={{ height: 200 }}>No Rooms Found</Grid>
+                <Grid style={{ height: 200 }}>No Live Rooms Found</Grid>
               )
             ) : (
               ""

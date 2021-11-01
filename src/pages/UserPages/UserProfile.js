@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   userName: {
     fontSize: "30px !important",
     fontWeight: "800 !important",
-    color: "#fff",
+    color: "#fff !important",
   },
   userImage: {
     height: "200px !important",
@@ -216,6 +216,7 @@ function UserProfile() {
             NavBarContent={NavBarContent}
             coverPhoto={userData.cover_photo}
           />
+
           <UserInfo
             followingCount={userData.following.length}
             followersCount={userData.follower.length}
