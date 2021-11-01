@@ -31,6 +31,9 @@ const useStyles = makeStyles(() => ({
     height: 70,
     border: "2px solid",
   },
+  username: {
+    fontWeight: 700,
+  },
   loginBtn: {
     color: "#fff",
     backgroundColor: "#2e7d32",
@@ -41,6 +44,7 @@ const useStyles = makeStyles(() => ({
 function DrawerComponent({ currentPageName, isLoggedIn }) {
   const classes = useStyles();
   const history = useHistory();
+
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const login_status = JSON.parse(localStorage.getItem("login"));
@@ -88,14 +92,25 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
       >
         <List>
           {isLoggedIn && (
-            <ListItem>
-              <Avatar
-                alt="PP"
-                className={classes.profilePicture}
-                src={user_profile_picture}
-                sx={{ ml: 8, mb: 2 }}
-              />
-            </ListItem>
+            <div>
+              <ListItem>
+                <Grid container justifyContent="center">
+                  <Avatar
+                    alt="PP"
+                    className={classes.profilePicture}
+                    src={user_profile_picture}
+                  />
+                </Grid>
+              </ListItem>
+
+              <ListItem>
+                <Grid container justifyContent="center">
+                  <Typography className={classes.username}>
+                    {username}
+                  </Typography>
+                </Grid>
+              </ListItem>
+            </div>
           )}
           <NavBarItem
             name="HOME"
