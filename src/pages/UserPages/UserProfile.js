@@ -105,6 +105,8 @@ function UserProfile() {
         { followed_user_id: user_id },
         config
       );
+
+      await getUserData();
       setIsFollowed(true);
     } catch (error) {
       console.log(error);
@@ -118,6 +120,8 @@ function UserProfile() {
         { unfollowed_user_id: user_id },
         config
       );
+
+      await getUserData();
       setIsFollowed(false);
     } catch (error) {
       console.log(error);
