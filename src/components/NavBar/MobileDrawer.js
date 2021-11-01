@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function DrawerComponent({ currentPageName, isLoggedIn }) {
+function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -78,6 +78,7 @@ function DrawerComponent({ currentPageName, isLoggedIn }) {
   const logoutHandler = () => {
     localStorage.clear();
     clearNotificationToken();
+    setIsLoggedIn(false);
     history.push("/home");
   };
 

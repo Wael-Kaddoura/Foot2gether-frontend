@@ -1,16 +1,20 @@
 import "../../css/bootstrap/bootstrap.css";
 import "../../css/style.css";
 
+import { useState, useEffect } from "react";
 import DesktopHeader from "./DesktopHeader";
 import Overlay from "./Overlay";
 
 function MainNavBar({ currentPageName, NavBarContent }) {
-  let isLoggedIn = false;
   let login_status = JSON.parse(localStorage.getItem("login"));
 
-  if (login_status && login_status.login) {
-    isLoggedIn = true;
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (login_status && login_status.login) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return (
     <div>
@@ -18,6 +22,7 @@ function MainNavBar({ currentPageName, NavBarContent }) {
         <DesktopHeader
           currentPageName={currentPageName}
           isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
         />
       </div>
 

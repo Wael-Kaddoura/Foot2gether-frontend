@@ -29,7 +29,8 @@ const useStyles = makeStyles({
 });
 
 function DesktopHeader(props) {
-  const { currentPageName, isLoggedIn, dontShowProfileIcon } = props;
+  const { currentPageName, isLoggedIn, setIsLoggedIn, dontShowProfileIcon } =
+    props;
 
   const login_status = JSON.parse(localStorage.getItem("login"));
 
@@ -74,6 +75,7 @@ function DesktopHeader(props) {
   const logoutHandler = () => {
     localStorage.clear();
     clearNotificationToken();
+    setIsLoggedIn(false);
     history.push("/home");
   };
 
@@ -118,6 +120,7 @@ function DesktopHeader(props) {
           <DrawerComponent
             currentPageName={currentPageName}
             isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
           />
         ) : (
           <div className="d-flex align-items-center">
