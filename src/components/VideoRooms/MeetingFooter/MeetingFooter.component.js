@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
   faVideo,
-  faPhone,
+  faSignOutAlt,
   faVideoSlash,
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -12,10 +11,6 @@ import {
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
 const MeetingFooter = (props) => {
-  const history = useHistory();
-  const userKeyFB = props.userKeyFB;
-  const streamTrack = props.streamTrack;
-
   const [streamState, setStreamState] = useState({
     mic: false,
     video: false,
@@ -30,20 +25,7 @@ const MeetingFooter = (props) => {
   };
 
   const onExitRoom = () => {
-    userKeyFB.remove();
-    history.go(-1);
-
-    // const stream = streamTrack.srcObject;
-    // const tracks = stream.getTracks();
-
-    // tracks.forEach(function (track) {
-    //   track.stop();
-    // });
-
-    // streamTrack.srcObject = null;
-
-    // window.location = window.location;
-    // console.log(streamTrack);
+    window.close();
   };
 
   const onVideoClick = () => {
@@ -98,7 +80,7 @@ const MeetingFooter = (props) => {
         onClick={onExitRoom}
         disabled={streamState.screen}
       >
-        <FontAwesomeIcon icon={faPhone} />
+        <FontAwesomeIcon icon={faSignOutAlt} />
       </div>
       <ReactTooltip />
     </div>

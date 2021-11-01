@@ -18,9 +18,6 @@ function Room(props) {
   let { firepadRef, userName } = props;
   const history = useHistory();
 
-  const [userKeyFB, setUserKeyFB] = useState("");
-  const [streamTrack, setStreamTrack] = useState("");
-
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -45,9 +42,6 @@ function Room(props) {
           userName,
           preferences: defaultPreference,
         });
-
-        setUserKeyFB(userStatusRef);
-        setStreamTrack(props.mainStream);
 
         props.setUser({
           [userStatusRef.key]: { name: userName, ...defaultPreference },
@@ -92,7 +86,7 @@ function Room(props) {
 
   return (
     <div className="App">
-      <MainScreen userKeyFB={userKeyFB} streamTrack={streamTrack} />
+      <MainScreen />
     </div>
   );
 }
