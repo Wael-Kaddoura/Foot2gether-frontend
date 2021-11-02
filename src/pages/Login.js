@@ -8,6 +8,8 @@ import axios from "axios";
 
 import firebase from "../server/firebase-notifications/firebase";
 
+import BackdropComponent from "../components/BackdropComponent";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -139,7 +141,7 @@ function Login() {
       }
     } catch (err) {
       if (err) {
-        if (err.response.status === 401) {
+        if (err.response && err.response.status === 401) {
           console.log("Wrong Credentials!");
         }
         console.log(err);
@@ -220,7 +222,12 @@ function Login() {
     </Grid>
   );
 
-  return <Overlay NavBarContent={login_form} />;
+  return (
+    <div>
+      <BackdropComponent open={isPending} />
+      <Overlay NavBarContent={login_form} />
+    </div>
+  );
 }
 
 export default Login;
