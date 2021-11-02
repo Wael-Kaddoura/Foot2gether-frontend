@@ -1,6 +1,6 @@
+import "../../css/style.css";
 import "../../css/bootstrap/bootstrap.css";
 
-import "../../css/style.css";
 import { useState, useEffect } from "react";
 
 import DesktopHeader from "./DesktopHeader";

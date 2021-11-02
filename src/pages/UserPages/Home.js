@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
@@ -23,6 +23,30 @@ const useStyles = makeStyles({
     minWidth: "100% ",
     backgroundColor: "#1a1e25",
   },
+  navbarContentContainer: {
+    height: "100vh !important",
+    minHeight: "500px !important",
+  },
+  navbarContent: {
+    marginLeft: "auto !important",
+    position: "relative !important",
+    width: "100% !important",
+    minHeight: "1px !important",
+    paddingRight: "15px !important",
+    paddingLeft: "15px !important",
+  },
+  navbarContentTitle: {
+    textAlign: "center !important",
+    color: "#fff !important",
+    fontSize: "32px !important",
+    fontWeight: "700 !important",
+  },
+  navbarContentSubtitle: {
+    fontSize: "16px !important",
+    fontWeight: "300 !important",
+    color: "rgba(255, 255, 255, 0.7) !important",
+    textAlign: "center",
+  },
 });
 
 function Home() {
@@ -43,13 +67,21 @@ function Home() {
   }, []);
 
   const NavBarContent = (
-    <div className="row align-items-center">
-      <div className="col-lg-5 ml-auto">
-        <h1 className="text-white text-center">Welcome to Foot2gether</h1>
-        <p className="text-center">
+    <Grid
+      container
+      alignItems="center"
+      className={classes.navbarContentContainer}
+    >
+      <Grid item xs={12} lg={5} className={classes.navbarContent}>
+        <Typography className={classes.navbarContentTitle} sx={{ mb: 1 }}>
+          Welcome to Foot2gether
+        </Typography>
+
+        <Typography className={classes.navbarContentSubtitle} sx={{ mb: 1 }}>
           Enjoy watching Football Matches with Fans from around the Globe!
-        </p>
-        <p className="text-center">
+        </Typography>
+
+        <Grid container justifyContent="center">
           <Link to="/MATCHES">
             <Button
               className={classes.viewMatchesBtn}
@@ -59,9 +91,9 @@ function Home() {
               View Matches
             </Button>
           </Link>
-        </p>
-      </div>
-    </div>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 
   return (

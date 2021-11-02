@@ -6,11 +6,7 @@ function SecondaryOverlay() {
         style={{
           backgroundImage: `url(http://localhost:8000/cover_photo/default_cover_photo.jpg)`,
         }}
-      >
-        <div className="container">
-          <div className="row align-items-center"></div>
-        </div>
-      </div>
+      ></div>
     </div>
   );
 }

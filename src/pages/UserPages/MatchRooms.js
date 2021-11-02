@@ -30,6 +30,17 @@ const useStyles = makeStyles((theme) => ({
   roomContent: {
     minWidth: "100%",
   },
+  navbarContentContainer: {
+    height: "100vh !important",
+    minHeight: "500px !important",
+  },
+  navbarContent: {
+    position: "relative !important",
+    width: "100% !important",
+    minHeight: "1px !important",
+    paddingRight: "15px !important",
+    paddingLeft: "15px !important",
+  },
 }));
 
 function MatchRooms() {
@@ -55,17 +66,39 @@ function MatchRooms() {
   }, []);
 
   const NavBarContent = (
-    <div className="row align-items-center">
-      <div className="col-lg-7 mx-auto text-center">
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-between"
+      alignItems="center"
+      className={classes.navbarContentContainer}
+    >
+      <Grid
+        item
+        xs={8}
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="flex-end"
+        className={classes.navbarContent}
+      >
         {!isPending && <RoomMatchCard matchData={matchData} />}
-        <Grid>
-          <ScrollLink to="liveRooms" spy={false} smooth={true}>
+      </Grid>
+
+      <Grid xs={2} className={classes.navbarContent}>
+        <ScrollLink to="liveRooms" spy={false} smooth={true}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Typography>Scroll to Rooms</Typography>
             <ArrowDownwardIcon style={{ color: "#fff" }} />
-          </ScrollLink>
-        </Grid>
-      </div>
-    </div>
+          </Grid>
+        </ScrollLink>
+      </Grid>
+    </Grid>
   );
 
   return (

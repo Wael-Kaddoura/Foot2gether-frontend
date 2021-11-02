@@ -33,6 +33,29 @@ const useStyles = makeStyles({
   roomContent: {
     minWidth: "100%",
   },
+  navbarContentContainer: {
+    height: "100vh !important",
+    minHeight: "500px !important",
+  },
+  navbarContent: {
+    position: "relative !important",
+    width: "100% !important",
+    minHeight: "1px !important",
+    paddingRight: "15px !important",
+    paddingLeft: "15px !important",
+  },
+  navbarContentTitle: {
+    textAlign: "center !important",
+    color: "#fff !important",
+    fontSize: "50px !important",
+    fontWeight: "700 !important",
+  },
+  navbarContentSubtitle: {
+    fontSize: "16px !important",
+    fontWeight: "300 !important",
+    color: "rgba(255, 255, 255, 0.7) !important",
+    textAlign: "center",
+  },
 });
 
 function Rooms() {
@@ -105,23 +128,49 @@ function Rooms() {
   }, []);
 
   const NavBarContent = (
-    <div className="row align-items-center">
-      <div className="col-lg-5 mx-auto text-center">
-        <h1 className={classes.pageTitle}>Rooms</h1>
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-between"
+      alignItems="center"
+      className={classes.navbarContentContainer}
+    >
+      <Grid
+        item
+        xs={7}
+        container
+        direction="column"
+        justifyContent="flex-end"
+        alignItems="center"
+        className={classes.navbarContent}
+      >
+        <Typography className={classes.navbarContentTitle} sx={{ mb: 1 }}>
+          Rooms
+        </Typography>
+
         {!isPending && (
-          <p className={classes.pageSubTitle}>
+          <Typography className={classes.navbarContentSubtitle} sx={{ mb: 2 }}>
             There are currently {liveRoomsCount} Live Rooms!
-          </p>
+          </Typography>
         )}
+
         <RoomSearchBar searchHandler={searchHandler} />
-        <Grid>
-          <ScrollLink to="allLiveRooms" spy={false} smooth={true}>
-            <Typography>See All Live Rooms</Typography>
+      </Grid>
+
+      <Grid xs={2} className={classes.navbarContent}>
+        <ScrollLink to="allLiveRooms" spy={false} smooth={true}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography>Scroll to Rooms</Typography>
             <ArrowDownwardIcon style={{ color: "#fff" }} />
-          </ScrollLink>
-        </Grid>
-      </div>
-    </div>
+          </Grid>
+        </ScrollLink>
+      </Grid>
+    </Grid>
   );
 
   return (

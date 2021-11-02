@@ -1,6 +1,3 @@
-import "../../css/bootstrap/bootstrap.css";
-
-import "../../css/style.css";
 import { ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
 

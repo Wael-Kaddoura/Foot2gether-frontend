@@ -1,6 +1,5 @@
-import "../../css/bootstrap/bootstrap.css";
-
 import "../../css/style.css";
+import "../../css/bootstrap/bootstrap.css";
 
 import DesktopHeader from "./DesktopHeader";
 import UserOverlay from "./UserOverlay";
