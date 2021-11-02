@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
-import HomeNextMatchCard from "../../components/Home/HomeNextMatchCard";
+import HomeNextMatch from "../../components/Home/HomeNextMatch";
 import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import HomeBlogs from "../../components/Home/HomeBlogs";
 import BackdropComponent from "../../components/BackdropComponent";
@@ -111,7 +111,16 @@ function Home() {
       >
         {!isPending &&
           (nextMatchData.length ? (
-            <HomeNextMatchCard nextMatch={nextMatchData} />
+            <HomeNextMatch
+              team1Name={nextMatchData[0].team1.name}
+              team1Logo={nextMatchData[0].team1.logo}
+              team2Name={nextMatchData[0].team2.name}
+              team2Logo={nextMatchData[0].team2.logo}
+              stadium={nextMatchData[0].stadium}
+              league={nextMatchData[0].competition.name}
+              kickOff={nextMatchData[0].kick_off}
+              matchDay={nextMatchData[0].match_day}
+            />
           ) : (
             <NoMatchMsg
               msg="There are no Upcoming Matches today!"
