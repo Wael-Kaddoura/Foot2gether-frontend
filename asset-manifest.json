@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Foot2gether-frontend/static/css/main.cb5bab7a.chunk.css",
+    "main.js": "/Foot2gether-frontend/static/js/main.04e027c5.chunk.js",
+    "main.js.map": "/Foot2gether-frontend/static/js/main.04e027c5.chunk.js.map",
+    "runtime-main.js": "/Foot2gether-frontend/static/js/runtime-main.b58aa1b3.js",
+    "runtime-main.js.map": "/Foot2gether-frontend/static/js/runtime-main.b58aa1b3.js.map",
+    "static/js/2.55ff57dd.chunk.js": "/Foot2gether-frontend/static/js/2.55ff57dd.chunk.js",
+    "static/js/2.55ff57dd.chunk.js.map": "/Foot2gether-frontend/static/js/2.55ff57dd.chunk.js.map",
+    "index.html": "/Foot2gether-frontend/index.html",
+    "static/css/main.cb5bab7a.chunk.css.map": "/Foot2gether-frontend/static/css/main.cb5bab7a.chunk.css.map",
+    "static/js/2.55ff57dd.chunk.js.LICENSE.txt": "/Foot2gether-frontend/static/js/2.55ff57dd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b58aa1b3.js",
+    "static/js/2.55ff57dd.chunk.js",
+    "static/css/main.cb5bab7a.chunk.css",
+    "static/js/main.04e027c5.chunk.js"
+  ]
+}
