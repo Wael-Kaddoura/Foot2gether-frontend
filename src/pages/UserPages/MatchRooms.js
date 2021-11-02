@@ -59,7 +59,7 @@ function MatchRooms() {
     data: matchData,
     fetchError,
     isPending,
-  } = useAxiosFetch("http://3.144.252.18/match/" + match_id);
+  } = useAxiosFetch("https://foot2gether.ml/match/" + match_id);
 
   useEffect(() => {
     window.scrollTo(0, 0);

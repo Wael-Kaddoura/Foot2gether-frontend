@@ -93,7 +93,7 @@ function Signup() {
   const [usernameUsedError, setUsernameUsedError] = useState(false);
 
   const { data: teamsData, isPending } = useAxiosFetch(
-    "http://3.144.252.18/team"
+    "https://foot2gether.ml/team"
   );
 
   const handleChange = (event) => {
@@ -128,7 +128,7 @@ function Signup() {
 
       try {
         let response = await axios.post(
-          "http://3.144.252.18/user/signup",
+          "https://foot2gether.ml/user/signup",
           data
         );
 

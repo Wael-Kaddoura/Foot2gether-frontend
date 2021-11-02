@@ -53,14 +53,14 @@ function Home() {
   const classes = useStyles();
 
   const { data: latestBlogsData, isPending: isBlogsPending } = useAxiosFetch(
-    "http://3.144.252.18/blog/latest"
+    "https://foot2gether.ml/blog/latest"
   );
 
   const {
     data: nextMatchData,
     fetchError,
     isPending,
-  } = useAxiosFetch("http://3.144.252.18/match/next");
+  } = useAxiosFetch("https://foot2gether.ml/match/next");
 
   useEffect(() => {
     window.scrollTo(0, 0);

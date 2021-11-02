@@ -132,7 +132,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
 
     try {
       let response = await axios.post(
-        "http://3.144.252.18/admin/match",
+        "https://foot2gether.ml/admin/match",
         data,
         config
       );

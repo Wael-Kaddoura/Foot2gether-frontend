@@ -76,17 +76,17 @@ function UserProfile() {
   const [postError, setPostError] = useState(null);
 
   const { data: userLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
-    "http://3.144.252.18/room/user/" + user_id
+    "https://foot2gether.ml/room/user/" + user_id
   );
 
   const { data: userBlogs, isPending: isBlogsPending } = useAxiosFetch(
-    "http://3.144.252.18/blog/user/" + user_id
+    "https://foot2gether.ml/blog/user/" + user_id
   );
 
   async function getUserData() {
     try {
       let response = await axios.get(
-        `http://3.144.252.18/user/` + user_id,
+        `https://foot2gether.ml/user/` + user_id,
         config
       );
       let user_data = response.data.user_data;
@@ -102,7 +102,7 @@ function UserProfile() {
   async function followUser() {
     try {
       await axios.post(
-        `http://3.144.252.18/user/follow`,
+        `https://foot2gether.ml/user/follow`,
         { followed_user_id: user_id },
         config
       );
@@ -119,7 +119,7 @@ function UserProfile() {
   async function unFollowUser() {
     try {
       await axios.post(
-        `http://3.144.252.18/user/unfollow`,
+        `https://foot2gether.ml/user/unfollow`,
         { unfollowed_user_id: user_id },
         config
       );

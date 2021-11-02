@@ -38,13 +38,13 @@ function AdminTodaysRooms() {
   const [todaysRooms, setTodaysRooms] = useState(null);
 
   const { data: availableMatches, isPending: isMatchesPending } = useAxiosFetch(
-    "http://3.144.252.18/admin/match/available"
+    "https://foot2gether.ml/admin/match/available"
   );
 
   async function getTodaysRooms() {
     try {
       const response = await axios.get(
-        "http://3.144.252.18/admin/room/today",
+        "https://foot2gether.ml/admin/room/today",
         config
       );
       const todays_rooms_data = response.data;

@@ -96,7 +96,7 @@ function AdminChangeScore({
 
     try {
       let response = await axios.put(
-        "http://3.144.252.18/admin/match_score",
+        "https://foot2gether.ml/admin/match_score",
         data,
         config
       );

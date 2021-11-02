@@ -76,7 +76,7 @@ function UserCard(props) {
   async function followUser() {
     try {
       let response = await axios.post(
-        `http://3.144.252.18/user/follow`,
+        `https://foot2gether.ml/user/follow`,
         { followed_user_id: userID },
         config
       );
@@ -90,7 +90,7 @@ function UserCard(props) {
   async function unFollowUser() {
     try {
       let response = await axios.post(
-        `http://3.144.252.18/user/unfollow`,
+        `https://foot2gether.ml/user/unfollow`,
         { unfollowed_user_id: userID },
         config
       );

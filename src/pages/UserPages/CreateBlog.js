@@ -65,7 +65,7 @@ function CreateBlog() {
 
     try {
       let response = await axios.post(
-        "http://3.144.252.18/blog",
+        "https://foot2gether.ml/blog",
         formData,
         config
       );

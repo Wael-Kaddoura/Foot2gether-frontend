@@ -75,7 +75,7 @@ function Blog() {
     data: blogsData,
     fetchError,
     isPending,
-  } = useAxiosFetch("http://3.144.252.18/blog");
+  } = useAxiosFetch("https://foot2gether.ml/blog");
 
   useEffect(() => {
     window.scrollTo(0, 0);

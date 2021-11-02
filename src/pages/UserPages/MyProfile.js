@@ -66,17 +66,17 @@ function MyProfile() {
   const [postError, setPostError] = useState(null);
 
   const { data: myLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
-    "http://3.144.252.18/room/my_rooms"
+    "https://foot2gether.ml/room/my_rooms"
   );
 
   const { data: myBlogs, isPending: isBlogsPending } = useAxiosFetch(
-    "http://3.144.252.18/blog/my_blogs"
+    "https://foot2gether.ml/blog/my_blogs"
   );
 
   async function getMyProfileData() {
     try {
       let response = await axios.get(
-        `http://3.144.252.18/user/my_profile`,
+        `https://foot2gether.ml/user/my_profile`,
         config
       );
       let my_profile_data = response.data;
@@ -96,7 +96,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       const response = await axios.post(
-        "http://3.144.252.18/user/change_profile_picture",
+        "https://foot2gether.ml/user/change_profile_picture",
         formData,
         config
       );
@@ -121,7 +121,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       const response = await axios.post(
-        "http://3.144.252.18/user/change_cover_photo",
+        "https://foot2gether.ml/user/change_cover_photo",
         formData,
         config
       );
@@ -146,7 +146,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       let response = await axios.post(
-        "http://3.144.252.18/user/change_bio",
+        "https://foot2gether.ml/user/change_bio",
         data,
         config
       );

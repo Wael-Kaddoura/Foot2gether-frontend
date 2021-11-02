@@ -50,7 +50,7 @@ function UserSearch() {
     setIsPending(true);
     try {
       let response = await axios.get(
-        `http://3.144.252.18/user/search/` + search_word,
+        `https://foot2gether.ml/user/search/` + search_word,
         config
       );
 

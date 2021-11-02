@@ -64,7 +64,7 @@ function DesktopHeader(props) {
   async function clearNotificationToken() {
     try {
       await axios.delete(
-        `http://3.144.252.18/user/clear_notification_token`,
+        `https://foot2gether.ml/user/clear_notification_token`,
         config
       );
     } catch (error) {

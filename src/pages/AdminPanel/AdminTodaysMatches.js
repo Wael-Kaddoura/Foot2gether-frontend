@@ -44,7 +44,7 @@ function AdminTodaysMatches() {
   async function getTodaysMatches() {
     try {
       const response = await axios.get(
-        "http://3.144.252.18/admin/match/today",
+        "https://foot2gether.ml/admin/match/today",
         config
       );
       const todays_matches_data = response.data;

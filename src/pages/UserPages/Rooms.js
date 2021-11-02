@@ -83,7 +83,7 @@ function Rooms() {
   }
 
   const { data: userType, isPending: isUserTypePending } = useAxiosFetch(
-    "http://3.144.252.18/user/type"
+    "https://foot2gether.ml/user/type"
   );
 
   async function searchHandler(room_id) {
@@ -93,7 +93,7 @@ function Rooms() {
       setIsPending(true);
       try {
         let response = await axios.get(
-          `http://3.144.252.18/room/` + room_id,
+          `https://foot2gether.ml/room/` + room_id,
           config
         );
         let searched_room_data = response.data;
@@ -108,7 +108,7 @@ function Rooms() {
 
   async function getLiveRooms() {
     try {
-      let response = await axios.get(`http://3.144.252.18/room`, config);
+      let response = await axios.get(`https://foot2gether.ml/room`, config);
       let live_rooms_data = response.data;
       setLiveRooms(live_rooms_data);
       setLiveRoomsCount(live_rooms_data.length);
