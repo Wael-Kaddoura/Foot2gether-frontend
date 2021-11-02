@@ -96,7 +96,7 @@ function AdminChangeScore({
 
     try {
       let response = await axios.put(
-        "http://localhost:8000/admin/match_score",
+        "http://3.144.252.18/admin/match_score",
         data,
         config
       );

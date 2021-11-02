@@ -43,12 +43,12 @@ function AdminAllMatches() {
   };
 
   const { data: createMatchOptions, isPending: isOptionsPending } =
-    useAxiosFetch("http://localhost:8000/admin/match/create_options");
+    useAxiosFetch("http://3.144.252.18/admin/match/create_options");
 
   async function getAllMatches() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/match/all",
+        "http://3.144.252.18/admin/match/all",
         config
       );
       const all_matches_data = response.data;

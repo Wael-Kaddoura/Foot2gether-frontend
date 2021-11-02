@@ -44,7 +44,7 @@ function AdminTodaysMatches() {
   async function getTodaysMatches() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/admin/match/today",
+        "http://3.144.252.18/admin/match/today",
         config
       );
       const todays_matches_data = response.data;

@@ -75,7 +75,7 @@ function Blog() {
     data: blogsData,
     fetchError,
     isPending,
-  } = useAxiosFetch("http://localhost:8000/blog");
+  } = useAxiosFetch("http://3.144.252.18/blog");
 
   useEffect(() => {
     window.scrollTo(0, 0);

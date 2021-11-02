@@ -72,7 +72,7 @@ function Login() {
       let config = { headers: { Authorization: `Bearer ${token}` } };
 
       let response = await axios.post(
-        "http://localhost:8000/user/save_notification_token",
+        "http://3.144.252.18/user/save_notification_token",
         { notification_token },
         config
       );
@@ -93,7 +93,7 @@ function Login() {
     const password = login_data.get("password");
 
     try {
-      const response = await axios.post("http://localhost:8000/user/login", {
+      const response = await axios.post("http://3.144.252.18/user/login", {
         email,
         password,
       });

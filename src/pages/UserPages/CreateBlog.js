@@ -65,7 +65,7 @@ function CreateBlog() {
 
     try {
       let response = await axios.post(
-        "http://localhost:8000/blog",
+        "http://3.144.252.18/blog",
         formData,
         config
       );

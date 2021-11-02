@@ -132,7 +132,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
 
     try {
       let response = await axios.post(
-        "http://localhost:8000/admin/match",
+        "http://3.144.252.18/admin/match",
         data,
         config
       );

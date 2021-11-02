@@ -47,18 +47,18 @@ function Matches() {
   }
 
   const { data: liveMatches, isPending: isLivePending } = useAxiosFetch(
-    "http://localhost:8000/match/live"
+    "http://3.144.252.18/match/live"
   );
 
   const { data: upcomingMatches, isPending: isUpcomingPending } = useAxiosFetch(
-    "http://localhost:8000/match/upcoming"
+    "http://3.144.252.18/match/upcoming"
   );
 
   const {
     data: finishedMatches,
     fetchError,
     isPending,
-  } = useAxiosFetch("http://localhost:8000/match/finished");
+  } = useAxiosFetch("http://3.144.252.18/match/finished");
 
   useEffect(() => {
     window.scrollTo(0, 0);

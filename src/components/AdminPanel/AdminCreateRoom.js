@@ -78,7 +78,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
 
     try {
       let response = await axios.post(
-        "http://localhost:8000/admin/room",
+        "http://3.144.252.18/admin/room",
         data,
         config
       );

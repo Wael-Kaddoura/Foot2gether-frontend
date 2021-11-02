@@ -71,13 +71,13 @@ function BlogView() {
   const [postError, setPostError] = useState(null);
 
   const { data: blogData, isPending: isBlogPending } = useAxiosFetch(
-    "http://localhost:8000/blog/" + blog_id
+    "http://3.144.252.18/blog/" + blog_id
   );
 
   async function getBlogComments() {
     try {
       let response = await axios.get(
-        "http://localhost:8000/blog/comments/" + blog_id,
+        "http://3.144.252.18/blog/comments/" + blog_id,
         config
       );
       let blog_comments = response.data;
@@ -100,7 +100,7 @@ function BlogView() {
   async function postNewComment(data) {
     try {
       let response = await axios.post(
-        "http://localhost:8000/blog/comment",
+        "http://3.144.252.18/blog/comment",
         data,
         config
       );

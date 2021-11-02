@@ -61,7 +61,7 @@ function CreateNewRoom({ getLiveRooms }) {
     data: availableMatches,
     fetchError,
     isPending,
-  } = useAxiosFetch("http://localhost:8000/match/available");
+  } = useAxiosFetch("http://3.144.252.18/match/available");
 
   const [open, setOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -100,11 +100,7 @@ function CreateNewRoom({ getLiveRooms }) {
     setOpen(false);
 
     try {
-      let response = await axios.post(
-        "http://localhost:8000/room",
-        data,
-        config
-      );
+      let response = await axios.post("http://3.144.252.18/room", data, config);
 
       if (response.status === 200) {
         getLiveRooms();

@@ -14,13 +14,13 @@ function AdminMainPage() {
   }
 
   const { data: allMatchesCount, isPending: isAllMatchesPending } =
-    useAxiosFetch("http://localhost:8000/admin/match/all");
+    useAxiosFetch("http://3.144.252.18/admin/match/all");
 
   const { data: todaysMatchesCount, isPending: isTodaysMatchesPending } =
-    useAxiosFetch("http://localhost:8000/admin/match/today");
+    useAxiosFetch("http://3.144.252.18/admin/match/today");
 
   const { data: todaysRoomsCount, isPending: isTodaysRoomsPending } =
-    useAxiosFetch("http://localhost:8000/admin/room/today");
+    useAxiosFetch("http://3.144.252.18/admin/room/today");
 
   return (
     <div>

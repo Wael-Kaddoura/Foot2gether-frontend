@@ -66,17 +66,17 @@ function MyProfile() {
   const [postError, setPostError] = useState(null);
 
   const { data: myLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
-    "http://localhost:8000/room/my_rooms"
+    "http://3.144.252.18/room/my_rooms"
   );
 
   const { data: myBlogs, isPending: isBlogsPending } = useAxiosFetch(
-    "http://localhost:8000/blog/my_blogs"
+    "http://3.144.252.18/blog/my_blogs"
   );
 
   async function getMyProfileData() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/user/my_profile`,
+        `http://3.144.252.18/user/my_profile`,
         config
       );
       let my_profile_data = response.data;
@@ -96,7 +96,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/user/change_profile_picture",
+        "http://3.144.252.18/user/change_profile_picture",
         formData,
         config
       );
@@ -121,7 +121,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/user/change_cover_photo",
+        "http://3.144.252.18/user/change_cover_photo",
         formData,
         config
       );
@@ -146,7 +146,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       let response = await axios.post(
-        "http://localhost:8000/user/change_bio",
+        "http://3.144.252.18/user/change_bio",
         data,
         config
       );
