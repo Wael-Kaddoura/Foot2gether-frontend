@@ -44,7 +44,7 @@ function Footer() {
             justifyContent="center"
             sx={{ mb: 2 }}
           >
-            <Link to="/HOME" className={classes.footerLink}>
+            <Link to="/" className={classes.footerLink}>
               Home
             </Link>
           </Grid>
@@ -100,7 +100,7 @@ function Footer() {
           alignItems="center"
           sx={{ mb: 2 }}
         >
-          <Link to="/HOME" className={classes.footerTitle}>
+          <Link to="/" className={classes.footerTitle}>
             Foot2gether
           </Link>
         </Grid>

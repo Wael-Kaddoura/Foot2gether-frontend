@@ -1,10 +1,10 @@
 import { ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function MainNavBar({ name, color, isActive, isActiveDrawer }) {
+function MainNavBar({ path, name, color, isActive, isActiveDrawer }) {
   return (
     <Link
-      to={"/" + name}
+      to={"/" + path}
       className="nav-link"
       style={{ textDecoration: "none", color: color }}
     >

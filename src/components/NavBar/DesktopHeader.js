@@ -76,7 +76,7 @@ function DesktopHeader(props) {
     localStorage.clear();
     clearNotificationToken();
     setIsLoggedIn(false);
-    history.push("/home");
+    history.push("/");
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -125,7 +125,7 @@ function DesktopHeader(props) {
         ) : (
           <div className="d-flex align-items-center">
             <div className="site-logo">
-              <Link to="/home">
+              <Link to="/">
                 <Typography className={classes.mainLogo}>
                   Foot2gether
                 </Typography>
@@ -140,21 +140,25 @@ function DesktopHeader(props) {
                 <List className="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                   <NavBarItem
                     name="HOME"
+                    path=""
                     color="white"
                     isActive={currentPageName === "Home" ? "active" : ""}
                   />
                   <NavBarItem
                     name="MATCHES"
+                    path="matches"
                     color="white"
                     isActive={currentPageName === "Matches" ? "active" : ""}
                   />
                   <NavBarItem
                     name="ROOMS"
+                    path="rooms"
                     color="white"
                     isActive={currentPageName === "Rooms" ? "active" : ""}
                   />
                   <NavBarItem
                     name="BLOGS"
+                    path="blogs"
                     color="white"
                     isActive={currentPageName === "Blogs" ? "active" : ""}
                   />

@@ -79,7 +79,7 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
     localStorage.clear();
     clearNotificationToken();
     setIsLoggedIn(false);
-    history.push("/home");
+    history.push("/");
   };
 
   return (
@@ -146,7 +146,7 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
                 </ListItem>
               </Link>
 
-              <Link to="/home" className="nav-link">
+              <Link to="/" className="nav-link">
                 <ListItem button onClick={logoutHandler}>
                   <ListItemText
                     style={{ color: "#212529" }}
@@ -182,7 +182,7 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
             <MenuIcon style={{ color: "#fff" }} />
           </IconButton>
 
-          <Link to="/home">
+          <Link to="/">
             <Typography className={classes.mainLogo}>Foot2gether</Typography>
           </Link>
         </Grid>

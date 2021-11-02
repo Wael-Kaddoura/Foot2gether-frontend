@@ -80,7 +80,7 @@ function Signup() {
     if (login_status.is_admin) {
       history.push("/admin/home");
     } else {
-      history.push("/home");
+      history.push("/");
     }
   }
 

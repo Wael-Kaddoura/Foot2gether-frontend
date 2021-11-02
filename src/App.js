@@ -20,7 +20,7 @@ import VideoRoom from "./pages/UserPages/VideoRoom";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Foot2gether-frontend">
       <Switch>
         <Route exact path="/login">
           <Login />
@@ -40,7 +40,7 @@ function App() {
         <Route exact path="/admin/todays_rooms">
           <AdminTodaysRooms />
         </Route>
-        <Route exact path="/home">
+        <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/matches">

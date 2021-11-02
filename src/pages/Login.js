@@ -45,7 +45,7 @@ function Login() {
     if (login_status.is_admin) {
       history.push("/admin/home");
     } else {
-      history.push("/home");
+      history.push("/");
     }
   }
 
@@ -132,7 +132,7 @@ function Login() {
         if (is_admin) {
           history.push("/admin/home");
         } else {
-          history.push("/home");
+          history.push("/");
         }
       } else {
         console.log("Something went wrong!");

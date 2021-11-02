@@ -30,7 +30,7 @@ function AdminTodaysMatches() {
       const token = login_status.token;
       config = { headers: { Authorization: `Bearer ${token}` } };
     } else {
-      history.push("/home");
+      history.push("/");
     }
   } else {
     history.push("/login");
