@@ -32,13 +32,13 @@ const useStyles = makeStyles((theme) => ({
   },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
-      maxHeight: 90,
-      maxWidth: 90,
+      maxHeight: "90px !important",
+      maxWidth: "90px !important",
     },
     [theme.breakpoints.between("sm", "xl")]: {
-      minHeight: 120,
-      maxHeight: 120,
-      maxWidth: 120,
+      minHeight: "120px !important",
+      maxHeight: "120px !important",
+      maxWidth: "120px !important",
     },
   },
 }));

@@ -18,8 +18,8 @@ const useStyles = makeStyles({
     color: "#fff",
     backgroundColor: "#ee1e46 !important",
     borderColor: "#ee1e46 !important",
-    width: 150,
-    height: 55,
+    width: "150px !important",
+    height: "55px !important",
   },
   homeContent: {
     minWidth: "100% ",

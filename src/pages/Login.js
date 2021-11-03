@@ -125,7 +125,6 @@ function Login() {
         );
 
         setLoginError(false);
-        getNotificationToken();
 
         let notification_token = await getNotificationToken();
         saveNotificationToken(notification_token);

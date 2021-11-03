@@ -114,11 +114,13 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
           )}
           <NavBarItem
             name="HOME"
+            path=""
             color="black"
             isActiveDrawer={currentPageName === "Home" ? "drawer-active" : ""}
           />
           <NavBarItem
             name="MATCHES"
+            path="matches"
             color="black"
             isActiveDrawer={
               currentPageName === "Matches" ? "drawer-active" : ""
@@ -126,11 +128,13 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
           />
           <NavBarItem
             name="ROOMS"
+            path="rooms"
             color="black"
             isActiveDrawer={currentPageName === "Rooms" ? "drawer-active" : ""}
           />
           <NavBarItem
             name="BLOGS"
+            path="blogs"
             color="black"
             isActiveDrawer={currentPageName === "Blogs" ? "drawer-active" : ""}
           />
