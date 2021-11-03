@@ -17,7 +17,6 @@ import UserProfile from "./pages/UserPages/UserProfile";
 import Rooms from "./pages/UserPages/Rooms";
 import UserSearch from "./pages/UserPages/UserSearch";
 import VideoRoom from "./pages/UserPages/VideoRoom";
-import "./css/style.css";
 
 function App() {
   return (

@@ -144,7 +144,12 @@ function CreateBlog() {
               Upload Blog Image
             </Typography>
 
-            <input type="file" required name="blog_image" />
+            <input
+              type="file"
+              required
+              name="blog_image"
+              style={{ color: "#808080 !important" }}
+            />
 
             <Grid container justifyContent="flex-end">
               <Button

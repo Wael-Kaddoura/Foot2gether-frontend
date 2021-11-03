@@ -29,10 +29,9 @@ export default function UserSearchBar({ searchHandler }) {
           inputProps={{ "aria-label": "Search Room by ID" }}
           onChange={handleChange}
         />
-        <IconButton sx={{ p: "10px" }} aria-label="search" type="submit">
+        <IconButton sx={{ p: "10px" }} elevation={0} type="submit">
           <SearchIcon />
         </IconButton>
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       </Paper>
     </Grid>
   );

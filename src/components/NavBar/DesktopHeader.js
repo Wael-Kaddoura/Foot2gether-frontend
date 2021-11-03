@@ -9,8 +9,10 @@ import {
   ListItem,
   Avatar,
   Typography,
+  Box,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import SearchIcon from "@mui/icons-material/Search";
 import { Link, useHistory } from "react-router-dom";
 
 import getAPIBaseURL from "../../APIBaseURL";
@@ -20,6 +22,16 @@ import NavBarItem from "./NavBarItem";
 import DrawerComponent from "./MobileDrawer";
 
 const useStyles = makeStyles({
+  navbarContainer: {
+    maxWidth: "1400px !important",
+    width: "100% !important",
+    paddingRight: "15px !important",
+    paddingLeft: "15px !important",
+    marginRight: "auto !important",
+    marginLeft: "auto !important",
+    display: "block !important",
+    boxSizing: "border-box !important",
+  },
   loginBtn: {
     color: "#fff",
   },
@@ -31,8 +43,7 @@ const useStyles = makeStyles({
 });
 
 function DesktopHeader(props) {
-  const { currentPageName, isLoggedIn, setIsLoggedIn, dontShowProfileIcon } =
-    props;
+  const { currentPageName, isLoggedIn, setIsLoggedIn } = props;
 
   const login_status = JSON.parse(localStorage.getItem("login"));
 
@@ -117,7 +128,7 @@ function DesktopHeader(props) {
 
   return (
     <header className="site-navbar py-4" role="banner">
-      <div className="container">
+      <div className={classes.navbarContainer}>
         {isMobile ? (
           <DrawerComponent
             currentPageName={currentPageName}
@@ -126,13 +137,13 @@ function DesktopHeader(props) {
           />
         ) : (
           <div className="d-flex align-items-center">
-            <div className="site-logo">
+            <Box className="site-logo" sx={{ ml: 16 }}>
               <Link to="/">
                 <Typography className={classes.mainLogo}>
                   Foot2gether
                 </Typography>
               </Link>
-            </div>
+            </Box>
 
             <div className="ml-auto">
               <nav
@@ -165,36 +176,46 @@ function DesktopHeader(props) {
                     isActive={currentPageName === "Blogs" ? "active" : ""}
                   />
 
-                  {!dontShowProfileIcon ? (
-                    isLoggedIn ? (
-                      <ListItem style={{ width: 100 }} sx={{ ml: 5 }}>
-                        <IconButton
-                          size="large"
-                          edge="end"
-                          aria-label="account of current user"
-                          aria-controls={menuId}
-                          aria-haspopup="true"
-                          onClick={handleProfileMenuOpen}
-                          color="primary"
-                        >
-                          <Avatar alt="PP" src={user_profile_picture} />
-                        </IconButton>
-                        {renderMenu}
-                      </ListItem>
-                    ) : (
-                      <Link to={"/login"}>
-                        <Button
-                          className={classes.loginBtn}
-                          variant="contained"
-                          sx={{ ml: 5 }}
-                        >
-                          Log in
-                        </Button>
-                      </Link>
-                    )
+                  {isLoggedIn ? (
+                    <ListItem style={{ width: 60 }} sx={{ mr: 1 }}>
+                      <IconButton
+                        size="large"
+                        edge="end"
+                        aria-label="account of current user"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={handleProfileMenuOpen}
+                        color="primary"
+                      >
+                        <Avatar alt="PP" src={user_profile_picture} />
+                      </IconButton>
+                      {renderMenu}
+                    </ListItem>
                   ) : (
-                    <div> </div>
+                    <Link to={"/login"}>
+                      <Button
+                        className={classes.loginBtn}
+                        variant="contained"
+                        sx={{ ml: 5 }}
+                      >
+                        Log in
+                      </Button>
+                    </Link>
                   )}
+
+                  <ListItem style={{ width: 230 }}>
+                    <Link to={"/user_search"}>
+                      <Button
+                        style={{
+                          color: "rgba(0, 0, 0, 0.5)",
+                          backgroundColor: "rgba(255, 255, 255, 0.45)",
+                          textTransform: "none",
+                        }}
+                      >
+                        Search Users <SearchIcon sx={{ ml: 1 }} />
+                      </Button>
+                    </Link>
+                  </ListItem>
                 </List>
               </nav>
             </div>

@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   msgBox: {
     minHeight: 500,
   },
-  msg: { fontSize: "25px !important" },
+  msg: { fontSize: "25px !important", color: "#808080 !important" },
 });
 
 function NoMatchMsg({ msg, home }) {

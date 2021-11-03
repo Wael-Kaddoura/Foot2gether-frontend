@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
@@ -50,11 +50,11 @@ function UserSearch() {
   const [isPending, setIsPending] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
 
-  async function searchHandler(search_word) {
+  async function searchHandler(search_term) {
     setIsPending(true);
     try {
       let response = await axios.get(
-        getAPIBaseURL() + `/user/search/` + search_word,
+        getAPIBaseURL() + `/user/search/` + search_term,
         config
       );
 
@@ -65,6 +65,15 @@ function UserSearch() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  let search_term = new URLSearchParams(useLocation().search).get(
+    "search_term"
+  );
+  if (search_term) {
+    let term = search_term;
+    search_term = null;
+    searchHandler(term);
   }
 
   return (
