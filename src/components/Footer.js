@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   footer: {
-    backgroundColor: "#222831 ",
-    minHeight: 300,
+    backgroundColor: "#222831 !important",
+    minHeight: "300px !important",
   },
   footerLink: {
-    fontWeight: 700,
+    fontWeight: "700 !important",
   },
   footerTitle: {
-    color: "#fff",
-    fontWeight: 900,
-    fontSize: 32,
+    color: "#fff !important",
+    fontWeight: "900 !important",
+    fontSize: "32px !important",
   },
 });
 

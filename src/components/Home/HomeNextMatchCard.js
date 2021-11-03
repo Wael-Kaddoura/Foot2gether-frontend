@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
   upcomingBtn: {
     color: "#fff !important",
     backgroundColor: "grey !important",
+    maxWidth: "90px !important",
+    maxHeight: "36px !important",
   },
   teamLogo: {
     [theme.breakpoints.between("xs", "sm")]: {
