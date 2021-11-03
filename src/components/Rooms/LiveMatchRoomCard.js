@@ -81,7 +81,10 @@ function LiveMatchRoomCard(props) {
             </Grid>
 
             <Grid item xs={3} md={1}>
-              <a href={"/video_room?id=" + roomID} target="_blank">
+              <a
+                href={"/Foot2gether-frontend/video_room?id=" + roomID}
+                target="_blank"
+              >
                 <Button
                   className={classes.joinBtn}
                   variant="contained"

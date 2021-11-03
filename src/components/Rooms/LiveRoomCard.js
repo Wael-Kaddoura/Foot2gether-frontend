@@ -99,7 +99,10 @@ function LiveRoomCard(props) {
             </Grid>
 
             <Grid item xs={3} md={1}>
-              <Link to={"/video_room?id=" + roomID}>
+              <a
+                href={"/Foot2gether-frontend/video_room?id=" + roomID}
+                target="_blank"
+              >
                 <Button
                   className={classes.joinBtn}
                   variant="contained"
@@ -107,7 +110,7 @@ function LiveRoomCard(props) {
                 >
                   Join
                 </Button>
-              </Link>
+              </a>
             </Grid>
           </Grid>
 
