@@ -136,6 +136,7 @@ function CreateBlog() {
               sx={{ mb: 3 }}
               name="blog_body"
               InputProps={{ className: classes.multilineColor }}
+              inputProps={{ minLength: 5, maxLength: 1234 }}
               InputLabelProps={{ className: classes.formLabel }}
             />
 
