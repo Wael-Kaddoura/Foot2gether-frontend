@@ -12,6 +12,8 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 import AdminCreateNewRoomMenuItem from "./AdminCreateNewRoomMenuItem";
@@ -78,7 +80,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
 
     try {
       let response = await axios.post(
-        "https://foot2gether.ml/admin/room",
+        getAPIBaseURL() + "/admin/room",
         data,
         config
       );

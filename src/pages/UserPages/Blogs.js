@@ -5,6 +5,8 @@ import { useHistory, Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -75,7 +77,7 @@ function Blog() {
     data: blogsData,
     fetchError,
     isPending,
-  } = useAxiosFetch("https://foot2gether.ml/blog");
+  } = useAxiosFetch(getAPIBaseURL() + "/blog");
 
   useEffect(() => {
     window.scrollTo(0, 0);

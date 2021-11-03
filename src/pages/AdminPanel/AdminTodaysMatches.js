@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
@@ -44,7 +46,7 @@ function AdminTodaysMatches() {
   async function getTodaysMatches() {
     try {
       const response = await axios.get(
-        "https://foot2gether.ml/admin/match/today",
+        getAPIBaseURL() + "/admin/match/today",
         config
       );
       const todays_matches_data = response.data;

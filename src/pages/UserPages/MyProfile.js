@@ -3,6 +3,8 @@ import { Grid, Badge, Typography, Avatar, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -66,17 +68,17 @@ function MyProfile() {
   const [postError, setPostError] = useState(null);
 
   const { data: myLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
-    "https://foot2gether.ml/room/my_rooms"
+    getAPIBaseURL() + "/room/my_rooms"
   );
 
   const { data: myBlogs, isPending: isBlogsPending } = useAxiosFetch(
-    "https://foot2gether.ml/blog/my_blogs"
+    getAPIBaseURL() + "/blog/my_blogs"
   );
 
   async function getMyProfileData() {
     try {
       let response = await axios.get(
-        `https://foot2gether.ml/user/my_profile`,
+        `http://localhost:8000/user/my_profile`,
         config
       );
       let my_profile_data = response.data;
@@ -96,7 +98,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       const response = await axios.post(
-        "https://foot2gether.ml/user/change_profile_picture",
+        getAPIBaseURL() + "/user/change_profile_picture",
         formData,
         config
       );
@@ -121,7 +123,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       const response = await axios.post(
-        "https://foot2gether.ml/user/change_cover_photo",
+        getAPIBaseURL() + "/user/change_cover_photo",
         formData,
         config
       );
@@ -146,7 +148,7 @@ function MyProfile() {
     setIsPending(true);
     try {
       let response = await axios.post(
-        "https://foot2gether.ml/user/change_bio",
+        getAPIBaseURL() + "/user/change_bio",
         data,
         config
       );

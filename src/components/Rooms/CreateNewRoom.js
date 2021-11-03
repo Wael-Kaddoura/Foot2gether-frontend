@@ -12,6 +12,8 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -61,7 +63,7 @@ function CreateNewRoom({ getLiveRooms }) {
     data: availableMatches,
     fetchError,
     isPending,
-  } = useAxiosFetch("https://foot2gether.ml/match/available");
+  } = useAxiosFetch(getAPIBaseURL() + "/match/available");
 
   const [open, setOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -100,11 +102,7 @@ function CreateNewRoom({ getLiveRooms }) {
     setOpen(false);
 
     try {
-      let response = await axios.post(
-        "https://foot2gether.ml/room",
-        data,
-        config
-      );
+      let response = await axios.post(getAPIBaseURL() + "/room", data, config);
 
       if (response.status === 200) {
         getLiveRooms();

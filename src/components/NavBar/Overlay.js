@@ -21,7 +21,7 @@ function Overlay({ NavBarContent }) {
     <div
       className="hero overlay"
       style={{
-        backgroundImage: `url(https://foot2gether.ml/cover_photo/default_cover_photo.jpg)`,
+        backgroundImage: `url(http://localhost:8000/cover_photo/default_cover_photo.jpg)`,
       }}
     >
       <Box className={classes.overlayContainer}>{NavBarContent}</Box>

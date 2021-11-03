@@ -1,5 +1,7 @@
 import { Grid, Backdrop, CircularProgress } from "@mui/material";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
@@ -14,13 +16,13 @@ function AdminMainPage() {
   }
 
   const { data: allMatchesCount, isPending: isAllMatchesPending } =
-    useAxiosFetch("https://foot2gether.ml/admin/match/all");
+    useAxiosFetch(getAPIBaseURL() + "/admin/match/all");
 
   const { data: todaysMatchesCount, isPending: isTodaysMatchesPending } =
-    useAxiosFetch("https://foot2gether.ml/admin/match/today");
+    useAxiosFetch(getAPIBaseURL() + "/admin/match/today");
 
   const { data: todaysRoomsCount, isPending: isTodaysRoomsPending } =
-    useAxiosFetch("https://foot2gether.ml/admin/room/today");
+    useAxiosFetch(getAPIBaseURL() + "/admin/room/today");
 
   return (
     <div>

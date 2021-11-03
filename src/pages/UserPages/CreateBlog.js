@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, Typography, TextField, Grid, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
@@ -65,7 +67,7 @@ function CreateBlog() {
 
     try {
       let response = await axios.post(
-        "https://foot2gether.ml/blog",
+        getAPIBaseURL() + "/blog",
         formData,
         config
       );

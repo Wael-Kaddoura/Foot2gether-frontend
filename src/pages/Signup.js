@@ -18,6 +18,8 @@ import {
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+import getAPIBaseURL from "../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
@@ -93,7 +95,7 @@ function Signup() {
   const [usernameUsedError, setUsernameUsedError] = useState(false);
 
   const { data: teamsData, isPending } = useAxiosFetch(
-    "https://foot2gether.ml/team"
+    getAPIBaseURL() + "/team"
   );
 
   const handleChange = (event) => {
@@ -127,10 +129,7 @@ function Signup() {
       };
 
       try {
-        let response = await axios.post(
-          "https://foot2gether.ml/user/signup",
-          data
-        );
+        let response = await axios.post(getAPIBaseURL() + "/user/signup", data);
 
         if (response.status === 201) {
           setSignUpError(false);

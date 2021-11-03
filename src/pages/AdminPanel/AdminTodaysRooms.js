@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -38,13 +40,13 @@ function AdminTodaysRooms() {
   const [todaysRooms, setTodaysRooms] = useState(null);
 
   const { data: availableMatches, isPending: isMatchesPending } = useAxiosFetch(
-    "https://foot2gether.ml/admin/match/available"
+    getAPIBaseURL() + "/admin/match/available"
   );
 
   async function getTodaysRooms() {
     try {
       const response = await axios.get(
-        "https://foot2gether.ml/admin/room/today",
+        getAPIBaseURL() + "/admin/room/today",
         config
       );
       const todays_rooms_data = response.data;

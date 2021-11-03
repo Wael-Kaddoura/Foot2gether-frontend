@@ -5,6 +5,8 @@ import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -83,7 +85,7 @@ function Rooms() {
   }
 
   const { data: userType, isPending: isUserTypePending } = useAxiosFetch(
-    "https://foot2gether.ml/user/type"
+    getAPIBaseURL() + "/user/type"
   );
 
   async function searchHandler(room_id) {
@@ -93,7 +95,7 @@ function Rooms() {
       setIsPending(true);
       try {
         let response = await axios.get(
-          `https://foot2gether.ml/room/` + room_id,
+          `http://localhost:8000/room/` + room_id,
           config
         );
         let searched_room_data = response.data;
@@ -108,7 +110,7 @@ function Rooms() {
 
   async function getLiveRooms() {
     try {
-      let response = await axios.get(`https://foot2gether.ml/room`, config);
+      let response = await axios.get(`http://localhost:8000/room`, config);
       let live_rooms_data = response.data;
       setLiveRooms(live_rooms_data);
       setLiveRoomsCount(live_rooms_data.length);

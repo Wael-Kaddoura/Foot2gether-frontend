@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Grid, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -53,14 +55,14 @@ function Home() {
   const classes = useStyles();
 
   const { data: latestBlogsData, isPending: isBlogsPending } = useAxiosFetch(
-    "https://foot2gether.ml/blog/latest"
+    getAPIBaseURL() + "/blog/latest"
   );
 
   const {
     data: nextMatchData,
     fetchError,
     isPending,
-  } = useAxiosFetch("https://foot2gether.ml/match/next");
+  } = useAxiosFetch(getAPIBaseURL() + "/match/next");
 
   useEffect(() => {
     window.scrollTo(0, 0);

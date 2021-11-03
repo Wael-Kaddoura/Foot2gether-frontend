@@ -26,7 +26,7 @@ function VideoRoom() {
     if (room_id) {
       try {
         let response = await axios.get(
-          `https://foot2gether.ml/room/check_if_live/` + room_id,
+          `http://localhost:8000/room/check_if_live/` + room_id,
           config
         );
         let room_live_status = response.data;
@@ -47,7 +47,7 @@ function VideoRoom() {
   async function getMyProfileData() {
     try {
       let response = await axios.get(
-        `https://foot2gether.ml/user/my_profile`,
+        `http://localhost:8000/user/my_profile`,
         config
       );
       let my_profile_data = response.data;

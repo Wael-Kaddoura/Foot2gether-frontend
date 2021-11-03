@@ -7,36 +7,25 @@ import DesktopHeader from "./DesktopHeader";
 import SecondaryOverlay from "./SecondaryOverlay";
 
 function MainNavBar({ currentPageName }) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isLoggedIn, setIsloggedIn] = useState(false);
+  let login_status = JSON.parse(localStorage.getItem("login"));
 
-  async function loginStatusCheck() {
-    let login_status = JSON.parse(localStorage.getItem("login"));
-
-    if (login_status && login_status.login) {
-      setIsloggedIn(true);
-
-      setIsLoaded(true);
-    } else {
-      setIsloggedIn(false);
-      setIsLoaded(true);
-    }
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    loginStatusCheck();
+    if (login_status && login_status.login) {
+      setIsLoggedIn(true);
+    }
   }, []);
 
   return (
     <div>
-      {isLoaded && (
-        <div>
-          <DesktopHeader
-            currentPageName={currentPageName}
-            isLoggedIn={isLoggedIn}
-          />
-        </div>
-      )}
+      <div>
+        <DesktopHeader
+          currentPageName={currentPageName}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      </div>
       <SecondaryOverlay />
     </div>
   );

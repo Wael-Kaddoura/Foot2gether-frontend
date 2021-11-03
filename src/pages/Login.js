@@ -4,8 +4,9 @@ import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
+import getAPIBaseURL from "../APIBaseURL";
+import axios from "axios";
 import firebase from "../server/firebase-notifications/firebase";
 
 import BackdropComponent from "../components/BackdropComponent";
@@ -72,7 +73,7 @@ function Login() {
       let config = { headers: { Authorization: `Bearer ${token}` } };
 
       let response = await axios.post(
-        "https://foot2gether.ml/user/save_notification_token",
+        getAPIBaseURL() + "/user/save_notification_token",
         { notification_token },
         config
       );
@@ -93,7 +94,7 @@ function Login() {
     const password = login_data.get("password");
 
     try {
-      const response = await axios.post("https://foot2gether.ml/user/login", {
+      const response = await axios.post(getAPIBaseURL() + "/user/login", {
         email,
         password,
       });

@@ -19,6 +19,8 @@ import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import TimePicker from "@mui/lab/TimePicker";
 import { makeStyles } from "@material-ui/core";
 import date from "date-and-time";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 const style = {
@@ -132,7 +134,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
 
     try {
       let response = await axios.post(
-        "https://foot2gether.ml/admin/match",
+        getAPIBaseURL() + "/admin/match",
         data,
         config
       );

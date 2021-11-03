@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory, Link } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -71,13 +73,13 @@ function BlogView() {
   const [postError, setPostError] = useState(null);
 
   const { data: blogData, isPending: isBlogPending } = useAxiosFetch(
-    "https://foot2gether.ml/blog/" + blog_id
+    getAPIBaseURL() + "/blog/" + blog_id
   );
 
   async function getBlogComments() {
     try {
       let response = await axios.get(
-        "https://foot2gether.ml/blog/comments/" + blog_id,
+        getAPIBaseURL() + "/blog/comments/" + blog_id,
         config
       );
       let blog_comments = response.data;
@@ -100,7 +102,7 @@ function BlogView() {
   async function postNewComment(data) {
     try {
       let response = await axios.post(
-        "https://foot2gether.ml/blog/comment",
+        getAPIBaseURL() + "/blog/comment",
         data,
         config
       );

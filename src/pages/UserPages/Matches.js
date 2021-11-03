@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -47,18 +49,18 @@ function Matches() {
   }
 
   const { data: liveMatches, isPending: isLivePending } = useAxiosFetch(
-    "https://foot2gether.ml/match/live"
+    getAPIBaseURL() + "/match/live"
   );
 
   const { data: upcomingMatches, isPending: isUpcomingPending } = useAxiosFetch(
-    "https://foot2gether.ml/match/upcoming"
+    getAPIBaseURL() + "/match/upcoming"
   );
 
   const {
     data: finishedMatches,
     fetchError,
     isPending,
-  } = useAxiosFetch("https://foot2gether.ml/match/finished");
+  } = useAxiosFetch(getAPIBaseURL() + "/match/finished");
 
   useEffect(() => {
     window.scrollTo(0, 0);

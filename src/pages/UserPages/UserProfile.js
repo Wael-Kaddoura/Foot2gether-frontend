@@ -3,6 +3,8 @@ import { Grid, Button, Badge, Typography, Avatar, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useLocation, useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -76,17 +78,17 @@ function UserProfile() {
   const [postError, setPostError] = useState(null);
 
   const { data: userLiveRooms, isPending: isRoomsPending } = useAxiosFetch(
-    "https://foot2gether.ml/room/user/" + user_id
+    getAPIBaseURL() + "/room/user/" + user_id
   );
 
   const { data: userBlogs, isPending: isBlogsPending } = useAxiosFetch(
-    "https://foot2gether.ml/blog/user/" + user_id
+    getAPIBaseURL() + "/blog/user/" + user_id
   );
 
   async function getUserData() {
     try {
       let response = await axios.get(
-        `https://foot2gether.ml/user/` + user_id,
+        `http://localhost:8000/user/` + user_id,
         config
       );
       let user_data = response.data.user_data;
@@ -102,7 +104,7 @@ function UserProfile() {
   async function followUser() {
     try {
       await axios.post(
-        `https://foot2gether.ml/user/follow`,
+        `http://localhost:8000/user/follow`,
         { followed_user_id: user_id },
         config
       );
@@ -119,7 +121,7 @@ function UserProfile() {
   async function unFollowUser() {
     try {
       await axios.post(
-        `https://foot2gether.ml/user/unfollow`,
+        `http://localhost:8000/user/unfollow`,
         { unfollowed_user_id: user_id },
         config
       );

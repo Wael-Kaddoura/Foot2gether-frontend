@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
@@ -43,12 +45,12 @@ function AdminAllMatches() {
   };
 
   const { data: createMatchOptions, isPending: isOptionsPending } =
-    useAxiosFetch("https://foot2gether.ml/admin/match/create_options");
+    useAxiosFetch(getAPIBaseURL() + "/admin/match/create_options");
 
   async function getAllMatches() {
     try {
       const response = await axios.get(
-        "https://foot2gether.ml/admin/match/all",
+        getAPIBaseURL() + "/admin/match/all",
         config
       );
       const all_matches_data = response.data;

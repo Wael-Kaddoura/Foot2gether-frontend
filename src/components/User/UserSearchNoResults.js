@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   msgBox: {
-    minHeight: 500,
+    minHeight: "500px !important",
   },
   msg: { fontSize: "25px !important" },
 });

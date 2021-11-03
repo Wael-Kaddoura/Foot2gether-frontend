@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   },
   usersContainer: {
     maxWidth: "800px !important",
+    backgroundColor: "#1a1e25 !important",
   },
   bodyTitle: {
     color: "#fff",
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
   },
   searchContent: {
     minWidth: "100%",
+    backgroundColor: "#1a1e25 !important",
   },
 });
 
@@ -50,7 +52,7 @@ function UserSearch() {
     setIsPending(true);
     try {
       let response = await axios.get(
-        `https://foot2gether.ml/user/search/` + search_word,
+        `http://localhost:8000/user/search/` + search_word,
         config
       );
 
@@ -74,7 +76,7 @@ function UserSearch() {
         className={classes.searchContent}
         direction="row"
         justifyContent="center"
-        sx={{ mt: 5 }}
+        sx={{ pt: 5 }}
       >
         <Grid
           item

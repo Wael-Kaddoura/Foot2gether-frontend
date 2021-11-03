@@ -5,6 +5,8 @@ import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
@@ -59,7 +61,7 @@ function MatchRooms() {
     data: matchData,
     fetchError,
     isPending,
-  } = useAxiosFetch("https://foot2gether.ml/match/" + match_id);
+  } = useAxiosFetch(getAPIBaseURL() + "/match/" + match_id);
 
   useEffect(() => {
     window.scrollTo(0, 0);

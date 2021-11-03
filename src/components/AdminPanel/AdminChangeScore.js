@@ -10,8 +10,9 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-
 import { makeStyles } from "@material-ui/core";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 const style = {
@@ -96,7 +97,7 @@ function AdminChangeScore({
 
     try {
       let response = await axios.put(
-        "https://foot2gether.ml/admin/match_score",
+        getAPIBaseURL() + "/admin/match_score",
         data,
         config
       );
