@@ -84,7 +84,7 @@ function Home() {
         </Typography>
 
         <Grid container justifyContent="center">
-          <Link to="/MATCHES">
+          <Link to="/matches">
             <Button
               className={classes.viewMatchesBtn}
               variant="contained"
