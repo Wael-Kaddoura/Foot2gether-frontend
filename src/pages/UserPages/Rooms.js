@@ -95,7 +95,7 @@ function Rooms() {
       setIsPending(true);
       try {
         let response = await axios.get(
-          `http://localhost:8000/room/` + room_id,
+          getAPIBaseURL() + `/room/` + room_id,
           config
         );
         let searched_room_data = response.data;
@@ -110,7 +110,7 @@ function Rooms() {
 
   async function getLiveRooms() {
     try {
-      let response = await axios.get(`http://localhost:8000/room`, config);
+      let response = await axios.get(getAPIBaseURL() + `/room`, config);
       let live_rooms_data = response.data;
       setLiveRooms(live_rooms_data);
       setLiveRoomsCount(live_rooms_data.length);

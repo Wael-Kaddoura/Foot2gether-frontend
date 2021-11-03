@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link, useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 import NavBarItem from "./NavBarItem";
@@ -64,7 +66,7 @@ function DesktopHeader(props) {
   async function clearNotificationToken() {
     try {
       await axios.delete(
-        `http://localhost:8000/user/clear_notification_token`,
+        getAPIBaseURL() + `/user/clear_notification_token`,
         config
       );
     } catch (error) {

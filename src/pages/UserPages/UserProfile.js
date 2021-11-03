@@ -88,7 +88,7 @@ function UserProfile() {
   async function getUserData() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/user/` + user_id,
+        getAPIBaseURL() + `/user/` + user_id,
         config
       );
       let user_data = response.data.user_data;
@@ -104,7 +104,7 @@ function UserProfile() {
   async function followUser() {
     try {
       await axios.post(
-        `http://localhost:8000/user/follow`,
+        getAPIBaseURL() + `/user/follow`,
         { followed_user_id: user_id },
         config
       );
@@ -121,7 +121,7 @@ function UserProfile() {
   async function unFollowUser() {
     try {
       await axios.post(
-        `http://localhost:8000/user/unfollow`,
+        getAPIBaseURL() + `/user/unfollow`,
         { unfollowed_user_id: user_id },
         config
       );

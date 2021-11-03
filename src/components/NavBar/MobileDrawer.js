@@ -67,7 +67,7 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
   async function clearNotificationToken() {
     try {
       await axios.delete(
-        `http://localhost:8000/user/clear_notification_token`,
+        getAPIBaseURL() + `/user/clear_notification_token`,
         config
       );
     } catch (error) {

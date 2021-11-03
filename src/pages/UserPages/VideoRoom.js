@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 import VideoRoomConnection from "../../components/VideoRooms/VideoRoom";
@@ -26,7 +28,7 @@ function VideoRoom() {
     if (room_id) {
       try {
         let response = await axios.get(
-          `http://localhost:8000/room/check_if_live/` + room_id,
+          getAPIBaseURL() + `/room/check_if_live/` + room_id,
           config
         );
         let room_live_status = response.data;
@@ -47,7 +49,7 @@ function VideoRoom() {
   async function getMyProfileData() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/user/my_profile`,
+        getAPIBaseURL() + `/user/my_profile`,
         config
       );
       let my_profile_data = response.data;

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+
+import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
@@ -52,7 +54,7 @@ function UserSearch() {
     setIsPending(true);
     try {
       let response = await axios.get(
-        `http://localhost:8000/user/search/` + search_word,
+        getAPIBaseURL() + `/user/search/` + search_word,
         config
       );
 

@@ -78,7 +78,7 @@ function MyProfile() {
   async function getMyProfileData() {
     try {
       let response = await axios.get(
-        `http://localhost:8000/user/my_profile`,
+        getAPIBaseURL() + `/user/my_profile`,
         config
       );
       let my_profile_data = response.data;
