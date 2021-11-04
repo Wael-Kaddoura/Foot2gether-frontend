@@ -5,7 +5,7 @@ import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({
   finishedScore: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "40px !important",
     fontWeight: 500,
   },

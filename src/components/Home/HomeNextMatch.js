@@ -6,7 +6,7 @@ import HomeNextMatchCard from "./HomeNextMatchCard";
 
 const useStyles = makeStyles({
   title: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 20,
     fontWeight: 500,
   },
@@ -44,7 +44,7 @@ function HomeBlogs(props) {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ mt: 5 }}
+        sx={{ mt: 5, mr: 2 }}
       >
         <Grid item xs={12} sx={{ mb: 0 }}>
           <Grid

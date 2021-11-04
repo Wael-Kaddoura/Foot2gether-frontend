@@ -47,7 +47,11 @@ function ChangeCoverPhoto({ getMyProfileData, changeCoverPhoto }) {
 
   return (
     <div>
-      <EditIcon onClick={handleOpen} style={{ color: "#fff" }} sx={{ mb: 1 }} />
+      <EditIcon
+        onClick={handleOpen}
+        style={{ color: "#fff !important" }}
+        sx={{ mb: 1 }}
+      />
 
       <Modal
         aria-labelledby="transition-modal-title"

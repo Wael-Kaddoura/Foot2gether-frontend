@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminTodaysMatchCard from "../../components/AdminPanel/AdminTodaysMatchCard";
+import BackdropComponent from "../../components/BackdropComponent";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -23,22 +22,16 @@ const useStyles = makeStyles({
 });
 
 function AdminTodaysMatches() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    if (login_status.is_admin) {
-      const token = login_status.token;
-      config = { headers: { Authorization: `Bearer ${token}` } };
-    } else {
-      history.push("/");
-    }
-  } else {
-    history.push("/login");
+  if (!login_status || !login_status.login || !login_status.is_admin) {
+    history.push("/");
   }
 
-  const classes = useStyles();
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [isPending, setIsPending] = useState(true);
   const [todaysMatches, setTodaysMatches] = useState(null);
@@ -68,12 +61,7 @@ function AdminTodaysMatches() {
   return (
     <div>
       <AdminNavBar>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={isPending}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <BackdropComponent open={isPending} />
 
         <Grid item xs={12} container direction="row" sx={{ mt: 4, ml: 1 }}>
           <Grid item xs={12}>

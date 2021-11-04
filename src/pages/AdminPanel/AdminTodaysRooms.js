@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminRoomCard from "../../components/AdminPanel/AdminRoomCard";
 import AdminCreateRoom from "../../components/AdminPanel/AdminCreateRoom";
+import BackdropComponent from "../../components/BackdropComponent";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -67,12 +66,7 @@ function AdminTodaysRooms() {
   return (
     <div>
       <AdminNavBar>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={isPending || isMatchesPending}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <BackdropComponent open={isPending || isMatchesPending} />
 
         <Grid item xs={12} container direction="row" sx={{ mt: 4, ml: 1 }}>
           <Grid item xs={12}>

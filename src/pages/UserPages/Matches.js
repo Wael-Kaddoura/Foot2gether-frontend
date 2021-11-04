@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import MatchesNavbarContent from "../../components/Matches/MatchesNavbarContent";
 import MatchesTab from "../../components/Matches/MatchesTab";
@@ -38,13 +36,13 @@ function Matches() {
 
   return (
     <div>
-      <MainNavBar currentPageName="Matches">
-        <MatchesNavbarContent />
-      </MainNavBar>
-
       <BackdropComponent
         open={isPending || isLivePending || isUpcomingPending}
       />
+
+      <MainNavBar currentPageName="Matches">
+        <MatchesNavbarContent />
+      </MainNavBar>
 
       {!isPending && !isLivePending && !isUpcomingPending && (
         <div id="matchesTab">

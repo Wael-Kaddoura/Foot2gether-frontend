@@ -9,7 +9,7 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 
 const useStyles = makeStyles({
   unfollowBtn: {
-    color: "#fff",
+    color: "#fff !important",
     backgroundColor: "#bf1737 !important",
     borderColor: "#bf1737 !important",
   },

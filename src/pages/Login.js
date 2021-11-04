@@ -1,41 +1,11 @@
 import { useState } from "react";
 import Overlay from "../components/NavBar/Overlay";
-import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../APIBaseURL";
 import axios from "axios";
 import firebase from "../server/firebase-notifications/firebase";
-
+import LoginForm from "../components/User/LoginForm";
 import BackdropComponent from "../components/BackdropComponent";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-};
-
-const useStyles = makeStyles({
-  mainContainer: {
-    width: "100%",
-    height: "100%",
-  },
-  formTitle: {
-    color: "#000000 !important",
-    fontSize: "25px !important",
-    fontWeight: "600 !important",
-  },
-  formField: {
-    width: "100%",
-  },
-});
 
 function Login() {
   const history = useHistory();
@@ -49,8 +19,6 @@ function Login() {
       history.push("/");
     }
   }
-
-  const classes = useStyles();
 
   const [isPending, setIsPending] = useState(false);
   const [loginError, setLoginError] = useState(false);
@@ -75,22 +43,11 @@ function Login() {
   }
 
   async function getNotificationToken() {
-    // const msg = firebase.messaging();
-    // await msg.requestPermission();
-
-    // try {
-    //   const token = await msg.getToken();
-    //   return token;
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     const messaging = firebase.messaging();
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("./firebase-messaging-sw.js")
         .then(function (registration) {
-          console.log("Registration successful, scope is:", registration.scope);
           Notification.requestPermission().then(() => {
             messaging
               .getToken({
@@ -100,7 +57,6 @@ function Login() {
               })
               .then((currentToken) => {
                 if (currentToken) {
-                  console.log("current token for client: ", currentToken);
                   saveNotificationToken(currentToken);
                 } else {
                   console.log(
@@ -182,81 +138,12 @@ function Login() {
     }
   };
 
-  const login_form = (
-    <Grid
-      container
-      className={classes.mainContainer}
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Box sx={style} style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}>
-        <Typography
-          id="transition-modal-title"
-          className={classes.formTitle}
-          sx={{ mb: 5 }}
-          style={{ textAlign: "center" }}
-        >
-          Login
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
-          {loginError && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              Wrong Credentials! Try again.
-            </Alert>
-          )}
-
-          <TextField
-            sx={{ mb: 3 }}
-            required
-            fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
-            inputProps={{
-              type: "email",
-              maxLength: 100,
-            }}
-          />
-
-          <TextField
-            sx={{ mb: 3 }}
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            inputProps={{
-              minLength: 6,
-            }}
-          />
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Log In
-          </Button>
-        </Box>
-
-        <Grid container justifyContent="space-between">
-          <Link to={"/signup"} style={{ color: "blue" }}>
-            Create Account
-          </Link>
-        </Grid>
-      </Box>
-    </Grid>
-  );
-
   return (
     <div>
       <BackdropComponent open={isPending} />
-      <Overlay NavBarContent={login_form} />
+      <Overlay>
+        <LoginForm handleSubmit={handleSubmit} loginError={loginError} />
+      </Overlay>
     </div>
   );
 }

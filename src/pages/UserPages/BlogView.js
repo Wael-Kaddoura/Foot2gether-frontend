@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogViewNavbarContent from "../../components/Blogs/BlogViewNavbarContent";
 import BlogBody from "../../components/Blogs/BlogBody";
@@ -14,15 +12,14 @@ import Footer from "../../components/Footer";
 
 function BlogView() {
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
+
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const blog_id = new URLSearchParams(useLocation().search).get("id");
 
@@ -47,16 +44,6 @@ function BlogView() {
     }
   }
 
-  async function fetchData() {
-    await getBlogComments();
-    setIsPending(false);
-  }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchData();
-  }, []);
-
   async function postNewComment(data) {
     try {
       let response = await axios.post(
@@ -76,18 +63,28 @@ function BlogView() {
     }
   }
 
+  async function fetchData() {
+    await getBlogComments();
+    setIsPending(false);
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchData();
+  }, []);
+
   return (
     <div>
+      <BackdropComponent open={isPending || isBlogPending} />
+
       <MainNavBar currentPageName="Matches">
         {!isPending && !isBlogPending && (
           <BlogViewNavbarContent blogData={blogData} />
         )}
       </MainNavBar>
 
-      <BackdropComponent open={isPending || isBlogPending} />
-
       {!isPending && !isBlogPending && (
-        <div style={{ backgroundColor: "#1a1e25 " }}>
+        <div style={{ backgroundColor: "#1a1e25" }}>
           <BlogBody
             blogTitle={blogData.title}
             blogBody={blogData.body}

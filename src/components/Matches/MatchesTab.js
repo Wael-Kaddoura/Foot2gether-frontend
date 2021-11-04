@@ -99,7 +99,7 @@ function MatchTabs(props) {
           onChange={handleChange}
           aria-label="basic tabs example"
           centered
-          TabIndicatorProps={{ style: { backgroundColor: "#fff" } }}
+          TabIndicatorProps={{ style: { backgroundcolor: "#fff !important" } }}
         >
           <Tab
             label={
@@ -119,7 +119,7 @@ function MatchTabs(props) {
             {...a11yProps(0)}
             style={
               isLive
-                ? { fontWeight: "800", color: "#fff" }
+                ? { fontWeight: "800", color: "#fff !important" }
                 : { color: "#808080" }
             }
             onClick={ActivateLive}
@@ -143,7 +143,7 @@ function MatchTabs(props) {
             {...a11yProps(1)}
             style={
               isUpcoming
-                ? { fontWeight: "800", color: "#fff" }
+                ? { fontWeight: "800", color: "#fff !important" }
                 : { color: "#808080" }
             }
             onClick={ActivateUpcoming}
@@ -167,7 +167,7 @@ function MatchTabs(props) {
             {...a11yProps(2)}
             style={
               isFinished
-                ? { fontWeight: "800", color: "#fff" }
+                ? { fontWeight: "800", color: "#fff !important" }
                 : { color: "#808080" }
             }
             onClick={ActivateFinished}

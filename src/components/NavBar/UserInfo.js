@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   userBio: {
-    color: "#fff",
+    color: "#fff !important",
     fontWeight: "400 !important",
     fontSize: "18px !important",
   },

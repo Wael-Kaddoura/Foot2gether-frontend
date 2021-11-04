@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { Alert } from "@mui/material";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import MyProfileNavbarContent from "../../components/User/MyProfileNavbarContent";
 import UserInfo from "../../components/NavBar/UserInfo";
@@ -23,10 +21,11 @@ function MyProfile() {
 
   const token = login_status.token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
-  let user_data = JSON.parse(localStorage.getItem("login"));
 
   const { username, user_profile_picture, user_cover_photo, user_bio } =
     login_status;
+
+  let user_data = JSON.parse(localStorage.getItem("login"));
 
   const [isPending, setIsPending] = useState(true);
   const [myProfileData, setMyProfileData] = useState(null);

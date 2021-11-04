@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     fontWeight: "700 !important",
   },
   blogTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "18px !important",
     fontWeight: "500 !important",
   },

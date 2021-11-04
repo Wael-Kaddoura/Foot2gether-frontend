@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-import { Grid, Button, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import HomeNavbarContent from "../../components/Home/HomeNavbarContent";
 import HomeNextMatch from "../../components/Home/HomeNextMatch";
@@ -39,11 +37,11 @@ function Home() {
 
   return (
     <div>
+      <BackdropComponent open={isPending || isBlogsPending} />
+
       <MainNavBar currentPageName="Home">
         <HomeNavbarContent />
       </MainNavBar>
-
-      <BackdropComponent open={isPending || isBlogsPending} />
 
       <Grid
         container
@@ -53,6 +51,7 @@ function Home() {
         alignItems="center"
       >
         {!isPending &&
+          !isBlogsPending &&
           (nextMatchData.length ? (
             <HomeNextMatch
               team1Name={nextMatchData[0].team1.name}
@@ -71,8 +70,11 @@ function Home() {
             />
           ))}
 
-        {!isBlogsPending && <HomeBlogs latestBlogs={latestBlogsData} />}
+        {!isPending && !isBlogsPending && (
+          <HomeBlogs latestBlogs={latestBlogsData} />
+        )}
       </Grid>
+
       <Footer />
     </div>
   );

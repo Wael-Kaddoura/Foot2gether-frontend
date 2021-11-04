@@ -6,7 +6,7 @@ import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({
   showRoomBtn: {
-    color: "#fff",
+    color: "#fff !important",
     backgroundColor: "#ee1e46 !important",
     borderColor: "#ee1e46 !important",
   },

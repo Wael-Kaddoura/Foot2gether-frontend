@@ -1,11 +1,10 @@
-import { Grid, Backdrop, CircularProgress } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminDashboardCard from "../../components/AdminPanel/AdminDashboardCard";
+import BackdropComponent from "../../components/BackdropComponent";
 
 function AdminMainPage() {
   const history = useHistory();
@@ -27,16 +26,13 @@ function AdminMainPage() {
   return (
     <div>
       <AdminNavBar pageTitle="Foot2gether Admin Panel">
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        <BackdropComponent
           open={
             isAllMatchesPending ||
             isTodaysMatchesPending ||
             isTodaysRoomsPending
           }
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        />
 
         {!isAllMatchesPending &&
           !isTodaysMatchesPending &&

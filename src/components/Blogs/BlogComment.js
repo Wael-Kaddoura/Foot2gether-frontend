@@ -5,7 +5,7 @@ import date from "date-and-time";
 
 const useStyles = makeStyles({
   blogTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 30,
     fontWeight: 700,
   },

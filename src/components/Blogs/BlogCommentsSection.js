@@ -6,7 +6,7 @@ import BlogNewComment from "./BlogNewComment";
 
 const useStyles = makeStyles({
   sectionTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "30px !important",
     fontWeight: "700 !important",
   },

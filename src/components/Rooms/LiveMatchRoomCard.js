@@ -12,26 +12,26 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto !important",
   },
   roomName: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "22px !important",
     fontWeight: "700 !important",
     textAlign: "center",
   },
   joinBtn: {
-    color: "#fff",
+    color: "#fff !important",
     backgroundColor: "#ee1e46 !important",
     borderColor: "#ee1e46 !important",
     fontSize: "16px !important",
     fontWeight: "700 !important",
   },
   roomDetailsTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "18px !important",
     fontWeight: "300 !important",
     textAlign: "center",
   },
   roomDetails: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "17px !important",
     fontWeight: "300 !important",
     textAlign: "center",
@@ -81,7 +81,17 @@ function LiveMatchRoomCard(props) {
             </Grid>
 
             <Grid item xs={3} md={1}>
-              <a
+              <Link to={"/video_room?id=" + roomID}>
+                <Button
+                  className={classes.joinBtn}
+                  variant="outlined"
+                  color="error"
+                >
+                  Join
+                </Button>
+              </Link>
+
+              {/* <a
                 href={"/Foot2gether-frontend/video_room?id=" + roomID}
                 target="_blank"
               >
@@ -92,7 +102,7 @@ function LiveMatchRoomCard(props) {
                 >
                   Join
                 </Button>
-              </a>
+              </a> */}
             </Grid>
           </Grid>
 

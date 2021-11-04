@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import AdminNavBar from "../../components/AdminPanel/AdminNavBar";
 import AdminMatchCard from "../../components/AdminPanel/AdminMatchCard";
 import AdminAddMatch from "../../components/AdminPanel/AdminAddMatch";
+import BackdropComponent from "../../components/BackdropComponent";
 
 const useStyles = makeStyles({
   pageTitle: {
@@ -38,11 +37,6 @@ function AdminAllMatches() {
 
   const [isPending, setIsPending] = useState(true);
   const [allMatches, setAllMatches] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const { data: createMatchOptions, isPending: isOptionsPending } =
     useAxiosFetch(getAPIBaseURL() + "/admin/match/create_options");
@@ -68,12 +62,7 @@ function AdminAllMatches() {
   return (
     <div>
       <AdminNavBar>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={isPending || isOptionsPending}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <BackdropComponent open={isPending || isOptionsPending} />
 
         <Grid item xs={12} container direction="row" sx={{ mt: 4, ml: 1 }}>
           <Grid item xs={12}>
@@ -112,7 +101,6 @@ function AdminAllMatches() {
                     config={config}
                     matchOptions={createMatchOptions}
                     getAllMatches={getAllMatches}
-                    handleClose={handleClose}
                   />
                 </Grid>
 

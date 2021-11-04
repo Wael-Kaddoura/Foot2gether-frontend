@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, Typography, TextField, Grid, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
 import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
@@ -16,7 +14,7 @@ const useStyles = makeStyles({
     backgroundColor: "#1a1e25 ",
   },
   pageTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "40px !important",
   },
   form: {
@@ -35,17 +33,16 @@ const useStyles = makeStyles({
 });
 
 function CreateBlog() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
-  const classes = useStyles();
+
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [isPending, setIsPending] = useState(false);
   const [postError, setPostError] = useState(null);
@@ -92,9 +89,9 @@ function CreateBlog() {
 
   return (
     <div>
-      <SecondaryNavBar />
-
       <BackdropComponent open={isPending} />
+
+      <SecondaryNavBar />
 
       <Grid className={classes.pageContainer} container sx={{ pt: 3 }}>
         <Grid item xs={12} sx={{ mb: 3 }} container justifyContent="center">
@@ -140,7 +137,7 @@ function CreateBlog() {
               InputLabelProps={{ className: classes.formLabel }}
             />
 
-            <Typography style={{ color: "#fff" }} sx={{ mb: 1 }}>
+            <Typography style={{ color: "#fff !important" }} sx={{ mb: 1 }}>
               Upload Blog Image
             </Typography>
 

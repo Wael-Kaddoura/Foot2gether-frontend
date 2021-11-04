@@ -21,7 +21,7 @@ import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles(() => ({
   mainLogo: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "24px !important",
     fontWeight: "900 !important",
   },
@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: "700 !important",
   },
   loginBtn: {
-    color: "#fff",
+    color: "#fff !important",
   },
 }));
 
@@ -201,7 +201,7 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
           alignItems="center"
         >
           <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-            <MenuIcon style={{ color: "#fff" }} />
+            <MenuIcon style={{ color: "#fff !important" }} />
           </IconButton>
 
           <Link to="/">

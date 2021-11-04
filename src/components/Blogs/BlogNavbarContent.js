@@ -66,7 +66,7 @@ function BlogNavbarContent() {
         </Typography>
       </Grid>
 
-      <Grid xs={2} className={classes.scrollDown}>
+      <Grid item xs={2} className={classes.scrollDown}>
         <ScrollLink to="allBlogs" spy={false} smooth={true}>
           <Grid
             container

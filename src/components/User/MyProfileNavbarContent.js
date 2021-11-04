@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     minWidth: "100%",
   },
   bodyTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 20,
     fontWeight: 500,
   },

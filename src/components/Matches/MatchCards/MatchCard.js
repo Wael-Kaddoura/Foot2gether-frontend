@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
   },
   teamSide: { textAlign: "center" },
   teamName: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "18px !important",
     fontWeight: "700 !important",
   },
   matchDetails: { textAlign: "center" },
   matchLeague: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "20px !important",
     fontWeight: "700 !important",
   },

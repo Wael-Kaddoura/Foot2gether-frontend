@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Overlay({ NavBarContent }) {
+function Overlay({ NavBarContent, children }) {
   const classes = useStyles();
 
   return (
@@ -27,7 +27,9 @@ function Overlay({ NavBarContent }) {
           "url(" + getAPIBaseURL() + "/cover_photo/default_cover_photo.jpg)",
       }}
     >
-      <Box className={classes.overlayContainer}>{NavBarContent}</Box>
+      <Box className={classes.overlayContainer}>
+        {NavBarContent ? NavBarContent : children}
+      </Box>
     </div>
   );
 }

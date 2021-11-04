@@ -1,12 +1,10 @@
 import { useEffect } from "react";
-import { Grid, Typography, Fab } from "@mui/material";
+import { Grid, Fab } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory, Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import BlogNavbarContent from "../../components/Blogs/BlogNavbarContent";
 import BlogCard from "../../components/Blogs/BlogCard";
@@ -49,12 +47,11 @@ function Blog() {
 
   return (
     <div>
+      <BackdropComponent open={isPending} />
+
       <MainNavBar currentPageName="Blogs">
         <BlogNavbarContent />
       </MainNavBar>
-
-      <BackdropComponent open={isPending} />
-
       {!isPending && (
         <Grid
           id="allBlogs"
@@ -64,7 +61,7 @@ function Blog() {
           justifyContent="space-around"
           alignItems="flex-end"
           sx={{ pt: 10 }}
-          style={{ backgroundColor: "#1a1e25 " }}
+          style={{ backgroundColor: "#1a1e25" }}
         >
           {blogsData.map((blog) => (
             <BlogCard

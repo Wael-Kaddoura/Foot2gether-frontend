@@ -4,7 +4,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   sectionTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "28px !important",
     fontWeight: "500 !important",
   },

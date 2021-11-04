@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   viewMatchesBtn: {
-    color: "#fff",
+    color: "#fff !important",
     backgroundColor: "#ee1e46 !important",
     borderColor: "#ee1e46 !important",
     width: "150px !important",

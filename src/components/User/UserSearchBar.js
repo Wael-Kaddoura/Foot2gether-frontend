@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Paper, InputBase, Divider } from "@mui/material";
+import { Grid, Paper, InputBase } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 

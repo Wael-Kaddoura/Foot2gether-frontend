@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { Alert } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import UserNavBar from "../../components/NavBar/UserNavBar";
 import UserProfileNavbarContent from "../../components/User/UserProfileNavbarContent";
 import UserInfo from "../../components/NavBar/UserInfo";
@@ -15,17 +13,15 @@ import Footer from "../../components/Footer";
 
 function UserProfile() {
   const history = useHistory();
-  let config = {};
-  let my_id = "";
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    my_id = login_status.user_id;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
+
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const my_id = login_status.user_id;
 
   const user_id = new URLSearchParams(useLocation().search).get("id");
 

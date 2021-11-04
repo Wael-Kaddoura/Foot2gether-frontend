@@ -3,11 +3,9 @@ import { Grid, Button } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import RoomsNavbarContent from "../../components/Rooms/RoomsNavbarContent";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
@@ -21,7 +19,7 @@ const useStyles = makeStyles({
     maxWidth: "1140px !important",
   },
   bodyTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 20,
     fontWeight: 500,
   },
@@ -31,18 +29,16 @@ const useStyles = makeStyles({
 });
 
 function Rooms() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
 
-  const classes = useStyles();
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [isPending, setIsPending] = useState(true);
   const [isSearchRoom, setIsSearchRoom] = useState(false);
@@ -101,6 +97,8 @@ function Rooms() {
 
   return (
     <div>
+      <BackdropComponent open={isPending || isUserTypePending} />
+
       <MainNavBar currentPageName="Rooms">
         {!isPending && (
           <RoomsNavbarContent
@@ -109,8 +107,6 @@ function Rooms() {
           />
         )}
       </MainNavBar>
-
-      <BackdropComponent open={isPending || isUserTypePending} />
 
       {!isPending && !isUserTypePending && (
         <Grid

@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   blogTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "30px !important",
     fontWeight: "700 !important",
   },

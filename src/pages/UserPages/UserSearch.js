@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useHistory, useLocation } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import SecondaryNavBar from "../../components/NavBar/SecondaryNavBar";
 import UserSearchBar from "../../components/User/UserSearchBar";
 import UserSearchNoResults from "../../components/User/UserSearchNoResults";
@@ -23,7 +21,7 @@ const useStyles = makeStyles({
     backgroundColor: "#1a1e25 !important",
   },
   bodyTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 20,
     fontWeight: 500,
   },
@@ -34,24 +32,23 @@ const useStyles = makeStyles({
 });
 
 function UserSearch() {
+  const classes = useStyles();
   const history = useHistory();
-  let config = {};
 
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status && login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
 
-  const classes = useStyles();
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [isPending, setIsPending] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
 
   async function searchHandler(search_term) {
     setIsPending(true);
+
     try {
       let response = await axios.get(
         getAPIBaseURL() + `/user/search/` + search_term,
@@ -67,20 +64,11 @@ function UserSearch() {
     }
   }
 
-  let search_term = new URLSearchParams(useLocation().search).get(
-    "search_term"
-  );
-  if (search_term) {
-    let term = search_term;
-    search_term = null;
-    searchHandler(term);
-  }
-
   return (
     <div>
-      <SecondaryNavBar />
-
       <BackdropComponent open={isPending} />
+
+      <SecondaryNavBar />
 
       <Grid
         container

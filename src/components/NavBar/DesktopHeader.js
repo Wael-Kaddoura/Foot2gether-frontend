@@ -33,10 +33,10 @@ const useStyles = makeStyles({
     boxSizing: "border-box !important",
   },
   loginBtn: {
-    color: "#fff",
+    color: "#fff !important",
   },
   mainLogo: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: "24px !important",
     fontWeight: "900 !important",
   },

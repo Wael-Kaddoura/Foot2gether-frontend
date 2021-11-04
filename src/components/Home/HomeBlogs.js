@@ -6,7 +6,7 @@ import HomeBlog from "./HomeBlog";
 
 const useStyles = makeStyles({
   title: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 20,
     fontWeight: 500,
   },

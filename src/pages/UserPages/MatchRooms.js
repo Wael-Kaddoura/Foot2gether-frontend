@@ -3,10 +3,8 @@ import { Grid } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import MainNavBar from "../../components/NavBar/MainNavBar";
 import MatchRoomsNavbarContent from "../../components/Matches/MatchRoomsNavbarContent";
 import LiveMatchRoomCard from "../../components/Rooms/LiveMatchRoomCard";
@@ -19,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "1140px !important",
   },
   bodyTitle: {
-    color: "#fff",
+    color: "#fff !important",
     fontSize: 20,
     fontWeight: 500,
   },
@@ -29,14 +27,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MatchRooms() {
+  const classes = useStyles();
   const history = useHistory();
 
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
     history.push("/login");
   }
-
-  const classes = useStyles();
 
   const match_id = new URLSearchParams(useLocation().search).get("id");
 
@@ -52,11 +49,11 @@ function MatchRooms() {
 
   return (
     <div>
+      <BackdropComponent open={isPending} />
+
       <MainNavBar currentPageName="Matches">
         {!isPending && <MatchRoomsNavbarContent matchData={matchData} />}
       </MainNavBar>
-
-      <BackdropComponent open={isPending} />
 
       {!isPending && (
         <Grid

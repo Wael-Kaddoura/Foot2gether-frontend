@@ -8,7 +8,7 @@ import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
 const useStyles = makeStyles({
   pageTitle: {
     fontSize: "50px !important",
-    color: "#fff",
+    color: "#fff !important",
     fontWeight: 700,
   },
   navbarContentContainer: {
@@ -77,7 +77,7 @@ function RoomsNavbarContent(props) {
         <RoomSearchBar searchHandler={searchHandler} />
       </Grid>
 
-      <Grid xs={2} className={classes.scrollDown}>
+      <Grid item xs={2} className={classes.scrollDown}>
         <ScrollLink to="allLiveRooms" spy={false} smooth={true}>
           <Grid
             container

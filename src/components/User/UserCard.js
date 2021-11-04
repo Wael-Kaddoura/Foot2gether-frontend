@@ -39,28 +39,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   userInfo: {
-    color: "#fff",
+    color: "#fff !important",
     fontWeight: 700,
   },
   unfollowBtn: {
-    color: "#fff",
+    color: "#fff !important",
     backgroundColor: "#bf1737 !important",
     borderColor: "#bf1737 !important",
   },
 }));
 
 function UserCard(props) {
+  const classes = useStyles();
   const history = useHistory();
 
-  let config = {};
-
   let login_status = JSON.parse(localStorage.getItem("login"));
-  if (login_status.login) {
-    const token = login_status.token;
-    config = { headers: { Authorization: `Bearer ${token}` } };
-  } else {
+  if (!login_status || !login_status.login) {
     history.push("/login");
   }
+
+  const token = login_status.token;
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const {
     userID,
@@ -71,13 +70,11 @@ function UserCard(props) {
     is_followed,
   } = props;
 
-  const classes = useStyles();
-
   const [isFollowed, setIsFollowed] = useState(is_followed);
 
   async function followUser() {
     try {
-      let response = await axios.post(
+      await axios.post(
         getAPIBaseURL() + `/user/follow`,
         { followed_user_id: userID },
         config
@@ -91,7 +88,7 @@ function UserCard(props) {
 
   async function unFollowUser() {
     try {
-      let response = await axios.post(
+      await axios.post(
         getAPIBaseURL() + `/user/unfollow`,
         { unfollowed_user_id: userID },
         config
