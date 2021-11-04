@@ -11,6 +11,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
 
 import getAPIBaseURL from "../../APIBaseURL";
@@ -51,11 +52,19 @@ const MenuProps = {
   },
 };
 
-function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
+function AdminCreateRoom(props) {
+  const {
+    config,
+    availableMatches,
+    getTodaysRooms,
+    roomID,
+    oldRoomName,
+    oldMatchRoomID,
+  } = props;
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
-  const [match, setMatch] = React.useState("");
+  const [match, setMatch] = React.useState(oldMatchRoomID);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -78,8 +87,8 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
     setOpen(false);
 
     try {
-      let response = await axios.post(
-        getAPIBaseURL() + "/admin/room",
+      let response = await axios.put(
+        getAPIBaseURL() + "/admin/room/" + roomID,
         data,
         config
       );
@@ -96,9 +105,8 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Create New Room
-      </Button>
+      <EditIcon onClick={handleOpen} style={{ fill: "orange" }} />
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -120,7 +128,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
               className={classes.formTitle}
               sx={{ mb: 5 }}
             >
-              Create New Room:
+              Edit Room:
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
@@ -131,6 +139,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
                 label="Room Name"
                 placeholder="Room Name"
                 name="room_name"
+                defaultValue={oldRoomName}
               />
 
               <InputLabel id="match_room">Match</InputLabel>
@@ -162,7 +171,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Add Room
+                Edit Room
               </Button>
             </Box>
           </Box>

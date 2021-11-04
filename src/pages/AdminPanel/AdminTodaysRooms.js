@@ -120,8 +120,12 @@ function AdminTodaysRooms() {
                     roomName={room.name}
                     roomID={room.id}
                     roomCreator={room.creator.username}
+                    matchRoomID={room.matchroom.id}
                     team1Logo={room.matchroom.team1.logo}
                     team2Logo={room.matchroom.team2.logo}
+                    config={config}
+                    availableMatches={availableMatches}
+                    getTodaysRooms={getTodaysRooms}
                   />
                 ))}
               </Grid>
