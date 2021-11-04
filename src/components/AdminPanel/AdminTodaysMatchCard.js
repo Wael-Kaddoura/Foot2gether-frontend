@@ -118,6 +118,8 @@ function AdminTodaysMatchCard(props) {
                   matchID={matchID}
                   team1Logo={team1Logo}
                   team2Logo={team2Logo}
+                  team1OldScore={team1Score}
+                  team2OldScore={team2Score}
                   getTodaysMatches={getTodaysMatches}
                 />
               </Grid>

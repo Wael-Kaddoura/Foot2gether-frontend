@@ -63,13 +63,15 @@ function AdminChangeScore({
   matchID,
   team1Logo,
   team2Logo,
+  team1OldScore,
+  team2OldScore,
   getTodaysMatches,
 }) {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [team1Score, setTeam1Score] = useState("");
-  const [team2Score, setTeam2Score] = useState("");
+  const [team1Score, setTeam1Score] = useState(team1OldScore);
+  const [team2Score, setTeam2Score] = useState(team2OldScore);
 
   const handleChangeTeam1Score = (event) => {
     setTeam1Score(event.target.value);
