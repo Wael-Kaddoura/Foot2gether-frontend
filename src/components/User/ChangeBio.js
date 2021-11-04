@@ -31,6 +31,9 @@ const useStyles = makeStyles({
   formField: {
     width: "100%",
   },
+  editIcon: {
+    transform: "scale(0.7)",
+  },
 });
 
 function ChangeBio({ changeBio }) {
@@ -53,7 +56,7 @@ function ChangeBio({ changeBio }) {
 
   return (
     <div>
-      <EditIcon onClick={handleOpen} />
+      <EditIcon onClick={handleOpen} className={classes.editIcon} />
 
       <Modal
         aria-labelledby="transition-modal-title"

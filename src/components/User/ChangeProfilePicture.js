@@ -23,6 +23,9 @@ const useStyles = makeStyles({
   formField: {
     width: "100%",
   },
+  editIcon: {
+    transform: "scale(0.7)",
+  },
 });
 
 function ChangeProfilePicture({ getMyProfileData, changeProfilePicture }) {
@@ -47,7 +50,7 @@ function ChangeProfilePicture({ getMyProfileData, changeProfilePicture }) {
 
   return (
     <div>
-      <EditIcon onClick={handleOpen} />
+      <EditIcon onClick={handleOpen} className={classes.editIcon} />
 
       <Modal
         aria-labelledby="transition-modal-title"
