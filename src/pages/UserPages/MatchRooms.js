@@ -1,26 +1,20 @@
 import { useEffect } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useLocation, useHistory } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import getAPIBaseURL from "../../APIBaseURL";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
-import RoomMatchCard from "../../components/Matches/MatchCards/RoomMatchCard";
+import MatchRoomsNavbarContent from "../../components/Matches/MatchRoomsNavbarContent";
 import LiveMatchRoomCard from "../../components/Rooms/LiveMatchRoomCard";
 import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
-  pageTitle: {
-    fontSize: "50px !important",
-    fontWeight: 700,
-  },
   roomsContainer: {
     maxWidth: "1140px !important",
   },
@@ -31,25 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   roomContent: {
     minWidth: "100%",
-  },
-  navbarContentContainer: {
-    height: "100vh !important",
-    minHeight: "500px !important",
-  },
-  navbarContent: {
-    position: "relative !important",
-    width: "100% !important",
-    minHeight: "1px !important",
-    paddingRight: "15px !important",
-    paddingLeft: "15px !important",
-  },
-  scrollDown: {
-    position: "relative !important",
-    width: "100% !important",
-    minHeight: "1px !important",
-    paddingRight: "15px !important",
-    paddingLeft: "15px !important",
-    minWidth: "185px !important",
   },
 }));
 
@@ -75,45 +50,11 @@ function MatchRooms() {
     window.scrollTo(0, 0);
   }, []);
 
-  const NavBarContent = (
-    <Grid
-      container
-      direction="column"
-      justifyContent="space-between"
-      alignItems="center"
-      className={classes.navbarContentContainer}
-    >
-      <Grid
-        item
-        xs={8}
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="flex-end"
-        className={classes.navbarContent}
-      >
-        {!isPending && <RoomMatchCard matchData={matchData} />}
-      </Grid>
-
-      <Grid xs={2} className={classes.scrollDown}>
-        <ScrollLink to="liveRooms" spy={false} smooth={true}>
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Typography>Scroll to Rooms</Typography>
-            <ArrowDownwardIcon style={{ color: "#fff" }} />
-          </Grid>
-        </ScrollLink>
-      </Grid>
-    </Grid>
-  );
-
   return (
     <div>
-      <MainNavBar NavBarContent={NavBarContent} />
+      <MainNavBar currentPageName="Matches">
+        {!isPending && <MatchRoomsNavbarContent matchData={matchData} />}
+      </MainNavBar>
 
       <BackdropComponent open={isPending} />
 

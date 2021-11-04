@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { Grid, Button, Typography } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 import MainNavBar from "../../components/NavBar/MainNavBar";
-import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
+import RoomsNavbarContent from "../../components/Rooms/RoomsNavbarContent";
 import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../../components/Rooms/CreateNewRoom";
 import NoMatchMsg from "../../components/Matches/NoMatchMsg";
@@ -19,11 +17,6 @@ import BackdropComponent from "../../components/BackdropComponent";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
-  pageTitle: {
-    fontSize: "50px !important",
-    color: "#fff",
-    fontWeight: 700,
-  },
   roomsContainer: {
     maxWidth: "1140px !important",
   },
@@ -34,37 +27,6 @@ const useStyles = makeStyles({
   },
   roomContent: {
     minWidth: "100%",
-  },
-  navbarContentContainer: {
-    height: "100vh !important",
-    minHeight: "500px !important",
-  },
-  navbarContent: {
-    position: "relative !important",
-    width: "100% !important",
-    minHeight: "1px !important",
-    paddingRight: "15px !important",
-    paddingLeft: "15px !important",
-  },
-  navbarContentTitle: {
-    textAlign: "center !important",
-    color: "#fff !important",
-    fontSize: "50px !important",
-    fontWeight: "700 !important",
-  },
-  navbarContentSubtitle: {
-    fontSize: "16px !important",
-    fontWeight: "300 !important",
-    color: "rgba(255, 255, 255, 0.7) !important",
-    textAlign: "center",
-  },
-  scrollDown: {
-    position: "relative !important",
-    width: "100% !important",
-    minHeight: "1px !important",
-    paddingRight: "15px !important",
-    paddingLeft: "15px !important",
-    minWidth: "185px !important",
   },
 });
 
@@ -137,55 +99,16 @@ function Rooms() {
     fetchData();
   }, []);
 
-  const NavBarContent = (
-    <Grid
-      container
-      direction="column"
-      justifyContent="space-between"
-      alignItems="center"
-      className={classes.navbarContentContainer}
-    >
-      <Grid
-        item
-        xs={7}
-        container
-        direction="column"
-        justifyContent="flex-end"
-        alignItems="center"
-        className={classes.navbarContent}
-      >
-        <Typography className={classes.navbarContentTitle} sx={{ mb: 1 }}>
-          Rooms
-        </Typography>
-
-        {!isPending && (
-          <Typography className={classes.navbarContentSubtitle} sx={{ mb: 2 }}>
-            There are currently {liveRoomsCount} Live Rooms!
-          </Typography>
-        )}
-
-        <RoomSearchBar searchHandler={searchHandler} />
-      </Grid>
-
-      <Grid xs={2} className={classes.scrollDown}>
-        <ScrollLink to="allLiveRooms" spy={false} smooth={true}>
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Typography>Scroll to Rooms</Typography>
-            <ArrowDownwardIcon style={{ color: "#fff" }} />
-          </Grid>
-        </ScrollLink>
-      </Grid>
-    </Grid>
-  );
-
   return (
     <div>
-      <MainNavBar currentPageName="Rooms" NavBarContent={NavBarContent} />
+      <MainNavBar currentPageName="Rooms">
+        {!isPending && (
+          <RoomsNavbarContent
+            searchHandler={searchHandler}
+            liveRoomsCount={liveRoomsCount}
+          />
+        )}
+      </MainNavBar>
 
       <BackdropComponent open={isPending || isUserTypePending} />
 

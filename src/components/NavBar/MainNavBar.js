@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import DesktopHeader from "./DesktopHeader";
 import Overlay from "./Overlay";
 
-function MainNavBar({ currentPageName, NavBarContent }) {
+function MainNavBar({ currentPageName, children }) {
   let login_status = JSON.parse(localStorage.getItem("login"));
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +26,7 @@ function MainNavBar({ currentPageName, NavBarContent }) {
         />
       </div>
 
-      <Overlay NavBarContent={NavBarContent} />
+      <Overlay NavBarContent={children} />
     </div>
   );
 }

@@ -6,8 +6,7 @@ import DesktopHeader from "./DesktopHeader";
 import UserOverlay from "./UserOverlay";
 
 function UserNavBar(props) {
-  const { currentPageName, NavBarContent, coverPhoto, dontShowProfileIcon } =
-    props;
+  const { currentPageName, coverPhoto, dontShowProfileIcon, children } = props;
 
   let login_status = JSON.parse(localStorage.getItem("login"));
 
@@ -30,7 +29,7 @@ function UserNavBar(props) {
         />
       </div>
 
-      <UserOverlay NavBarContent={NavBarContent} coverPhoto={coverPhoto} />
+      <UserOverlay NavBarContent={children} coverPhoto={coverPhoto} />
     </div>
   );
 }
