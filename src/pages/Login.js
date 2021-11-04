@@ -55,18 +55,6 @@ function Login() {
   const [isPending, setIsPending] = useState(false);
   const [loginError, setLoginError] = useState(false);
 
-  async function getNotificationToken() {
-    const msg = firebase.messaging();
-    await msg.requestPermission();
-
-    try {
-      const token = await msg.getToken();
-      return token;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function saveNotificationToken(notification_token) {
     try {
       const token = JSON.parse(localStorage.getItem("login")).token;
@@ -83,6 +71,51 @@ function Login() {
       }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async function getNotificationToken() {
+    // const msg = firebase.messaging();
+    // await msg.requestPermission();
+
+    // try {
+    //   const token = await msg.getToken();
+    //   return token;
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    const messaging = firebase.messaging();
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("./firebase-messaging-sw.js")
+        .then(function (registration) {
+          console.log("Registration successful, scope is:", registration.scope);
+          Notification.requestPermission().then(() => {
+            messaging
+              .getToken({
+                vapidKey:
+                  "BCTRcjpzvhCl8JaIKrvVWswLqauwLo8_1kyBSR68F1i2zjkmksoEw5YhqxlnIMdtlrpkDZRn6tTzS3arf6nB1fw",
+                serviceWorkerRegistration: registration,
+              })
+              .then((currentToken) => {
+                if (currentToken) {
+                  console.log("current token for client: ", currentToken);
+                  saveNotificationToken(currentToken);
+                } else {
+                  console.log(
+                    "No registration token available. Request permission to generate one."
+                  );
+                }
+              })
+              .catch((err) => {
+                console.log("An error occurred while retrieving token. ", err);
+              });
+          });
+        })
+        .catch(function (err) {
+          console.log("Service worker registration failed, error:", err);
+        });
     }
   }
 
@@ -126,12 +159,10 @@ function Login() {
 
         setLoginError(false);
 
-        let notification_token = await getNotificationToken();
-        saveNotificationToken(notification_token);
-
         if (is_admin) {
           history.push("/admin/home");
         } else {
+          await getNotificationToken();
           history.push("/");
         }
       } else {
