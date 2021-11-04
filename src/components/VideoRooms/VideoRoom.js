@@ -1,9 +1,11 @@
 import { Provider } from "react-redux";
 import Room from "./Room";
 import store from "../../store/createStore";
-import firepadRef from "../../server/firebase-videoRooms/getFirebaseRef";
+import videoRoomsFirebase from "../../server/firebase-videoRooms/firebase";
 
-function VideoRoom({ userName }) {
+function VideoRoom({ userName, roomID }) {
+  let firepadRef = videoRoomsFirebase.database().ref().child(roomID);
+
   return (
     <Provider store={store}>
       <Room firepadRef={firepadRef} userName={userName} />

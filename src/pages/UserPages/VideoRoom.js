@@ -73,7 +73,10 @@ function VideoRoom() {
     <div>
       {isLoaded ? (
         isRoomLive ? (
-          <VideoRoomConnection userName={myProfileData.username} />
+          <VideoRoomConnection
+            userName={myProfileData.username}
+            roomID={room_id}
+          />
         ) : (
           ""
         )
