@@ -43,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "15px !important",
     paddingLeft: "15px !important",
   },
+  scrollDown: {
+    position: "relative !important",
+    width: "100% !important",
+    minHeight: "1px !important",
+    paddingRight: "15px !important",
+    paddingLeft: "15px !important",
+    minWidth: "185px !important",
+  },
 }));
 
 function MatchRooms() {
@@ -87,7 +95,7 @@ function MatchRooms() {
         {!isPending && <RoomMatchCard matchData={matchData} />}
       </Grid>
 
-      <Grid xs={2} className={classes.navbarContent}>
+      <Grid xs={2} className={classes.scrollDown}>
         <ScrollLink to="liveRooms" spy={false} smooth={true}>
           <Grid
             container

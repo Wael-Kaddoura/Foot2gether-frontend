@@ -61,6 +61,14 @@ const useStyles = makeStyles({
     color: "rgba(255, 255, 255, 0.7) !important",
     textAlign: "center",
   },
+  scrollDown: {
+    position: "relative !important",
+    width: "100% !important",
+    minHeight: "1px !important",
+    paddingRight: "15px !important",
+    paddingLeft: "15px !important",
+    minWidth: "185px !important",
+  },
 });
 
 function Blog() {
@@ -109,7 +117,7 @@ function Blog() {
         </Typography>
       </Grid>
 
-      <Grid xs={2} className={classes.navbarContent}>
+      <Grid xs={2} className={classes.scrollDown}>
         <ScrollLink to="allBlogs" spy={false} smooth={true}>
           <Grid
             container
