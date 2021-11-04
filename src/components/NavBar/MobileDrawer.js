@@ -11,6 +11,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import { Button, Avatar } from "@mui/material";
 import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import { Link, useHistory } from "react-router-dom";
 
 import getAPIBaseURL from "../../APIBaseURL";
@@ -112,6 +113,22 @@ function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
               </ListItem>
             </div>
           )}
+          <ListItem>
+            <Grid container justifyContent="center">
+              <Link to={"/user_search"}>
+                <Button
+                  style={{
+                    color: "rgba(0, 0, 0, 0.5)",
+                    backgroundColor: "rgba(0, 0, 0, 0.04)",
+                    textTransform: "none",
+                  }}
+                >
+                  Search Users <SearchIcon sx={{ ml: 1 }} />
+                </Button>
+              </Link>
+            </Grid>
+          </ListItem>
+
           <NavBarItem
             name="HOME"
             path=""
