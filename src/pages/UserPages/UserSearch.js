@@ -104,17 +104,21 @@ function UserSearch() {
           </Grid>
 
           {searchResults ? (
-            searchResults.map((result) => (
-              <UserCard
-                key={result.id}
-                userID={result.id}
-                username={result.username}
-                userPP={result.profile_picture}
-                userFavTeamLogo={result.fav_team.logo}
-                followersCount={result.follower.length}
-                is_followed={result.is_followed}
-              />
-            ))
+            searchResults.length ? (
+              searchResults.map((result) => (
+                <UserCard
+                  key={result.id}
+                  userID={result.id}
+                  username={result.username}
+                  userPP={result.profile_picture}
+                  userFavTeamLogo={result.fav_team.logo}
+                  followersCount={result.follower.length}
+                  is_followed={result.is_followed}
+                />
+              ))
+            ) : (
+              <UserSearchNoResults msg="There are no results found!" />
+            )
           ) : (
             <UserSearchNoResults />
           )}

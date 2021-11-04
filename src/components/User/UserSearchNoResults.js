@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   msgBox: {
     minHeight: "500px !important",
   },
-  msg: { fontSize: "25px !important" },
+  msg: { fontSize: "25px !important", color: "#808080 !important" },
 });
 
 function UserSearchNoResults({ msg }) {
@@ -18,9 +18,7 @@ function UserSearchNoResults({ msg }) {
       alignItems="center"
       className={classes.msgBox}
     >
-      <Typography className={classes.msg}>
-        There are no results found!
-      </Typography>
+      <Typography className={classes.msg}>{msg}</Typography>
     </Grid>
   );
 }
