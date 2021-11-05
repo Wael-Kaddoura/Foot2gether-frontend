@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Foot2gether-frontend/static/css/main.451730a4.chunk.css",
-    "main.js": "/Foot2gether-frontend/static/js/main.72a9289e.chunk.js",
-    "main.js.map": "/Foot2gether-frontend/static/js/main.72a9289e.chunk.js.map",
+    "main.js": "/Foot2gether-frontend/static/js/main.824b3832.chunk.js",
+    "main.js.map": "/Foot2gether-frontend/static/js/main.824b3832.chunk.js.map",
     "runtime-main.js": "/Foot2gether-frontend/static/js/runtime-main.b58aa1b3.js",
     "runtime-main.js.map": "/Foot2gether-frontend/static/js/runtime-main.b58aa1b3.js.map",
     "static/js/2.ed49fc4a.chunk.js": "/Foot2gether-frontend/static/js/2.ed49fc4a.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b58aa1b3.js",
     "static/js/2.ed49fc4a.chunk.js",
     "static/css/main.451730a4.chunk.css",
-    "static/js/main.72a9289e.chunk.js"
+    "static/js/main.824b3832.chunk.js"
   ]
 }
