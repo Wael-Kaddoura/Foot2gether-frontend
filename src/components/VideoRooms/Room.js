@@ -1,4 +1,3 @@
-import { useState } from "react";
 import MainScreen from "./MainScreen/MainScreen.component";
 import { db } from "../../server/firebase-videoRooms/firebase";
 import "../../App.css";
@@ -10,13 +9,11 @@ import {
   removeParticipant,
   updateParticipant,
 } from "../../store/actioncreator";
-import { useLocation, useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
 
 function Room(props) {
   let { firepadRef, userName } = props;
-  const history = useHistory();
 
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({

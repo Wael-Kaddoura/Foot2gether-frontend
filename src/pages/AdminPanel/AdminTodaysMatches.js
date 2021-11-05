@@ -25,13 +25,15 @@ function AdminTodaysMatches() {
   const classes = useStyles();
   const history = useHistory();
 
+  let config = "";
+
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login || !login_status.is_admin) {
     history.push("/");
+  } else {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
   }
-
-  const token = login_status.token;
-  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [isPending, setIsPending] = useState(true);
   const [todaysMatches, setTodaysMatches] = useState(null);

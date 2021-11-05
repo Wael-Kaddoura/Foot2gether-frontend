@@ -7,10 +7,13 @@ import {
   faVideoSlash,
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
-
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
+import { useHistory } from "react-router-dom";
+
 const MeetingFooter = (props) => {
+  const history = useHistory();
+
   const [streamState, setStreamState] = useState({
     mic: false,
     video: false,
@@ -25,7 +28,8 @@ const MeetingFooter = (props) => {
   };
 
   const onExitRoom = () => {
-    window.close();
+    // window.close();
+    history.go(-1);
   };
 
   const onVideoClick = () => {

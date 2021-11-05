@@ -13,13 +13,15 @@ import Footer from "../../components/Footer";
 function BlogView() {
   const history = useHistory();
 
+  let config = "";
+
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
     history.push("/login");
+  } else {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
   }
-
-  const token = login_status.token;
-  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const blog_id = new URLSearchParams(useLocation().search).get("id");
 
