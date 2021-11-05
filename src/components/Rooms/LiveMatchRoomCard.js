@@ -80,7 +80,7 @@ function LiveMatchRoomCard(props) {
             </Grid>
 
             <Grid item xs={3} md={1}>
-              <Link to={"/video_room?id=" + roomID}>
+              {/* <Link to={"/video_room?id=" + roomID}>
                 <Button
                   className={classes.joinBtn}
                   variant="outlined"
@@ -88,9 +88,9 @@ function LiveMatchRoomCard(props) {
                 >
                   Join
                 </Button>
-              </Link>
+              </Link> */}
 
-              {/* <Link
+              <Link
                 to={"/video_room?id=" + roomID}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -102,7 +102,7 @@ function LiveMatchRoomCard(props) {
                 >
                   Join
                 </Button>
-              </Link> */}
+              </Link>
             </Grid>
           </Grid>
 

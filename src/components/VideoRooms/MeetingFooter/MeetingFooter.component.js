@@ -28,8 +28,7 @@ const MeetingFooter = (props) => {
   };
 
   const onExitRoom = () => {
-    // window.close();
-    history.go(-1);
+    window.close();
   };
 
   const onVideoClick = () => {
