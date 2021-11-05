@@ -14,7 +14,9 @@ const useStyles = makeStyles({
   },
 });
 
-function Overlay({ NavBarContent, coverPhoto }) {
+function Overlay(props) {
+  const { NavBarContent, coverPhoto } = props;
+
   const classes = useStyles();
 
   return (

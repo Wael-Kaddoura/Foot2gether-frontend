@@ -11,7 +11,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
@@ -58,15 +57,10 @@ const MenuProps = {
   },
 };
 
-function AdminChangeScore({
-  config,
-  matchID,
-  team1Logo,
-  team2Logo,
-  team1OldScore,
-  team2OldScore,
-  getTodaysMatches,
-}) {
+function AdminChangeScore(props) {
+  const { config, matchID, team1OldScore, team2OldScore, getTodaysMatches } =
+    props;
+
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -119,6 +113,7 @@ function AdminChangeScore({
       <Button variant="contained" onClick={handleOpen}>
         Change Score
       </Button>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -142,6 +137,7 @@ function AdminChangeScore({
             >
               Change Match Score:
             </Typography>
+
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <InputLabel id="demo-simple-select-label">
                 Team 1 Score

@@ -2,7 +2,6 @@ import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link as ScrollLink } from "react-scroll";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-
 import RoomSearchBar from "../../components/Rooms/RoomSearchBar";
 
 const useStyles = makeStyles({

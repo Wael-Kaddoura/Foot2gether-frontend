@@ -40,7 +40,9 @@ function BlogBody(props) {
         <Typography className={classes.blogTitle} sx={{ mb: 5 }}>
           {blogTitle}
         </Typography>
+
         <img className={classes.blogImg} src={blogImg} alt="blogImage" />
+
         <Typography className={classes.blogContent} sx={{ mt: 5 }}>
           {blogBody}
         </Typography>

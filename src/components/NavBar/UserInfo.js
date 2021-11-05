@@ -1,6 +1,5 @@
 import { Grid, Typography, Badge } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import ChangeBio from "../User/ChangeBio";
 
 const useStyles = makeStyles({
@@ -75,6 +74,7 @@ function UserInfo(props) {
                 {followersCount}
               </Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography className={classes.followInfo}>Following</Typography>
               <Typography className={classes.followInfo}>

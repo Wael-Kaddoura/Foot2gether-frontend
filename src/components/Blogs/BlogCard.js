@@ -42,16 +42,20 @@ function BlogCard(props) {
     <Grid item xs={12} md={4} lg={3} sx={{ mb: 5, mr: 1 }}>
       <Link to={"/blog_view?id=" + blogID}>
         <img className={classes.blogImg} src={blogImg} alt="blogImage" />
+
         <Box className={classes.blogInfo} sx={{ mt: 3 }}>
           <Typography className={classes.blogDate}>
             {`${new Date(blogDate)}`.substring(0, 16)}
           </Typography>
+
           <Typography className={classes.blogTitle} sx={{ mb: 2 }}>
             {blogTitle}
           </Typography>
+
           <Typography className={classes.blogBody}>
             {blogBody.substring(0, 97) + "..."}
           </Typography>
+
           <Typography className={classes.blogReadMore} sx={{ mt: 2 }}>
             Read More
           </Typography>

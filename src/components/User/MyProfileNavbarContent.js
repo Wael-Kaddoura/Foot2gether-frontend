@@ -35,6 +35,7 @@ const useStyles = makeStyles({
     fontWeight: 500,
   },
 });
+
 function MyProfileNavbarContent(props) {
   const {
     myProfileData,
@@ -44,6 +45,7 @@ function MyProfileNavbarContent(props) {
     username,
     userProfilePicture,
   } = props;
+
   const classes = useStyles();
 
   return (

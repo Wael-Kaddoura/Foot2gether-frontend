@@ -1,8 +1,8 @@
 import { LinearProgress, Grid } from "@mui/material";
-
 import MatchCard from "./MatchCard";
 
-function RoomMatchCard({ matchData }) {
+function RoomMatchCard(props) {
+  const { matchData } = props;
   return (
     <MatchCard
       team1Name={matchData.team1.name}

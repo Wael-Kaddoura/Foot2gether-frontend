@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({
@@ -12,8 +11,6 @@ const useStyles = makeStyles({
 });
 
 function FinishedMatchCard(props) {
-  const classes = useStyles();
-
   const {
     team1Name,
     team1Logo,
@@ -24,6 +21,8 @@ function FinishedMatchCard(props) {
     stadium,
     league,
   } = props;
+
+  const classes = useStyles();
 
   return (
     <MatchCard
@@ -37,7 +36,6 @@ function FinishedMatchCard(props) {
       <Typography className={classes.finishedScore}>
         {team1Score} - {team2Score}
       </Typography>
-      ;
     </MatchCard>
   );
 }

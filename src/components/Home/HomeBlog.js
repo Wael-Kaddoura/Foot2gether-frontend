@@ -37,6 +37,7 @@ function HomeBlog(props) {
           <Grid item xs={4} sx={{ mr: 2 }}>
             <img className={classes.blogImg} src={blogImg} alt="blogImage" />
           </Grid>
+
           <Grid item xs={7}>
             <Typography className={classes.blogDate}>
               {`${new Date(blogDate)}`.substring(0, 16)}
@@ -51,7 +52,7 @@ function HomeBlog(props) {
             </Typography>
           </Grid>
         </Grid>
-      </Link>{" "}
+      </Link>
     </Grid>
   );
 }

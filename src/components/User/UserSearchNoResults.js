@@ -8,7 +8,9 @@ const useStyles = makeStyles({
   msg: { fontSize: "25px !important", color: "#808080 !important" },
 });
 
-function UserSearchNoResults({ msg }) {
+function UserSearchNoResults(props) {
+  const { msg } = props;
+
   const classes = useStyles();
 
   return (

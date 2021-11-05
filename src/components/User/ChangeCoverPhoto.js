@@ -25,7 +25,8 @@ const useStyles = makeStyles({
   },
 });
 
-function ChangeCoverPhoto({ getMyProfileData, changeCoverPhoto }) {
+function ChangeCoverPhoto(props) {
+  const { getMyProfileData, changeCoverPhoto } = props;
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -47,11 +48,7 @@ function ChangeCoverPhoto({ getMyProfileData, changeCoverPhoto }) {
 
   return (
     <div>
-      <EditIcon
-        onClick={handleOpen}
-        style={{ color: "#fff !important" }}
-        sx={{ mb: 1 }}
-      />
+      <EditIcon onClick={handleOpen} style={{ color: "#fff" }} sx={{ mb: 1 }} />
 
       <Modal
         aria-labelledby="transition-modal-title"

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Card, Grid, Typography, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
 import videoRoomsFirebase from "../../server/firebase-videoRooms/firebase";
 
 const useStyles = makeStyles((theme) => ({

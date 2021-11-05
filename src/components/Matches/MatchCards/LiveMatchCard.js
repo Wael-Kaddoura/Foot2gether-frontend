@@ -1,7 +1,6 @@
 import { Button, LinearProgress, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
-
 import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({
@@ -13,8 +12,6 @@ const useStyles = makeStyles({
 });
 
 function LiveMatchCard(props) {
-  const classes = useStyles();
-
   const {
     matchID,
     team1Name,
@@ -25,6 +22,8 @@ function LiveMatchCard(props) {
     league,
     kickOff,
   } = props;
+
+  const classes = useStyles();
 
   return (
     <MatchCard
@@ -47,6 +46,7 @@ function LiveMatchCard(props) {
           <LinearProgress color="error" />
         </Grid>
       </Grid>
+
       <Link to={"/match/rooms?id=" + matchID}>
         <Button
           className={classes.showRoomBtn}

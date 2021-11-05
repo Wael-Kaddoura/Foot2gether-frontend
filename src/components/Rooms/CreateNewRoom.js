@@ -12,11 +12,9 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
-
 import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
 import CreateRoomSnackbar from "./CreateRoomSnackbar";
 
@@ -53,7 +51,9 @@ const MenuProps = {
   },
 };
 
-function CreateNewRoom({ getLiveRooms }) {
+function CreateNewRoom(props) {
+  const { getLiveRooms } = props;
+
   const classes = useStyles();
 
   const token = JSON.parse(localStorage.getItem("login")).token;
@@ -119,6 +119,7 @@ function CreateNewRoom({ getLiveRooms }) {
       <Button variant="contained" onClick={handleOpen}>
         Create New Room
       </Button>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -142,6 +143,7 @@ function CreateNewRoom({ getLiveRooms }) {
             >
               Create New Room:
             </Typography>
+
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
                 className={classes.formField}

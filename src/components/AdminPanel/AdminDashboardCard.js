@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 
 function AdminDashboardCard(props) {
   const { cardTitle, cardIconName, cardCount, pageLink } = props;
+
   const classes = useStyles();
 
   return (

@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { Card, Grid, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { makeStyles } from "@material-ui/core";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import videoRoomsFirebase from "../../server/firebase-videoRooms/firebase";
-
 import AdminEditRoom from "./AdminEditRoom";
 
 const useStyles = makeStyles((theme) => ({
@@ -107,6 +105,7 @@ function AdminRoomCard(props) {
             oldRoomName={roomName}
             oldMatchRoomID={matchRoomID}
           />
+
           <DeleteIcon
             onClick={deleteRoomHandler}
             sx={{ mr: 1, ml: 2 }}
@@ -128,7 +127,6 @@ function AdminRoomCard(props) {
 
           <Grid item xs={4} sm={2} className={classes.vs} sx={{ mr: 5 }}>
             <img className={classes.teamLogo} src={team1Logo} alt="team1" />
-
             <img className={classes.teamLogo} src={team2Logo} alt="team2" />
           </Grid>
         </Grid>

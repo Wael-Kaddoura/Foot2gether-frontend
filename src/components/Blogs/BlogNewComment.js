@@ -15,7 +15,9 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogNewComment({ blog_id, postNewComment }) {
+function BlogNewComment(props) {
+  const { blog_id, postNewComment } = props;
+
   const classes = useStyles();
 
   const [value, setValue] = useState("");
@@ -60,6 +62,7 @@ function BlogNewComment({ blog_id, postNewComment }) {
           style={{ width: "100%" }}
           sx={{ my: 4 }}
         />
+
         <Button
           type="submit"
           fullWidth

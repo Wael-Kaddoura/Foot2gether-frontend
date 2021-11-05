@@ -50,6 +50,7 @@ function LoginForm(props) {
         >
           Login
         </Typography>
+
         <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
           {loginError && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -96,7 +97,7 @@ function LoginForm(props) {
         </Box>
 
         <Grid container justifyContent="space-between">
-          <Link to={"/signup"} style={{ color: "blue" }}>
+          <Link to={"/signup"} style={{ color: "#1976d2" }}>
             Create Account
           </Link>
         </Grid>

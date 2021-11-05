@@ -29,7 +29,7 @@ const useStyles = makeStyles({
     fontSize: "20px !important",
     fontWeight: 500,
   },
-  commentTime: {
+  commentDate: {
     color: "#ccc",
     fontSize: "13px !important",
     fontWeight: 300,
@@ -50,8 +50,8 @@ function BlogComment(props) {
     commentAuthorPP,
   } = props;
 
-  //formating comment date and time
-  let comment_date_time = date.format(
+  //formatting comment date and time
+  let commentDateFormatted = date.format(
     new Date(commentDate),
     "ddd, MMM DD YYYY hh:mm A"
   );
@@ -68,6 +68,7 @@ function BlogComment(props) {
             alt="blogImage"
           />
         </Grid>
+
         <Grid item xs={10}>
           <Typography className={classes.userName}>
             <Link
@@ -77,9 +78,11 @@ function BlogComment(props) {
               {commentAuthor}
             </Link>
           </Typography>
-          <Typography className={classes.commentTime}>
-            {comment_date_time}
+
+          <Typography className={classes.commentDate}>
+            {commentDateFormatted}
           </Typography>
+
           <Typography className={classes.commentBody} sx={{ mt: 1 }}>
             {commentBody}
           </Typography>

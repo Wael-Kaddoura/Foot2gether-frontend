@@ -179,6 +179,7 @@ function SignupForm(props) {
               minLength: 6,
             }}
           />
+
           <TextField
             required
             fullWidth
@@ -249,7 +250,7 @@ function SignupForm(props) {
 
         <Grid container justifyContent="space-between">
           Already have an account?
-          <Link to={"/login"} style={{ color: "blue" }}>
+          <Link to={"/login"} style={{ color: "#1976d2" }}>
             Log in
           </Link>
         </Grid>

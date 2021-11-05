@@ -57,7 +57,7 @@ function AdminMatchCard(props) {
 
   const classes = useStyles();
 
-  //extracting and formating match date
+  //extracting and formatting match date
   let match_date = date.parse(matchDay + " " + kickOff, "YYYY-MM-DD HH:mm:ss");
   match_date = date.format(match_date, "DD MMM YYYY hh:mm A");
 

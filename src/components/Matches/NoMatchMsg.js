@@ -8,7 +8,9 @@ const useStyles = makeStyles({
   msg: { fontSize: "25px !important", color: "#808080 !important" },
 });
 
-function NoMatchMsg({ msg, home }) {
+function NoMatchMsg(props) {
+  const { msg, home } = props;
+
   const classes = useStyles();
 
   return (

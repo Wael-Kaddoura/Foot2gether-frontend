@@ -28,7 +28,9 @@ const useStyles = makeStyles({
   },
 });
 
-function ChangeProfilePicture({ getMyProfileData, changeProfilePicture }) {
+function ChangeProfilePicture(props) {
+  const { getMyProfileData, changeProfilePicture } = props;
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);

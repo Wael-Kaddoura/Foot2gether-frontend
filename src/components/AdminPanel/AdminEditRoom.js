@@ -13,10 +13,8 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import AdminCreateNewRoomMenuItem from "./AdminCreateNewRoomMenuItem";
 
 const style = {
@@ -61,6 +59,7 @@ function AdminCreateRoom(props) {
     oldRoomName,
     oldMatchRoomID,
   } = props;
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -75,6 +74,7 @@ function AdminCreateRoom(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const new_room_data = new FormData(event.currentTarget);
     const name = new_room_data.get("room_name");
     const match_id = new_room_data.get("match_id");
@@ -130,6 +130,7 @@ function AdminCreateRoom(props) {
             >
               Edit Room:
             </Typography>
+
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
                 className={classes.formField}

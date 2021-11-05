@@ -19,7 +19,6 @@ import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import TimePicker from "@mui/lab/TimePicker";
 import { makeStyles } from "@material-ui/core";
 import date from "date-and-time";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
@@ -66,15 +65,18 @@ const MenuProps = {
   },
 };
 
-function AdminAddMatch({ config, matchOptions, getAllMatches }) {
+function AdminAddMatch(props) {
+  const { config, matchOptions, getAllMatches } = props;
+
   const classes = useStyles();
+
   const competitions = matchOptions.competitions;
   const teams = matchOptions.teams;
 
   const [open, setOpen] = useState(false);
-  const [matchDay, setMatchDay] = useState(new Date("2021-10-18T21:11:54"));
-  const [kickOff, setKickOff] = useState(new Date("2021-10-18T21:11:54"));
-  const [fulltime, setFulltime] = useState(new Date("2021-10-18T21:11:54"));
+  const [matchDay, setMatchDay] = useState(new Date("2021-11-05T21:00:00"));
+  const [kickOff, setKickOff] = useState(new Date("2021-11-05T21:00:00"));
+  const [fulltime, setFulltime] = useState(new Date("2021-11-05T21:00:00"));
   const [competitionID, setCompetitionID] = useState("");
   const [team1ID, setTeam1ID] = useState("");
   const [team2ID, setTeam2ID] = useState("");
@@ -154,6 +156,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
       <Button variant="contained" onClick={handleOpen}>
         Add New Match
       </Button>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -177,6 +180,7 @@ function AdminAddMatch({ config, matchOptions, getAllMatches }) {
             >
               Add New Match:
             </Typography>
+
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <InputLabel id="match_room">Competition</InputLabel>
               <Select

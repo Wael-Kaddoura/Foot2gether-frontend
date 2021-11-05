@@ -137,7 +137,7 @@ function CreateBlog() {
               InputLabelProps={{ className: classes.formLabel }}
             />
 
-            <Typography style={{ color: "#fff !important" }} sx={{ mb: 1 }}>
+            <Typography style={{ color: "#fff" }} sx={{ mb: 1 }}>
               Upload Blog Image
             </Typography>
 

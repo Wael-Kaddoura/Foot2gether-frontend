@@ -1,7 +1,9 @@
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function BackdropComponent({ open }) {
+function BackdropComponent(props) {
+  const { open } = props;
+
   return (
     <div>
       <Backdrop

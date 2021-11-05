@@ -92,13 +92,16 @@ function MatchCard(props) {
               <Typography className={classes.matchLeague} sx={{ mb: 1 }}>
                 {league}
               </Typography>
+
               <Typography className={classes.matchTime} sx={{ mb: 1 }}>
                 {kick_off_time}
               </Typography>
+
               <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
                 {stadium}
               </Typography>
             </Grid>
+
             <Grid item xs={4}>
               {children}
             </Grid>

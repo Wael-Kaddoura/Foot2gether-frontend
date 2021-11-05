@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 
 function UserProfileNavbarContent(props) {
   const { userData, isFollowed, followUser, unFollowUser } = props;
+
   const classes = useStyles();
 
   return (
@@ -69,6 +70,7 @@ function UserProfileNavbarContent(props) {
           </Grid>
         </Grid>
       </Grid>
+
       <Grid item xs={4} sm={1} sx={{ mb: 8 }}>
         {isFollowed ? (
           <Button

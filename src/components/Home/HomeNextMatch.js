@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CircleIcon from "@mui/icons-material/Circle";
-
 import HomeNextMatchCard from "./HomeNextMatchCard";
 
 const useStyles = makeStyles({
@@ -18,8 +17,6 @@ const useStyles = makeStyles({
 });
 
 function HomeBlogs(props) {
-  const classes = useStyles();
-
   const {
     team1Name,
     team1Logo,
@@ -30,6 +27,8 @@ function HomeBlogs(props) {
     kickOff,
     matchDay,
   } = props;
+
+  const classes = useStyles();
 
   return (
     <Grid

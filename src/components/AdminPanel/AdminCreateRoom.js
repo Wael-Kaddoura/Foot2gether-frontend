@@ -12,10 +12,8 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import AdminCreateNewRoomMenuItem from "./AdminCreateNewRoomMenuItem";
 
 const style = {
@@ -51,7 +49,9 @@ const MenuProps = {
   },
 };
 
-function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
+function AdminCreateRoom(props) {
+  const { config, availableMatches, getTodaysRooms } = props;
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -99,6 +99,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
       <Button variant="contained" onClick={handleOpen}>
         Create New Room
       </Button>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -122,6 +123,7 @@ function AdminCreateRoom({ config, availableMatches, getTodaysRooms }) {
             >
               Create New Room:
             </Typography>
+
             <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
               <TextField
                 className={classes.formField}

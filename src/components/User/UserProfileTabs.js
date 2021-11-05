@@ -93,14 +93,14 @@ function UserProfileTabs(props) {
           onChange={handleChange}
           aria-label="basic tabs example"
           centered
-          TabIndicatorProps={{ style: { backgroundcolor: "#fff !important" } }}
+          TabIndicatorProps={{ style: { backgroundColor: "#fff" } }}
         >
           <Tab
             label="Live Rooms"
             {...a11yProps(0)}
             style={
               isLiveRooms
-                ? { fontWeight: "800", color: "#fff !important" }
+                ? { fontWeight: "800", color: "#fff" }
                 : { color: "#808080" }
             }
             onClick={ActivateLive}
@@ -111,7 +111,7 @@ function UserProfileTabs(props) {
             {...a11yProps(1)}
             style={
               isBlogs
-                ? { fontWeight: "800", color: "#fff !important" }
+                ? { fontWeight: "800", color: "#fff" }
                 : { color: "#808080" }
             }
             onClick={ActivateUpcoming}

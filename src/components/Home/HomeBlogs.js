@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CircleIcon from "@mui/icons-material/Circle";
-
 import HomeBlog from "./HomeBlog";
 
 const useStyles = makeStyles({
@@ -17,7 +16,9 @@ const useStyles = makeStyles({
   },
 });
 
-function HomeBlogs({ latestBlogs }) {
+function HomeBlogs(props) {
+  const { latestBlogs } = props;
+
   const classes = useStyles();
 
   return (

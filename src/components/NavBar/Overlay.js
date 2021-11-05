@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import getAPIBaseURL from "../../APIBaseURL";
 
 const useStyles = makeStyles({
@@ -16,15 +15,18 @@ const useStyles = makeStyles({
   },
 });
 
-function Overlay({ NavBarContent, children }) {
+function Overlay(props) {
+  const { NavBarContent, children } = props;
+
   const classes = useStyles();
+  const overlayBackgroundImage =
+    getAPIBaseURL() + "/cover_photo/default_cover_photo.jpg";
 
   return (
     <div
       className="hero overlay"
       style={{
-        backgroundImage:
-          "url(" + getAPIBaseURL() + "/cover_photo/default_cover_photo.jpg)",
+        backgroundImage: `url(${overlayBackgroundImage})`,
       }}
     >
       <Box className={classes.overlayContainer}>

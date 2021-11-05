@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import MatchCard from "./MatchCard";
 
 const useStyles = makeStyles({
@@ -29,7 +28,7 @@ function UpcomingMatchCard(props) {
 
   const [timer, setTimer] = useState("--:--:--");
 
-  //Getting hours, minutes & seconds from our time
+  //getting hours, minutes & seconds from our time
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
@@ -60,7 +59,7 @@ function UpcomingMatchCard(props) {
   };
 
   const clearTimer = (e) => {
-    //Updating Timer variable every 1 second
+    //updating Timer variable every 1 second
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
       startTimer(e);
@@ -69,7 +68,7 @@ function UpcomingMatchCard(props) {
   };
 
   const getDeadTime = (kickOff) => {
-    //Specify Countdown Deadline
+    //specify Countdown Deadline
     let deadline = new Date(matchDay + " " + kickOff);
     return deadline;
   };

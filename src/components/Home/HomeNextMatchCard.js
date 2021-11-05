@@ -108,7 +108,7 @@ function MatchCard(props) {
   };
 
   const clearTimer = (e) => {
-    //Updating Timer variable every 1 second
+    //updating Timer variable every 1 second
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
       startTimer(e);
@@ -117,7 +117,7 @@ function MatchCard(props) {
   };
 
   const getDeadTime = (kickOff) => {
-    //Specify Countdown Deadline
+    //specify Countdown Deadline
     let deadline = new Date(matchDay + " " + kickOff);
     return deadline;
   };
@@ -155,13 +155,16 @@ function MatchCard(props) {
               <Typography className={classes.matchLeague} sx={{ mb: 1 }}>
                 {league}
               </Typography>
+
               <Typography className={classes.matchTime} sx={{ mb: 1 }}>
                 {kick_off_time}
               </Typography>
+
               <Typography className={classes.matchStadium} sx={{ mb: 1 }}>
                 {stadium}
               </Typography>
             </Grid>
+
             <Grid item xs={4}>
               <Button
                 className={classes.upcomingBtn}

@@ -3,7 +3,9 @@ import { Grid, Paper, InputBase } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function RoomSearchBar({ searchHandler }) {
+export default function RoomSearchBar(props) {
+  const { searchHandler } = props;
+
   const [searchField, setSearchField] = useState("initialState");
 
   const handleChange = (e) => {
@@ -29,6 +31,7 @@ export default function RoomSearchBar({ searchHandler }) {
           inputProps={{ "aria-label": "Search Room by ID" }}
           onChange={handleChange}
         />
+
         <IconButton sx={{ p: "10px" }} aria-label="search" type="submit">
           <SearchIcon />
         </IconButton>

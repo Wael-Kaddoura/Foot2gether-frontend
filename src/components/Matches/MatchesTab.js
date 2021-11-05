@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Tabs, Tab, Typography, Box, Badge, useTheme } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-
 import UpcomingMatchCard from "./MatchCards/UpcomingMatchCard";
 import FinishedMatchCard from "./MatchCards/FinishedMatchCard";
 import LiveMatchCard from "./MatchCards/LiveMatchCard";
@@ -99,7 +98,7 @@ function MatchTabs(props) {
           onChange={handleChange}
           aria-label="basic tabs example"
           centered
-          TabIndicatorProps={{ style: { backgroundcolor: "#fff !important" } }}
+          TabIndicatorProps={{ style: { backgroundColor: "#fff" } }}
         >
           <Tab
             label={
@@ -119,7 +118,7 @@ function MatchTabs(props) {
             {...a11yProps(0)}
             style={
               isLive
-                ? { fontWeight: "800", color: "#fff !important" }
+                ? { fontWeight: "800", color: "#fff" }
                 : { color: "#808080" }
             }
             onClick={ActivateLive}
@@ -143,7 +142,7 @@ function MatchTabs(props) {
             {...a11yProps(1)}
             style={
               isUpcoming
-                ? { fontWeight: "800", color: "#fff !important" }
+                ? { fontWeight: "800", color: "#fff" }
                 : { color: "#808080" }
             }
             onClick={ActivateUpcoming}
@@ -167,7 +166,7 @@ function MatchTabs(props) {
             {...a11yProps(2)}
             style={
               isFinished
-                ? { fontWeight: "800", color: "#fff !important" }
+                ? { fontWeight: "800", color: "#fff" }
                 : { color: "#808080" }
             }
             onClick={ActivateFinished}

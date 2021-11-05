@@ -36,10 +36,13 @@ const useStyles = makeStyles({
   },
 });
 
-function ChangeBio({ changeBio }) {
+function ChangeBio(props) {
+  const { changeBio } = props;
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

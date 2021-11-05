@@ -35,12 +35,15 @@ function CreateNewRoomMenuItem(props) {
       >
         {matchType}
       </Grid>
+
       <Grid container item xs={3} sm={4} justifyContent="center">
         <img src={team1Logo} className={classes.teamLogo} alt="team1" />
       </Grid>
+
       <Grid item xs={2} className={classes.vs}>
         VS
       </Grid>
+
       <Grid container item xs={3} sm={4} justifyContent="center">
         <img src={team2Logo} className={classes.teamLogo} alt="team2" />
       </Grid>

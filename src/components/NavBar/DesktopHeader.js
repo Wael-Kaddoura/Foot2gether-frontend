@@ -14,10 +14,8 @@ import {
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link, useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import NavBarItem from "./NavBarItem";
 import DrawerComponent from "./MobileDrawer";
 
@@ -45,6 +43,10 @@ const useStyles = makeStyles({
 function DesktopHeader(props) {
   const { currentPageName, isLoggedIn, setIsLoggedIn } = props;
 
+  const history = useHistory();
+  const classes = useStyles();
+  const theme = useTheme();
+
   const login_status = JSON.parse(localStorage.getItem("login"));
 
   let token = "";
@@ -64,14 +66,9 @@ function DesktopHeader(props) {
     },
   };
 
-  const history = useHistory();
-  const classes = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
-
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const menuId = "primary-search-account-menu";
 
   async function clearNotificationToken() {
@@ -117,9 +114,11 @@ function DesktopHeader(props) {
       sx={{ mt: 6.5, ml: 6.25 }}
     >
       <MenuItem style={{ color: "#ee1e46" }}>{username}</MenuItem>
+
       <Link to={"/my_profile"} style={{ color: "#212529" }}>
         <MenuItem>My Profile</MenuItem>
       </Link>
+
       <MenuItem onClick={logoutHandler}>Log out</MenuItem>
     </Menu>
   ) : (

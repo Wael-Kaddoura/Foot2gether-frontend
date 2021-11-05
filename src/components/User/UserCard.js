@@ -50,6 +50,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UserCard(props) {
+  const {
+    userID,
+    userPP,
+    userFavTeamLogo,
+    username,
+    followersCount,
+    is_followed,
+  } = props;
+
   const classes = useStyles();
   const history = useHistory();
 
@@ -60,15 +69,6 @@ function UserCard(props) {
 
   const token = login_status.token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
-
-  const {
-    userID,
-    userPP,
-    userFavTeamLogo,
-    username,
-    followersCount,
-    is_followed,
-  } = props;
 
   const [isFollowed, setIsFollowed] = useState(is_followed);
 

@@ -1,7 +1,6 @@
 import { Card, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import date from "date-and-time";
-
 import AdminChangeScore from "../../components/AdminPanel/AdminChangeScore";
 
 const useStyles = makeStyles((theme) => ({
@@ -107,11 +106,13 @@ function AdminTodaysMatchCard(props) {
                   {kick_off_time}
                 </Typography>
               </Grid>
+
               <Grid item xs={4}>
                 <Typography className={classes.finishedScore}>
                   {team1Score} - {team2Score}
                 </Typography>
               </Grid>
+
               <Grid item xs={4}>
                 <AdminChangeScore
                   config={config}

@@ -5,10 +5,12 @@ const useStyles = makeStyles({
   msgBox: {
     minHeight: 500,
   },
-  msg: { fontSize: 25 },
+  msg: { fontSize: 25, color: "#808080 !important" },
 });
 
-function NoContentMsg({ msg }) {
+function NoContentMsg(props) {
+  const { msg } = props;
+
   const classes = useStyles();
 
   return (

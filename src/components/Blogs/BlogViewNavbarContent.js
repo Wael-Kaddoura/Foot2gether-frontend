@@ -57,7 +57,7 @@ function BlogViewNavbarContent(props) {
       <Grid
         item
         xs={12}
-        lg={5}
+        lg={8}
         container
         direction="column"
         justifyContent="flex-end"
@@ -84,6 +84,7 @@ function BlogViewNavbarContent(props) {
             >
               {`${new Date(blogData.updatedAt)}`.substring(0, 16)}
             </Grid>
+
             <Grid
               item
               xs={6}

@@ -13,10 +13,8 @@ import { Button, Avatar } from "@mui/material";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link, useHistory } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
-
 import NavBarItem from "./NavBarItem";
 
 const useStyles = makeStyles(() => ({
@@ -41,7 +39,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function DrawerComponent({ currentPageName, isLoggedIn, setIsLoggedIn }) {
+function DrawerComponent(props) {
+  const { currentPageName, isLoggedIn, setIsLoggedIn } = props;
+
   const classes = useStyles();
   const history = useHistory();
 

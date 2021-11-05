@@ -77,7 +77,7 @@ function BlogView() {
     <div>
       <BackdropComponent open={isPending || isBlogPending} />
 
-      <MainNavBar currentPageName="Matches">
+      <MainNavBar>
         {!isPending && !isBlogPending && (
           <BlogViewNavbarContent blogData={blogData} />
         )}

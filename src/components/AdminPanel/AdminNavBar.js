@@ -91,7 +91,9 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function NavBar({ children }) {
+export default function NavBar(props) {
+  const { children } = props;
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -214,7 +216,6 @@ export default function NavBar({ children }) {
         direction="row"
         justifyContent="center"
       >
-        {/* <DrawerHeader /> */}
         {children}
       </Grid>
     </Box>

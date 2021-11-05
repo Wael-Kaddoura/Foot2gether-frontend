@@ -1,7 +1,9 @@
 import { ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function MainNavBar({ path, name, color, isActive, isActiveDrawer }) {
+function MainNavBar(props) {
+  const { path, name, color, isActive, isActiveDrawer } = props;
+
   return (
     <Link
       to={"/" + path}

@@ -1,6 +1,5 @@
 import { Grid, Typography, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import BlogComment from "./BlogComment";
 import BlogNewComment from "./BlogNewComment";
 
@@ -26,13 +25,15 @@ const useStyles = makeStyles({
   },
 });
 
-function BlogComments({
-  blogComments,
-  blogCommentsCount,
-  blog_id,
-  postNewComment,
-  postError,
-}) {
+function BlogComments(props) {
+  const {
+    blogComments,
+    blogCommentsCount,
+    blog_id,
+    postNewComment,
+    postError,
+  } = props;
+
   const classes = useStyles();
 
   return (
@@ -47,6 +48,7 @@ function BlogComments({
         <Typography className={classes.sectionTitle} sx={{ mb: 5 }}>
           {blogCommentsCount} Comments
         </Typography>
+
         <Grid
           container
           direction="row"
