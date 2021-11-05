@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Overlay from "../components/NavBar/Overlay";
 import { useHistory } from "react-router-dom";
+import { isMobile, isSafari, isIOS } from "react-device-detect";
 import getAPIBaseURL from "../APIBaseURL";
 import axios from "axios";
 import firebase from "../server/firebase-notifications/firebase";
@@ -118,7 +119,9 @@ function Login() {
         if (is_admin) {
           history.push("/admin/home");
         } else {
-          await getNotificationToken();
+          if (!isIOS) {
+            await getNotificationToken();
+          }
           history.push("/");
         }
       } else {
