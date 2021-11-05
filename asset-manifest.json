@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/Foot2gether-frontend/static/css/main.451730a4.chunk.css",
-    "main.js": "/Foot2gether-frontend/static/js/main.eaf0a851.chunk.js",
-    "main.js.map": "/Foot2gether-frontend/static/js/main.eaf0a851.chunk.js.map",
+    "main.js": "/Foot2gether-frontend/static/js/main.a6ba77a6.chunk.js",
+    "main.js.map": "/Foot2gether-frontend/static/js/main.a6ba77a6.chunk.js.map",
     "runtime-main.js": "/Foot2gether-frontend/static/js/runtime-main.b58aa1b3.js",
     "runtime-main.js.map": "/Foot2gether-frontend/static/js/runtime-main.b58aa1b3.js.map",
-    "static/js/2.e5df16c3.chunk.js": "/Foot2gether-frontend/static/js/2.e5df16c3.chunk.js",
-    "static/js/2.e5df16c3.chunk.js.map": "/Foot2gether-frontend/static/js/2.e5df16c3.chunk.js.map",
+    "static/js/2.ed49fc4a.chunk.js": "/Foot2gether-frontend/static/js/2.ed49fc4a.chunk.js",
+    "static/js/2.ed49fc4a.chunk.js.map": "/Foot2gether-frontend/static/js/2.ed49fc4a.chunk.js.map",
     "index.html": "/Foot2gether-frontend/index.html",
     "service-worker.js": "/Foot2gether-frontend/service-worker.js",
     "service-worker.js.map": "/Foot2gether-frontend/service-worker.js.map",
     "static/css/main.451730a4.chunk.css.map": "/Foot2gether-frontend/static/css/main.451730a4.chunk.css.map",
-    "static/js/2.e5df16c3.chunk.js.LICENSE.txt": "/Foot2gether-frontend/static/js/2.e5df16c3.chunk.js.LICENSE.txt"
+    "static/js/2.ed49fc4a.chunk.js.LICENSE.txt": "/Foot2gether-frontend/static/js/2.ed49fc4a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b58aa1b3.js",
-    "static/js/2.e5df16c3.chunk.js",
+    "static/js/2.ed49fc4a.chunk.js",
     "static/css/main.451730a4.chunk.css",
-    "static/js/main.eaf0a851.chunk.js"
+    "static/js/main.a6ba77a6.chunk.js"
   ]
 }
