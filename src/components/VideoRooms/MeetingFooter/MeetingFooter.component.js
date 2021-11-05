@@ -15,7 +15,7 @@ const MeetingFooter = (props) => {
   const history = useHistory();
 
   const [streamState, setStreamState] = useState({
-    mic: false,
+    mic: true,
     video: false,
   });
   const micClick = () => {

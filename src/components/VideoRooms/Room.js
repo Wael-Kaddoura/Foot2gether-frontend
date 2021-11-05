@@ -32,7 +32,7 @@ function Room(props) {
     connectedRef.on("value", (snap) => {
       if (snap.val()) {
         const defaultPreference = {
-          audio: false,
+          audio: true,
           video: false,
         };
         const userStatusRef = participantRef.push({
