@@ -1,5 +1,5 @@
 const getAPIBaseURL = () => {
-  return "http://localhost:8000";
+  return "https://foot2gether.ml";
 };
 
 export default getAPIBaseURL;
