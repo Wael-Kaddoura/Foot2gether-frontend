@@ -62,7 +62,7 @@ function MatchesNavbarContent() {
         </Typography>
 
         <Typography className={classes.navbarContentSubtitle} sx={{ mb: 1 }}>
-          Choose any Match to enjoy watching the game with other fans!
+          Choose any match to enjoy watching the game with other fans!
         </Typography>
       </Grid>
 

@@ -51,7 +51,7 @@ function HomeNavbarContent() {
         </Typography>
 
         <Typography className={classes.navbarContentSubtitle} sx={{ mb: 1 }}>
-          Enjoy watching Football Matches with Fans from around the Globe!
+          Enjoy watching football matches with fans from around the globe!
         </Typography>
 
         <Grid container justifyContent="center">
