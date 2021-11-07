@@ -103,7 +103,9 @@ function MatchTabs(props) {
           <Tab
             label={
               <div>
-                {"Live    ."}
+                <Typography sx={{ mr: 1.5 }} display="inline">
+                  Live
+                </Typography>
                 <Badge
                   badgeContent={liveMatches.length}
                   color="error"
@@ -127,13 +129,15 @@ function MatchTabs(props) {
           <Tab
             label={
               <div>
-                {"Upcoming    ."}
+                <Typography sx={{ mr: 1.5 }} display="inline">
+                  Upcoming
+                </Typography>
                 <Badge
                   badgeContent={upcomingMatches.length}
                   color="error"
                   showZero
                   anchorOrigin={{
-                    vertical: "top",
+                    vertical: "bottom",
                     horizontal: "right",
                   }}
                 ></Badge>
@@ -151,7 +155,9 @@ function MatchTabs(props) {
           <Tab
             label={
               <div>
-                {"Finished    ."}
+                <Typography sx={{ mr: 1.5 }} display="inline">
+                  Finished
+                </Typography>
                 <Badge
                   badgeContent={finishedMatches.length}
                   color="error"
