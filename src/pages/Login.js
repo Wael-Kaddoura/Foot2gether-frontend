@@ -55,6 +55,7 @@ function Login(props) {
 
   async function getNotificationToken() {
     const messaging = firebase.messaging();
+
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("./firebase-messaging-sw.js")
@@ -87,8 +88,10 @@ function Login(props) {
   }
 
   const handleSubmit = async (event) => {
-    setIsPending(true);
     event.preventDefault();
+
+    setIsPending(true);
+
     const login_data = new FormData(event.currentTarget);
     const email = login_data.get("email");
     const password = login_data.get("password");

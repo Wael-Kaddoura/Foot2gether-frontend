@@ -1,12 +1,10 @@
 import {
   Grid,
-  Box,
   Typography,
   Card,
   CardMedia,
   CardContent,
   CardActions,
-  Button,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";

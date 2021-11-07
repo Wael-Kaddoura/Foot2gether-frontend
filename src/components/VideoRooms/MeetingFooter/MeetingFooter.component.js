@@ -9,15 +9,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
-import { useHistory } from "react-router-dom";
 
 const MeetingFooter = (props) => {
-  const history = useHistory();
-
   const [streamState, setStreamState] = useState({
     mic: true,
     video: false,
   });
+
   const micClick = () => {
     setStreamState((currentState) => {
       return {

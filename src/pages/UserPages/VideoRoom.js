@@ -7,8 +7,8 @@ import VideoRoomConnection from "../../components/VideoRooms/VideoRoom";
 function VideoRoom() {
   const history = useHistory();
 
+  //check user login status
   let config = "";
-
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
     history.push({

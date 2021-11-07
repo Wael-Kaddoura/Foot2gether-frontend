@@ -13,7 +13,7 @@ import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
   homeContent: {
-    minWidth: "100% ",
+    minWidth: "100%",
     backgroundColor: "#1a1e25",
   },
 });

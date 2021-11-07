@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 function ChangeProfilePicture(props) {
-  const { getMyProfileData, changeProfilePicture } = props;
+  const { changeProfilePicture } = props;
 
   const classes = useStyles();
 

@@ -35,8 +35,8 @@ function UserSearch() {
   const classes = useStyles();
   const history = useHistory();
 
+  //check user login status
   let config = "";
-
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
     history.push({
@@ -53,7 +53,7 @@ function UserSearch() {
   const [isPending, setIsPending] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
 
-  async function getSuggestions(search_term) {
+  async function getSuggestions() {
     setIsPending(true);
 
     try {

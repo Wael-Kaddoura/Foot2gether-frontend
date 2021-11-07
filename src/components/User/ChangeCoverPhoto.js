@@ -26,7 +26,8 @@ const useStyles = makeStyles({
 });
 
 function ChangeCoverPhoto(props) {
-  const { getMyProfileData, changeCoverPhoto } = props;
+  const { changeCoverPhoto } = props;
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);

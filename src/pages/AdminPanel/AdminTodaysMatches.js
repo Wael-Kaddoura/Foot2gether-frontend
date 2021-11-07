@@ -25,8 +25,8 @@ function AdminTodaysMatches() {
   const classes = useStyles();
   const history = useHistory();
 
+  //check user login status & type
   let config = "";
-
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login || !login_status.is_admin) {
     history.push("/");

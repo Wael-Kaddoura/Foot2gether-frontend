@@ -13,8 +13,8 @@ import Footer from "../../components/Footer";
 function BlogView() {
   const history = useHistory();
 
+  //check user login status
   let config = "";
-
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
     history.push({

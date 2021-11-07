@@ -3,9 +3,13 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   msgBox: {
-    minHeight: 500,
+    minHeight: "500px !important",
   },
-  msg: { fontSize: 25, color: "#808080 !important" },
+  msg: {
+    fontSize: "25px !important",
+    color: "#808080 !important",
+    textAlign: "center !important",
+  },
 });
 
 function NoContentMsg(props) {
