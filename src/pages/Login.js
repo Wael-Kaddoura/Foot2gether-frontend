@@ -1,14 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Overlay from "../components/NavBar/Overlay";
 import { useHistory } from "react-router-dom";
-import { isMobile, isSafari, isIOS } from "react-device-detect";
+import { isIOS } from "react-device-detect";
 import getAPIBaseURL from "../APIBaseURL";
 import axios from "axios";
 import firebase from "../server/firebase-notifications/firebase";
 import LoginForm from "../components/User/LoginForm";
 import BackdropComponent from "../components/BackdropComponent";
 
-function Login() {
+function Login(props) {
   const history = useHistory();
 
   //check if user already logged in
@@ -20,6 +20,16 @@ function Login() {
       history.push("/");
     }
   }
+
+  const is_new_account_created_msg =
+    history.location.state && history.location.state.new_account_created
+      ? true
+      : false;
+
+  const is_need_login_first_msg =
+    history.location.state && history.location.state.need_login_first
+      ? true
+      : false;
 
   const [isPending, setIsPending] = useState(false);
   const [loginError, setLoginError] = useState(false);
@@ -145,7 +155,12 @@ function Login() {
     <div>
       <BackdropComponent open={isPending} />
       <Overlay>
-        <LoginForm handleSubmit={handleSubmit} loginError={loginError} />
+        <LoginForm
+          isNewAccountCreatedMsg={is_new_account_created_msg}
+          isNeedLoginFirstMsg={is_need_login_first_msg}
+          loginError={loginError}
+          handleSubmit={handleSubmit}
+        />
       </Overlay>
     </div>
   );

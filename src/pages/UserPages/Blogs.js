@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid, Fab } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory, Link } from "react-router-dom";
@@ -36,7 +36,12 @@ function Blog() {
 
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
-    history.push("/login");
+    history.push({
+      pathname: "/login",
+      state: {
+        need_login_first: true,
+      },
+    });
   }
 
   const {

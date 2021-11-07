@@ -29,7 +29,12 @@ const useStyles = makeStyles({
 });
 
 function LoginForm(props) {
-  const { handleSubmit, loginError } = props;
+  const {
+    isNewAccountCreatedMsg,
+    isNeedLoginFirstMsg,
+    loginError,
+    handleSubmit,
+  } = props;
 
   const classes = useStyles();
 
@@ -48,13 +53,25 @@ function LoginForm(props) {
           sx={{ mb: 5 }}
           style={{ textAlign: "center" }}
         >
-          Login
+          Log In
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
           {loginError && (
             <Alert severity="error" sx={{ mb: 2 }}>
               Wrong Credentials! Try again.
+            </Alert>
+          )}
+
+          {isNewAccountCreatedMsg && (
+            <Alert variant="filled" severity="success" sx={{ mb: 2 }}>
+              Account was successfully created!
+            </Alert>
+          )}
+
+          {isNeedLoginFirstMsg && (
+            <Alert variant="filled" severity="warning" sx={{ mb: 2 }}>
+              Please Log In First!
             </Alert>
           )}
 

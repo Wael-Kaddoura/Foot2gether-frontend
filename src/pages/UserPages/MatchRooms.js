@@ -32,7 +32,12 @@ function MatchRooms() {
 
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
-    history.push("/login");
+    history.push({
+      pathname: "/login",
+      state: {
+        need_login_first: true,
+      },
+    });
   }
 
   const match_id = new URLSearchParams(useLocation().search).get("id");
@@ -51,7 +56,7 @@ function MatchRooms() {
     <div>
       <BackdropComponent open={isPending} />
 
-      <MainNavBar currentPageName="Matches">
+      <MainNavBar>
         {!isPending && <MatchRoomsNavbarContent matchData={matchData} />}
       </MainNavBar>
 
