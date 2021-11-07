@@ -77,6 +77,8 @@ function UserCard(props) {
   }
 
   const [isFollowed, setIsFollowed] = useState(is_followed);
+  const [followersCountIncrementer, setFollowersCountIncrementer] =
+    useState(followersCount);
 
   async function followUser() {
     try {
@@ -87,6 +89,9 @@ function UserCard(props) {
       );
 
       setIsFollowed(true);
+      setFollowersCountIncrementer(
+        (followersCountIncrementer) => followersCountIncrementer + 1
+      );
     } catch (error) {
       console.log(error);
     }
@@ -101,6 +106,9 @@ function UserCard(props) {
       );
 
       setIsFollowed(false);
+      setFollowersCountIncrementer(
+        (followersCountIncrementer) => followersCountIncrementer - 1
+      );
     } catch (error) {
       console.log(error);
     }
@@ -143,7 +151,7 @@ function UserCard(props) {
               </Link>
             </Grid>
             <Grid item xs={12} className={classes.userInfo}>
-              {followersCount} Followers
+              {followersCountIncrementer} Followers
             </Grid>
           </Grid>
 
