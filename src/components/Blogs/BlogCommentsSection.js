@@ -46,7 +46,10 @@ function BlogComments(props) {
     >
       <Grid item xs={12} sm={9} md={7} lg={5}>
         <Typography className={classes.sectionTitle} sx={{ mb: 5 }}>
-          {blogCommentsCount} Comments
+          {blogCommentsCount}
+          {blogCommentsCount === 0 || blogCommentsCount > 1
+            ? " Comments"
+            : " Comment"}
         </Typography>
 
         <Grid
