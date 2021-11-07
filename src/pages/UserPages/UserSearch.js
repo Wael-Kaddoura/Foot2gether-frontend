@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
@@ -39,7 +39,12 @@ function UserSearch() {
 
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
-    history.push("/login");
+    history.push({
+      pathname: "/login",
+      state: {
+        need_login_first: true,
+      },
+    });
   } else {
     const token = login_status.token;
     config = { headers: { Authorization: `Bearer ${token}` } };
@@ -47,6 +52,24 @@ function UserSearch() {
 
   const [isPending, setIsPending] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
+
+  async function getSuggestions(search_term) {
+    setIsPending(true);
+
+    try {
+      let response = await axios.get(
+        getAPIBaseURL() + "/user/search/suggestions",
+        config
+      );
+
+      let suggested_users = response.data;
+      setSearchResults(suggested_users);
+
+      setIsPending(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function searchHandler(search_term) {
     setIsPending(true);
@@ -65,6 +88,10 @@ function UserSearch() {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    getSuggestions();
+  }, []);
 
   return (
     <div>

@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Card, Grid, Badge, Avatar, Button } from "@mui/material";
+import { Card, Grid, Badge, Avatar, Button, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
 import { useHistory, Link } from "react-router-dom";
-
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userInfo: {
     color: "#fff !important",
-    fontWeight: 700,
+    fontWeight: "700 !important",
   },
   unfollowBtn: {
     color: "#fff !important",
@@ -66,7 +65,12 @@ function UserCard(props) {
 
   let login_status = JSON.parse(localStorage.getItem("login"));
   if (!login_status || !login_status.login) {
-    history.push("/login");
+    history.push({
+      pathname: "/login",
+      state: {
+        need_login_first: true,
+      },
+    });
   } else {
     const token = login_status.token;
     config = { headers: { Authorization: `Bearer ${token}` } };
@@ -104,18 +108,18 @@ function UserCard(props) {
 
   return (
     <Grid item xs={12} sx={{ mb: 5, mx: 2 }}>
-      <Link to={"/user_profile?id=" + userID}>
-        <Card
-          className={classes.card}
-          sx={{ maxWidth: 800, minHeight: 176, maxHeight: 176, mx: 2 }}
+      <Card
+        className={classes.card}
+        sx={{ maxWidth: 800, minHeight: 176, maxHeight: 176, mx: 2 }}
+      >
+        <Grid
+          sx={{ minHeight: 176 }}
+          container
+          justifyContent="center"
+          alignItems="center"
         >
-          <Grid
-            sx={{ minHeight: 176 }}
-            container
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid item xs={3} sm={3}>
+          <Grid item xs={3} sm={3}>
+            <Link to={"/user_profile?id=" + userID}>
               <Badge
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -129,36 +133,38 @@ function UserCard(props) {
                   className={classes.userImage}
                 />
               </Badge>
-            </Grid>
+            </Link>
+          </Grid>
 
-            <Grid item container xs={5} sm={5} className={classes.userInfo}>
-              <Grid item xs={12}>
-                {username}
-              </Grid>
-              <Grid item xs={12}>
-                {followersCount} Followers
-              </Grid>
+          <Grid item container xs={5} sm={5}>
+            <Grid item xs={12}>
+              <Link to={"/user_profile?id=" + userID}>
+                <Typography className={classes.userInfo}>{username}</Typography>
+              </Link>
             </Grid>
-
-            <Grid item container xs={3} sm={3}>
-              {isFollowed ? (
-                <Button
-                  className={classes.unfollowBtn}
-                  onClick={unFollowUser}
-                  variant="contained"
-                  color="error"
-                >
-                  Unfollow
-                </Button>
-              ) : (
-                <Button onClick={followUser} variant="contained" color="error">
-                  Follow
-                </Button>
-              )}
+            <Grid item xs={12} className={classes.userInfo}>
+              {followersCount} Followers
             </Grid>
           </Grid>
-        </Card>
-      </Link>
+
+          <Grid item container xs={3} sm={3}>
+            {isFollowed ? (
+              <Button
+                className={classes.unfollowBtn}
+                onClick={unFollowUser}
+                variant="contained"
+                color="error"
+              >
+                Unfollow
+              </Button>
+            ) : (
+              <Button onClick={followUser} variant="contained" color="error">
+                Follow
+              </Button>
+            )}
+          </Grid>
+        </Grid>
+      </Card>
     </Grid>
   );
 }
