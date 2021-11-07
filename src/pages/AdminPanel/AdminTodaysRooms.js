@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Typography, Backdrop, CircularProgress } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import getAPIBaseURL from "../../APIBaseURL";
@@ -41,7 +41,7 @@ function AdminTodaysRooms() {
   const [todaysRooms, setTodaysRooms] = useState(null);
 
   const { data: availableMatches, isPending: isMatchesPending } = useAxiosFetch(
-    getAPIBaseURL() + "/admin/match/available"
+    getAPIBaseURL() + "/match/available"
   );
 
   async function getTodaysRooms() {

@@ -156,14 +156,24 @@ function AdminCreateRoom(props) {
                 sx={{ mb: 3 }}
                 MenuProps={MenuProps}
               >
-                {availableMatches.map((match) => (
+                {availableMatches.live_matches.map((match) => (
                   <MenuItem key={match.id} value={match.id}>
                     <AdminCreateNewRoomMenuItem
+                      matchType="Live"
                       team1Logo={match.team1.logo}
                       team2Logo={match.team2.logo}
                     />
                   </MenuItem>
                 ))}
+                {availableMatches.upcoming_matches.map((match) => (
+                  <MenuItem key={match.id} value={match.id}>
+                    <AdminCreateNewRoomMenuItem
+                      matchType="Upcoming"
+                      team1Logo={match.team1.logo}
+                      team2Logo={match.team2.logo}
+                    />
+                  </MenuItem>
+                ))}{" "}
               </Select>
 
               <Button
