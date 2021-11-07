@@ -64,7 +64,12 @@ function Signup() {
 
         if (response.status === 201) {
           setSignUpError(false);
-          history.push("/login");
+          history.push({
+            pathname: "/login",
+            state: {
+              new_account_created: true,
+            },
+          });
         } else {
           console.log("Something went wrong!");
           setSignUpError(true);
