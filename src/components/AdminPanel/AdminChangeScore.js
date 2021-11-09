@@ -58,8 +58,14 @@ const MenuProps = {
 };
 
 function AdminChangeScore(props) {
-  const { config, matchID, team1OldScore, team2OldScore, getTodaysMatches } =
-    props;
+  const {
+    config,
+    matchID,
+    team1OldScore,
+    team2OldScore,
+    getTodaysMatches,
+    setIsPending,
+  } = props;
 
   const classes = useStyles();
 
@@ -90,7 +96,7 @@ function AdminChangeScore(props) {
       team2_score,
     };
     setOpen(false);
-
+    setIsPending(true);
     try {
       let response = await axios.put(
         getAPIBaseURL() + "/admin/match_score",
@@ -100,11 +106,14 @@ function AdminChangeScore(props) {
 
       if (response.status === 200) {
         getTodaysMatches();
+        setIsPending(false);
       } else {
         console.log("Something went wrong!");
+        setIsPending(false);
       }
     } catch (err) {
       console.log(err);
+      setIsPending(false);
     }
   };
 

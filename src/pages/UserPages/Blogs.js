@@ -45,11 +45,9 @@ function Blog() {
     });
   }
 
-  const {
-    data: blogsData,
-    fetchError,
-    isPending,
-  } = useAxiosFetch(getAPIBaseURL() + "/blog");
+  const { data: blogsData, isPending } = useAxiosFetch(
+    getAPIBaseURL() + "/blog"
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);

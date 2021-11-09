@@ -43,11 +43,9 @@ function MatchRooms() {
 
   const match_id = new URLSearchParams(useLocation().search).get("id");
 
-  const {
-    data: matchData,
-    fetchError,
-    isPending,
-  } = useAxiosFetch(getAPIBaseURL() + "/match/" + match_id);
+  const { data: matchData, isPending } = useAxiosFetch(
+    getAPIBaseURL() + "/match/" + match_id
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);

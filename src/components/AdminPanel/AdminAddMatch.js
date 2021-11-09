@@ -66,7 +66,7 @@ const MenuProps = {
 };
 
 function AdminAddMatch(props) {
-  const { config, matchOptions, getAllMatches } = props;
+  const { config, matchOptions, getAllMatches, setIsPending } = props;
 
   const classes = useStyles();
 
@@ -133,7 +133,7 @@ function AdminAddMatch(props) {
     };
 
     setOpen(false);
-
+    setIsPending(true);
     try {
       let response = await axios.post(
         getAPIBaseURL() + "/admin/match",
@@ -143,11 +143,14 @@ function AdminAddMatch(props) {
 
       if (response.status === 200) {
         getAllMatches();
+        setIsPending(false);
       } else {
         console.log("Something went wrong!");
+        setIsPending(false);
       }
     } catch (err) {
       console.log(err);
+      setIsPending(false);
     }
   };
 

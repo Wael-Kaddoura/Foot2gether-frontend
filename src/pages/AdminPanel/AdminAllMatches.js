@@ -103,6 +103,7 @@ function AdminAllMatches() {
                     config={config}
                     matchOptions={createMatchOptions}
                     getAllMatches={getAllMatches}
+                    setIsPending={setIsPending}
                   />
                 </Grid>
 

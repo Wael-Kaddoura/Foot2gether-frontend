@@ -30,11 +30,9 @@ function Matches() {
     getAPIBaseURL() + "/match/upcoming"
   );
 
-  const {
-    data: finishedMatches,
-    fetchError,
-    isPending,
-  } = useAxiosFetch(getAPIBaseURL() + "/match/finished");
+  const { data: finishedMatches, isPending } = useAxiosFetch(
+    getAPIBaseURL() + "/match/finished"
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);

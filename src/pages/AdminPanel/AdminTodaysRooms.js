@@ -107,6 +107,7 @@ function AdminTodaysRooms() {
                     config={config}
                     availableMatches={availableMatches}
                     getTodaysRooms={getTodaysRooms}
+                    setIsPending={setIsPending}
                   />
                 </Grid>
 

@@ -61,12 +61,15 @@ function BlogView() {
 
       if (response.status === 201) {
         getBlogComments();
+        setIsPending(false);
       } else {
         console.log("Something went wrong!");
+        setIsPending(false);
       }
     } catch (err) {
       console.log(err);
       setPostError(err.message);
+      setIsPending(false);
     }
   }
 
@@ -104,6 +107,7 @@ function BlogView() {
             blog_id={blog_id}
             postNewComment={postNewComment}
             postError={postError}
+            setIsPending={setIsPending}
           />
         </div>
       )}

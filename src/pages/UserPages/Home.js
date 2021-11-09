@@ -25,11 +25,9 @@ function Home() {
     getAPIBaseURL() + "/blog/latest"
   );
 
-  const {
-    data: nextMatchData,
-    fetchError,
-    isPending,
-  } = useAxiosFetch(getAPIBaseURL() + "/match/next");
+  const { data: nextMatchData, isPending } = useAxiosFetch(
+    getAPIBaseURL() + "/match/next"
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);

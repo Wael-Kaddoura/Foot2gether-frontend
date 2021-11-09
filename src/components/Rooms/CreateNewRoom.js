@@ -16,7 +16,6 @@ import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 import CreateNewRoomMenuItem from "./CreateNewRoomMenuItem";
-import CreateRoomSnackbar from "./CreateRoomSnackbar";
 
 const style = {
   position: "absolute",
@@ -52,37 +51,22 @@ const MenuProps = {
 };
 
 function CreateNewRoom(props) {
-  const { getLiveRooms } = props;
+  const { getLiveRooms, setIsPending, setSnackbarOpen } = props;
 
   const classes = useStyles();
 
   const token = JSON.parse(localStorage.getItem("login")).token;
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const {
-    data: availableMatches,
-    fetchError,
-    isPending,
-  } = useAxiosFetch(getAPIBaseURL() + "/match/available");
+  const { data: availableMatches, isPending } = useAxiosFetch(
+    getAPIBaseURL() + "/match/available"
+  );
 
   const [open, setOpen] = React.useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [match, setMatch] = React.useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleClick = () => {
-    setSnackbarOpen(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarOpen(false);
-  };
 
   const handleChange = (event) => {
     setMatch(event.target.value);
@@ -100,17 +84,25 @@ function CreateNewRoom(props) {
     };
 
     setOpen(false);
-
+    setIsPending(true);
     try {
       let response = await axios.post(getAPIBaseURL() + "/room", data, config);
 
       if (response.status === 200) {
         getLiveRooms();
+        setIsPending(false);
+        setSnackbarOpen(true);
       } else {
         console.log("Something went wrong!");
+        getLiveRooms();
+        setIsPending(false);
+        setSnackbarOpen(true);
       }
     } catch (err) {
       console.log(err);
+      getLiveRooms();
+      setIsPending(false);
+      setSnackbarOpen(true);
     }
   };
 
@@ -195,7 +187,6 @@ function CreateNewRoom(props) {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={handleClick}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Create Room
@@ -204,10 +195,6 @@ function CreateNewRoom(props) {
           </Box>
         </Fade>
       </Modal>
-      <CreateRoomSnackbar
-        open={snackbarOpen}
-        handleClose={handleCloseSnackbar}
-      />
     </div>
   );
 }

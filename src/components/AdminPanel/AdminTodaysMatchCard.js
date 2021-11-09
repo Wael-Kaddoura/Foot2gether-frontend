@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgba(0, 0, 0, 0.05) !important",
     marginLeft: "auto !important",
     marginRight: "auto !important",
+    border: "none !important",
   },
   teamSide: { textAlign: "center" },
   teamName: {
@@ -62,6 +63,7 @@ function AdminTodaysMatchCard(props) {
     competition,
     kickOff,
     getTodaysMatches,
+    setIsPending,
   } = props;
 
   const classes = useStyles();
@@ -122,6 +124,7 @@ function AdminTodaysMatchCard(props) {
                   team1OldScore={team1Score}
                   team2OldScore={team2Score}
                   getTodaysMatches={getTodaysMatches}
+                  setIsPending={setIsPending}
                 />
               </Grid>
             </Grid>

@@ -32,6 +32,7 @@ function BlogComments(props) {
     blog_id,
     postNewComment,
     postError,
+    setIsPending,
   } = props;
 
   const classes = useStyles();
@@ -76,7 +77,11 @@ function BlogComments(props) {
           </Alert>
         )}
 
-        <BlogNewComment blog_id={blog_id} postNewComment={postNewComment} />
+        <BlogNewComment
+          blog_id={blog_id}
+          postNewComment={postNewComment}
+          setIsPending={setIsPending}
+        />
       </Grid>
     </Grid>
   );

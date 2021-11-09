@@ -50,7 +50,7 @@ const MenuProps = {
 };
 
 function AdminCreateRoom(props) {
-  const { config, availableMatches, getTodaysRooms } = props;
+  const { config, availableMatches, getTodaysRooms, setIsPending } = props;
 
   const classes = useStyles();
 
@@ -76,7 +76,7 @@ function AdminCreateRoom(props) {
     };
 
     setOpen(false);
-
+    setIsPending(true);
     try {
       let response = await axios.post(
         getAPIBaseURL() + "/admin/room",
@@ -86,11 +86,14 @@ function AdminCreateRoom(props) {
 
       if (response.status === 200) {
         getTodaysRooms();
+        setIsPending(false);
       } else {
         console.log("Something went wrong!");
+        setIsPending(false);
       }
     } catch (err) {
       console.log(err);
+      setIsPending(false);
     }
   };
 

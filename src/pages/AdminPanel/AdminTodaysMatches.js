@@ -15,7 +15,6 @@ const useStyles = makeStyles({
   roomContent: {
     minWidth: "100%",
   },
-
   roomsContainer: {
     maxWidth: "1140px !important",
   },
@@ -113,6 +112,7 @@ function AdminTodaysMatches() {
                     team2Logo={match.team2.logo}
                     team2Score={match.team2_score}
                     getTodaysMatches={getTodaysMatches}
+                    setIsPending={setIsPending}
                   />
                 ))}
               </Grid>

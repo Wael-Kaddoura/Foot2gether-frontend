@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 });
 
 function BlogNewComment(props) {
-  const { blog_id, postNewComment } = props;
+  const { blog_id, postNewComment, setIsPending } = props;
 
   const classes = useStyles();
 
@@ -35,6 +35,8 @@ function BlogNewComment(props) {
       body,
       blog_id,
     };
+
+    setIsPending(true);
 
     await postNewComment(data);
     setValue("");

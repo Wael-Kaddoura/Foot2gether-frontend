@@ -12,6 +12,7 @@ import LiveRoomCard from "../../components/Rooms/LiveRoomCard";
 import CreateNewRoom from "../../components/Rooms/CreateNewRoom";
 import NoMatchMsg from "../../components/Matches/NoMatchMsg";
 import BackdropComponent from "../../components/BackdropComponent";
+import CreateRoomSnackbar from "../../components/Rooms/CreateRoomSnackbar";
 import Footer from "../../components/Footer";
 
 const useStyles = makeStyles({
@@ -52,7 +53,15 @@ function Rooms() {
   const [searchResult, setSearchResult] = useState(null);
   const [liveRooms, setLiveRooms] = useState(null);
   const [liveRoomsCount, setLiveRoomsCount] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
   function showAllRooms() {
     setIsSearchRoom(false);
   }
@@ -156,7 +165,11 @@ function Rooms() {
               ) : (
                 <Grid item xs={5} style={{ textAlign: "right" }}>
                   {userType.user_type_id === 2 ? (
-                    <CreateNewRoom getLiveRooms={getLiveRooms} />
+                    <CreateNewRoom
+                      getLiveRooms={getLiveRooms}
+                      setIsPending={setIsPending}
+                      setSnackbarOpen={setSnackbarOpen}
+                    />
                   ) : (
                     ""
                   )}
@@ -204,6 +217,11 @@ function Rooms() {
           </Grid>
         </Grid>
       )}
+
+      <CreateRoomSnackbar
+        open={snackbarOpen}
+        handleClose={handleCloseSnackbar}
+      />
 
       <Footer />
     </div>
