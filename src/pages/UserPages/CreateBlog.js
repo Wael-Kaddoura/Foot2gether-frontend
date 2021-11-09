@@ -18,7 +18,8 @@ const useStyles = makeStyles({
     fontSize: "40px !important",
   },
   form: {
-    width: "50%",
+    width: "90%",
+    maxWidth: "800px !important",
   },
   formField: {
     width: "100%",
@@ -105,7 +106,7 @@ function CreateBlog() {
           <Typography className={classes.pageTitle}>Create New Blog</Typography>
         </Grid>
 
-        <Grid item xs={12} sx={{ ml: 2 }} container justifyContent="center">
+        <Grid item xs={12} container justifyContent="center">
           <Box
             component="form"
             onSubmit={handleSubmit}
