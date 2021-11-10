@@ -233,9 +233,25 @@ function SignupForm(props) {
 
           <FormLabel component="legend">Gender</FormLabel>
           <RadioGroup row aria-label="gender" name="gender" defaultValue="0">
-            <FormControlLabel value="0" control={<Radio />} label="Male" />
-            <FormControlLabel value="1" control={<Radio />} label="Female" />
-            <FormControlLabel value="2" control={<Radio />} label="Other" />
+            <FormControlLabel
+              value="0"
+              control={<Radio />}
+              label={<Typography style={{ color: "#212529" }}>Male</Typography>}
+            />
+            <FormControlLabel
+              value="1"
+              control={<Radio />}
+              label={
+                <Typography style={{ color: "#212529" }}>Female</Typography>
+              }
+            />
+            <FormControlLabel
+              value="2"
+              control={<Radio />}
+              label={
+                <Typography style={{ color: "#212529" }}>Other</Typography>
+              }
+            />
           </RadioGroup>
 
           <Button
@@ -249,7 +265,10 @@ function SignupForm(props) {
         </Box>
 
         <Grid container justifyContent="space-between">
-          Already have an account?
+          <Typography style={{ color: "#212529" }}>
+            Already have an account?
+          </Typography>
+
           <Link to={"/login"} style={{ color: "#1976d2" }}>
             Log in
           </Link>
