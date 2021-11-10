@@ -16,7 +16,7 @@ const style = {
 const useStyles = makeStyles({
   mainContainer: {
     width: "100%",
-    height: "100%",
+    height: "100vh !important",
   },
   formTitle: {
     color: "#000000 !important",
