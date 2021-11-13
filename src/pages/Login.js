@@ -64,7 +64,7 @@ function Login(props) {
             messaging
               .getToken({
                 vapidKey:
-                  "BCTRcjpzvhCl8JaIKrvVWswLqauwLo8_1kyBSR68F1i2zjkmksoEw5YhqxlnIMdtlrpkDZRn6tTzS3arf6nB1fw",
+                  "BE79LYKRbGr6Awn6AzLkyJ6uXG6MEvb6mlLHfm6a4AY6jB1y0KmdnDGRZ5Mya_akjv6nBkzkCJecd2Sl054Nurg",
                 serviceWorkerRegistration: registration,
               })
               .then((currentToken) => {
