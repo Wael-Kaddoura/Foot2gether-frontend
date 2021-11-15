@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Overlay from "../components/NavBar/Overlay";
 import { useHistory } from "react-router-dom";
 import { isIOS } from "react-device-detect";
@@ -21,11 +21,13 @@ function Login(props) {
     }
   }
 
+  //checking if the user is redirected to the login page after creating a new account, in order to display a msg
   const is_new_account_created_msg =
     history.location.state && history.location.state.new_account_created
       ? true
       : false;
 
+  //checking if the user is directed to the login page after trying to access pages without logging in, in order to display a msg
   const is_need_login_first_msg =
     history.location.state && history.location.state.need_login_first
       ? true
@@ -132,6 +134,7 @@ function Login(props) {
         if (is_admin) {
           history.push("/admin/home");
         } else {
+          //if user is using IOS device, the Firebase Notification Token won't be fetched to prevent errors
           if (!isIOS) {
             await getNotificationToken();
           }

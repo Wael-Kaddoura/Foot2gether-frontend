@@ -17,7 +17,6 @@ const useStyles = makeStyles({
   roomContent: {
     minWidth: "100%",
   },
-
   roomsContainer: {
     maxWidth: "1140px !important",
   },
